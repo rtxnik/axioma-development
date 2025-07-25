@@ -1,0 +1,12 @@
+node_modules/
+dist/
+lighthouse-report.html
+.DS_Store
+*.log
+.htaccess
+/assets
+about.webp
+ax-4logo.png
+ax.webp
+sc.webp
+/src
