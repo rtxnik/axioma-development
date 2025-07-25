@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Аксиома Капитал - Управляющая компания</title>
+		<meta
+			name="description"
+			content="Осуществляет доверительное управление индивидуальными закрытыми паевыми инвестиционными фондами"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="css/main.css" />
+	</head>
+	<body>
+		<!-- Header -->
+		<header class="header">
+			<div class="container">
+				<nav class="nav">
+					<div class="nav__wrapper">
+						<div class="nav__logo">
+							<a href="/" class="logo-link">
+								<img
+									class="logo"
+									src="https://static.tildacdn.com/tild6337-3833-4836-a436-656266346565/____compressed_2_8.png"
+									alt="Аксиома Капитал"
+								/>
+							</a>
+						</div>
+
+						<input type="checkbox" id="nav__menu-btn" />
+
+						<label for="nav__menu-btn" class="nav__btn nav__btn--menu">
+							<span class="hamburger">
+								<span class="hamburger__line"></span>
+								<span class="hamburger__line"></span>
+								<span class="hamburger__line"></span>
+							</span>
+						</label>
+
+						<ul class="nav__list">
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									<span>О компании</span>
+									<svg
+										class="dropdown__arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+									>
+										<polyline points="6,9 12,15 18,9"></polyline>
+									</svg>
+								</a>
+								<input type="checkbox" id="nav__showDropInfo" />
+								<label
+									for="nav__showDropInfo"
+									class="nav__link nav__link--mobile"
+								>
+									О компании
+								</label>
+								<ul class="nav__sub-list nav__sub-list--dropdown">
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/about">
+											<span>Информация об организации</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/req/">
+											<span>Реквизиты организации</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/team/">
+											<span>Команда</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/contacts/">
+											<span>Контакты</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="nav__item">
+								<a class="nav__link" href="/src/news/">
+									<span>Новости</span>
+								</a>
+							</li>
+
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									<span>Инвестиционная библиотека</span>
+									<svg
+										class="dropdown__arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+									>
+										<polyline points="6,9 12,15 18,9"></polyline>
+									</svg>
+								</a>
+								<input type="checkbox" id="nav__showDropLibrary" />
+								<label
+									for="nav__showDropLibrary"
+									class="nav__link nav__link--mobile"
+								>
+									Инвестиционная библиотека
+								</label>
+								<ul class="nav__sub-list nav__sub-list--dropdown">
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/what_is_zpif"
+										>
+											<span>Что такое ЗПИФ</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/how_does_zpif_work"
+										>
+											<span>Как работает ЗПИФ</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/business_solutions"
+										>
+											<span>Решения для бизнеса</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/stages_of_creating_zpif"
+										>
+											<span>Этапы создания ЗПИФ</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/composition_of_the_assets_zpif"
+										>
+											<span>Состав имущества ЗПИФ</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/investment_library/faq">
+											<span>Вопросы и ответы</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="nav__item nav__item--has-mega">
+								<a href="#" class="nav__link nav__link--desktop">
+									<span>Раскрытие информации</span>
+									<svg
+										class="dropdown__arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+									>
+										<polyline points="6,9 12,15 18,9"></polyline>
+									</svg>
+								</a>
+								<input type="checkbox" id="nav__showMegaInfo" />
+								<label
+									for="nav__showMegaInfo"
+									class="nav__link nav__link--mobile"
+								>
+									Раскрытие информации
+								</label>
+								<div class="nav__mega-menu">
+									<div class="nav__mega-content">
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/disclosure"
+													>
+														<span>Раскрытие информации</span>
+													</a>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/messages_and_notifications"
+													>
+														<span>Сообщения и уведомления</span>
+													</a>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/investors"
+													>
+														<span>Квалифицированным инвесторам</span>
+													</a>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/regulations_and_provisions"
+													>
+														<span>Регламенты и положения</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/data_protection"
+													>
+														<span>Защита информации</span>
+													</a>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/conflict_of_interest"
+													>
+														<span>Информация о конфликте интересов</span>
+													</a>
+												</li>
+												<li class="nav__mega-item">
+													<a class="nav__mega-link" href="/src/information/cpo">
+														<span>Участие в СРО</span>
+													</a>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/licenses_and_certificates"
+													>
+														<span>Лицензии и свидетельства</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/calculation_of_funds"
+													>
+														<span>Расчет размера собственных средств</span>
+													</a>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/financial_statements"
+													>
+														<span>Бухгалтерская отчетность</span>
+													</a>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/assessment_of_working_conditions"
+													>
+														<span>Специальная оценка труда</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									<span>Фонды</span>
+									<svg
+										class="dropdown__arrow"
+										width="12"
+										height="12"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+									>
+										<polyline points="6,9 12,15 18,9"></polyline>
+									</svg>
+								</a>
+								<input type="checkbox" id="nav__showDropFunds" />
+								<label
+									for="nav__showDropFunds"
+									class="nav__link nav__link--mobile"
+									>Фонды</label
+								>
+								<ul
+									class="nav__sub-list nav__sub-list--dropdown nav__sub-list--dropdown-long"
+								>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=1"
+										>
+											<span>ЗПИФ комбинированный «Проектный бизнес»</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=2"
+										>
+											<span>ЗПИФ комбинированный «Структурные финансы»</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=3"
+										>
+											<span>ЗПИФ комбинированный «ЛэндПро»</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=5"
+										>
+											<span>ЗПИФ комбинированный «ФК ПаРус»</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=6"
+										>
+											<span>ЗПИФ комбинированный «Аксиома финансов»</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=7"
+										>
+											<span>ЗПИФ комбинированный «Финансовый центр»</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=8"
+										>
+											<span>ЗПИФ комбинированный «Проектные вложения»</span>
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=9"
+										>
+											<span>ЗПИФ комбинированный «Финансовый бизнес»</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<!-- Main Content -->
+		<main id="main-content">
+			<!-- Hero Section -->
+			<section class="hero" id="hero">
+				<!-- Video Background -->
+				<div class="video-container">
+					<video
+						id="heroVideo"
+						class="hero-video"
+						muted
+						loop
+						playsinline
+						webkit-playsinline
+						preload="auto"
+					>
+						<source src="./assets/hero-video.mp4" type="video/mp4" />
+					</video>
+					<div class="video-overlay"></div>
+				</div>
+
+				<!-- Loading Container -->
+				<div class="loading-container" id="loadingContainer">
+					<div class="loading-spinner" id="loadingSpinner">
+						<svg viewBox="0 0 50 50">
+							<circle
+								cx="25"
+								cy="25"
+								r="20"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-dasharray="31.416"
+								stroke-dashoffset="31.416"
+							>
+								<animate
+									attributeName="stroke-array"
+									dur="2s"
+									values="0 31.416;15.708 15.708;0 31.416"
+									repeatCount="indefinite"
+								/>
+								<animate
+									attributeName="stroke-dashoffset"
+									dur="2s"
+									values="0;-15.708;-31.416"
+									repeatCount="indefinite"
+								/>
+							</circle>
+						</svg>
+					</div>
+				</div>
+
+				<!-- Video Progress Bar -->
+				<div class="video-progress-container" id="videoProgressContainer">
+					<div class="video-progress-bar">
+						<div class="video-progress-fill" id="videoProgressFill"></div>
+					</div>
+				</div>
+
+				<!-- Scroll Indicator -->
+				<div class="scroll-indicator" id="scrollIndicator">
+					<button class="scroll-button" aria-label="Перейти к следующей секции">
+						<svg
+							class="scroll-icon"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M7 10L12 15L17 10"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					</button>
+				</div>
+			</section>
+
+			<!-- Company Intro -->
+			<section class="about" id="about">
+				<div class="container">
+					<div class="content">
+						<h1 class="title">АКСИОМА КАПИТАЛ</h1>
+						<p class="description">
+							Осуществляет доверительное управление<br />
+							индивидуальными закрытыми паевыми<br />
+							инвестиционными фондами.<br />
+							ЗПИФ обеспечивают защиту интересов<br />
+							бенефициаров и высокий уровень<br />
+							безопасности активов
+						</p>
+						<button class="learn-more">
+							<span class="circle" aria-hidden="true">
+								<span class="icon arrow"></span>
+							</span>
+							<span class="button-text">Подробнее</span>
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<!-- Services Section -->
+			<section class="services" id="services">
+				<div class="container">
+					<div class="services-header">
+						<h2 class="section-title">Решения для бизнеса</h2>
+						<p class="section-subtitle">
+							Комплексные решения для вашего бизнеса
+						</p>
+					</div>
+					<div class="services-grid">
+						<div class="service-card">
+							<div class="card-number">01</div>
+							<div class="card-content">
+								<h3 class="service-title">
+									Структурирование сделок с непрофильными активами
+								</h3>
+								<p class="service-description">
+									Для владельцев залоговых активов, имущества дефолтных
+									заемщиков, портфелей разнородных активов, земельных участков и
+									зданий вне фокуса
+								</p>
+							</div>
+							<button class="card-button">Подробнее</button>
+						</div>
+						<div class="service-card">
+							<div class="card-number">02</div>
+							<div class="card-content">
+								<h3 class="service-title">M&A и проектное финансирование</h3>
+								<p class="service-description">
+									Для собственников бизнеса, стартапов и IT-компаний,
+									застройщиков и девелоперов, энергетических и инфраструктурных
+									проектов
+								</p>
+							</div>
+							<button class="card-button">Подробнее</button>
+						</div>
+						<div class="service-card">
+							<div class="card-number">03</div>
+							<div class="card-content">
+								<h3 class="service-title">Финансирование контрактов</h3>
+								<p class="service-description">
+									Факторинг для финансирования экспортеров и импортеров,
+									поставщиков и покупателей
+								</p>
+							</div>
+							<button class="card-button">Подробнее</button>
+						</div>
+						<div class="service-card">
+							<div class="card-number">04</div>
+							<div class="card-content">
+								<h3 class="service-title">Мезонинное кредитование</h3>
+								<p class="service-description">
+									Финансирование и участие в капитализации крупных
+									инвестиционных проектов, промышленных объектов
+								</p>
+							</div>
+							<button class="card-button">Подробнее</button>
+						</div>
+						<div class="service-card">
+							<div class="card-number">05</div>
+							<div class="card-content">
+								<h3 class="service-title">Бридж-Финансирование</h3>
+								<p class="service-description">
+									Для владельцев крупных земельных участков, застройщиков и
+									девелоперов
+								</p>
+							</div>
+							<button class="card-button">Подробнее</button>
+						</div>
+						<div class="service-card">
+							<div class="card-number">06</div>
+							<div class="card-content">
+								<h3 class="service-title">Мезонинное кредитование</h3>
+								<p class="service-description">
+									Финансирование и участие в капитализации крупных
+									инвестиционных проектов, промышленных объектов
+								</p>
+							</div>
+							<button class="card-button">Подробнее</button>
+						</div>
+						<div class="service-card">
+							<div class="card-number">07</div>
+							<div class="card-content">
+								<h3 class="service-title">Мезонинное кредитование</h3>
+								<p class="service-description">
+									Финансирование и участие в капитализации крупных
+									инвестиционных проектов, промышленных объектов
+								</p>
+							</div>
+							<button class="card-button">Подробнее</button>
+						</div>
+						<div class="service-card">
+							<div class="card-number">08</div>
+							<div class="card-content">
+								<h3 class="service-title">Мезонинное кредитование</h3>
+								<p class="service-description">
+									Финансирование и участие в капитализации крупных
+									инвестиционных проектов, промышленных объектов
+								</p>
+							</div>
+							<button class="card-button">Подробнее</button>
+						</div>
+					</div>
+				</div>
+				<!-- Секция со схемой взаимосвязи -->
+				<div class="interaction-section">
+					<div class="parallax-layer"></div>
+					<div class="container">
+						<div class="interaction-content">
+							<h2 class="interaction-title">
+								Схема взаимосвязи участников<br />
+								управляющей компании
+							</h2>
+							<p class="interaction-description">
+								Прозрачная структура для эффективного управления активами
+							</p>
+							<button class="learn-more">
+								<span class="circle" aria-hidden="true">
+									<span class="icon arrow"></span>
+								</span>
+
+								<span class="button-text">Подробнее</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section class="contact" id="contact">
+				<!-- Фоновые слои -->
+				<div class="contact-bg-image"></div>
+				<div class="contact-overlay"></div>
+				<div class="floating-particles"></div>
+
+				<!-- Основной контент -->
+				<div class="container">
+					<div class="contact-wrapper">
+						<!-- Декоративные элементы -->
+						<div class="animated-circle"></div>
+						<div class="animated-circle-secondary"></div>
+
+						<!-- Форма с фоном -->
+						<div class="contact-card">
+							<!-- Заголовок -->
+							<div class="contact-header">
+								<h2 class="contact-title">
+									<span class="title-line">Подать заявку</span>
+									<span class="title-line">на консультацию</span>
+								</h2>
+								<p class="contact-subtitle">
+									Заполните форму и мы свяжемся с Вами
+								</p>
+							</div>
+
+							<!-- Форма -->
+							<form class="contact-form" id="contactForm" novalidate>
+								<!-- Email поле -->
+								<div class="form-group">
+									<input
+										type="email"
+										class="form-input"
+										name="email"
+										id="email"
+										placeholder=" "
+										required
+										autocomplete="email"
+									/>
+									<label class="form-label" for="email">Email</label>
+									<span class="form-highlight"></span>
+									<span class="form-error" id="email-error"></span>
+								</div>
+
+								<!-- Телефон с выбором страны -->
+								<div class="form-group phone-group">
+									<div class="country-selector">
+										<button
+											type="button"
+											class="country-button"
+											aria-label="Выбрать страну"
+											aria-expanded="false"
+											aria-controls="countryDropdown"
+										>
+											<span class="selected-flag">🇺🇸</span>
+											<svg
+												class="dropdown-arrow"
+												width="10"
+												height="6"
+												viewBox="0 0 10 6"
+												fill="none"
+												aria-hidden="true"
+											>
+												<path
+													d="M1 1L5 5L9 1"
+													stroke="currentColor"
+													stroke-width="1.5"
+													stroke-linecap="round"
+												/>
+											</svg>
+										</button>
+
+										<div class="country-dropdown" id="countryDropdown">
+											<div class="country-search">
+												<input
+													type="text"
+													placeholder="Поиск страны..."
+													class="country-search-input"
+													aria-label="Поиск страны"
+												/>
+											</div>
+											<ul class="country-list" role="listbox">
+												<li
+													role="option"
+													data-code="+1"
+													data-flag="🇺🇸"
+													class="selected"
+												>
+													<span class="country-flag">🇺🇸</span>
+													<span class="country-name">США</span>
+													<span class="country-code">+1</span>
+												</li>
+												<li role="option" data-code="+7" data-flag="🇷🇺">
+													<span class="country-flag">🇷🇺</span>
+													<span class="country-name">Россия</span>
+													<span class="country-code">+7</span>
+												</li>
+												<li role="option" data-code="+86" data-flag="🇨🇳">
+													<span class="country-flag">🇨🇳</span>
+													<span class="country-name">Китай</span>
+													<span class="country-code">+86</span>
+												</li>
+												<li role="option" data-code="+91" data-flag="🇮🇳">
+													<span class="country-flag">🇮🇳</span>
+													<span class="country-name">Индия</span>
+													<span class="country-code">+91</span>
+												</li>
+												<li role="option" data-code="+55" data-flag="🇧🇷">
+													<span class="country-flag">🇧🇷</span>
+													<span class="country-name">Бразилия</span>
+													<span class="country-code">+55</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+
+									<input
+										type="tel"
+										class="form-input phone-input"
+										name="phone"
+										id="phone"
+										placeholder=" "
+										required
+										autocomplete="tel"
+									/>
+									<label class="form-label phone-label" for="phone"
+										>Телефон</label
+									>
+									<span class="form-highlight"></span>
+									<span class="form-error" id="phone-error"></span>
+								</div>
+
+								<!-- Имя -->
+								<div class="form-group">
+									<input
+										type="text"
+										class="form-input"
+										name="name"
+										id="name"
+										placeholder=" "
+										required
+										autocomplete="name"
+									/>
+									<label class="form-label" for="name">Имя</label>
+									<span class="form-highlight"></span>
+									<span class="form-error" id="name-error"></span>
+								</div>
+
+								<!-- Кнопка отправки -->
+								<button type="submit" class="submit-button">
+									<span class="button-text">ОТПРАВИТЬ</span>
+									<div class="button-effect"></div>
+									<svg
+										class="button-icon"
+										width="20"
+										height="20"
+										viewBox="0 0 20 20"
+										fill="none"
+									>
+										<path
+											d="M6 10H14M14 10L10 6M14 10L10 14"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</button>
+							</form>
+
+							<!-- Дополнительная информация -->
+							<div class="contact-info">
+								<p class="info-text">Или свяжитесь с нами напрямую:</p>
+								<a href="tel:+78001234567" class="info-link">
+									<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+										<path
+											d="M2 3.5C2 2.67157 2.67157 2 3.5 2H5.37285C5.69602 2 5.98816 2.18537 6.11775 2.47819L7.36259 5.26367C7.51051 5.59832 7.40739 5.98956 7.11885 6.20743L5.91612 7.15848C5.87678 7.18714 5.86048 7.23553 5.87311 7.28113C6.25601 8.64682 7.35318 9.74399 8.71887 10.1269C8.76447 10.1395 8.81286 10.1232 8.84152 10.0839L9.79257 8.88115C10.0104 8.59261 10.4017 8.48949 10.7363 8.63741L13.5218 9.88225C13.8146 10.0118 14 10.304 14 10.6271V12.5C14 13.3284 13.3284 14 12.5 14H11C5.47715 14 1 9.52285 1 4V3.5Z"
+											stroke="currentColor"
+											stroke-width="1.5"
+										/>
+									</svg>
+									+7 (495) 970-37-57
+								</a>
+								<a href="mailto:info@axiomacapital.ru" class="info-link">
+									<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+										<rect
+											x="1.5"
+											y="3.5"
+											width="13"
+											height="9"
+											rx="1.5"
+											stroke="currentColor"
+											stroke-width="1.5"
+										/>
+										<path
+											d="M1.5 5.5L7.29289 9.29289C7.68342 9.68342 8.31658 9.68342 8.70711 9.29289L14.5 5.5"
+											stroke="currentColor"
+											stroke-width="1.5"
+										/>
+									</svg>
+									info@axiomacapital.ru
+								</a>
+							</div>
+						</div>
+
+						<!-- Футер -->
+						<p class="contact-footer">УК "АКСИОМА КАПИТАЛ"</p>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer -->
+		<footer class="footer">
+			<div class="container">
+				<div class="footer-content">
+					<!-- Левая секция с логотипом и описанием -->
+					<div class="footer-brand">
+						<div class="footer-logo">
+							<img
+								src="https://optim.tildacdn.com/tild6439-3537-4665-b938-663062623234/-/resize/772x/-/format/webp/__2025-06-23__001452.png.webp"
+								alt="Аксиома Капитал"
+							/>
+						</div>
+						<p class="footer-tagline">
+							Общество с ограниченной ответственностью<br />
+							Управляющая компания «Аксиома Капитал»<br />
+							ООО УК «Аксиома Капитал»
+						</p>
+					</div>
+
+					<!-- Центральная секция с ссылками -->
+					<div class="footer-links">
+						<h4>Информация</h4>
+						<nav>
+							<a href="/about">О компании</a>
+							<a href="/services">Услуги</a>
+							<a href="/documents">Документы</a>
+							<a href="/contacts">Контакты</a>
+						</nav>
+					</div>
+
+					<!-- Правая секция с контактами -->
+					<div class="footer-contact">
+						<h4>Социальные сети</h4>
+						<div class="footer-social">
+							<a href="#" aria-label="Telegram">
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="currentColor"
+								>
+									<path
+										d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.56c-.21 2.27-1.13 7.78-1.6 10.32-.2 1.07-.59 1.43-.97 1.47-.82.08-1.45-.54-2.24-1.06-1.24-.82-1.95-1.33-3.15-2.13-1.39-.93-.49-1.44.3-2.27.21-.22 3.86-3.54 3.93-3.84.01-.04.01-.18-.07-.26-.08-.08-.2-.05-.28-.03-.12.03-2.02 1.28-5.7 3.76-.54.37-1.03.55-1.47.54-.48-.01-1.41-.27-2.1-.5-.85-.28-1.52-.43-1.46-.91.03-.25.37-.51 1.01-.78 3.96-1.72 6.6-2.86 7.93-3.42 3.78-1.58 4.56-1.86 5.07-1.87.11 0 .37.03.53.17.14.12.18.28.2.46.02.13.04.42.02.65z"
+									/>
+								</svg>
+							</a>
+							<a href="#" aria-label="VK">
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="currentColor"
+								>
+									<path
+										d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zM18.15 16.27h-1.7c-.64 0-.84-.51-2-1.67-1.02-1.02-1.48-1.18-1.73-1.18-.35 0-.45.1-.45.59v1.52c0 .42-.13.67-1.25.67-1.85 0-3.9-1.12-5.34-3.21C3.68 9.69 3 7.64 3 7.15c0-.25.1-.48.59-.48h1.7c.44 0 .61.2.78.68.87 2.52 2.31 4.72 2.91 4.72.22 0 .32-.1.32-.67v-2.6c-.07-.93-.54-1.01-.54-1.35 0-.2.17-.4.44-.4h2.67c.37 0 .5.2.5.64v3.51c0 .37.17.5.27.5.22 0 .4-.13.81-.54 1.25-1.43 2.15-3.64 2.15-3.64.12-.25.32-.48.78-.48h1.7c.51 0 .62.26.51.63-.22 1.02-2.35 4.03-2.35 4.03-.2.32-.27.47 0 .83.2.27.84.83 1.27 1.33.79.91 1.4 1.67 1.56 2.19.17.52-.08.79-.59.79z"
+									/>
+								</svg>
+							</a>
+							<a href="#" aria-label="VK">
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="currentColor"
+								>
+									<path
+										d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zM18.15 16.27h-1.7c-.64 0-.84-.51-2-1.67-1.02-1.02-1.48-1.18-1.73-1.18-.35 0-.45.1-.45.59v1.52c0 .42-.13.67-1.25.67-1.85 0-3.9-1.12-5.34-3.21C3.68 9.69 3 7.64 3 7.15c0-.25.1-.48.59-.48h1.7c.44 0 .61.2.78.68.87 2.52 2.31 4.72 2.91 4.72.22 0 .32-.1.32-.67v-2.6c-.07-.93-.54-1.01-.54-1.35 0-.2.17-.4.44-.4h2.67c.37 0 .5.2.5.64v3.51c0 .37.17.5.27.5.22 0 .4-.13.81-.54 1.25-1.43 2.15-3.64 2.15-3.64.12-.25.32-.48.78-.48h1.7c.51 0 .62.26.51.63-.22 1.02-2.35 4.03-2.35 4.03-.2.32-.27.47 0 .83.2.27.84.83 1.27 1.33.79.91 1.4 1.67 1.56 2.19.17.52-.08.79-.59.79z"
+									/>
+								</svg>
+							</a>
+							<a href="#" aria-label="VK">
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="currentColor"
+								>
+									<path
+										d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zM18.15 16.27h-1.7c-.64 0-.84-.51-2-1.67-1.02-1.02-1.48-1.18-1.73-1.18-.35 0-.45.1-.45.59v1.52c0 .42-.13.67-1.25.67-1.85 0-3.9-1.12-5.34-3.21C3.68 9.69 3 7.64 3 7.15c0-.25.1-.48.59-.48h1.7c.44 0 .61.2.78.68.87 2.52 2.31 4.72 2.91 4.72.22 0 .32-.1.32-.67v-2.6c-.07-.93-.54-1.01-.54-1.35 0-.2.17-.4.44-.4h2.67c.37 0 .5.2.5.64v3.51c0 .37.17.5.27.5.22 0 .4-.13.81-.54 1.25-1.43 2.15-3.64 2.15-3.64.12-.25.32-.48.78-.48h1.7c.51 0 .62.26.51.63-.22 1.02-2.35 4.03-2.35 4.03-.2.32-.27.47 0 .83.2.27.84.83 1.27 1.33.79.91 1.4 1.67 1.56 2.19.17.52-.08.79-.59.79z"
+									/>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Секция с обязательной юридической информацией -->
+				<div class="footer-legal-section">
+					<p>
+						Общество с ограниченной ответственностью Управляющая компания
+						«Аксиома Капитал» действует на основании лицензии, выданной Банком
+						России 23.05.2024 г. № 21-000-1-01104, на осуществление деятельности
+						по управлению инвестиционными фондами, паевыми инвестиционными
+						фондами и негосударственными пенсионными фондами, без ограничения
+						срока действия (Решение Банка России от 23.05.2024 № Р5-14/682).
+						Деятельность ООО УК «Аксиома Капитал» по управлению инвестиционными
+						фондами, паевыми инвестиционными фондами и негосударственными
+						пенсионными фондами не совмещается с профессиональной деятельностью
+						по доверительному управлению ценными бумагами. В связи с этим
+						отсутствует риск возникновения конфликта интересов при совмещении
+						указанных видов деятельности.
+					</p>
+					<p>
+						Московская область, г.о. Одинцовский, с. Усово, стр. 100, часть
+						помещ. 10, по телефону
+						<a href="tel:+74959703757">+7 (495) 970-37-57</a>, а также по адресу
+						страницы в сети Интернет
+						<a href="https://axiomacapital.ru/" target="_blank"
+							>https://axiomacapital.ru/</a
+						>
+					</p>
+					<p>
+						ООО УК «Аксиома Капитал» уведомляет, что стоимость инвестиционных
+						паев может увеличиваться и уменьшаться, результаты инвестирования в
+						прошлом не определяют доходы в будущем, государство не гарантирует
+						доходность инвестиций в паевые инвестиционные фонды. Прежде чем
+						приобрести инвестиционный пай, следует внимательно ознакомиться с
+						правилами доверительного управления паевым инвестиционным фондом.
+					</p>
+				</div>
+
+				<!-- Нижняя секция с копирайтом -->
+				<div class="footer-bottom">
+					<p class="footer-copyright">
+						© 2025 ООО УК «Аксиома Капитал». Все права защищены.
+					</p>
+				</div>
+			</div>
+		</footer>
+
+		<script src="js/header.js"></script>
+		<script src="js/video.js"></script>
+		<script src="js/loading.js"></script>
+		<script src="js/navigation.js"></script>
+		<script src="js/contacts.js"></script>
+		<script src="js/parallax-services.js"></script>
+	</body>
+</html>

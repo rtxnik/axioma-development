@@ -1,0 +1,517 @@
+/* ===============================================
+  SERVICES SECTION - БЕЛЫЙ МИНИМАЛИСТИЧНЫЙ СТИЛЬ
+  =============================================== */
+
+/* Контейнер */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+/* Основная секция */
+.services {
+	padding: 100px 0 0 0;
+	background: #ffffff;
+	position: relative;
+}
+
+/* Заголовок секции */
+.services-header {
+	text-align: center;
+	margin-bottom: 80px;
+	opacity: 0;
+	animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.section-title {
+	font-size: clamp(2rem, 5vw, 3rem);
+	font-weight: 300;
+	color: #111827;
+	margin-bottom: 10px;
+	letter-spacing: -0.02em;
+	text-transform: uppercase;
+}
+
+.section-subtitle {
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	color: #6b7280;
+	font-weight: 300;
+}
+
+/* Сетка услуг */
+.services-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 30px;
+	margin-bottom: 120px;
+}
+
+/* Карточка услуги */
+.service-card {
+	position: relative;
+	background: #fafafa;
+	border: 1px solid #f3f4f6;
+	padding: 40px 30px;
+	height: 100%;
+	min-height: 320px;
+	transition: all 0.3s ease;
+	overflow: visible;
+	opacity: 0;
+	animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.service-card:nth-child(1) {
+	animation-delay: 0.3s;
+}
+.service-card:nth-child(2) {
+	animation-delay: 0.4s;
+}
+.service-card:nth-child(3) {
+	animation-delay: 0.5s;
+}
+.service-card:nth-child(4) {
+	animation-delay: 0.6s;
+}
+
+.service-card:hover {
+	transform: translateY(-5px);
+	background: #ffffff;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+	border-color: #e5e7eb;
+}
+
+/* Номер карточки */
+.card-number {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	font-size: 3rem;
+	font-weight: 900;
+	color: rgba(59, 130, 246, 0.1);
+	line-height: 1;
+}
+
+/* Контент карточки */
+.card-content {
+	position: relative;
+	z-index: 1;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Заголовок услуги */
+.service-title {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #111827;
+	line-height: 1.4;
+	margin-bottom: 20px;
+	text-transform: none;
+	letter-spacing: -0.01em;
+	flex-shrink: 0;
+}
+
+/* Описание услуги */
+.service-description {
+	font-size: 0.875rem;
+	color: #6b7280;
+	line-height: 1.6;
+	margin-bottom: auto;
+	flex-grow: 1;
+}
+
+/* Кнопка карточки */
+.card-button {
+	transform: translate(-50%, 125%);
+	width: 70%;
+	max-width: 150px;
+	border-radius: 25px;
+	border: none;
+	background-color: #3b82f6;
+	color: #fff;
+	font-size: 0.875rem;
+	font-weight: 500;
+	padding: 0.75rem 1.5rem;
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	opacity: 0;
+	transition: all 0.3s ease-out;
+	cursor: pointer;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+}
+
+.card-button:hover {
+	background-color: #2563eb;
+	transform: translate(-50%, 50%) scale(1.05);
+}
+
+/* Hover эффект карточки */
+.service-card:hover .card-button {
+	transform: translate(-50%, 50%);
+	opacity: 1;
+}
+
+/* ===============================================
+  СЕКЦИЯ ВЗАИМОСВЯЗИ С УЛУЧШЕННЫМ ПАРАЛЛАКСОМ
+  =============================================== */
+.interaction-section {
+	position: relative;
+	background: #f9fafb;
+	padding: 100px 0;
+	overflow: hidden;
+}
+
+.interaction-section .container {
+	position: relative;
+	z-index: 2;
+}
+
+/* Параллакс слой для изображения */
+.parallax-layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	z-index: 1;
+}
+
+/* Параллакс изображение */
+.parallax-layer::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: -15%;
+	transform: translateY(-50%);
+	width: 2400px;
+	height: 2400px;
+	background-image: url("/ax-4logo.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	opacity: 0.25; /* Оптимальная видимость */
+	will-change: transform;
+	z-index: 0;
+}
+
+/* Дополнительные декоративные элементы */
+.parallax-layer::after {
+	content: "";
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+	bottom: -50px;
+	left: -50px;
+	opacity: 0.05;
+	animation: softPulse 20s ease-in-out infinite;
+}
+
+/* Размеры изображения для разных экранов */
+@media (min-width: 768px) {
+	.parallax-layer::before {
+		width: 900px;
+		height: 900px;
+		opacity: 0.3;
+		right: -10%;
+	}
+}
+
+@media (min-width: 1024px) {
+	.parallax-layer::before {
+		width: 1000px;
+		height: 1000px;
+		opacity: 0.35;
+		right: -5%;
+	}
+}
+
+@media (min-width: 1440px) {
+	.parallax-layer::before {
+		width: 1200px;
+		height: 1200px;
+		opacity: 0.4;
+		right: 0;
+	}
+}
+
+/* Контент взаимосвязи */
+.interaction-content {
+	text-align: center;
+	position: relative;
+	z-index: 3; /* Увеличен z-index для отображения поверх изображения */
+	opacity: 0;
+	animation: fadeIn 1s ease-out 0.8s forwards;
+}
+
+.interaction-title {
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	font-weight: 300;
+	color: #111827;
+	line-height: 1.3;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+	letter-spacing: -0.02em;
+}
+
+.interaction-description {
+	font-size: clamp(1rem, 2vw, 1.125rem);
+	color: #6b7280;
+	margin-bottom: 40px;
+	font-weight: 300;
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes softPulse {
+	0%,
+	100% {
+		opacity: 0.05;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.08;
+		transform: scale(1.1);
+	}
+}
+
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
+
+/* Большие планшеты (до 1024px) */
+@media (max-width: 1024px) {
+	.services-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 25px;
+	}
+
+	.services {
+		padding: 80px 0 0 0;
+	}
+
+	.services-header {
+		margin-bottom: 60px;
+	}
+
+	.services-grid {
+		margin-bottom: 80px;
+	}
+}
+
+/* Планшеты (до 768px) */
+@media (max-width: 768px) {
+	.services {
+		padding: 60px 0 0 0;
+	}
+
+	.services-header {
+		margin-bottom: 40px;
+	}
+
+	.section-title {
+		font-size: 2rem;
+	}
+
+	.section-subtitle {
+		font-size: 1rem;
+	}
+
+	.services-grid {
+		grid-template-columns: 1fr;
+		gap: 20px;
+		margin-bottom: 60px;
+	}
+
+	.service-card {
+		min-height: auto;
+		padding: 30px 25px;
+	}
+
+	.card-number {
+		font-size: 2.5rem;
+		top: 25px;
+		right: 25px;
+	}
+
+	.service-title {
+		font-size: 1rem;
+		margin-bottom: 15px;
+	}
+
+	.service-description {
+		font-size: 0.875rem;
+	}
+
+	.card-button {
+		font-size: 0.8125rem;
+		padding: 0.625rem 1.25rem;
+	}
+
+	.interaction-section {
+		padding: 60px 0;
+	}
+
+	.interaction-title {
+		font-size: 1.5rem;
+		margin-bottom: 15px;
+	}
+
+	.interaction-description {
+		font-size: 1rem;
+		margin-bottom: 30px;
+	}
+
+	.parallax-layer::before {
+		width: 500px;
+		height: 500px;
+		opacity: 0.2;
+	}
+}
+
+/* Мобильные устройства (до 480px) */
+@media (max-width: 480px) {
+	.container {
+		padding: 0 15px;
+	}
+
+	.services {
+		padding: 40px 0 0 0;
+	}
+
+	.services-header {
+		margin-bottom: 30px;
+	}
+
+	.section-title {
+		font-size: 1.75rem;
+	}
+
+	.section-subtitle {
+		font-size: 0.875rem;
+	}
+
+	.services-grid {
+		margin-bottom: 40px;
+	}
+
+	.service-card {
+		padding: 25px 20px;
+	}
+
+	.card-number {
+		font-size: 2rem;
+		top: 20px;
+		right: 20px;
+	}
+
+	.service-title {
+		font-size: 0.9375rem;
+	}
+
+	.service-description {
+		font-size: 0.8125rem;
+		line-height: 1.5;
+	}
+
+	.card-button {
+		font-size: 0.75rem;
+		padding: 0.5rem 1rem;
+		width: 80%;
+	}
+
+	.interaction-section {
+		padding: 40px 0;
+	}
+
+	.interaction-title {
+		font-size: 1.25rem;
+		line-height: 1.4;
+	}
+
+	.interaction-description {
+		font-size: 0.875rem;
+		margin-bottom: 25px;
+	}
+
+	.parallax-layer::before {
+		width: 400px;
+		height: 400px;
+		opacity: 0.15;
+	}
+}
+
+/* Очень маленькие экраны (до 375px) */
+@media (max-width: 375px) {
+	.section-title {
+		font-size: 1.5rem;
+	}
+
+	.service-card {
+		padding: 20px 15px;
+	}
+
+	.card-number {
+		font-size: 1.75rem;
+	}
+
+	.service-title {
+		font-size: 0.875rem;
+	}
+
+	.service-description {
+		font-size: 0.75rem;
+	}
+
+	.interaction-title {
+		font-size: 1.125rem;
+	}
+}
+
+/* Большие экраны (от 1440px) */
+@media (min-width: 1440px) {
+	.container {
+		max-width: 1320px;
+		padding: 0 40px;
+	}
+
+	.services-grid {
+		gap: 40px;
+	}
+
+	.service-card {
+		padding: 50px 40px;
+	}
+}
+
+/* Очень большие экраны (от 1920px) */
+@media (min-width: 1920px) {
+	.container {
+		max-width: 1400px;
+		padding: 0 60px;
+	}
+}
