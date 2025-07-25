@@ -1,0 +1,311 @@
+/* ===============================================
+   MODERN CSS RESET + NORMALIZE
+   Сброс стилей браузера и нормализация
+   =============================================== */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* Prevent font size inflation */
+html {
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+/* Set core root defaults */
+html {
+	scroll-behavior: smooth;
+	font-size: 16px; /* Базовый размер для rem */
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	line-height: var(--line-height-normal);
+	font-family: var(--font-family-primary);
+	font-weight: var(--font-weight-normal);
+	color: var(--color-text-primary);
+	background-color: var(--color-bg-primary);
+	text-rendering: optimizeSpeed;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove list styles on ul, ol elements with a list role */
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+	list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	color: var(--color-accent);
+	text-decoration-skip-ink: auto;
+}
+
+/* Remove underline from all links by default */
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+	color: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto !important;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* Remove default button styles */
+button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+/* Remove default input styles */
+input,
+textarea {
+	background: none;
+	border: none;
+	outline: none;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+	min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+	scroll-margin-block: 5ex;
+}
+
+/* Remove default table spacing */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Default focus styles */
+:focus-visible {
+	outline: 2px solid var(--color-accent);
+	outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* Headings reset */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+/* Address inconsistent styling of abbr elements */
+abbr[title] {
+	text-decoration: underline dotted;
+}
+
+/* Address inconsistent styling of b and strong elements */
+b,
+strong {
+	font-weight: var(--font-weight-bold);
+}
+
+/* Address styling not present in Safari and Chrome */
+dfn {
+	font-style: italic;
+}
+
+/* Address inconsistent styling of mark elements */
+mark {
+	background-color: var(--color-warning);
+	color: var(--color-black);
+}
+
+/* Address inconsistent quote types */
+q {
+	quotes: "\201C""\201D""\2018""\2019";
+}
+
+/* Address inconsistent styling of small elements */
+small {
+	font-size: 80%;
+}
+
+/* Prevent sub and sup elements from affecting line height */
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+sup {
+	top: -0.5em;
+}
+
+/* Interactive elements */
+details {
+	display: block;
+}
+
+summary {
+	display: list-item;
+	cursor: pointer;
+}
+
+/* Hidden attribute */
+[hidden] {
+	display: none !important;
+}
+
+/* Disabled elements */
+:disabled {
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+/* Selection styles */
+::selection {
+	background-color: var(--color-accent);
+	color: var(--color-white);
+}
+
+/* Placeholder styles */
+::placeholder {
+	color: var(--input-placeholder);
+	opacity: 1;
+}
+
+/* File input button */
+::file-selector-button {
+	font: inherit;
+}
+
+/* Scrollbar styles (Webkit) */
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-tertiary);
+	border-radius: var(--radius-full);
+	border: 2px solid var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-secondary);
+}
+
+/* Firefox scrollbar */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-tertiary) var(--color-bg-secondary);
+}
+
+/* Ensure full height layouts work properly */
+#root,
+#__next,
+main {
+	min-height: 100vh;
+}
+
+/* Utility: visually hidden but accessible */
+.visually-hidden,
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+/* Skip to content link */
+.skip-to-content {
+	position: absolute;
+	left: var(--space-2);
+	top: var(--space-2);
+	z-index: var(--z-tooltip);
+	padding: var(--space-2) var(--space-4);
+	background: var(--color-bg-primary);
+	color: var(--color-text-primary);
+	text-decoration: none;
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-lg);
+	transform: translateY(-100%);
+	transition: var(--transition-transform);
+}
+
+.skip-to-content:focus {
+	transform: translateY(0);
+}

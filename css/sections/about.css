@@ -1,8 +1,12 @@
-/* =============================================== */
-/* ВАРИАНТ 4: КОРПОРАТИВНЫЙ МИНИМАЛИЗМ */
-/* =============================================== */
+/* ===============================================
+   ABOUT SECTION - КОРПОРАТИВНЫЙ МИНИМАЛИЗМ
+   Рефакторинг с использованием CSS переменных
+   =============================================== */
 
-/* Основная секция */
+/* ===============================================
+   ОСНОВНАЯ СЕКЦИЯ
+   =============================================== */
+
 .about {
 	width: 100%;
 	height: 100vh;
@@ -12,7 +16,7 @@
 	display: flex;
 	align-items: center;
 	overflow: hidden;
-	background: #ffffff;
+	background: var(--color-bg-primary);
 	background-image: url("/about.webp");
 	background-size: cover;
 	background-position: center center;
@@ -37,40 +41,33 @@
 	z-index: 0;
 }
 
-/* Контейнер */
-.container {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 20px;
-	width: 100%;
-	position: relative;
-	z-index: 1;
-}
+/* ===============================================
+   КОНТЕНТ
+   =============================================== */
 
-/* Контент */
 .content {
 	max-width: 100%;
 	opacity: 0;
-	animation: fadeInScale 0.8s ease-out 0.3s forwards;
+	animation: fadeInScale var(--duration-700) var(--ease-out) 0.3s forwards;
 	text-align: center;
 	position: relative;
 }
 
 /* Заголовок */
 .title {
-	font-size: clamp(2rem, 8vw, 2.5rem);
-	font-weight: 400;
-	margin-bottom: 5px;
-	letter-spacing: 0.05em;
-	line-height: 1.1;
+	font-size: clamp(var(--font-size-4xl), 8vw, var(--font-size-4xl));
+	font-weight: var(--font-weight-normal);
+	margin-bottom: var(--space-1);
+	letter-spacing: var(--letter-spacing-wider);
+	line-height: var(--line-height-none);
 	text-transform: uppercase;
-	color: #111827;
+	color: var(--color-text-primary);
 	position: relative;
 }
 
 /* Первое слово заголовка */
 .title::first-line {
-	font-weight: 700;
+	font-weight: var(--font-weight-bold);
 }
 
 /* Подзаголовок-линия */
@@ -78,23 +75,23 @@
 	display: block;
 	width: 80px;
 	height: 2px;
-	background: #3b82f6;
-	margin: 20px auto 30px;
+	background: var(--color-accent);
+	margin: var(--space-5) auto var(--space-7);
 }
 
 /* Описание */
 .description {
-	font-size: clamp(0.9rem, 4vw, 1rem);
-	line-height: 1.75;
-	margin-bottom: 35px;
-	color: #4b5563;
-	font-weight: 400;
+	font-size: clamp(var(--font-size-sm), 4vw, var(--font-size-base));
+	line-height: var(--line-height-loose);
+	margin-bottom: var(--space-9);
+	color: var(--color-text-secondary);
+	font-weight: var(--font-weight-normal);
 }
 
 /* Жирный текст в описании */
 .description strong {
-	color: #111827;
-	font-weight: 600;
+	color: var(--color-text-primary);
+	font-weight: var(--font-weight-semibold);
 }
 
 /* Скрытие br на мобильных */
@@ -102,7 +99,10 @@
 	display: none;
 }
 
-/* Анимации */
+/* ===============================================
+   АНИМАЦИИ
+   =============================================== */
+
 @keyframes fadeInScale {
 	from {
 		opacity: 0;
@@ -114,25 +114,25 @@
 	}
 }
 
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
+
 /* Планшеты (от 576px) */
 @media (min-width: 576px) {
-	.container {
-		padding: 0 30px;
-	}
-
 	.title {
 		font-size: clamp(2.2rem, 6vw, 2.8rem);
-		margin-bottom: 10px;
+		margin-bottom: var(--space-2-5);
 	}
 
 	.content > span {
 		width: 100px;
-		margin: 25px auto 35px;
+		margin: var(--space-6) auto var(--space-9);
 	}
 
 	.description {
-		font-size: clamp(1rem, 3vw, 1.1rem);
-		margin-bottom: 40px;
+		font-size: clamp(var(--font-size-base), 3vw, 1.1rem);
+		margin-bottom: var(--space-10);
 	}
 }
 
@@ -153,10 +153,6 @@
 		);
 	}
 
-	.container {
-		padding: 0 40px;
-	}
-
 	.content {
 		max-width: 600px;
 		text-align: left;
@@ -164,28 +160,28 @@
 	}
 
 	.content > span {
-		margin: 30px 0 40px;
+		margin: var(--space-7) 0 var(--space-10);
 	}
 
 	.title {
-		font-size: clamp(2.5rem, 5vw, 3rem);
-		margin-bottom: 15px;
-		letter-spacing: 0;
-		font-weight: 300;
+		font-size: clamp(var(--font-size-4xl), 5vw, var(--font-size-5xl));
+		margin-bottom: var(--space-4);
+		letter-spacing: var(--letter-spacing-normal);
+		font-weight: var(--font-weight-light);
 	}
 
 	/* Выделение первого слова */
 	.title::before {
 		content: "Управляющая компания";
 		display: block;
-		font-weight: 700;
-		margin-bottom: -10px;
+		font-weight: var(--font-weight-bold);
+		margin-bottom: calc(var(--space-2-5) * -1);
 	}
 
 	.description {
-		font-size: clamp(1.1rem, 2.5vw, 1.2rem);
-		margin-bottom: 45px;
-		line-height: 1.8;
+		font-size: clamp(1.1rem, 2.5vw, var(--font-size-xl));
+		margin-bottom: var(--space-11);
+		line-height: var(--line-height-extra);
 	}
 
 	.description br {
@@ -194,8 +190,8 @@
 
 	/* Выделяем ключевые слова */
 	.description::first-line {
-		font-weight: 500;
-		color: #111827;
+		font-weight: var(--font-weight-medium);
+		color: var(--color-text-primary);
 	}
 }
 
@@ -216,11 +212,11 @@
 	}
 
 	.title {
-		font-size: clamp(2.8rem, 4vw, 3.5rem);
+		font-size: clamp(2.8rem, 4vw, var(--font-size-6xl));
 	}
 
 	.description {
-		font-size: clamp(1.2rem, 2vw, 1.3rem);
+		font-size: clamp(var(--font-size-xl), 2vw, 1.3rem);
 		line-height: 1.9;
 	}
 }
@@ -233,22 +229,22 @@
 	}
 
 	.container {
-		padding: 0 60px;
+		padding: 0 var(--space-16);
 	}
 
 	.title {
-		font-size: 3.5rem;
-		letter-spacing: -0.02em;
+		font-size: var(--font-size-6xl);
+		letter-spacing: var(--letter-spacing-tight);
 	}
 
 	.title::before {
-		font-size: 1.5rem;
-		margin-bottom: -15px;
+		font-size: var(--font-size-2xl);
+		margin-bottom: calc(var(--space-4) * -1);
 	}
 
 	.description {
-		font-size: 1.25rem;
-		line-height: 2;
+		font-size: var(--font-size-xl);
+		line-height: var(--line-height-extra);
 	}
 }
 
@@ -261,7 +257,7 @@
 
 	.container {
 		max-width: 1400px;
-		padding: 0 80px;
+		padding: 0 var(--space-20);
 	}
 
 	.content {
@@ -269,7 +265,10 @@
 	}
 }
 
-/* Особые устройства */
+/* ===============================================
+   ОСОБЫЕ УСТРОЙСТВА
+   =============================================== */
+
 /* iPhone SE и малые экраны */
 @media (max-width: 375px) {
 	.about {
@@ -281,22 +280,22 @@
 	}
 
 	.container {
-		padding: 0 15px;
+		padding: 0 var(--space-4);
 	}
 
 	.title {
-		font-size: 1.8rem;
-		margin-bottom: 5px;
+		font-size: var(--font-size-3xl);
+		margin-bottom: var(--space-1);
 	}
 
 	.content > span {
 		width: 60px;
-		margin: 15px auto 25px;
+		margin: var(--space-4) auto var(--space-6);
 	}
 
 	.description {
-		font-size: 0.85rem;
-		margin-bottom: 25px;
+		font-size: var(--font-size-xs);
+		margin-bottom: var(--space-6);
 	}
 }
 
@@ -316,7 +315,10 @@
 	}
 }
 
-/* Печать */
+/* ===============================================
+   ПЕЧАТЬ
+   =============================================== */
+
 @media print {
 	.about {
 		height: auto;

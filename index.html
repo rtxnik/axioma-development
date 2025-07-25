@@ -11,10 +11,10 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
 			rel="stylesheet"
 		/>
+		<!-- Новая структура CSS файлов -->
 		<link rel="stylesheet" href="css/main.css" />
 	</head>
 	<body>
@@ -387,6 +387,7 @@
 				</nav>
 			</div>
 		</header>
+
 		<!-- Main Content -->
 		<main id="main-content">
 			<!-- Hero Section -->
@@ -472,14 +473,18 @@
 				<div class="container">
 					<div class="content">
 						<h1 class="title">АКСИОМА КАПИТАЛ</h1>
+						<span></span>
 						<p class="description">
 							Осуществляет доверительное управление<br />
 							индивидуальными закрытыми паевыми<br />
 							инвестиционными фондами.<br />
-							ЗПИФ обеспечивают защиту интересов<br />
-							бенефициаров и высокий уровень<br />
-							безопасности активов
+							<strong
+								>ЗПИФ обеспечивают защиту интересов<br />
+								бенефициаров и высокий уровень<br />
+								безопасности активов</strong
+							>
 						</p>
+						<!-- ВАЖНО: Оригинальная кнопка .learn-more остается без изменений! -->
 						<button class="learn-more">
 							<span class="circle" aria-hidden="true">
 								<span class="icon arrow"></span>
@@ -512,7 +517,10 @@
 									зданий вне фокуса
 								</p>
 							</div>
-							<button class="card-button">Подробнее</button>
+							<!-- Используем новые классы кнопок -->
+							<button class="btn btn-primary btn-sm card-button">
+								Подробнее
+							</button>
 						</div>
 						<div class="service-card">
 							<div class="card-number">02</div>
@@ -524,7 +532,9 @@
 									проектов
 								</p>
 							</div>
-							<button class="card-button">Подробнее</button>
+							<button class="btn btn-primary btn-sm card-button">
+								Подробнее
+							</button>
 						</div>
 						<div class="service-card">
 							<div class="card-number">03</div>
@@ -535,7 +545,9 @@
 									поставщиков и покупателей
 								</p>
 							</div>
-							<button class="card-button">Подробнее</button>
+							<button class="btn btn-primary btn-sm card-button">
+								Подробнее
+							</button>
 						</div>
 						<div class="service-card">
 							<div class="card-number">04</div>
@@ -546,7 +558,9 @@
 									инвестиционных проектов, промышленных объектов
 								</p>
 							</div>
-							<button class="card-button">Подробнее</button>
+							<button class="btn btn-primary btn-sm card-button">
+								Подробнее
+							</button>
 						</div>
 						<div class="service-card">
 							<div class="card-number">05</div>
@@ -557,7 +571,9 @@
 									девелоперов
 								</p>
 							</div>
-							<button class="card-button">Подробнее</button>
+							<button class="btn btn-primary btn-sm card-button">
+								Подробнее
+							</button>
 						</div>
 						<div class="service-card">
 							<div class="card-number">06</div>
@@ -568,7 +584,9 @@
 									инвестиционных проектов, промышленных объектов
 								</p>
 							</div>
-							<button class="card-button">Подробнее</button>
+							<button class="btn btn-primary btn-sm card-button">
+								Подробнее
+							</button>
 						</div>
 						<div class="service-card">
 							<div class="card-number">07</div>
@@ -579,7 +597,9 @@
 									инвестиционных проектов, промышленных объектов
 								</p>
 							</div>
-							<button class="card-button">Подробнее</button>
+							<button class="btn btn-primary btn-sm card-button">
+								Подробнее
+							</button>
 						</div>
 						<div class="service-card">
 							<div class="card-number">08</div>
@@ -590,7 +610,9 @@
 									инвестиционных проектов, промышленных объектов
 								</p>
 							</div>
-							<button class="card-button">Подробнее</button>
+							<button class="btn btn-primary btn-sm card-button">
+								Подробнее
+							</button>
 						</div>
 					</div>
 				</div>
@@ -606,11 +628,11 @@
 							<p class="interaction-description">
 								Прозрачная структура для эффективного управления активами
 							</p>
+							<!-- ВАЖНО: Оригинальная кнопка .learn-more остается без изменений! -->
 							<button class="learn-more">
 								<span class="circle" aria-hidden="true">
 									<span class="icon arrow"></span>
 								</span>
-
 								<span class="button-text">Подробнее</span>
 							</button>
 						</div>
@@ -792,7 +814,7 @@
 							<!-- Дополнительная информация -->
 							<div class="contact-info">
 								<p class="info-text">Или свяжитесь с нами напрямую:</p>
-								<a href="tel:+78001234567" class="info-link">
+								<a href="tel:+74959703757" class="info-link">
 									<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
 										<path
 											d="M2 3.5C2 2.67157 2.67157 2 3.5 2H5.37285C5.69602 2 5.98816 2.18537 6.11775 2.47819L7.36259 5.26367C7.51051 5.59832 7.40739 5.98956 7.11885 6.20743L5.91612 7.15848C5.87678 7.18714 5.86048 7.23553 5.87311 7.28113C6.25601 8.64682 7.35318 9.74399 8.71887 10.1269C8.76447 10.1395 8.81286 10.1232 8.84152 10.0839L9.79257 8.88115C10.0104 8.59261 10.4017 8.48949 10.7363 8.63741L13.5218 9.88225C13.8146 10.0118 14 10.304 14 10.6271V12.5C14 13.3284 13.3284 14 12.5 14H11C5.47715 14 1 9.52285 1 4V3.5Z"
@@ -961,6 +983,7 @@
 			</div>
 		</footer>
 
+		<!-- JavaScript файлы -->
 		<script src="js/header.js"></script>
 		<script src="js/video.js"></script>
 		<script src="js/loading.js"></script>

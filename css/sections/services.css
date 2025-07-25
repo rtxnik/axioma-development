@@ -1,0 +1,514 @@
+/* ===============================================
+   SERVICES SECTION
+   Рефакторинг с использованием CSS переменных
+   =============================================== */
+
+/* ===============================================
+   ОСНОВНАЯ СЕКЦИЯ
+   =============================================== */
+
+.services {
+	padding: var(--space-24) 0 0 0;
+	background: var(--color-bg-primary);
+	position: relative;
+}
+
+/* ===============================================
+   ЗАГОЛОВОК СЕКЦИИ
+   =============================================== */
+
+.services-header {
+	text-align: center;
+	margin-bottom: var(--space-20);
+	opacity: 0;
+	animation: fadeInUp var(--duration-700) var(--ease-out) 0.2s forwards;
+}
+
+.section-title {
+	font-size: clamp(var(--font-size-4xl), 5vw, var(--font-size-5xl));
+	font-weight: var(--font-weight-light);
+	color: var(--color-text-primary);
+	margin-bottom: var(--space-2-5);
+	letter-spacing: var(--letter-spacing-tight);
+	text-transform: uppercase;
+}
+
+.section-subtitle {
+	font-size: clamp(var(--font-size-base), 2vw, var(--font-size-xl));
+	color: var(--color-text-secondary);
+	font-weight: var(--font-weight-light);
+}
+
+/* ===============================================
+   СЕТКА УСЛУГ
+   =============================================== */
+
+.services-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: var(--space-7);
+	margin-bottom: var(--space-32);
+}
+
+/* ===============================================
+   КАРТОЧКА УСЛУГИ
+   =============================================== */
+
+.service-card {
+	position: relative;
+	background: var(--color-bg-secondary);
+	border: 1px solid var(--color-border-primary);
+	padding: var(--space-10) var(--space-7);
+	height: 100%;
+	min-height: 320px;
+	transition: var(--transition-base);
+	overflow: visible;
+	opacity: 0;
+	animation: fadeInUp var(--duration-700) var(--ease-out) forwards;
+}
+
+/* Задержка анимации для каждой карточки */
+.service-card:nth-child(1) {
+	animation-delay: 0.3s;
+}
+.service-card:nth-child(2) {
+	animation-delay: 0.4s;
+}
+.service-card:nth-child(3) {
+	animation-delay: 0.5s;
+}
+.service-card:nth-child(4) {
+	animation-delay: 0.6s;
+}
+.service-card:nth-child(5) {
+	animation-delay: 0.7s;
+}
+.service-card:nth-child(6) {
+	animation-delay: 0.8s;
+}
+.service-card:nth-child(7) {
+	animation-delay: 0.9s;
+}
+.service-card:nth-child(8) {
+	animation-delay: 1s;
+}
+
+.service-card:hover {
+	transform: translateY(-5px);
+	background: var(--color-bg-primary);
+	box-shadow: var(--shadow-xl);
+	border-color: var(--color-muted);
+}
+
+/* Номер карточки */
+.card-number {
+	position: absolute;
+	top: var(--space-7);
+	right: var(--space-7);
+	font-size: var(--font-size-5xl);
+	font-weight: var(--font-weight-black);
+	color: rgba(59, 130, 246, 0.1);
+	line-height: 1;
+}
+
+/* Контент карточки */
+.card-content {
+	position: relative;
+	z-index: 1;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Заголовок услуги */
+.service-title {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary);
+	line-height: var(--line-height-snug);
+	margin-bottom: var(--space-5);
+	text-transform: none;
+	letter-spacing: var(--letter-spacing-tight);
+	flex-shrink: 0;
+}
+
+/* Описание услуги */
+.service-description {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-secondary);
+	line-height: var(--line-height-relaxed);
+	margin-bottom: auto;
+	flex-grow: 1;
+}
+
+/* Кнопка карточки - специальная позиция для hover эффекта */
+.card-button {
+	/* Позиционирование */
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	transform: translate(-50%, 125%);
+
+	/* Дополнительные стили к .btn и .btn-primary */
+	opacity: 0;
+	width: 70%;
+	max-width: 150px;
+}
+
+.card-button:hover {
+	transform: translate(-50%, 50%) scale(1.05);
+}
+
+/* Hover эффект карточки */
+.service-card:hover .card-button {
+	transform: translate(-50%, 50%);
+	opacity: 1;
+}
+
+/* ===============================================
+   СЕКЦИЯ ВЗАИМОСВЯЗИ
+   =============================================== */
+
+.interaction-section {
+	position: relative;
+	background: var(--color-bg-secondary);
+	padding: var(--space-24) 0;
+	overflow: hidden;
+}
+
+.interaction-section .container {
+	position: relative;
+	z-index: 2;
+}
+
+/* Параллакс слой */
+.parallax-layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	z-index: 1;
+}
+
+/* Параллакс изображение */
+.parallax-layer::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: -15%;
+	transform: translateY(-50%);
+	width: 2400px;
+	height: 2400px;
+	background-image: url("/ax-4logo.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	opacity: 0.25;
+	will-change: transform;
+	z-index: 0;
+}
+
+/* Декоративный элемент */
+.parallax-layer::after {
+	content: "";
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+	bottom: -50px;
+	left: -50px;
+	opacity: 0.05;
+	animation: softPulse 20s var(--ease-in-out) infinite;
+}
+
+/* Контент взаимосвязи */
+.interaction-content {
+	text-align: center;
+	position: relative;
+	z-index: 3;
+	opacity: 0;
+	animation: fadeIn var(--duration-1000) var(--ease-out) 0.8s forwards;
+}
+
+.interaction-title {
+	font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+	font-weight: var(--font-weight-light);
+	color: var(--color-text-primary);
+	line-height: var(--line-height-snug);
+	margin-bottom: var(--space-5);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-tight);
+}
+
+.interaction-description {
+	font-size: clamp(var(--font-size-base), 2vw, var(--font-size-lg));
+	color: var(--color-text-secondary);
+	margin-bottom: var(--space-10);
+	font-weight: var(--font-weight-light);
+}
+
+/* ===============================================
+   АНИМАЦИИ
+   =============================================== */
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes softPulse {
+	0%,
+	100% {
+		opacity: 0.05;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.08;
+		transform: scale(1.1);
+	}
+}
+
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
+
+/* Большие планшеты (до 1024px) */
+@media (max-width: 1024px) {
+	.services-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--space-6);
+	}
+
+	.services {
+		padding: var(--space-20) 0 0 0;
+	}
+
+	.services-header {
+		margin-bottom: var(--space-16);
+	}
+
+	.services-grid {
+		margin-bottom: var(--space-20);
+	}
+}
+
+/* Планшеты (до 768px) */
+@media (max-width: 768px) {
+	.services {
+		padding: var(--space-16) 0 0 0;
+	}
+
+	.services-header {
+		margin-bottom: var(--space-10);
+	}
+
+	.section-title {
+		font-size: var(--font-size-4xl);
+	}
+
+	.section-subtitle {
+		font-size: var(--font-size-base);
+	}
+
+	.services-grid {
+		grid-template-columns: 1fr;
+		gap: var(--space-5);
+		margin-bottom: var(--space-16);
+	}
+
+	.service-card {
+		min-height: auto;
+		padding: var(--space-7) var(--space-6);
+	}
+
+	.card-number {
+		font-size: var(--font-size-4xl);
+		top: var(--space-6);
+		right: var(--space-6);
+	}
+
+	.service-title {
+		font-size: var(--font-size-base);
+		margin-bottom: var(--space-4);
+	}
+
+	.service-description {
+		font-size: var(--font-size-sm);
+	}
+
+	.card-button {
+		font-size: var(--font-size-xs);
+		padding: 0 var(--space-5);
+	}
+
+	.interaction-section {
+		padding: var(--space-16) 0;
+	}
+
+	.interaction-title {
+		font-size: var(--font-size-2xl);
+		margin-bottom: var(--space-4);
+	}
+
+	.interaction-description {
+		font-size: var(--font-size-base);
+		margin-bottom: var(--space-7);
+	}
+
+	.parallax-layer::before {
+		width: 500px;
+		height: 500px;
+		opacity: 0.2;
+	}
+}
+
+/* Мобильные устройства (до 480px) */
+@media (max-width: 480px) {
+	.services {
+		padding: var(--space-10) 0 0 0;
+	}
+
+	.services-header {
+		margin-bottom: var(--space-7);
+	}
+
+	.section-title {
+		font-size: var(--font-size-3xl);
+	}
+
+	.section-subtitle {
+		font-size: var(--font-size-sm);
+	}
+
+	.services-grid {
+		margin-bottom: var(--space-10);
+	}
+
+	.service-card {
+		padding: var(--space-6) var(--space-5);
+	}
+
+	.card-number {
+		font-size: var(--font-size-3xl);
+		top: var(--space-5);
+		right: var(--space-5);
+	}
+
+	.service-title {
+		font-size: var(--font-size-sm);
+	}
+
+	.service-description {
+		font-size: var(--font-size-xs);
+		line-height: var(--line-height-normal);
+	}
+
+	.card-button {
+		font-size: var(--font-size-xs);
+		padding: 0 var(--space-4);
+		width: 80%;
+	}
+
+	.interaction-section {
+		padding: var(--space-10) 0;
+	}
+
+	.interaction-title {
+		font-size: var(--font-size-xl);
+		line-height: var(--line-height-snug);
+	}
+
+	.interaction-description {
+		font-size: var(--font-size-sm);
+		margin-bottom: var(--space-6);
+	}
+
+	.parallax-layer::before {
+		width: 400px;
+		height: 400px;
+		opacity: 0.15;
+	}
+}
+
+/* Очень маленькие экраны (до 375px) */
+@media (max-width: 375px) {
+	.section-title {
+		font-size: var(--font-size-2xl);
+	}
+
+	.service-card {
+		padding: var(--space-5) var(--space-4);
+	}
+
+	.card-number {
+		font-size: var(--font-size-2xl);
+	}
+
+	.service-title {
+		font-size: var(--font-size-sm);
+	}
+
+	.service-description {
+		font-size: var(--font-size-xs);
+	}
+
+	.interaction-title {
+		font-size: var(--font-size-lg);
+	}
+}
+
+/* Большие экраны (от 1440px) */
+@media (min-width: 1440px) {
+	.services-grid {
+		gap: var(--space-10);
+	}
+
+	.service-card {
+		padding: var(--space-12) var(--space-10);
+	}
+}
+
+/* Размеры изображения для разных экранов */
+@media (min-width: 768px) {
+	.parallax-layer::before {
+		width: 900px;
+		height: 900px;
+		opacity: 0.3;
+		right: -10%;
+	}
+}
+
+@media (min-width: 1024px) {
+	.parallax-layer::before {
+		width: 1000px;
+		height: 1000px;
+		opacity: 0.35;
+		right: -5%;
+	}
+}
+
+@media (min-width: 1440px) {
+	.parallax-layer::before {
+		width: 1200px;
+		height: 1200px;
+		opacity: 0.4;
+		right: 0;
+	}
+}

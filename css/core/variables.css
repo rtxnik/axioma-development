@@ -1,0 +1,374 @@
+/* ===============================================
+   ГЛОБАЛЬНЫЕ CSS ПЕРЕМЕННЫЕ
+   Единая система дизайн-токенов для всего сайта
+   Версия: 1.0.0
+   Последнее обновление: 2025
+   =============================================== */
+
+:root {
+	/* ===============================================
+     ЦВЕТОВАЯ СИСТЕМА
+     =============================================== */
+
+	/* Основные цвета бренда */
+	--color-primary: #111827; /* Основной темный */
+	--color-primary-light: #374151; /* Светлый вариант */
+	--color-primary-dark: #030712; /* Темный вариант */
+
+	/* Акцентные цвета (синяя палитра) */
+	--color-accent: #3b82f6; /* Основной синий */
+	--color-accent-light: #60a5fa; /* Светло-синий */
+	--color-accent-dark: #1d4ed8; /* Темно-синий */
+	--color-accent-darker: #1e40af; /* Очень темно-синий */
+
+	/* Дополнительные цвета */
+	--color-secondary: #6b7280; /* Серый для текста */
+	--color-tertiary: #9ca3af; /* Светло-серый */
+	--color-muted: #e5e7eb; /* Очень светло-серый */
+	--color-light: #f3f4f6; /* Почти белый */
+	--color-white: #ffffff; /* Чистый белый */
+	--color-black: #000000; /* Чистый черный */
+
+	/* Функциональные цвета */
+	--color-success: #22c55e; /* Зеленый */
+	--color-warning: #f59e0b; /* Оранжевый */
+	--color-error: #ef4444; /* Красный */
+	--color-info: #06b6d4; /* Голубой */
+
+	/* Цвета текста */
+	--color-text-primary: var(--color-primary);
+	--color-text-secondary: var(--color-secondary);
+	--color-text-muted: var(--color-tertiary);
+	--color-text-inverse: var(--color-white);
+
+	/* Цвета фона */
+	--color-bg-primary: var(--color-white);
+	--color-bg-secondary: #f9fafb;
+	--color-bg-tertiary: var(--color-light);
+	--color-bg-dark: #1a1a1a;
+	--color-bg-darker: rgba(26, 26, 26, 0.95);
+
+	/* Цвета границ */
+	--color-border-primary: var(--color-muted);
+	--color-border-secondary: rgba(255, 255, 255, 0.1);
+	--color-border-hover: var(--color-accent);
+
+	/* ===============================================
+     ГРАДИЕНТЫ
+     =============================================== */
+
+	--gradient-primary: linear-gradient(
+		135deg,
+		var(--color-accent) 0%,
+		var(--color-accent-darker) 100%
+	);
+	--gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%);
+	--gradient-accent: linear-gradient(
+		135deg,
+		var(--color-accent-light) 0%,
+		var(--color-accent) 100%
+	);
+	--gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+	--gradient-overlay: linear-gradient(
+		180deg,
+		rgba(0, 0, 0, 0.1) 0%,
+		rgba(0, 0, 0, 0.05) 50%,
+		rgba(0, 0, 0, 0.1) 100%
+	);
+
+	/* ===============================================
+     ТИПОГРАФИКА
+     =============================================== */
+
+	/* Семейства шрифтов */
+	--font-family-primary: "Montserrat", -apple-system, BlinkMacSystemFont,
+		"Segoe UI", sans-serif;
+	--font-family-secondary: "Inter", -apple-system, BlinkMacSystemFont,
+		"Segoe UI", sans-serif;
+	--font-family-mono: "Fira Code", "Courier New", monospace;
+
+	/* Размеры шрифтов - модульная шкала */
+	--font-size-xs: 0.75rem; /* 12px */
+	--font-size-sm: 0.875rem; /* 14px */
+	--font-size-base: 1rem; /* 16px */
+	--font-size-lg: 1.125rem; /* 18px */
+	--font-size-xl: 1.25rem; /* 20px */
+	--font-size-2xl: 1.5rem; /* 24px */
+	--font-size-3xl: 1.875rem; /* 30px */
+	--font-size-4xl: 2.25rem; /* 36px */
+	--font-size-5xl: 3rem; /* 48px */
+	--font-size-6xl: 3.75rem; /* 60px */
+	--font-size-7xl: 4.5rem; /* 72px */
+
+	/* Вес шрифта */
+	--font-weight-light: 300;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+	--font-weight-extrabold: 800;
+	--font-weight-black: 900;
+
+	/* Межстрочный интервал */
+	--line-height-none: 1;
+	--line-height-tight: 1.25;
+	--line-height-snug: 1.375;
+	--line-height-normal: 1.5;
+	--line-height-relaxed: 1.625;
+	--line-height-loose: 1.75;
+	--line-height-extra: 2;
+
+	/* Межбуквенный интервал */
+	--letter-spacing-tighter: -0.05em;
+	--letter-spacing-tight: -0.025em;
+	--letter-spacing-normal: 0;
+	--letter-spacing-wide: 0.025em;
+	--letter-spacing-wider: 0.05em;
+	--letter-spacing-widest: 0.1em;
+	--letter-spacing-ultra: 0.15em;
+
+	/* ===============================================
+     СИСТЕМА ОТСТУПОВ (8px базовая сетка)
+     =============================================== */
+
+	--space-0: 0;
+	--space-px: 1px;
+	--space-0-5: 0.125rem; /* 2px */
+	--space-1: 0.25rem; /* 4px */
+	--space-1-5: 0.375rem; /* 6px */
+	--space-2: 0.5rem; /* 8px */
+	--space-2-5: 0.625rem; /* 10px */
+	--space-3: 0.75rem; /* 12px */
+	--space-3-5: 0.875rem; /* 14px */
+	--space-4: 1rem; /* 16px */
+	--space-5: 1.25rem; /* 20px */
+	--space-6: 1.5rem; /* 24px */
+	--space-7: 1.75rem; /* 28px */
+	--space-8: 2rem; /* 32px */
+	--space-9: 2.25rem; /* 36px */
+	--space-10: 2.5rem; /* 40px */
+	--space-11: 2.75rem; /* 44px */
+	--space-12: 3rem; /* 48px */
+	--space-14: 3.5rem; /* 56px */
+	--space-16: 4rem; /* 64px */
+	--space-20: 5rem; /* 80px */
+	--space-24: 6rem; /* 96px */
+	--space-28: 7rem; /* 112px */
+	--space-32: 8rem; /* 128px */
+	--space-36: 9rem; /* 144px */
+	--space-40: 10rem; /* 160px */
+	--space-44: 11rem; /* 176px */
+	--space-48: 12rem; /* 192px */
+	--space-52: 13rem; /* 208px */
+	--space-56: 14rem; /* 224px */
+	--space-60: 15rem; /* 240px */
+	--space-64: 16rem; /* 256px */
+	--space-72: 18rem; /* 288px */
+	--space-80: 20rem; /* 320px */
+	--space-96: 24rem; /* 384px */
+
+	/* ===============================================
+     РАЗМЕРЫ И ПРОПОРЦИИ
+     =============================================== */
+
+	/* Размеры контейнера */
+	--container-xs: 32rem; /* 512px */
+	--container-sm: 40rem; /* 640px */
+	--container-md: 48rem; /* 768px */
+	--container-lg: 64rem; /* 1024px */
+	--container-xl: 80rem; /* 1280px */
+	--container-2xl: 96rem; /* 1536px */
+	--container-max: 1200px; /* Максимальная ширина */
+
+	/* Высота хедера */
+	--header-height: 80px;
+	--header-height-mobile: 70px;
+
+	/* Радиусы скругления */
+	--radius-none: 0;
+	--radius-sm: 0.125rem; /* 2px */
+	--radius-base: 0.25rem; /* 4px */
+	--radius-md: 0.375rem; /* 6px */
+	--radius-lg: 0.5rem; /* 8px */
+	--radius-xl: 0.75rem; /* 12px */
+	--radius-2xl: 1rem; /* 16px */
+	--radius-3xl: 1.5rem; /* 24px */
+	--radius-full: 9999px; /* Полное скругление */
+
+	/* Ширина границ */
+	--border-0: 0;
+	--border-1: 1px;
+	--border-2: 2px;
+	--border-4: 4px;
+	--border-8: 8px;
+
+	/* ===============================================
+     ТЕНИ
+     =============================================== */
+
+	--shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	--shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -2px rgba(0, 0, 0, 0.1);
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -4px rgba(0, 0, 0, 0.1);
+	--shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+		0 8px 10px -6px rgba(0, 0, 0, 0.1);
+	--shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+	--shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+	--shadow-none: 0 0 #0000;
+
+	/* Специальные тени */
+	--shadow-button: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+	--shadow-button-hover: 0 8px 20px rgba(59, 130, 246, 0.4),
+		0 4px 10px rgba(0, 0, 0, 0.2);
+	--shadow-card: 0 0 0 1px rgba(59, 130, 246, 0.1),
+		0 20px 60px -10px rgba(0, 0, 0, 0.5), 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+
+	/* ===============================================
+     АНИМАЦИИ И ПЕРЕХОДЫ
+     =============================================== */
+
+	/* Длительность */
+	--duration-75: 75ms;
+	--duration-100: 100ms;
+	--duration-150: 150ms;
+	--duration-200: 200ms;
+	--duration-300: 300ms;
+	--duration-500: 500ms;
+	--duration-700: 700ms;
+	--duration-1000: 1000ms;
+
+	/* Функции плавности */
+	--ease-linear: linear;
+	--ease-in: cubic-bezier(0.4, 0, 1, 1);
+	--ease-out: cubic-bezier(0, 0, 0.2, 1);
+	--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	--ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+	/* Готовые переходы */
+	--transition-base: all var(--duration-300) var(--ease-in-out);
+	--transition-fast: all var(--duration-150) var(--ease-in-out);
+	--transition-slow: all var(--duration-500) var(--ease-in-out);
+	--transition-colors: color var(--duration-300) var(--ease-in-out),
+		background-color var(--duration-300) var(--ease-in-out),
+		border-color var(--duration-300) var(--ease-in-out);
+	--transition-opacity: opacity var(--duration-300) var(--ease-in-out);
+	--transition-transform: transform var(--duration-300) var(--ease-in-out);
+
+	/* ===============================================
+     Z-INDEX СИСТЕМА
+     =============================================== */
+
+	--z-negative: -1;
+	--z-0: 0;
+	--z-10: 10;
+	--z-20: 20;
+	--z-30: 30;
+	--z-40: 40;
+	--z-50: 50;
+	--z-auto: auto;
+
+	/* Специальные z-index */
+	--z-dropdown: 1000;
+	--z-sticky: 1020;
+	--z-fixed: 1030;
+	--z-modal-backdrop: 1040;
+	--z-modal: 1050;
+	--z-popover: 1060;
+	--z-tooltip: 1070;
+	--z-header: 1001;
+
+	/* ===============================================
+     BREAKPOINTS (для использования в JS)
+     =============================================== */
+
+	--breakpoint-xs: 0;
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
+	--breakpoint-2xl: 1536px;
+
+	/* ===============================================
+     СПЕЦИАЛЬНЫЕ ПЕРЕМЕННЫЕ ДЛЯ КОМПОНЕНТОВ
+     =============================================== */
+
+	/* Навигация */
+	--nav-bg: var(--color-bg-darker);
+	--nav-bg-mobile: rgba(26, 26, 26, 0.98);
+	--nav-text: rgba(255, 255, 255, 0.8);
+	--nav-text-hover: var(--color-white);
+	--nav-border: var(--color-border-secondary);
+	--nav-dropdown-bg: rgba(255, 255, 255, 0.05);
+
+	/* Кнопки */
+	--button-height-sm: 2rem; /* 32px */
+	--button-height-md: 2.5rem; /* 40px */
+	--button-height-lg: 3rem; /* 48px */
+	--button-height-xl: 3.5rem; /* 56px */
+
+	/* Формы */
+	--input-height: 3.5rem; /* 56px */
+	--input-bg: rgba(255, 255, 255, 0.05);
+	--input-bg-hover: rgba(255, 255, 255, 0.08);
+	--input-border: rgba(255, 255, 255, 0.15);
+	--input-border-focus: var(--color-accent);
+	--input-text: var(--color-white);
+	--input-placeholder: rgba(255, 255, 255, 0.4);
+
+	/* Карточки */
+	--card-bg: rgba(30, 30, 30, 0.95);
+	--card-bg-hover: rgba(30, 30, 30, 0.98);
+	--card-border: rgba(255, 255, 255, 0.1);
+	--card-padding: var(--space-6);
+	--card-radius: var(--radius-lg);
+
+	/* Оверлеи */
+	--overlay-bg: rgba(0, 0, 0, 0.5);
+	--overlay-bg-dark: rgba(0, 0, 0, 0.8);
+	--overlay-bg-light: rgba(255, 255, 255, 0.9);
+}
+
+/* ===============================================
+   ТЕМНАЯ ТЕМА (опционально)
+   =============================================== */
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* Переопределение цветов для темной темы */
+		--color-bg-primary: #0f0f0f;
+		--color-bg-secondary: #1a1a1a;
+		--color-text-primary: #f3f4f6;
+		--color-text-secondary: #d1d5db;
+	}
+}
+
+/* ===============================================
+   РЕЖИМ ВЫСОКОЙ КОНТРАСТНОСТИ
+   =============================================== */
+
+@media (prefers-contrast: high) {
+	:root {
+		--color-text-primary: #000000;
+		--color-text-secondary: #000000;
+		--color-bg-primary: #ffffff;
+		--color-border-primary: #000000;
+		--shadow-sm: 0 0 0 1px #000000;
+		--shadow-md: 0 0 0 2px #000000;
+	}
+}
+
+/* ===============================================
+   УТИЛИТЫ ДЛЯ ОТЛАДКИ
+   =============================================== */
+
+/* Добавьте класс .debug к body для визуализации сетки */
+.debug * {
+	outline: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.debug *:hover {
+	outline: 2px solid rgba(255, 0, 0, 0.5);
+}

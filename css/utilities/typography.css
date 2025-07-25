@@ -1,0 +1,588 @@
+/* ===============================================
+   УТИЛИТЫ ТИПОГРАФИКИ
+   Классы для быстрой настройки текста
+   =============================================== */
+
+/* ===============================================
+   РАЗМЕР ШРИФТА
+   =============================================== */
+
+.text-xs {
+	font-size: var(--font-size-xs);
+}
+.text-sm {
+	font-size: var(--font-size-sm);
+}
+.text-base {
+	font-size: var(--font-size-base);
+}
+.text-lg {
+	font-size: var(--font-size-lg);
+}
+.text-xl {
+	font-size: var(--font-size-xl);
+}
+.text-2xl {
+	font-size: var(--font-size-2xl);
+}
+.text-3xl {
+	font-size: var(--font-size-3xl);
+}
+.text-4xl {
+	font-size: var(--font-size-4xl);
+}
+.text-5xl {
+	font-size: var(--font-size-5xl);
+}
+.text-6xl {
+	font-size: var(--font-size-6xl);
+}
+.text-7xl {
+	font-size: var(--font-size-7xl);
+}
+
+/* ===============================================
+   ВЕС ШРИФТА
+   =============================================== */
+
+.font-light {
+	font-weight: var(--font-weight-light);
+}
+.font-normal {
+	font-weight: var(--font-weight-normal);
+}
+.font-medium {
+	font-weight: var(--font-weight-medium);
+}
+.font-semibold {
+	font-weight: var(--font-weight-semibold);
+}
+.font-bold {
+	font-weight: var(--font-weight-bold);
+}
+.font-extrabold {
+	font-weight: var(--font-weight-extrabold);
+}
+.font-black {
+	font-weight: var(--font-weight-black);
+}
+
+/* ===============================================
+   МЕЖСТРОЧНЫЙ ИНТЕРВАЛ
+   =============================================== */
+
+.leading-none {
+	line-height: var(--line-height-none);
+}
+.leading-tight {
+	line-height: var(--line-height-tight);
+}
+.leading-snug {
+	line-height: var(--line-height-snug);
+}
+.leading-normal {
+	line-height: var(--line-height-normal);
+}
+.leading-relaxed {
+	line-height: var(--line-height-relaxed);
+}
+.leading-loose {
+	line-height: var(--line-height-loose);
+}
+.leading-extra {
+	line-height: var(--line-height-extra);
+}
+
+/* ===============================================
+   МЕЖБУКВЕННЫЙ ИНТЕРВАЛ
+   =============================================== */
+
+.tracking-tighter {
+	letter-spacing: var(--letter-spacing-tighter);
+}
+.tracking-tight {
+	letter-spacing: var(--letter-spacing-tight);
+}
+.tracking-normal {
+	letter-spacing: var(--letter-spacing-normal);
+}
+.tracking-wide {
+	letter-spacing: var(--letter-spacing-wide);
+}
+.tracking-wider {
+	letter-spacing: var(--letter-spacing-wider);
+}
+.tracking-widest {
+	letter-spacing: var(--letter-spacing-widest);
+}
+.tracking-ultra {
+	letter-spacing: var(--letter-spacing-ultra);
+}
+
+/* ===============================================
+   ВЫРАВНИВАНИЕ ТЕКСТА
+   =============================================== */
+
+.text-left {
+	text-align: left;
+}
+.text-center {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
+}
+.text-justify {
+	text-align: justify;
+}
+.text-start {
+	text-align: start;
+}
+.text-end {
+	text-align: end;
+}
+
+/* ===============================================
+   ПРЕОБРАЗОВАНИЕ ТЕКСТА
+   =============================================== */
+
+.uppercase {
+	text-transform: uppercase;
+}
+.lowercase {
+	text-transform: lowercase;
+}
+.capitalize {
+	text-transform: capitalize;
+}
+.normal-case {
+	text-transform: none;
+}
+
+/* ===============================================
+   СТИЛЬ ШРИФТА
+   =============================================== */
+
+.italic {
+	font-style: italic;
+}
+.not-italic {
+	font-style: normal;
+}
+
+/* ===============================================
+   ДЕКОРИРОВАНИЕ ТЕКСТА
+   =============================================== */
+
+.underline {
+	text-decoration: underline;
+}
+.overline {
+	text-decoration: overline;
+}
+.line-through {
+	text-decoration: line-through;
+}
+.no-underline {
+	text-decoration: none;
+}
+
+/* Стили подчеркивания */
+.decoration-solid {
+	text-decoration-style: solid;
+}
+.decoration-double {
+	text-decoration-style: double;
+}
+.decoration-dotted {
+	text-decoration-style: dotted;
+}
+.decoration-dashed {
+	text-decoration-style: dashed;
+}
+.decoration-wavy {
+	text-decoration-style: wavy;
+}
+
+/* Толщина подчеркивания */
+.decoration-auto {
+	text-decoration-thickness: auto;
+}
+.decoration-from-font {
+	text-decoration-thickness: from-font;
+}
+.decoration-0 {
+	text-decoration-thickness: 0px;
+}
+.decoration-1 {
+	text-decoration-thickness: 1px;
+}
+.decoration-2 {
+	text-decoration-thickness: 2px;
+}
+.decoration-4 {
+	text-decoration-thickness: 4px;
+}
+.decoration-8 {
+	text-decoration-thickness: 8px;
+}
+
+/* Смещение подчеркивания */
+.underline-offset-auto {
+	text-underline-offset: auto;
+}
+.underline-offset-0 {
+	text-underline-offset: 0px;
+}
+.underline-offset-1 {
+	text-underline-offset: 1px;
+}
+.underline-offset-2 {
+	text-underline-offset: 2px;
+}
+.underline-offset-4 {
+	text-underline-offset: 4px;
+}
+.underline-offset-8 {
+	text-underline-offset: 8px;
+}
+
+/* ===============================================
+   ВЕРТИКАЛЬНОЕ ВЫРАВНИВАНИЕ
+   =============================================== */
+
+.align-baseline {
+	vertical-align: baseline;
+}
+.align-top {
+	vertical-align: top;
+}
+.align-middle {
+	vertical-align: middle;
+}
+.align-bottom {
+	vertical-align: bottom;
+}
+.align-text-top {
+	vertical-align: text-top;
+}
+.align-text-bottom {
+	vertical-align: text-bottom;
+}
+.align-sub {
+	vertical-align: sub;
+}
+.align-super {
+	vertical-align: super;
+}
+
+/* ===============================================
+   ПЕРЕПОЛНЕНИЕ ТЕКСТА
+   =============================================== */
+
+.truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.text-ellipsis {
+	text-overflow: ellipsis;
+}
+.text-clip {
+	text-overflow: clip;
+}
+
+/* ===============================================
+   ПЕРЕНОС СЛОВ
+   =============================================== */
+
+.break-normal {
+	overflow-wrap: normal;
+	word-break: normal;
+}
+
+.break-words {
+	overflow-wrap: break-word;
+}
+
+.break-all {
+	word-break: break-all;
+}
+
+.break-keep {
+	word-break: keep-all;
+}
+
+/* ===============================================
+   ПРОБЕЛЫ
+   =============================================== */
+
+.whitespace-normal {
+	white-space: normal;
+}
+.whitespace-nowrap {
+	white-space: nowrap;
+}
+.whitespace-pre {
+	white-space: pre;
+}
+.whitespace-pre-line {
+	white-space: pre-line;
+}
+.whitespace-pre-wrap {
+	white-space: pre-wrap;
+}
+.whitespace-break-spaces {
+	white-space: break-spaces;
+}
+
+/* ===============================================
+   СЕМЕЙСТВО ШРИФТОВ
+   =============================================== */
+
+.font-sans {
+	font-family: var(--font-family-primary);
+}
+.font-serif {
+	font-family: var(--font-family-secondary);
+}
+.font-mono {
+	font-family: var(--font-family-mono);
+}
+
+/* ===============================================
+   СГЛАЖИВАНИЕ ШРИФТОВ
+   =============================================== */
+
+.antialiased {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.subpixel-antialiased {
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
+}
+
+/* ===============================================
+   ВАРИАНТЫ ШРИФТА
+   =============================================== */
+
+.normal-nums {
+	font-variant-numeric: normal;
+}
+.ordinal {
+	font-variant-numeric: ordinal;
+}
+.slashed-zero {
+	font-variant-numeric: slashed-zero;
+}
+.lining-nums {
+	font-variant-numeric: lining-nums;
+}
+.oldstyle-nums {
+	font-variant-numeric: oldstyle-nums;
+}
+.proportional-nums {
+	font-variant-numeric: proportional-nums;
+}
+.tabular-nums {
+	font-variant-numeric: tabular-nums;
+}
+.diagonal-fractions {
+	font-variant-numeric: diagonal-fractions;
+}
+.stacked-fractions {
+	font-variant-numeric: stacked-fractions;
+}
+
+/* ===============================================
+   СПИСКИ
+   =============================================== */
+
+.list-none {
+	list-style-type: none;
+}
+.list-disc {
+	list-style-type: disc;
+}
+.list-decimal {
+	list-style-type: decimal;
+}
+
+.list-inside {
+	list-style-position: inside;
+}
+.list-outside {
+	list-style-position: outside;
+}
+
+/* ===============================================
+   ПЕРВАЯ БУКВА И ПЕРВАЯ СТРОКА
+   =============================================== */
+
+.first-letter\:uppercase::first-letter {
+	text-transform: uppercase;
+}
+.first-letter\:text-4xl::first-letter {
+	font-size: var(--font-size-4xl);
+}
+.first-letter\:font-bold::first-letter {
+	font-weight: var(--font-weight-bold);
+}
+.first-letter\:float-left::first-letter {
+	float: left;
+}
+
+.first-line\:uppercase::first-line {
+	text-transform: uppercase;
+}
+.first-line\:tracking-widest::first-line {
+	letter-spacing: var(--letter-spacing-widest);
+}
+
+/* ===============================================
+   ВЫДЕЛЕНИЕ ТЕКСТА
+   =============================================== */
+
+.selection\:bg-accent::selection {
+	background-color: var(--color-accent);
+}
+.selection\:text-white::selection {
+	color: var(--color-white);
+}
+
+/* ===============================================
+   PLACEHOLDER
+   =============================================== */
+
+.placeholder\:text-muted::placeholder {
+	color: var(--color-text-muted);
+}
+.placeholder\:italic::placeholder {
+	font-style: italic;
+}
+
+/* ===============================================
+   АДАПТИВНАЯ ТИПОГРАФИКА
+   =============================================== */
+
+/* Fluid typography */
+.text-fluid-sm {
+	font-size: clamp(var(--font-size-sm), 2vw, var(--font-size-base));
+}
+
+.text-fluid-base {
+	font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg));
+}
+
+.text-fluid-lg {
+	font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-xl));
+}
+
+.text-fluid-xl {
+	font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl));
+}
+
+.text-fluid-2xl {
+	font-size: clamp(var(--font-size-2xl), 5vw, var(--font-size-3xl));
+}
+
+.text-fluid-3xl {
+	font-size: clamp(var(--font-size-3xl), 6vw, var(--font-size-4xl));
+}
+
+/* ===============================================
+   RESPONSIVE UTILITIES
+   =============================================== */
+
+@media (min-width: 768px) {
+	.md\:text-sm {
+		font-size: var(--font-size-sm);
+	}
+	.md\:text-base {
+		font-size: var(--font-size-base);
+	}
+	.md\:text-lg {
+		font-size: var(--font-size-lg);
+	}
+	.md\:text-xl {
+		font-size: var(--font-size-xl);
+	}
+	.md\:text-2xl {
+		font-size: var(--font-size-2xl);
+	}
+	.md\:text-3xl {
+		font-size: var(--font-size-3xl);
+	}
+	.md\:text-4xl {
+		font-size: var(--font-size-4xl);
+	}
+	.md\:text-5xl {
+		font-size: var(--font-size-5xl);
+	}
+
+	.md\:text-left {
+		text-align: left;
+	}
+	.md\:text-center {
+		text-align: center;
+	}
+	.md\:text-right {
+		text-align: right;
+	}
+
+	.md\:font-normal {
+		font-weight: var(--font-weight-normal);
+	}
+	.md\:font-medium {
+		font-weight: var(--font-weight-medium);
+	}
+	.md\:font-semibold {
+		font-weight: var(--font-weight-semibold);
+	}
+	.md\:font-bold {
+		font-weight: var(--font-weight-bold);
+	}
+}
+
+@media (min-width: 1024px) {
+	.lg\:text-sm {
+		font-size: var(--font-size-sm);
+	}
+	.lg\:text-base {
+		font-size: var(--font-size-base);
+	}
+	.lg\:text-lg {
+		font-size: var(--font-size-lg);
+	}
+	.lg\:text-xl {
+		font-size: var(--font-size-xl);
+	}
+	.lg\:text-2xl {
+		font-size: var(--font-size-2xl);
+	}
+	.lg\:text-3xl {
+		font-size: var(--font-size-3xl);
+	}
+	.lg\:text-4xl {
+		font-size: var(--font-size-4xl);
+	}
+	.lg\:text-5xl {
+		font-size: var(--font-size-5xl);
+	}
+	.lg\:text-6xl {
+		font-size: var(--font-size-6xl);
+	}
+
+	.lg\:text-left {
+		text-align: left;
+	}
+	.lg\:text-center {
+		text-align: center;
+	}
+	.lg\:text-right {
+		text-align: right;
+	}
+}

@@ -1,0 +1,792 @@
+/* ===============================================
+   УТИЛИТЫ АНИМАЦИЙ
+   Классы для анимаций и переходов
+   =============================================== */
+
+/* ===============================================
+   БАЗОВЫЕ АНИМАЦИИ
+   =============================================== */
+
+/* Fade анимации */
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+.animate-fade-in {
+	animation: fade-in var(--duration-500) var(--ease-out);
+}
+
+.animate-fade-out {
+	animation: fade-out var(--duration-500) var(--ease-out);
+}
+
+/* Slide анимации */
+@keyframes slide-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slide-in-down {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slide-in-left {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slide-in-right {
+	from {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.animate-slide-in-up {
+	animation: slide-in-up var(--duration-500) var(--ease-out);
+}
+
+.animate-slide-in-down {
+	animation: slide-in-down var(--duration-500) var(--ease-out);
+}
+
+.animate-slide-in-left {
+	animation: slide-in-left var(--duration-500) var(--ease-out);
+}
+
+.animate-slide-in-right {
+	animation: slide-in-right var(--duration-500) var(--ease-out);
+}
+
+/* Scale анимации */
+@keyframes scale-in {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes scale-out {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+}
+
+.animate-scale-in {
+	animation: scale-in var(--duration-500) var(--ease-out);
+}
+
+.animate-scale-out {
+	animation: scale-out var(--duration-500) var(--ease-out);
+}
+
+/* Rotate анимации */
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes rotate-reverse {
+	from {
+		transform: rotate(360deg);
+	}
+	to {
+		transform: rotate(0deg);
+	}
+}
+
+.animate-rotate {
+	animation: rotate var(--duration-1000) var(--ease-linear) infinite;
+}
+
+.animate-rotate-reverse {
+	animation: rotate-reverse var(--duration-1000) var(--ease-linear) infinite;
+}
+
+/* Bounce анимации */
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(0);
+		animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+	}
+	50% {
+		transform: translateY(-25%);
+		animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+	}
+}
+
+.animate-bounce {
+	animation: bounce var(--duration-1000) infinite;
+}
+
+/* Pulse анимации */
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes pulse-scale {
+	0%,
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.05);
+		opacity: 0.8;
+	}
+}
+
+.animate-pulse {
+	animation: pulse var(--duration-1000) var(--ease-in-out) infinite;
+}
+
+.animate-pulse-scale {
+	animation: pulse-scale var(--duration-1000) var(--ease-in-out) infinite;
+}
+
+/* Shake анимации */
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	10%,
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: translateX(-10px);
+	}
+	20%,
+	40%,
+	60%,
+	80% {
+		transform: translateX(10px);
+	}
+}
+
+.animate-shake {
+	animation: shake var(--duration-700) var(--ease-in-out);
+}
+
+/* Ping анимации */
+@keyframes ping {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	75%,
+	100% {
+		transform: scale(2);
+		opacity: 0;
+	}
+}
+
+.animate-ping {
+	animation: ping var(--duration-1000) var(--ease-out) infinite;
+}
+
+/* Wiggle анимации */
+@keyframes wiggle {
+	0%,
+	100% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(-3deg);
+	}
+	75% {
+		transform: rotate(3deg);
+	}
+}
+
+.animate-wiggle {
+	animation: wiggle var(--duration-500) var(--ease-in-out) infinite;
+}
+
+/* ===============================================
+   СПЕЦИАЛЬНЫЕ ЭФФЕКТЫ
+   =============================================== */
+
+/* Skeleton loading */
+@keyframes skeleton {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+.animate-skeleton {
+	background: linear-gradient(
+		90deg,
+		var(--color-bg-secondary) 25%,
+		var(--color-bg-tertiary) 50%,
+		var(--color-bg-secondary) 75%
+	);
+	background-size: 200% 100%;
+	animation: skeleton 1.5s var(--ease-in-out) infinite;
+}
+
+/* Gradient shift */
+@keyframes gradient-shift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.animate-gradient {
+	background-size: 200% 200%;
+	animation: gradient-shift 3s var(--ease-in-out) infinite;
+}
+
+/* Float */
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+}
+
+.animate-float {
+	animation: float 3s var(--ease-in-out) infinite;
+}
+
+/* ===============================================
+   ДЛИТЕЛЬНОСТЬ АНИМАЦИЙ
+   =============================================== */
+
+.duration-75 {
+	animation-duration: var(--duration-75);
+}
+.duration-100 {
+	animation-duration: var(--duration-100);
+}
+.duration-150 {
+	animation-duration: var(--duration-150);
+}
+.duration-200 {
+	animation-duration: var(--duration-200);
+}
+.duration-300 {
+	animation-duration: var(--duration-300);
+}
+.duration-500 {
+	animation-duration: var(--duration-500);
+}
+.duration-700 {
+	animation-duration: var(--duration-700);
+}
+.duration-1000 {
+	animation-duration: var(--duration-1000);
+}
+
+/* ===============================================
+   ЗАДЕРЖКА АНИМАЦИЙ
+   =============================================== */
+
+.delay-75 {
+	animation-delay: var(--duration-75);
+}
+.delay-100 {
+	animation-delay: var(--duration-100);
+}
+.delay-150 {
+	animation-delay: var(--duration-150);
+}
+.delay-200 {
+	animation-delay: var(--duration-200);
+}
+.delay-300 {
+	animation-delay: var(--duration-300);
+}
+.delay-500 {
+	animation-delay: var(--duration-500);
+}
+.delay-700 {
+	animation-delay: var(--duration-700);
+}
+.delay-1000 {
+	animation-delay: var(--duration-1000);
+}
+
+/* ===============================================
+   ФУНКЦИИ ПЛАВНОСТИ
+   =============================================== */
+
+.ease-linear {
+	animation-timing-function: var(--ease-linear);
+}
+.ease-in {
+	animation-timing-function: var(--ease-in);
+}
+.ease-out {
+	animation-timing-function: var(--ease-out);
+}
+.ease-in-out {
+	animation-timing-function: var(--ease-in-out);
+}
+.ease-bounce {
+	animation-timing-function: var(--ease-bounce);
+}
+.ease-smooth {
+	animation-timing-function: var(--ease-smooth);
+}
+
+/* ===============================================
+   КОЛИЧЕСТВО ПОВТОРЕНИЙ
+   =============================================== */
+
+.animate-once {
+	animation-iteration-count: 1;
+}
+.animate-twice {
+	animation-iteration-count: 2;
+}
+.animate-infinite {
+	animation-iteration-count: infinite;
+}
+
+/* ===============================================
+   НАПРАВЛЕНИЕ АНИМАЦИИ
+   =============================================== */
+
+.animate-normal {
+	animation-direction: normal;
+}
+.animate-reverse {
+	animation-direction: reverse;
+}
+.animate-alternate {
+	animation-direction: alternate;
+}
+.animate-alternate-reverse {
+	animation-direction: alternate-reverse;
+}
+
+/* ===============================================
+   СОСТОЯНИЕ АНИМАЦИИ
+   =============================================== */
+
+.animate-play {
+	animation-play-state: running;
+}
+.animate-pause {
+	animation-play-state: paused;
+}
+
+/* ===============================================
+   FILL MODE
+   =============================================== */
+
+.animate-fill-none {
+	animation-fill-mode: none;
+}
+.animate-fill-forwards {
+	animation-fill-mode: forwards;
+}
+.animate-fill-backwards {
+	animation-fill-mode: backwards;
+}
+.animate-fill-both {
+	animation-fill-mode: both;
+}
+
+/* ===============================================
+   ПЕРЕХОДЫ (TRANSITIONS)
+   =============================================== */
+
+/* Базовые переходы */
+.transition-none {
+	transition: none;
+}
+.transition-all {
+	transition: var(--transition-base);
+}
+.transition-colors {
+	transition: var(--transition-colors);
+}
+.transition-opacity {
+	transition: var(--transition-opacity);
+}
+.transition-transform {
+	transition: var(--transition-transform);
+}
+
+/* Специфичные переходы */
+.transition-shadow {
+	transition: box-shadow var(--duration-300) var(--ease-in-out);
+}
+.transition-filter {
+	transition: filter var(--duration-300) var(--ease-in-out);
+}
+.transition-blur {
+	transition: backdrop-filter var(--duration-300) var(--ease-in-out);
+}
+
+/* Длительность переходов */
+.transition-75 {
+	transition-duration: var(--duration-75);
+}
+.transition-100 {
+	transition-duration: var(--duration-100);
+}
+.transition-150 {
+	transition-duration: var(--duration-150);
+}
+.transition-200 {
+	transition-duration: var(--duration-200);
+}
+.transition-300 {
+	transition-duration: var(--duration-300);
+}
+.transition-500 {
+	transition-duration: var(--duration-500);
+}
+.transition-700 {
+	transition-duration: var(--duration-700);
+}
+.transition-1000 {
+	transition-duration: var(--duration-1000);
+}
+
+/* Задержка переходов */
+.transition-delay-75 {
+	transition-delay: var(--duration-75);
+}
+.transition-delay-100 {
+	transition-delay: var(--duration-100);
+}
+.transition-delay-150 {
+	transition-delay: var(--duration-150);
+}
+.transition-delay-200 {
+	transition-delay: var(--duration-200);
+}
+.transition-delay-300 {
+	transition-delay: var(--duration-300);
+}
+.transition-delay-500 {
+	transition-delay: var(--duration-500);
+}
+.transition-delay-700 {
+	transition-delay: var(--duration-700);
+}
+.transition-delay-1000 {
+	transition-delay: var(--duration-1000);
+}
+
+/* ===============================================
+   ТРАНСФОРМАЦИИ
+   =============================================== */
+
+/* Scale */
+.scale-0 {
+	transform: scale(0);
+}
+.scale-50 {
+	transform: scale(0.5);
+}
+.scale-75 {
+	transform: scale(0.75);
+}
+.scale-90 {
+	transform: scale(0.9);
+}
+.scale-95 {
+	transform: scale(0.95);
+}
+.scale-100 {
+	transform: scale(1);
+}
+.scale-105 {
+	transform: scale(1.05);
+}
+.scale-110 {
+	transform: scale(1.1);
+}
+.scale-125 {
+	transform: scale(1.25);
+}
+.scale-150 {
+	transform: scale(1.5);
+}
+
+/* Rotate */
+.rotate-0 {
+	transform: rotate(0deg);
+}
+.rotate-45 {
+	transform: rotate(45deg);
+}
+.rotate-90 {
+	transform: rotate(90deg);
+}
+.rotate-180 {
+	transform: rotate(180deg);
+}
+.-rotate-45 {
+	transform: rotate(-45deg);
+}
+.-rotate-90 {
+	transform: rotate(-90deg);
+}
+.-rotate-180 {
+	transform: rotate(-180deg);
+}
+
+/* Translate */
+.translate-x-0 {
+	transform: translateX(0);
+}
+.translate-x-1 {
+	transform: translateX(var(--space-1));
+}
+.translate-x-2 {
+	transform: translateX(var(--space-2));
+}
+.translate-x-4 {
+	transform: translateX(var(--space-4));
+}
+.translate-x-8 {
+	transform: translateX(var(--space-8));
+}
+.-translate-x-1 {
+	transform: translateX(calc(var(--space-1) * -1));
+}
+.-translate-x-2 {
+	transform: translateX(calc(var(--space-2) * -1));
+}
+.-translate-x-4 {
+	transform: translateX(calc(var(--space-4) * -1));
+}
+.-translate-x-8 {
+	transform: translateX(calc(var(--space-8) * -1));
+}
+
+.translate-y-0 {
+	transform: translateY(0);
+}
+.translate-y-1 {
+	transform: translateY(var(--space-1));
+}
+.translate-y-2 {
+	transform: translateY(var(--space-2));
+}
+.translate-y-4 {
+	transform: translateY(var(--space-4));
+}
+.translate-y-8 {
+	transform: translateY(var(--space-8));
+}
+.-translate-y-1 {
+	transform: translateY(calc(var(--space-1) * -1));
+}
+.-translate-y-2 {
+	transform: translateY(calc(var(--space-2) * -1));
+}
+.-translate-y-4 {
+	transform: translateY(calc(var(--space-4) * -1));
+}
+.-translate-y-8 {
+	transform: translateY(calc(var(--space-8) * -1));
+}
+
+/* Skew */
+.skew-x-0 {
+	transform: skewX(0deg);
+}
+.skew-x-3 {
+	transform: skewX(3deg);
+}
+.skew-x-6 {
+	transform: skewX(6deg);
+}
+.skew-x-12 {
+	transform: skewX(12deg);
+}
+.-skew-x-3 {
+	transform: skewX(-3deg);
+}
+.-skew-x-6 {
+	transform: skewX(-6deg);
+}
+.-skew-x-12 {
+	transform: skewX(-12deg);
+}
+
+.skew-y-0 {
+	transform: skewY(0deg);
+}
+.skew-y-3 {
+	transform: skewY(3deg);
+}
+.skew-y-6 {
+	transform: skewY(6deg);
+}
+.skew-y-12 {
+	transform: skewY(12deg);
+}
+.-skew-y-3 {
+	transform: skewY(-3deg);
+}
+.-skew-y-6 {
+	transform: skewY(-6deg);
+}
+.-skew-y-12 {
+	transform: skewY(-12deg);
+}
+
+/* Transform origin */
+.origin-center {
+	transform-origin: center;
+}
+.origin-top {
+	transform-origin: top;
+}
+.origin-top-right {
+	transform-origin: top right;
+}
+.origin-right {
+	transform-origin: right;
+}
+.origin-bottom-right {
+	transform-origin: bottom right;
+}
+.origin-bottom {
+	transform-origin: bottom;
+}
+.origin-bottom-left {
+	transform-origin: bottom left;
+}
+.origin-left {
+	transform-origin: left;
+}
+.origin-top-left {
+	transform-origin: top left;
+}
+
+/* ===============================================
+   HOVER АНИМАЦИИ
+   =============================================== */
+
+.hover\:scale-105:hover {
+	transform: scale(1.05);
+}
+.hover\:scale-110:hover {
+	transform: scale(1.1);
+}
+.hover\:rotate-3:hover {
+	transform: rotate(3deg);
+}
+.hover\:-rotate-3:hover {
+	transform: rotate(-3deg);
+}
+.hover\:translate-y-1:hover {
+	transform: translateY(calc(var(--space-1) * -1));
+}
+.hover\:translate-y-2:hover {
+	transform: translateY(calc(var(--space-2) * -1));
+}
+
+/* ===============================================
+   ГРУППЫ АНИМАЦИЙ
+   =============================================== */
+
+.group:hover .group-hover\:scale-105 {
+	transform: scale(1.05);
+}
+.group:hover .group-hover\:opacity-100 {
+	opacity: 1;
+}
+.group:hover .group-hover\:translate-x-2 {
+	transform: translateX(var(--space-2));
+}
+
+/* ===============================================
+   ПАРАЛАКС
+   =============================================== */
+
+.parallax {
+	will-change: transform;
+	transform: translateZ(0);
+}
+
+.parallax-slow {
+	transform: translateY(calc(var(--parallax-offset, 0) * 0.5));
+}
+
+.parallax-medium {
+	transform: translateY(calc(var(--parallax-offset, 0) * 0.8));
+}
+
+.parallax-fast {
+	transform: translateY(calc(var(--parallax-offset, 0) * 1.2));
+}

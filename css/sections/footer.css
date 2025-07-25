@@ -1,15 +1,19 @@
 /* ===============================================
    МИНИМАЛИСТИЧНЫЙ ФУТЕР
+   Рефакторинг с использованием CSS переменных
    =============================================== */
+
 .footer {
-	background: var(--color-white);
-	color: var(--color-primary);
-	padding: 4rem 0 2rem;
+	background: var(--color-bg-primary);
+	color: var(--color-text-primary);
+	padding: var(--space-16) 0 var(--space-8);
 	margin-top: auto;
 	position: relative;
 	overflow: hidden;
-	border-top: 1px solid var(--color-light);
+	border-top: 1px solid var(--color-border-primary);
 }
+
+/* Декоративная линия сверху */
 .footer::before {
 	content: "";
 	position: absolute;
@@ -20,32 +24,32 @@
 	background: linear-gradient(
 		90deg,
 		transparent,
-		var(--color-blue) 50%,
+		var(--color-accent) 50%,
 		transparent
 	);
 	opacity: 0.3;
 }
 
-.footer .container {
-	max-width: var(--container-max-width);
-	margin: 0 auto;
-	padding: 0 2rem;
-}
+/* ===============================================
+   ОСНОВНОЙ КОНТЕНТ ФУТЕРА
+   =============================================== */
 
-/* Основной контент футера */
 .footer-content {
 	display: grid;
 	grid-template-columns: 1.5fr 1fr 1fr;
-	gap: 3rem;
-	margin-bottom: 3rem;
+	gap: var(--space-12);
+	margin-bottom: var(--space-12);
 	align-items: start;
 }
 
-/* Секция бренда */
+/* ===============================================
+   СЕКЦИЯ БРЕНДА
+   =============================================== */
+
 .footer-brand {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: var(--space-4);
 }
 
 .footer-logo {
@@ -57,7 +61,7 @@
 	width: 100%;
 	height: auto;
 	opacity: 0.9;
-	transition: var(--transition-base);
+	transition: var(--transition-opacity);
 }
 
 .footer-logo:hover img {
@@ -65,32 +69,36 @@
 }
 
 .footer-tagline {
-	font-size: 0.875rem;
-	line-height: 1.6;
-	color: var(--color-secondary);
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-relaxed);
+	color: var(--color-text-secondary);
 }
 
-/* Секция ссылок */
+/* ===============================================
+   СЕКЦИИ ССЫЛОК И КОНТАКТОВ
+   =============================================== */
+
 .footer-links h4,
 .footer-contact h4 {
-	font-size: 0.875rem;
-	font-weight: 600;
-	color: var(--color-primary);
-	margin-bottom: 1.5rem;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary);
+	margin-bottom: var(--space-6);
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	letter-spacing: var(--letter-spacing-wider);
 }
 
+/* Навигационные ссылки */
 .footer-links nav {
 	display: flex;
 	flex-direction: column;
-	gap: 0.75rem;
+	gap: var(--space-3);
 }
 
 .footer-links a {
-	color: var(--color-secondary);
+	color: var(--color-text-secondary);
 	text-decoration: none;
-	font-size: 0.875rem;
+	font-size: var(--font-size-sm);
 	transition: var(--transition-fast);
 	position: relative;
 	padding-left: 0;
@@ -104,14 +112,14 @@
 	transform: translateY(-50%);
 	width: 12px;
 	height: 1px;
-	background: var(--color-blue);
+	background: var(--color-accent);
 	opacity: 0;
 	transition: var(--transition-fast);
 }
 
 .footer-links a:hover {
-	color: var(--color-blue);
-	padding-left: 1rem;
+	color: var(--color-accent);
+	padding-left: var(--space-4);
 }
 
 .footer-links a:hover::before {
@@ -119,15 +127,15 @@
 	left: 0;
 }
 
-/* Секция контактов */
+/* Контактная информация */
 .footer-phone,
 .footer-email {
-	color: var(--color-blue);
+	color: var(--color-accent);
 	text-decoration: none;
-	font-size: 0.875rem;
+	font-size: var(--font-size-sm);
 	transition: var(--transition-base);
 	display: block;
-	margin-bottom: 0.75rem;
+	margin-bottom: var(--space-3);
 	position: relative;
 }
 
@@ -139,13 +147,13 @@
 	left: 0;
 	width: 0;
 	height: 1px;
-	background: var(--color-blue);
+	background: var(--color-accent);
 	transition: var(--transition-base);
 }
 
 .footer-phone:hover,
 .footer-email:hover {
-	color: var(--color-blue-dark);
+	color: var(--color-accent-dark);
 }
 
 .footer-phone:hover::after,
@@ -154,13 +162,16 @@
 }
 
 .footer-email {
-	margin-bottom: 1.5rem;
+	margin-bottom: var(--space-6);
 }
 
-/* Социальные сети */
+/* ===============================================
+   СОЦИАЛЬНЫЕ СЕТИ
+   =============================================== */
+
 .footer-social {
 	display: flex;
-	gap: 1rem;
+	gap: var(--space-4);
 }
 
 .footer-social a {
@@ -169,11 +180,11 @@
 	justify-content: center;
 	width: 36px;
 	height: 36px;
-	border-radius: var(--border-radius);
-	background: var(--color-light);
-	color: var(--color-secondary);
+	border-radius: var(--radius-lg);
+	background: var(--color-bg-tertiary);
+	color: var(--color-text-secondary);
 	transition: var(--transition-base);
-	border: 1px solid var(--color-light);
+	border: 1px solid var(--color-border-primary);
 }
 
 .footer-social a:hover {
@@ -189,20 +200,22 @@
 	height: 20px;
 }
 
-/* Секция юридической информации */
+/* ===============================================
+   ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ
+   =============================================== */
+
 .footer-legal-section {
-	margin-top: 3rem;
-	padding: 2rem;
-	/* background: var(--color-light);	 */
-	border-radius: var(--border-radius);
-	border: 1px solid var(--border);
+	margin-top: var(--space-12);
+	padding: var(--space-8);
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--color-border-primary);
 }
 
 .footer-legal-section p {
-	font-size: 0.75rem;
-	line-height: 1.8;
-	color: var(--color-secondary);
-	margin-bottom: 1rem;
+	font-size: var(--font-size-xs);
+	line-height: var(--line-height-extra);
+	color: var(--color-text-secondary);
+	margin-bottom: var(--space-4);
 	text-align: justify;
 }
 
@@ -211,39 +224,43 @@
 }
 
 .footer-legal-section a {
-	color: var(--color-blue);
+	color: var(--color-accent);
 	text-decoration: none;
 	transition: var(--transition-fast);
 }
 
 .footer-legal-section a:hover {
-	color: var(--color-blue-dark);
+	color: var(--color-accent-dark);
 	text-decoration: underline;
 }
 
-/* Нижняя часть футера */
+/* ===============================================
+   НИЖНЯЯ ЧАСТЬ ФУТЕРА
+   =============================================== */
+
 .footer-bottom {
-	padding-top: 2rem;
+	padding-top: var(--space-8);
 	text-align: center;
 }
 
 .footer-copyright {
-	font-size: 0.75rem;
-	color: var(--color-secondary);
+	font-size: var(--font-size-xs);
+	color: var(--color-text-secondary);
 	margin: 0;
 }
 
 /* ===============================================
    АДАПТИВНОСТЬ
    =============================================== */
+
 @media (max-width: 768px) {
 	.footer {
-		padding: 3rem 0 1.5rem;
+		padding: var(--space-12) 0 var(--space-6);
 	}
 
 	.footer-content {
 		grid-template-columns: 1fr;
-		gap: 2.5rem;
+		gap: var(--space-10);
 		text-align: center;
 	}
 
@@ -257,14 +274,14 @@
 
 	.footer-links h4,
 	.footer-contact h4 {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 	}
 
 	.footer-links nav {
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 1rem 2rem;
+		gap: var(--space-4) var(--space-8);
 	}
 
 	.footer-links a::before {
@@ -278,7 +295,7 @@
 	.footer-phone,
 	.footer-email {
 		display: inline-block;
-		margin: 0 0.5rem 0.75rem;
+		margin: 0 var(--space-2) var(--space-3);
 	}
 
 	.footer-social {
@@ -286,8 +303,8 @@
 	}
 
 	.footer-legal-section {
-		margin-top: 2rem;
-		padding: 1.5rem;
+		margin-top: var(--space-8);
+		padding: var(--space-6);
 	}
 
 	.footer-legal-section p {
@@ -296,24 +313,25 @@
 	}
 
 	.footer-bottom {
-		padding-top: 1.5rem;
+		padding-top: var(--space-6);
 	}
 }
 
 @media (max-width: 480px) {
 	.footer .container {
-		padding: 0 1rem;
+		padding: 0 var(--space-4);
 	}
 
 	.footer-links nav {
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: var(--space-3);
 	}
 }
 
 /* ===============================================
    АНИМАЦИИ
    =============================================== */
+
 @keyframes fadeInUp {
 	from {
 		opacity: 0;
@@ -326,16 +344,18 @@
 }
 
 .footer-content > * {
-	animation: fadeInUp 0.6s ease-out;
+	animation: fadeInUp var(--duration-700) var(--ease-out);
 	animation-fill-mode: both;
 }
 
 .footer-content > *:nth-child(1) {
 	animation-delay: 0.1s;
 }
+
 .footer-content > *:nth-child(2) {
 	animation-delay: 0.2s;
 }
+
 .footer-content > *:nth-child(3) {
 	animation-delay: 0.3s;
 }

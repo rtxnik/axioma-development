@@ -1,18 +1,105 @@
-/* MAIN CSS FILE - IMPORTS ALL MODULES */
+/* ===============================================
+   ГЛАВНЫЙ CSS ФАЙЛ
+   Импорт всех модулей в правильном порядке
+   =============================================== */
 
-/* Основные стили */
-@import url("reset.css");
-@import url("variables.css");
-@import url("buttons.css");
+/* ===============================================
+   1. CORE - Основа
+   =============================================== */
+@import url("core/variables.css"); /* CSS переменные */
+@import url("core/reset.css"); /* Сброс стилей браузера */
+@import url("core/base.css"); /* Базовые стили элементов */
 
-/* Компоненты */
-@import url("header.css");
-@import url("hero.css");
-@import url("about.css");
-@import url("services.css");
-@import url("contact.css");
-@import url("footer.css");
+/* ===============================================
+   2. LAYOUT - Макет
+   =============================================== */
+@import url("layout/containers.css"); /* Контейнеры и обертки */
+@import url("layout/grid.css"); /* Сеточная система */
+@import url("layout/sections.css"); /* Общие стили секций */
 
-/* Адаптивность и доступность */
+/* ===============================================
+   3. COMPONENTS - Компоненты
+   =============================================== */
+@import url("components/buttons.css"); /* Все кнопки */
+@import url("components/forms.css"); /* Формы и поля ввода */
+@import url("components/cards.css"); /* Карточки */
+@import url("components/navigation.css"); /* Навигационные элементы */
+@import url("components/modals.css"); /* Модальные окна */
+@import url("components/tooltips.css"); /* Подсказки */
+@import url("components/badges.css"); /* Бейджи и метки */
+@import url("components/alerts.css"); /* Уведомления */
+
+/* ===============================================
+   4. SECTIONS - Секции страниц
+   =============================================== */
+@import url("sections/header.css"); /* Шапка сайта */
+@import url("sections/hero.css"); /* Hero секция */
+@import url("sections/about.css"); /* О компании */
+@import url("sections/services.css"); /* Услуги */
+@import url("sections/portfolio.css"); /* Портфолио */
+@import url("sections/testimonials.css"); /* Отзывы */
+@import url("sections/team.css"); /* Команда */
+@import url("sections/contact.css"); /* Контакты */
+@import url("sections/blog.css"); /* Блог */
+@import url("sections/footer.css"); /* Подвал */
+
+/* ===============================================
+   5. PAGES - Страницы
+   =============================================== */
+@import url("pages/home.css"); /* Главная страница */
+@import url("pages/about-page.css"); /* Страница "О нас" */
+@import url("pages/services-page.css"); /* Страница "Услуги" */
+@import url("pages/portfolio-page.css"); /* Страница "Портфолио" */
+@import url("pages/blog-page.css"); /* Страница "Блог" */
+@import url("pages/contact-page.css"); /* Страница "Контакты" */
+@import url("pages/404.css"); /* Страница 404 */
+
+/* ===============================================
+   6. UTILITIES - Утилиты
+   =============================================== */
+@import url("utilities/spacing.css"); /* Отступы */
+@import url("utilities/typography.css"); /* Типографика */
+@import url("utilities/colors.css"); /* Цвета */
+@import url("utilities/display.css"); /* Отображение */
+@import url("utilities/flexbox.css"); /* Flexbox утилиты */
+@import url("utilities/position.css"); /* Позиционирование */
+@import url("utilities/sizing.css"); /* Размеры */
+@import url("utilities/borders.css"); /* Границы */
+@import url("utilities/shadows.css"); /* Тени */
+@import url("utilities/animations.css"); /* Анимации */
+
+/* ===============================================
+   7. VENDORS - Сторонние библиотеки
+   =============================================== */
+/* @import url("vendors/normalize.css"); */
+
+/* ===============================================
+   8. RESPONSIVE - Адаптивность
+   =============================================== */
 @import url("responsive.css");
+
+/* ===============================================
+   9. ACCESSIBILITY - Доступность
+   =============================================== */
 @import url("accessibility.css");
+
+/* ===============================================
+   10. PRINT - Печать
+   =============================================== */
+@import url("print.css");
+
+/* ===============================================
+   ВРЕМЕННЫЕ СТИЛИ И ХАКИ
+   Удалить после полного рефакторинга
+   =============================================== */
+
+/* Временное исправление для старых компонентов */
+.old-component {
+	/* Старые стили, которые нужно переписать */
+}
+
+/* ===============================================
+   КАСТОМНЫЕ СТИЛИ ДЛЯ КОНКРЕТНОГО ПРОЕКТА
+   =============================================== */
+
+/* Добавьте сюда уникальные стили проекта */

@@ -1,0 +1,578 @@
+/* ===============================================
+   СИСТЕМА ФОРМ
+   Унифицированные стили для всех элементов форм
+   =============================================== */
+
+/* ===============================================
+   БАЗОВЫЕ СТИЛИ ФОРМ
+   =============================================== */
+
+form {
+	width: 100%;
+}
+
+fieldset {
+	border: 1px solid var(--color-border-primary);
+	border-radius: var(--radius-lg);
+	padding: var(--space-6);
+	margin-bottom: var(--space-6);
+}
+
+legend {
+	padding: 0 var(--space-3);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary);
+}
+
+/* ===============================================
+   ГРУППЫ ПОЛЕЙ
+   =============================================== */
+
+.form-group {
+	position: relative;
+	margin-bottom: var(--space-6);
+}
+
+.form-group:last-child {
+	margin-bottom: 0;
+}
+
+/* Inline группы */
+.form-group-inline {
+	display: flex;
+	align-items: center;
+	gap: var(--space-4);
+}
+
+/* ===============================================
+   ЛЕЙБЛЫ
+   =============================================== */
+
+.form-label {
+	display: block;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+	margin-bottom: var(--space-2);
+	transition: var(--transition-colors);
+}
+
+/* Обязательное поле */
+.form-label--required::after {
+	content: " *";
+	color: var(--color-error);
+}
+
+/* Floating label */
+.form-group--floating {
+	position: relative;
+}
+
+.form-group--floating .form-label {
+	position: absolute;
+	left: var(--space-4);
+	top: 50%;
+	transform: translateY(-50%);
+	margin: 0;
+	padding: 0 var(--space-2);
+	background: var(--color-bg-primary);
+	transition: var(--transition-base);
+	pointer-events: none;
+}
+
+.form-group--floating .form-input:focus ~ .form-label,
+.form-group--floating .form-input:not(:placeholder-shown) ~ .form-label {
+	top: 0;
+	transform: translateY(-50%) scale(0.85);
+	color: var(--color-accent);
+}
+
+/* ===============================================
+   ПОЛЯ ВВОДА
+   =============================================== */
+
+.form-input,
+.form-textarea,
+.form-select {
+	width: 100%;
+	padding: var(--space-3) var(--space-4);
+	background: var(--color-bg-primary);
+	border: 1px solid var(--color-border-primary);
+	border-radius: var(--radius-lg);
+	font-family: var(--font-family-primary);
+	font-size: var(--font-size-base);
+	color: var(--color-text-primary);
+	transition: var(--transition-base);
+}
+
+/* Размеры полей */
+.form-input--sm,
+.form-textarea--sm,
+.form-select--sm {
+	padding: var(--space-2) var(--space-3);
+	font-size: var(--font-size-sm);
+}
+
+.form-input--lg,
+.form-textarea--lg,
+.form-select--lg {
+	padding: var(--space-4) var(--space-5);
+	font-size: var(--font-size-lg);
+}
+
+/* Состояния hover и focus */
+.form-input:hover,
+.form-textarea:hover,
+.form-select:hover {
+	border-color: var(--color-accent);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+	outline: none;
+	border-color: var(--color-accent);
+	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Disabled состояние */
+.form-input:disabled,
+.form-textarea:disabled,
+.form-select:disabled {
+	background-color: var(--color-bg-secondary);
+	color: var(--color-text-muted);
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+/* Readonly состояние */
+.form-input:read-only,
+.form-textarea:read-only {
+	background-color: var(--color-bg-tertiary);
+	cursor: default;
+}
+
+/* ===============================================
+   TEXTAREA
+   =============================================== */
+
+.form-textarea {
+	min-height: calc(var(--input-height) * 2.5);
+	resize: vertical;
+	line-height: var(--line-height-relaxed);
+}
+
+.form-textarea--no-resize {
+	resize: none;
+}
+
+/* ===============================================
+   SELECT
+   =============================================== */
+
+.form-select {
+	appearance: none;
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M3 4.5L6 7.5L9 4.5' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right var(--space-3) center;
+	background-size: 20px;
+	padding-right: var(--space-10);
+	cursor: pointer;
+}
+
+.form-select:focus {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M3 4.5L6 7.5L9 4.5' stroke='%233b82f6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+}
+
+/* ===============================================
+   CHECKBOX И RADIO
+   =============================================== */
+
+.form-checkbox,
+.form-radio {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-2);
+	cursor: pointer;
+	user-select: none;
+}
+
+.form-checkbox input[type="checkbox"],
+.form-radio input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+/* Кастомный checkbox */
+.form-checkbox__box {
+	width: 20px;
+	height: 20px;
+	border: 2px solid var(--color-border-primary);
+	border-radius: var(--radius-base);
+	transition: var(--transition-base);
+	position: relative;
+	flex-shrink: 0;
+}
+
+.form-checkbox input[type="checkbox"]:checked ~ .form-checkbox__box {
+	background: var(--color-accent);
+	border-color: var(--color-accent);
+}
+
+.form-checkbox__box::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 5px;
+	height: 10px;
+	border: solid var(--color-white);
+	border-width: 0 2px 2px 0;
+	transform: translate(-50%, -60%) rotate(45deg) scale(0);
+	transition: var(--transition-base);
+}
+
+.form-checkbox input[type="checkbox"]:checked ~ .form-checkbox__box::after {
+	transform: translate(-50%, -60%) rotate(45deg) scale(1);
+}
+
+/* Кастомный radio */
+.form-radio__box {
+	width: 20px;
+	height: 20px;
+	border: 2px solid var(--color-border-primary);
+	border-radius: 50%;
+	transition: var(--transition-base);
+	position: relative;
+	flex-shrink: 0;
+}
+
+.form-radio input[type="radio"]:checked ~ .form-radio__box {
+	border-color: var(--color-accent);
+}
+
+.form-radio__box::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--color-accent);
+	transform: translate(-50%, -50%) scale(0);
+	transition: var(--transition-base);
+}
+
+.form-radio input[type="radio"]:checked ~ .form-radio__box::after {
+	transform: translate(-50%, -50%) scale(1);
+}
+
+/* Hover состояния */
+.form-checkbox:hover .form-checkbox__box,
+.form-radio:hover .form-radio__box {
+	border-color: var(--color-accent);
+}
+
+/* Focus состояния */
+.form-checkbox input[type="checkbox"]:focus-visible ~ .form-checkbox__box,
+.form-radio input[type="radio"]:focus-visible ~ .form-radio__box {
+	outline: 2px solid var(--color-accent);
+	outline-offset: 2px;
+}
+
+/* Disabled состояния */
+.form-checkbox input[type="checkbox"]:disabled ~ .form-checkbox__box,
+.form-radio input[type="radio"]:disabled ~ .form-radio__box {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.form-checkbox input[type="checkbox"]:disabled ~ .form-checkbox__label,
+.form-radio input[type="radio"]:disabled ~ .form-radio__label {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Label для checkbox/radio */
+.form-checkbox__label,
+.form-radio__label {
+	font-size: var(--font-size-base);
+	color: var(--color-text-primary);
+	line-height: 1.2;
+}
+
+/* ===============================================
+   TOGGLE SWITCH
+   =============================================== */
+
+.form-switch {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-3);
+	cursor: pointer;
+}
+
+.form-switch input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+}
+
+.form-switch__toggle {
+	width: 48px;
+	height: 24px;
+	background: var(--color-tertiary);
+	border-radius: var(--radius-full);
+	position: relative;
+	transition: var(--transition-base);
+}
+
+.form-switch__toggle::after {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 20px;
+	height: 20px;
+	background: var(--color-white);
+	border-radius: 50%;
+	transition: var(--transition-base);
+	box-shadow: var(--shadow-sm);
+}
+
+.form-switch input[type="checkbox"]:checked ~ .form-switch__toggle {
+	background: var(--color-accent);
+}
+
+.form-switch input[type="checkbox"]:checked ~ .form-switch__toggle::after {
+	transform: translateX(24px);
+}
+
+/* ===============================================
+   RANGE SLIDER
+   =============================================== */
+
+.form-range {
+	width: 100%;
+	height: 6px;
+	background: var(--color-bg-tertiary);
+	border-radius: var(--radius-full);
+	outline: none;
+	-webkit-appearance: none;
+	appearance: none;
+	cursor: pointer;
+}
+
+.form-range::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	background: var(--color-accent);
+	border-radius: 50%;
+	cursor: pointer;
+	transition: var(--transition-base);
+	box-shadow: var(--shadow-md);
+}
+
+.form-range::-webkit-slider-thumb:hover {
+	transform: scale(1.2);
+	box-shadow: var(--shadow-lg);
+}
+
+.form-range::-moz-range-thumb {
+	width: 20px;
+	height: 20px;
+	background: var(--color-accent);
+	border-radius: 50%;
+	cursor: pointer;
+	transition: var(--transition-base);
+	box-shadow: var(--shadow-md);
+	border: none;
+}
+
+/* ===============================================
+   FILE INPUT
+   =============================================== */
+
+.form-file {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	width: 100%;
+}
+
+.form-file input[type="file"] {
+	position: absolute;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.form-file__label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-3);
+	padding: var(--space-4) var(--space-6);
+	background: var(--color-bg-secondary);
+	border: 2px dashed var(--color-border-primary);
+	border-radius: var(--radius-lg);
+	color: var(--color-text-secondary);
+	font-weight: var(--font-weight-medium);
+	transition: var(--transition-base);
+}
+
+.form-file:hover .form-file__label {
+	background: var(--color-bg-tertiary);
+	border-color: var(--color-accent);
+	color: var(--color-accent);
+}
+
+.form-file__icon {
+	width: 24px;
+	height: 24px;
+}
+
+/* ===============================================
+   INPUT ГРУППЫ И АДДОНЫ
+   =============================================== */
+
+.input-group {
+	display: flex;
+	align-items: stretch;
+	width: 100%;
+}
+
+.input-group > .form-input {
+	flex: 1;
+	border-radius: 0;
+}
+
+.input-group > :first-child {
+	border-top-left-radius: var(--radius-lg);
+	border-bottom-left-radius: var(--radius-lg);
+}
+
+.input-group > :last-child {
+	border-top-right-radius: var(--radius-lg);
+	border-bottom-right-radius: var(--radius-lg);
+}
+
+.input-group > :not(:last-child) {
+	border-right: 0;
+}
+
+.input-addon {
+	display: flex;
+	align-items: center;
+	padding: 0 var(--space-4);
+	background: var(--color-bg-secondary);
+	border: 1px solid var(--color-border-primary);
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-sm);
+	white-space: nowrap;
+}
+
+/* ===============================================
+   СООБЩЕНИЯ ОБ ОШИБКАХ И ПОДСКАЗКИ
+   =============================================== */
+
+.form-error,
+.form-success,
+.form-warning,
+.form-info {
+	display: block;
+	font-size: var(--font-size-sm);
+	margin-top: var(--space-1);
+}
+
+.form-error {
+	color: var(--color-error);
+}
+
+.form-success {
+	color: var(--color-success);
+}
+
+.form-warning {
+	color: var(--color-warning);
+}
+
+.form-info {
+	color: var(--color-info);
+}
+
+/* Иконка статуса в поле */
+.form-group--error .form-input,
+.form-group--error .form-textarea,
+.form-group--error .form-select {
+	border-color: var(--color-error);
+	padding-right: var(--space-10);
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z' stroke='%23ef4444' stroke-width='2'/%3e%3cpath d='M10 6V10M10 14H10.01' stroke='%23ef4444' stroke-width='2' stroke-linecap='round'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right var(--space-3) center;
+	background-size: 20px;
+}
+
+.form-group--success .form-input,
+.form-group--success .form-textarea,
+.form-group--success .form-select {
+	border-color: var(--color-success);
+	padding-right: var(--space-10);
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z' stroke='%2322c55e' stroke-width='2'/%3e%3cpath d='M6 10L9 13L14 7' stroke='%2322c55e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right var(--space-3) center;
+	background-size: 20px;
+}
+
+/* Help text */
+.form-help {
+	display: block;
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+	margin-top: var(--space-1);
+}
+
+/* ===============================================
+   FORM ACTIONS
+   =============================================== */
+
+.form-actions {
+	display: flex;
+	gap: var(--space-4);
+	margin-top: var(--space-8);
+}
+
+.form-actions--right {
+	justify-content: flex-end;
+}
+
+.form-actions--center {
+	justify-content: center;
+}
+
+.form-actions--between {
+	justify-content: space-between;
+}
+
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
+
+@media (max-width: 768px) {
+	.form-group-inline {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.form-actions {
+		flex-direction: column;
+	}
+
+	.form-actions > * {
+		width: 100%;
+	}
+}

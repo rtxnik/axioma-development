@@ -1,14 +1,9 @@
-/* =============================================== */
-/* БАЗОВЫЕ СТИЛИ */
-/* =============================================== */
+/* ===============================================
+   HEADER И НАВИГАЦИЯ
+   Рефакторинг с использованием CSS переменных
+   =============================================== */
 
-.container {
-	max-width: var(--container-max-width);
-	margin: 0 auto;
-	padding: 0 2rem;
-}
-
-/* Скрытие элементов */
+/* Скрытие элементов для доступности */
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -21,9 +16,9 @@
 	border: 0;
 }
 
-/* =============================================== */
-/* HEADER И НАВИГАЦИЯ */
-/* =============================================== */
+/* ===============================================
+   HEADER
+   =============================================== */
 
 .header {
 	position: fixed;
@@ -31,13 +26,13 @@
 	left: 0;
 	right: 0;
 	z-index: var(--z-header);
-	background: rgba(26, 26, 26, 0.95);
+	background: var(--nav-bg);
 	backdrop-filter: blur(20px) saturate(180%);
 	-webkit-backdrop-filter: blur(20px) saturate(180%);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid var(--nav-border);
+	box-shadow: var(--shadow-lg);
 	transition: var(--transition-base);
-	animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	animation: slideDown var(--duration-700) var(--ease-smooth);
 }
 
 @keyframes slideDown {
@@ -51,6 +46,7 @@
 	}
 }
 
+/* Градиентный эффект при наведении */
 .header::before {
 	content: "";
 	position: absolute;
@@ -65,13 +61,17 @@
 		rgba(102, 126, 234, 0.1) 100%
 	);
 	opacity: 0;
-	transition: var(--transition-base);
+	transition: var(--transition-opacity);
 	pointer-events: none;
 }
 
 .header:hover::before {
 	opacity: 1;
 }
+
+/* ===============================================
+   НАВИГАЦИЯ
+   =============================================== */
 
 .nav {
 	position: relative;
@@ -100,7 +100,7 @@
 	height: 100%;
 	position: relative;
 	overflow: hidden;
-	border-radius: var(--border-radius-small);
+	border-radius: var(--radius-base);
 }
 
 .logo-link::before {
@@ -114,7 +114,7 @@
 		transparent
 	);
 	transform: translateX(-100%) skewX(-15deg);
-	transition: var(--transition-base);
+	transition: var(--transition-transform);
 }
 
 .logo-link:hover::before {
@@ -133,7 +133,7 @@
 	filter: brightness(1.15) contrast(1.15);
 }
 
-/* Скрытые элементы управления */
+/* Скрытые чекбоксы для мобильного меню */
 #nav__menu-btn,
 #nav__close-btn,
 #nav__showDropInfo,
@@ -143,11 +143,14 @@
 	display: none;
 }
 
-/* Основное меню */
+/* ===============================================
+   ОСНОВНОЕ МЕНЮ
+   =============================================== */
+
 .nav__list {
 	display: flex;
 	align-items: center;
-	gap: 2.5rem;
+	gap: var(--space-10);
 	list-style: none;
 	transition: var(--transition-base);
 	position: relative;
@@ -160,12 +163,12 @@
 .nav__link {
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
-	font-size: 0.9rem;
-	font-weight: 500;
-	color: rgba(255, 255, 255, 0.8);
+	gap: var(--space-2);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--nav-text);
 	text-decoration: none;
-	padding: 1.5rem 0;
+	padding: var(--space-6) 0;
 	transition: var(--transition-base);
 	white-space: nowrap;
 	position: relative;
@@ -190,7 +193,7 @@
 }
 
 .nav__link:hover {
-	color: var(--color-white);
+	color: var(--nav-text-hover);
 }
 
 .nav__link:hover::before {
@@ -199,7 +202,7 @@
 
 /* Стрелка dropdown */
 .dropdown__arrow {
-	transition: var(--transition-base);
+	transition: var(--transition-transform);
 	opacity: 0.7;
 }
 
@@ -209,23 +212,26 @@
 	opacity: 1;
 }
 
-/* Dropdown меню */
+/* ===============================================
+   DROPDOWN МЕНЮ
+   =============================================== */
+
 .nav__sub-list {
 	position: absolute;
-	top: calc(100% + 10px);
+	top: calc(100% + var(--space-2-5));
 	left: 0;
 	min-width: 320px;
-	background: rgba(26, 26, 26, 0.95);
+	background: var(--nav-bg);
 	backdrop-filter: blur(20px) saturate(180%);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: var(--border-radius);
+	border: 1px solid var(--nav-border);
+	border-radius: var(--radius-lg);
 	box-shadow: var(--shadow-xl);
 	opacity: 0;
 	visibility: hidden;
 	transform: translateY(-10px) scale(0.98);
 	transition: var(--transition-base);
 	list-style: none;
-	padding: 1rem 0;
+	padding: var(--space-4) 0;
 	z-index: var(--z-dropdown);
 	overflow: hidden;
 }
@@ -248,9 +254,10 @@
 	transform: translateY(0) scale(1);
 }
 
+/* Анимация элементов dropdown */
 .nav__sub-item {
 	padding: 0;
-	animation: slideInDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	animation: slideInDown var(--duration-300) var(--ease-smooth);
 	animation-fill-mode: both;
 }
 
@@ -286,14 +293,14 @@
 
 .nav__sub-link {
 	display: block;
-	padding: 0.875rem 1.5rem;
-	color: rgba(255, 255, 255, 0.8);
+	padding: var(--space-3-5) var(--space-6);
+	color: var(--nav-text);
 	text-decoration: none;
-	font-size: 0.875rem;
-	font-weight: 500;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
 	transition: var(--transition-base);
-	border-radius: var(--border-radius-small);
-	margin: 0 0.75rem;
+	border-radius: var(--radius-base);
+	margin: 0 var(--space-3);
 	position: relative;
 	overflow: hidden;
 }
@@ -314,7 +321,7 @@
 }
 
 .nav__sub-link:hover {
-	color: var(--color-white);
+	color: var(--nav-text-hover);
 }
 
 .nav__sub-link:hover::before {
@@ -329,42 +336,46 @@
 	overflow-y: auto;
 }
 
+/* Кастомный скроллбар для dropdown */
 .nav__sub-list--dropdown-long::-webkit-scrollbar {
 	width: 6px;
 }
 
 .nav__sub-list--dropdown-long::-webkit-scrollbar-track {
 	background: rgba(255, 255, 255, 0.05);
-	border-radius: 3px;
+	border-radius: var(--radius-full);
 }
 
 .nav__sub-list--dropdown-long::-webkit-scrollbar-thumb {
 	background: rgba(255, 255, 255, 0.2);
-	border-radius: 3px;
-	transition: var(--transition-base);
+	border-radius: var(--radius-full);
+	transition: var(--transition-colors);
 }
 
 .nav__sub-list--dropdown-long::-webkit-scrollbar-thumb:hover {
 	background: rgba(255, 255, 255, 0.3);
 }
 
-/* Mega меню */
+/* ===============================================
+   MEGA МЕНЮ
+   =============================================== */
+
 .nav__mega-menu {
 	position: absolute;
-	top: calc(100% + 10px);
+	top: calc(100% + var(--space-2-5));
 	left: -100px;
 	width: 700px;
-	background: rgba(26, 26, 26, 0.95);
+	background: var(--nav-bg);
 	backdrop-filter: blur(20px) saturate(180%);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: var(--border-radius);
+	border: 1px solid var(--nav-border);
+	border-radius: var(--radius-lg);
 	box-shadow: var(--shadow-xl);
 	opacity: 0;
 	visibility: hidden;
 	transform: translateY(-10px) scale(0.98);
 	transition: var(--transition-base);
 	z-index: var(--z-dropdown);
-	padding: 2.5rem;
+	padding: var(--space-10);
 	overflow: hidden;
 }
 
@@ -389,7 +400,7 @@
 .nav__mega-content {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 3rem;
+	gap: var(--space-12);
 	position: relative;
 	z-index: 2;
 }
@@ -399,8 +410,8 @@
 }
 
 .nav__mega-item {
-	margin-bottom: 0.75rem;
-	animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	margin-bottom: var(--space-3);
+	animation: slideInUp var(--duration-500) var(--ease-smooth);
 	animation-fill-mode: both;
 }
 
@@ -430,15 +441,15 @@
 
 .nav__mega-link {
 	display: block;
-	padding: 0.75rem 0;
-	color: rgba(255, 255, 255, 0.8);
+	padding: var(--space-3) 0;
+	color: var(--nav-text);
 	text-decoration: none;
-	font-size: 0.875rem;
-	font-weight: 500;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
 	transition: var(--transition-base);
 	position: relative;
-	border-radius: var(--border-radius-small);
-	padding-left: 1rem;
+	border-radius: var(--radius-base);
+	padding-left: var(--space-4);
 }
 
 .nav__mega-link span {
@@ -459,22 +470,25 @@
 }
 
 .nav__mega-link:hover {
-	color: var(--color-white);
+	color: var(--nav-text-hover);
 }
 
 .nav__mega-link:hover::before {
 	width: 3px;
 }
 
-/* Кнопки мобильного меню */
+/* ===============================================
+   МОБИЛЬНОЕ МЕНЮ
+   =============================================== */
+
 .nav__btn {
 	display: none;
 	cursor: pointer;
 	z-index: calc(var(--z-header) + 2);
 	background: none;
 	border: none;
-	padding: 0.75rem;
-	border-radius: var(--border-radius-small);
+	padding: var(--space-3);
+	border-radius: var(--radius-base);
 	transition: var(--transition-base);
 	position: relative;
 }
@@ -486,15 +500,15 @@
 .nav__btn svg {
 	width: 24px;
 	height: 24px;
-	stroke: rgba(255, 255, 255, 0.8);
-	transition: var(--transition-base);
+	stroke: var(--nav-text);
+	transition: var(--transition-colors);
 }
 
 .nav__btn:hover svg {
-	stroke: var(--color-white);
+	stroke: var(--nav-text-hover);
 }
 
-/* Кастомный гамбургер с анимацией в крестик */
+/* Кастомный гамбургер */
 .hamburger {
 	display: flex;
 	flex-direction: column;
@@ -507,7 +521,7 @@
 .hamburger__line {
 	height: 2px;
 	background: var(--nav-text);
-	border-radius: 1px;
+	border-radius: var(--radius-sm);
 	transition: var(--transition-base);
 	transform-origin: center;
 }
@@ -515,11 +529,9 @@
 .hamburger__line:nth-child(1) {
 	width: 100%;
 }
-
 .hamburger__line:nth-child(2) {
 	width: 80%;
 }
-
 .hamburger__line:nth-child(3) {
 	width: 100%;
 }
@@ -550,13 +562,13 @@
 	display: none;
 }
 
-/* =============================================== */
-/* АДАПТИВНОСТЬ */
-/* =============================================== */
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
 
 @media (max-width: 1024px) {
 	.nav__list {
-		gap: 2rem;
+		gap: var(--space-8);
 	}
 
 	.nav__mega-menu {
@@ -565,17 +577,13 @@
 	}
 
 	.nav__mega-content {
-		gap: 2rem;
+		gap: var(--space-8);
 	}
 }
 
 @media (max-width: 768px) {
-	.container {
-		padding: 0 1.5rem;
-	}
-
 	.header {
-		background: rgba(26, 26, 26, 0.98);
+		background: var(--nav-bg-mobile);
 	}
 
 	.nav__wrapper {
@@ -599,13 +607,13 @@
 		right: -100%;
 		width: 100%;
 		height: 100vh;
-		background: rgba(26, 26, 26, 0.98);
+		background: var(--nav-bg-mobile);
 		backdrop-filter: blur(20px) saturate(180%);
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: stretch;
 		gap: 0;
-		padding: 6rem 2rem 2rem;
+		padding: var(--space-24) var(--space-8) var(--space-8);
 		transition: var(--transition-slow);
 		overflow-y: auto;
 		border-left: none;
@@ -619,10 +627,10 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba(0, 0, 0, 0.3);
+		background: var(--overlay-bg);
 		opacity: 0;
 		visibility: hidden;
-		transition: var(--transition-base);
+		transition: var(--transition-opacity);
 		z-index: -1;
 	}
 
@@ -639,12 +647,12 @@
 
 	.nav__item {
 		width: 100%;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		border-bottom: 1px solid var(--nav-border);
 	}
 
 	.nav__link {
-		padding: 1.25rem 0;
-		font-size: 1rem;
+		padding: var(--space-5) 0;
+		font-size: var(--font-size-base);
 		width: 100%;
 		justify-content: space-between;
 	}
@@ -670,7 +678,7 @@
 		border-right: 6px solid transparent;
 		border-top: 8px solid var(--nav-text);
 		transform: translateY(-50%);
-		transition: var(--transition-base);
+		transition: var(--transition-transform);
 	}
 
 	input[type="checkbox"]:checked + .nav__link--mobile::after {
@@ -697,13 +705,13 @@
 		opacity: 1;
 		visibility: visible;
 		max-height: 500px;
-		padding: 1rem 0;
+		padding: var(--space-4) 0;
 	}
 
 	.nav__sub-link {
 		margin: 0;
-		padding: 0.875rem 1.5rem;
-		font-size: 0.9rem;
+		padding: var(--space-3-5) var(--space-6);
+		font-size: var(--font-size-sm);
 	}
 
 	.nav__mega-menu {
@@ -726,40 +734,36 @@
 		opacity: 1;
 		visibility: visible;
 		max-height: 800px;
-		padding: 1.5rem;
+		padding: var(--space-6);
 	}
 
 	.nav__mega-content {
 		grid-template-columns: 1fr;
-		gap: 1.5rem;
+		gap: var(--space-6);
 	}
 
 	.nav__mega-link {
-		padding: 0.75rem 0;
+		padding: var(--space-3) 0;
 		padding-left: 0;
 	}
 }
 
 @media (max-width: 480px) {
-	.container {
-		padding: 0 1rem;
-	}
-
 	.nav__logo {
 		width: 160px;
 		height: 28px;
 	}
 
 	.nav__list {
-		padding: 5rem 1.5rem 2rem;
+		padding: var(--space-20) var(--space-6) var(--space-8);
 	}
 
 	.nav__link {
-		font-size: 0.95rem;
+		font-size: var(--font-size-sm);
 	}
 
 	.nav__sub-link {
-		padding: 0.75rem 1rem;
-		font-size: 0.85rem;
+		padding: var(--space-3) var(--space-4);
+		font-size: var(--font-size-xs);
 	}
 }
