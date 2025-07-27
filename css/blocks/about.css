@@ -12,7 +12,7 @@
 	align-items: center;
 	overflow: hidden;
 	background: var(--color-white);
-	background-image: url("/about.webp");
+	background-image: url("/assets/about.png");
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -27,14 +27,13 @@
 	right: 0;
 	bottom: 0;
 	z-index: 0;
-	/* Закомментирован градиент как в оригинале */
-	/* background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.95) 40%,
-    rgba(255, 255, 255, 0.7) 60%,
-    rgba(255, 255, 255, 0) 100%
-  ); */
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 0.95) 40%,
+		rgba(255, 255, 255, 0.7) 60%,
+		rgba(255, 255, 255, 0) 100%
+	);
 }
 
 /* Контент секции */

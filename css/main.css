@@ -26,11 +26,7 @@
 @import url("blocks/hero.css");
 @import url("blocks/about.css");
 @import url("blocks/services.css");
-@import url("blocks/service-card.css");
-@import url("blocks/interaction.css");
 @import url("blocks/contact.css");
-@import url("blocks/contact-card.css");
-@import url("blocks/country-selector.css");
 @import url("blocks/footer.css");
 
 /* Utilities */
