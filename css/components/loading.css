@@ -1,0 +1,251 @@
+/* ===============================================
+   КОМПОНЕНТ: LOADING (БЭМ)
+   =============================================== */
+
+.loading {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--color-black);
+	z-index: var(--z-loading);
+	transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* Скрытое состояние */
+.loading--hidden {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+/* Спиннер */
+.loading__spinner {
+	width: 60px;
+	height: 60px;
+	color: var(--color-white);
+	opacity: 0.8;
+	animation: fadeIn 0.5s ease forwards;
+}
+
+.loading__icon {
+	width: 100%;
+	height: 100%;
+	transform-origin: center;
+	animation: rotate 2s linear infinite;
+}
+
+/* Текст загрузки (опционально) */
+.loading__text {
+	position: absolute;
+	bottom: 40%;
+	left: 50%;
+	transform: translateX(-50%);
+	color: var(--color-white);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-light);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	opacity: 0.6;
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Прогресс бар (опционально) */
+.loading__progress {
+	position: absolute;
+	bottom: 30%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 200px;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 1px;
+	overflow: hidden;
+}
+
+.loading__progress-bar {
+	height: 100%;
+	background: var(--color-white);
+	width: 0;
+	transition: width 0.3s ease;
+	border-radius: 1px;
+}
+
+/* Варианты загрузчика */
+
+/* Минимальный */
+.loading--minimal {
+	background: rgba(0, 0, 0, 0.9);
+}
+
+.loading--minimal .loading__spinner {
+	width: 40px;
+	height: 40px;
+}
+
+/* С фоном */
+.loading--overlay {
+	background: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(10px);
+}
+
+/* Светлый */
+.loading--light {
+	background: rgba(255, 255, 255, 0.95);
+}
+
+.loading--light .loading__icon {
+	color: var(--color-primary);
+}
+
+.loading--light .loading__text {
+	color: var(--color-primary);
+}
+
+.loading--light .loading__progress {
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.loading--light .loading__progress-bar {
+	background: var(--color-primary);
+}
+
+/* Альтернативные спиннеры */
+
+/* Точки */
+.loading__dots {
+	display: flex;
+	gap: 8px;
+}
+
+.loading__dot {
+	width: 12px;
+	height: 12px;
+	background: var(--color-white);
+	border-radius: 50%;
+	animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.loading__dot:nth-child(1) {
+	animation-delay: -0.32s;
+}
+.loading__dot:nth-child(2) {
+	animation-delay: -0.16s;
+}
+.loading__dot:nth-child(3) {
+	animation-delay: 0;
+}
+
+@keyframes dotPulse {
+	0%,
+	80%,
+	100% {
+		transform: scale(0.8);
+		opacity: 0.5;
+	}
+	40% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/* Кольцо */
+.loading__ring {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+}
+
+.loading__ring:after {
+	content: "";
+	display: block;
+	width: 48px;
+	height: 48px;
+	margin: 6px;
+	border-radius: 50%;
+	border: 3px solid var(--color-white);
+	border-color: var(--color-white) transparent var(--color-white) transparent;
+	animation: ringRotate 1.2s linear infinite;
+}
+
+@keyframes ringRotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* Линии */
+.loading__bars {
+	display: flex;
+	gap: 4px;
+	height: 40px;
+	align-items: center;
+}
+
+.loading__bar {
+	width: 4px;
+	height: 100%;
+	background: var(--color-white);
+	animation: barScale 1s ease-in-out infinite;
+}
+
+.loading__bar:nth-child(1) {
+	animation-delay: 0s;
+}
+.loading__bar:nth-child(2) {
+	animation-delay: 0.1s;
+}
+.loading__bar:nth-child(3) {
+	animation-delay: 0.2s;
+}
+.loading__bar:nth-child(4) {
+	animation-delay: 0.3s;
+}
+.loading__bar:nth-child(5) {
+	animation-delay: 0.4s;
+}
+
+@keyframes barScale {
+	0%,
+	40%,
+	100% {
+		transform: scaleY(0.4);
+	}
+	20% {
+		transform: scaleY(1);
+	}
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+	.loading__spinner {
+		width: 50px;
+		height: 50px;
+	}
+
+	.loading__text {
+		font-size: var(--font-size-xs);
+	}
+
+	.loading__progress {
+		width: 150px;
+	}
+}
+
+/* Режим уменьшенной анимации */
+@media (prefers-reduced-motion: reduce) {
+	.loading__icon,
+	.loading__dot,
+	.loading__ring:after,
+	.loading__bar {
+		animation: none;
+	}
+
+	.loading {
+		transition-duration: 0.01ms;
+	}
+}

@@ -1,0 +1,206 @@
+/* ===============================================
+   LAYOUT: PAGE (БЭМ)
+   =============================================== */
+
+.page {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background: var(--color-white);
+	color: var(--color-primary);
+	font-family: var(--font-primary);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-normal);
+	font-weight: var(--font-weight-regular);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	overflow-x: hidden;
+}
+
+/* Состояния страницы */
+.page--loading {
+	overflow: hidden;
+}
+
+.page--loaded {
+	animation: pageLoaded 0.5s ease-out;
+}
+
+@keyframes pageLoaded {
+	from {
+		opacity: 0.99;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* Хедер страницы */
+.page__header {
+	flex-shrink: 0;
+}
+
+/* Основной контент */
+.page__main {
+	flex-grow: 1;
+	position: relative;
+}
+
+/* Футер страницы */
+.page__footer {
+	flex-shrink: 0;
+}
+
+/* ===============================================
+   LAYOUT: MAIN (БЭМ)
+   =============================================== */
+
+.main {
+	padding-top: var(--header-height);
+	position: relative;
+}
+
+/* Секции основного контента */
+.main__hero {
+	margin-top: calc(var(--header-height) * -1);
+}
+
+.main__about,
+.main__services,
+.main__contact {
+	position: relative;
+}
+
+/* ===============================================
+   МОДИФИКАТОРЫ СТРАНИЦЫ
+   =============================================== */
+
+/* Без хедера */
+.page--no-header .main {
+	padding-top: 0;
+}
+
+/* Фиксированный футер */
+.page--fixed-footer {
+	padding-bottom: 100px; /* Высота футера */
+}
+
+.page--fixed-footer .page__footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: var(--z-sticky);
+}
+
+/* Темная тема */
+.page--dark {
+	background: var(--color-dark);
+	color: var(--color-white);
+}
+
+/* ===============================================
+   СЕКЦИИ
+   =============================================== */
+
+.section {
+	position: relative;
+	padding: var(--spacing-4xl) 0;
+}
+
+.section--no-padding {
+	padding: 0;
+}
+
+.section--padding-top {
+	padding-bottom: 0;
+}
+
+.section--padding-bottom {
+	padding-top: 0;
+}
+
+.section--small {
+	padding: var(--spacing-2xl) 0;
+}
+
+.section--large {
+	padding: calc(var(--spacing-4xl) * 1.5) 0;
+}
+
+/* Фоновые варианты секций */
+.section--light {
+	background: var(--color-light);
+}
+
+.section--dark {
+	background: var(--color-dark);
+	color: var(--color-white);
+}
+
+.section--primary {
+	background: var(--color-primary);
+	color: var(--color-white);
+}
+
+.section--gradient {
+	background: var(--gradient-primary);
+	color: var(--color-white);
+}
+
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
+
+@media (max-width: 768px) {
+	.main {
+		padding-top: var(--header-height-mobile);
+	}
+
+	.main__hero {
+		margin-top: calc(var(--header-height-mobile) * -1);
+	}
+
+	.section {
+		padding: var(--spacing-3xl) 0;
+	}
+
+	.section--small {
+		padding: var(--spacing-xl) 0;
+	}
+
+	.section--large {
+		padding: var(--spacing-4xl) 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.section {
+		padding: var(--spacing-2xl) 0;
+	}
+
+	.section--small {
+		padding: var(--spacing-lg) 0;
+	}
+
+	.section--large {
+		padding: var(--spacing-3xl) 0;
+	}
+}
+
+/* Режим печати */
+@media print {
+	.page {
+		min-height: auto;
+	}
+
+	.main {
+		padding-top: 0;
+	}
+
+	.section {
+		page-break-inside: avoid;
+		padding: 2rem 0;
+	}
+}

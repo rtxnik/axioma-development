@@ -1,0 +1,351 @@
+/* ===============================================
+   АДАПТИВНЫЕ СТИЛИ
+   =============================================== */
+
+/* Брейкпоинты:
+   - xs: 375px  (iPhone SE)
+   - sm: 640px  (маленькие планшеты)
+   - md: 768px  (планшеты)
+   - lg: 1024px (десктоп)
+   - xl: 1280px (большие экраны)
+   - 2xl: 1536px (очень большие экраны)
+*/
+
+/* ===============================================
+   МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px)
+   =============================================== */
+
+@media (max-width: 768px) {
+	/* Типографика */
+	body {
+		font-size: var(--font-size-sm);
+	}
+
+	h1 {
+		font-size: clamp(1.75rem, 6vw, 2rem);
+	}
+	h2 {
+		font-size: clamp(1.5rem, 5vw, 1.75rem);
+	}
+	h3 {
+		font-size: clamp(1.25rem, 4vw, 1.5rem);
+	}
+	h4 {
+		font-size: clamp(1.125rem, 3vw, 1.25rem);
+	}
+	h5 {
+		font-size: clamp(1rem, 2.5vw, 1.125rem);
+	}
+	h6 {
+		font-size: clamp(0.875rem, 2vw, 1rem);
+	}
+
+	/* Отступы */
+	.section {
+		padding: var(--spacing-3xl) 0;
+	}
+
+	/* Скрытие элементов */
+	.desktop-only {
+		display: none !important;
+	}
+
+	/* Мобильная навигация */
+	.nav__list {
+		position: fixed;
+		flex-direction: column;
+	}
+
+	/* Адаптивные сетки */
+	.services__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.footer__content {
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+}
+
+/* ===============================================
+   МАЛЕНЬКИЕ ЭКРАНЫ (до 480px)
+   =============================================== */
+
+@media (max-width: 480px) {
+	/* Уменьшенные отступы */
+	.container {
+		padding: 0 1rem;
+	}
+
+	.section {
+		padding: var(--spacing-2xl) 0;
+	}
+
+	/* Кнопки на всю ширину */
+	.button {
+		width: 100%;
+		justify-content: center;
+	}
+
+	/* Форма */
+	.form__group {
+		margin-bottom: 1rem;
+	}
+
+	/* Уменьшенные шрифты */
+	body {
+		font-size: var(--font-size-xs);
+	}
+}
+
+/* ===============================================
+   ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 375px)
+   =============================================== */
+
+@media (max-width: 375px) {
+	/* Минимальные отступы */
+	.container {
+		padding: 0 15px;
+	}
+
+	/* Компактные карточки */
+	.service-card {
+		padding: 20px 15px;
+	}
+
+	.contact-card {
+		padding: 1.5rem 1rem;
+	}
+}
+
+/* ===============================================
+   ПЛАНШЕТЫ (768px - 1024px)
+   =============================================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+	/* Двухколоночные сетки */
+	.services__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	/* Средние размеры шрифтов */
+	h1 {
+		font-size: 2.5rem;
+	}
+	h2 {
+		font-size: 2rem;
+	}
+	h3 {
+		font-size: 1.75rem;
+	}
+}
+
+/* ===============================================
+   ДЕСКТОП (1024px+)
+   =============================================== */
+
+@media (min-width: 1024px) {
+	/* Полноразмерные сетки */
+	.services__grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	/* Скрытие мобильных элементов */
+	.mobile-only {
+		display: none !important;
+	}
+}
+
+/* ===============================================
+   БОЛЬШИЕ ЭКРАНЫ (1440px+)
+   =============================================== */
+
+@media (min-width: 1440px) {
+	/* Увеличенные контейнеры */
+	.container {
+		max-width: 1320px;
+		padding: 0 40px;
+	}
+
+	/* Увеличенные отступы */
+	.section {
+		padding: calc(var(--spacing-4xl) * 1.5) 0;
+	}
+
+	/* Увеличенные карточки */
+	.service-card {
+		padding: 50px 40px;
+	}
+}
+
+/* ===============================================
+   ОЧЕНЬ БОЛЬШИЕ ЭКРАНЫ (1920px+)
+   =============================================== */
+
+@media (min-width: 1920px) {
+	/* Максимальные контейнеры */
+	.container {
+		max-width: 1400px;
+		padding: 0 60px;
+	}
+
+	/* Увеличенные шрифты */
+	body {
+		font-size: 1.125rem;
+	}
+
+	h1 {
+		font-size: 4rem;
+	}
+	h2 {
+		font-size: 3rem;
+	}
+	h3 {
+		font-size: 2.5rem;
+	}
+}
+
+/* ===============================================
+   АЛЬБОМНАЯ ОРИЕНТАЦИЯ
+   =============================================== */
+
+@media (orientation: landscape) and (max-height: 500px) {
+	/* Уменьшенная высота hero */
+	.hero {
+		height: 100vh;
+		min-height: 400px;
+	}
+
+	/* Компактный хедер */
+	.header {
+		padding: 0.5rem 0;
+	}
+
+	.nav__wrapper {
+		height: 60px;
+	}
+}
+
+/* ===============================================
+   ВЫСОКАЯ ПЛОТНОСТЬ ПИКСЕЛЕЙ
+   =============================================== */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+	/* Тонкие границы */
+	.service-card,
+	.contact-card {
+		border-width: 0.5px;
+	}
+
+	/* Оптимизация изображений */
+	img {
+		image-rendering: -webkit-optimize-contrast;
+	}
+}
+
+/* ===============================================
+   HOVER СОСТОЯНИЯ (только для устройств с мышью)
+   =============================================== */
+
+@media (hover: hover) and (pointer: fine) {
+	/* Hover эффекты только для десктопа */
+	.button:hover {
+		transform: translateY(-2px);
+	}
+
+	.nav__link:hover::before {
+		width: 100%;
+	}
+
+	.service-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+	}
+}
+
+/* ===============================================
+   СЕНСОРНЫЕ УСТРОЙСТВА
+   =============================================== */
+
+@media (hover: none) and (pointer: coarse) {
+	/* Увеличенные области нажатия */
+	.button,
+	.nav__link {
+		min-height: 44px;
+		min-width: 44px;
+	}
+
+	/* Отключение hover эффектов */
+	.service-card:hover {
+		transform: none;
+	}
+
+	/* Видимые фокусы */
+	*:focus {
+		outline: 2px solid var(--color-blue);
+		outline-offset: 2px;
+	}
+}
+
+/* ===============================================
+   СПЕЦИФИЧНЫЕ УСТРОЙСТВА
+   =============================================== */
+
+/* iPhone X и выше (с выемкой) */
+@supports (padding: max(0px)) {
+	.header {
+		padding-top: max(0px, env(safe-area-inset-top));
+	}
+
+	.footer {
+		padding-bottom: max(2rem, env(safe-area-inset-bottom));
+	}
+}
+
+/* iPad Pro */
+@media only screen and (min-width: 1024px) and (max-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+	.container {
+		max-width: 960px;
+	}
+}
+
+/* ===============================================
+   ДОСТУПНОСТЬ
+   =============================================== */
+
+/* Режим высокой контрастности */
+@media (prefers-contrast: high) {
+	.button {
+		border: 2px solid currentColor;
+	}
+
+	.form__input {
+		border-width: 2px;
+	}
+
+	.nav__link {
+		text-decoration: underline;
+	}
+}
+
+/* Режим уменьшенной прозрачности */
+@media (prefers-reduced-transparency) {
+	.header {
+		background: var(--color-dark);
+		backdrop-filter: none;
+	}
+
+	.contact-card {
+		background: var(--color-dark);
+		backdrop-filter: none;
+	}
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+	/* Можно добавить стили для темной темы */
+	body {
+		background: var(--color-dark);
+		color: var(--color-white);
+	}
+}

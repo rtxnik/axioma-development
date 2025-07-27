@@ -1,0 +1,122 @@
+/* ===============================================
+   LAYOUT: CONTAINER
+   =============================================== */
+
+.container {
+	width: 100%;
+	max-width: var(--container-max-width);
+	margin: 0 auto;
+	padding: 0 2rem;
+	position: relative;
+}
+
+/* Варианты размеров контейнера */
+.container--sm {
+	max-width: 640px;
+}
+
+.container--md {
+	max-width: 768px;
+}
+
+.container--lg {
+	max-width: 1024px;
+}
+
+.container--xl {
+	max-width: 1280px;
+}
+
+.container--2xl {
+	max-width: 1536px;
+}
+
+.container--fluid {
+	max-width: 100%;
+}
+
+/* Варианты отступов */
+.container--no-padding {
+	padding: 0;
+}
+
+.container--padding-sm {
+	padding: 0 1rem;
+}
+
+.container--padding-lg {
+	padding: 0 3rem;
+}
+
+.container--padding-xl {
+	padding: 0 4rem;
+}
+
+/* Адаптивность */
+@media (max-width: 1440px) {
+	.container {
+		padding: 0 2rem;
+	}
+
+	.container--padding-xl {
+		padding: 0 3rem;
+	}
+}
+
+@media (max-width: 1024px) {
+	.container {
+		padding: 0 1.5rem;
+	}
+
+	.container--padding-lg {
+		padding: 0 2rem;
+	}
+
+	.container--padding-xl {
+		padding: 0 2.5rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.container {
+		padding: 0 1.5rem;
+	}
+
+	.container--padding-sm {
+		padding: 0 1rem;
+	}
+
+	.container--padding-lg {
+		padding: 0 1.5rem;
+	}
+
+	.container--padding-xl {
+		padding: 0 2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.container {
+		padding: 0 1rem;
+	}
+
+	.container--padding-sm {
+		padding: 0 0.75rem;
+	}
+
+	.container--padding-lg,
+	.container--padding-xl {
+		padding: 0 1.25rem;
+	}
+}
+
+/* iPhone SE и очень маленькие экраны */
+@media (max-width: 375px) {
+	.container {
+		padding: 0 15px;
+	}
+
+	.container--padding-sm {
+		padding: 0 10px;
+	}
+}

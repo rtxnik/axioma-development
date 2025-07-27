@@ -1,0 +1,315 @@
+/* ===============================================
+   БЛОК: ABOUT (БЭМ)
+   =============================================== */
+
+.about {
+	width: 100%;
+	height: 100vh;
+	min-height: 500px;
+	max-height: 800px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	background: var(--color-white);
+	background-image: url("/about.webp");
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+/* Градиентный оверлей */
+.about::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	/* Закомментирован градиент как в оригинале */
+	/* background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.95) 40%,
+    rgba(255, 255, 255, 0.7) 60%,
+    rgba(255, 255, 255, 0) 100%
+  ); */
+}
+
+/* Контент секции */
+.about__content {
+	max-width: 100%;
+	opacity: 0;
+	animation: fadeInScale 0.8s ease-out 0.3s forwards;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+}
+
+/* Заголовок */
+.about__title {
+	font-size: clamp(2rem, 8vw, 2.5rem);
+	font-weight: var(--font-weight-regular);
+	margin-bottom: 5px;
+	letter-spacing: 0.05em;
+	line-height: 1.1;
+	text-transform: uppercase;
+	color: var(--color-primary);
+	position: relative;
+}
+
+/* Первое слово заголовка */
+.about__title::first-line {
+	font-weight: var(--font-weight-bold);
+}
+
+/* Декоративная линия */
+.about__content > span {
+	display: block;
+	width: 80px;
+	height: 2px;
+	background: var(--color-blue);
+	margin: 20px auto 30px;
+}
+
+/* Описание */
+.about__description {
+	font-size: clamp(0.9rem, 4vw, 1rem);
+	line-height: 1.75;
+	margin-bottom: 35px;
+	color: var(--color-secondary);
+	font-weight: var(--font-weight-regular);
+}
+
+/* Жирный текст в описании */
+.about__description strong {
+	color: var(--color-primary);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* Скрытие br на мобильных */
+.about__description br {
+	display: none;
+}
+
+/* Кнопка */
+.about__button {
+	margin-top: 20px;
+}
+
+/* Анимации */
+@keyframes fadeInScale {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Планшеты (от 576px) */
+@media (min-width: 576px) {
+	.about__title {
+		font-size: clamp(2.2rem, 6vw, 2.8rem);
+		margin-bottom: 10px;
+	}
+
+	.about__content > span {
+		width: 100px;
+		margin: 25px auto 35px;
+	}
+
+	.about__description {
+		font-size: clamp(1rem, 3vw, 1.1rem);
+		margin-bottom: 40px;
+	}
+}
+
+/* Планшеты средние (от 768px) */
+@media (min-width: 768px) {
+	.about {
+		height: 70vh;
+		min-height: 600px;
+	}
+
+	/* .about::before {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.98) 30%,
+      rgba(255, 255, 255, 0.85) 50%,
+      rgba(255, 255, 255, 0) 70%
+    );
+  } */
+
+	.about__content {
+		max-width: 600px;
+		text-align: left;
+		margin-left: 0;
+	}
+
+	.about__content > span {
+		margin: 30px 0 40px;
+	}
+
+	.about__title {
+		font-size: clamp(2.5rem, 5vw, 3rem);
+		margin-bottom: 15px;
+		letter-spacing: 0;
+		font-weight: var(--font-weight-light);
+	}
+
+	/* Выделение первого слова */
+	.about__title::before {
+		content: "Управляющая компания";
+		display: block;
+		font-weight: var(--font-weight-bold);
+		margin-bottom: -10px;
+	}
+
+	.about__description {
+		font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+		margin-bottom: 45px;
+		line-height: 1.8;
+	}
+
+	.about__description br {
+		display: block;
+	}
+
+	/* Выделяем ключевые слова */
+	.about__description::first-line {
+		font-weight: var(--font-weight-medium);
+		color: var(--color-primary);
+	}
+}
+
+/* Десктоп (от 1024px) */
+@media (min-width: 1024px) {
+	.about {
+		height: 60vh;
+		min-height: 650px;
+	}
+
+	.about__content {
+		max-width: 700px;
+	}
+
+	.about__content > span {
+		width: 120px;
+		height: 3px;
+	}
+
+	.about__title {
+		font-size: clamp(2.8rem, 4vw, 3.5rem);
+	}
+
+	.about__description {
+		font-size: clamp(1.2rem, 2vw, 1.3rem);
+		line-height: 1.9;
+	}
+}
+
+/* Большие экраны (от 1440px) */
+@media (min-width: 1440px) {
+	.about {
+		height: 55vh;
+		min-height: 700px;
+	}
+
+	.about__title {
+		font-size: 3.5rem;
+		letter-spacing: -0.02em;
+	}
+
+	.about__title::before {
+		font-size: 1.5rem;
+		margin-bottom: -15px;
+	}
+
+	.about__description {
+		font-size: 1.25rem;
+		line-height: 2;
+	}
+}
+
+/* Очень большие экраны (от 1920px) */
+@media (min-width: 1920px) {
+	.about {
+		height: 50vh;
+		min-height: 800px;
+	}
+
+	.about__content {
+		max-width: 800px;
+	}
+}
+
+/* Особые устройства */
+/* iPhone SE и малые экраны */
+@media (max-width: 375px) {
+	.about {
+		min-height: 450px;
+	}
+
+	.about::before {
+		background: rgba(255, 255, 255, 0.95);
+	}
+
+	.about__title {
+		font-size: 1.8rem;
+		margin-bottom: 5px;
+	}
+
+	.about__content > span {
+		width: 60px;
+		margin: 15px auto 25px;
+	}
+
+	.about__description {
+		font-size: 0.85rem;
+		margin-bottom: 25px;
+	}
+}
+
+/* Landscape планшеты */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+	.about {
+		height: 80vh;
+		min-height: 500px;
+	}
+}
+
+/* Высокие экраны */
+@media (min-aspect-ratio: 16/9) {
+	.about {
+		height: 45vh;
+		min-height: 500px;
+	}
+}
+
+/* Печать */
+@media print {
+	.about {
+		height: auto;
+		min-height: auto;
+		background-image: none;
+		page-break-inside: avoid;
+	}
+
+	.about::before {
+		display: none;
+	}
+
+	.about__title,
+	.about__description {
+		color: black !important;
+	}
+
+	.about__title::before {
+		color: black !important;
+	}
+}

@@ -1,0 +1,327 @@
+/* ===============================================
+   БЛОК: FOOTER (БЭМ)
+   =============================================== */
+
+.footer {
+	background: var(--color-white);
+	color: var(--color-primary);
+	padding: 4rem 0 2rem;
+	margin-top: auto;
+	position: relative;
+	overflow: hidden;
+	border-top: 1px solid var(--color-light);
+}
+
+/* Декоративная линия */
+.footer::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--color-blue) 50%,
+		transparent
+	);
+	opacity: 0.3;
+}
+
+/* Основной контент футера */
+.footer__content {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr 1fr;
+	gap: 3rem;
+	margin-bottom: 3rem;
+	align-items: start;
+}
+
+/* Секция бренда */
+.footer__brand {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	animation: fadeInUp 0.6s ease-out;
+	animation-fill-mode: both;
+	animation-delay: 0.1s;
+}
+
+.footer__logo {
+	display: inline-block;
+	max-width: 200px;
+}
+
+.footer__logo img {
+	width: 100%;
+	height: auto;
+	opacity: 0.9;
+	transition: var(--transition-base);
+}
+
+.footer__logo:hover img {
+	opacity: 1;
+}
+
+.footer__tagline {
+	font-size: var(--font-size-sm);
+	line-height: 1.6;
+	color: var(--color-secondary);
+}
+
+/* Секция ссылок */
+.footer__links {
+	animation: fadeInUp 0.6s ease-out;
+	animation-fill-mode: both;
+	animation-delay: 0.2s;
+}
+
+.footer__heading {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-primary);
+	margin-bottom: 1.5rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.footer__links nav {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.footer__list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.footer__link {
+	color: var(--color-secondary);
+	text-decoration: none;
+	font-size: var(--font-size-sm);
+	transition: var(--transition-fast);
+	position: relative;
+	padding-left: 0;
+}
+
+.footer__link::before {
+	content: "";
+	position: absolute;
+	left: -20px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 12px;
+	height: 1px;
+	background: var(--color-blue);
+	opacity: 0;
+	transition: var(--transition-fast);
+}
+
+.footer__link:hover {
+	color: var(--color-blue);
+	padding-left: 1rem;
+}
+
+.footer__link:hover::before {
+	opacity: 1;
+	left: 0;
+}
+
+/* Секция контактов */
+.footer__contact {
+	animation: fadeInUp 0.6s ease-out;
+	animation-fill-mode: both;
+	animation-delay: 0.3s;
+}
+
+.footer__phone,
+.footer__email {
+	color: var(--color-blue);
+	text-decoration: none;
+	font-size: var(--font-size-sm);
+	transition: var(--transition-base);
+	display: block;
+	margin-bottom: 0.75rem;
+	position: relative;
+}
+
+.footer__phone::after,
+.footer__email::after {
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background: var(--color-blue);
+	transition: var(--transition-base);
+}
+
+.footer__phone:hover,
+.footer__email:hover {
+	color: var(--color-blue-dark);
+}
+
+.footer__phone:hover::after,
+.footer__email:hover::after {
+	width: 100%;
+}
+
+.footer__email {
+	margin-bottom: 1.5rem;
+}
+
+/* Социальные сети */
+.footer__social {
+	display: flex;
+	gap: 1rem;
+}
+
+.footer__social-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: var(--radius-md);
+	background: var(--color-light);
+	color: var(--color-secondary);
+	transition: var(--transition-base);
+	border: 1px solid var(--color-light);
+}
+
+.footer__social-link:hover {
+	background: var(--gradient-primary);
+	color: var(--color-white);
+	border-color: transparent;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+}
+
+.footer__social-link svg {
+	width: 20px;
+	height: 20px;
+}
+
+/* Секция юридической информации */
+.footer__legal {
+	margin-top: 3rem;
+	padding: 2rem;
+	border-radius: var(--radius-md);
+	border: 1px solid var(--color-light);
+}
+
+.footer__legal-text {
+	font-size: var(--font-size-xs);
+	line-height: 1.8;
+	color: var(--color-secondary);
+	margin-bottom: 1rem;
+	text-align: justify;
+}
+
+.footer__legal-text:last-child {
+	margin-bottom: 0;
+}
+
+.footer__legal-link {
+	color: var(--color-blue);
+	text-decoration: none;
+	transition: var(--transition-fast);
+}
+
+.footer__legal-link:hover {
+	color: var(--color-blue-dark);
+	text-decoration: underline;
+}
+
+/* Нижняя часть футера */
+.footer__bottom {
+	padding-top: 2rem;
+	text-align: center;
+}
+
+.footer__copyright {
+	font-size: var(--font-size-xs);
+	color: var(--color-secondary);
+	margin: 0;
+}
+
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
+
+@media (max-width: 768px) {
+	.footer {
+		padding: 3rem 0 1.5rem;
+	}
+
+	.footer__content {
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+		text-align: center;
+	}
+
+	.footer__brand {
+		align-items: center;
+	}
+
+	.footer__logo {
+		max-width: 160px;
+	}
+
+	.footer__heading {
+		margin-bottom: 1rem;
+	}
+
+	.footer__links nav,
+	.footer__list {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem 2rem;
+	}
+
+	.footer__link::before {
+		display: none;
+	}
+
+	.footer__link:hover {
+		padding-left: 0;
+	}
+
+	.footer__phone,
+	.footer__email {
+		display: inline-block;
+		margin: 0 0.5rem 0.75rem;
+	}
+
+	.footer__social {
+		justify-content: center;
+	}
+
+	.footer__legal {
+		margin-top: 2rem;
+		padding: 1.5rem;
+	}
+
+	.footer__legal-text {
+		font-size: 0.7rem;
+		text-align: left;
+	}
+
+	.footer__bottom {
+		padding-top: 1.5rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.footer__links nav,
+	.footer__list {
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+}

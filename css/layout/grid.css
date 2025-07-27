@@ -1,0 +1,471 @@
+/* ===============================================
+   LAYOUT: GRID SYSTEM
+   =============================================== */
+
+/* Базовая сетка */
+.grid {
+	display: grid;
+	gap: var(--spacing-lg);
+}
+
+/* Варианты gap */
+.grid--gap-none {
+	gap: 0;
+}
+.grid--gap-xs {
+	gap: var(--spacing-xs);
+}
+.grid--gap-sm {
+	gap: var(--spacing-sm);
+}
+.grid--gap-md {
+	gap: var(--spacing-md);
+}
+.grid--gap-lg {
+	gap: var(--spacing-lg);
+}
+.grid--gap-xl {
+	gap: var(--spacing-xl);
+}
+.grid--gap-2xl {
+	gap: var(--spacing-2xl);
+}
+
+/* Количество колонок */
+.grid--cols-1 {
+	grid-template-columns: repeat(1, 1fr);
+}
+.grid--cols-2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+.grid--cols-3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+.grid--cols-4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+.grid--cols-5 {
+	grid-template-columns: repeat(5, 1fr);
+}
+.grid--cols-6 {
+	grid-template-columns: repeat(6, 1fr);
+}
+.grid--cols-7 {
+	grid-template-columns: repeat(7, 1fr);
+}
+.grid--cols-8 {
+	grid-template-columns: repeat(8, 1fr);
+}
+.grid--cols-9 {
+	grid-template-columns: repeat(9, 1fr);
+}
+.grid--cols-10 {
+	grid-template-columns: repeat(10, 1fr);
+}
+.grid--cols-11 {
+	grid-template-columns: repeat(11, 1fr);
+}
+.grid--cols-12 {
+	grid-template-columns: repeat(12, 1fr);
+}
+
+/* Auto-fit и auto-fill */
+.grid--auto-fit {
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid--auto-fill {
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* Кастомные размеры для auto-fit/fill */
+.grid--auto-fit-sm {
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.grid--auto-fit-md {
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.grid--auto-fit-lg {
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid--auto-fit-xl {
+	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+/* Выравнивание */
+.grid--align-start {
+	align-items: start;
+}
+.grid--align-center {
+	align-items: center;
+}
+.grid--align-end {
+	align-items: end;
+}
+.grid--align-stretch {
+	align-items: stretch;
+}
+
+.grid--justify-start {
+	justify-items: start;
+}
+.grid--justify-center {
+	justify-items: center;
+}
+.grid--justify-end {
+	justify-items: end;
+}
+.grid--justify-stretch {
+	justify-items: stretch;
+}
+
+/* Выравнивание контента */
+.grid--content-start {
+	align-content: start;
+}
+.grid--content-center {
+	align-content: center;
+}
+.grid--content-end {
+	align-content: end;
+}
+.grid--content-stretch {
+	align-content: stretch;
+}
+.grid--content-between {
+	align-content: space-between;
+}
+.grid--content-around {
+	align-content: space-around;
+}
+.grid--content-evenly {
+	align-content: space-evenly;
+}
+
+/* Элементы сетки */
+.grid__item {
+	min-width: 0; /* Предотвращает переполнение */
+}
+
+/* Span колонок */
+.grid__item--span-1 {
+	grid-column: span 1;
+}
+.grid__item--span-2 {
+	grid-column: span 2;
+}
+.grid__item--span-3 {
+	grid-column: span 3;
+}
+.grid__item--span-4 {
+	grid-column: span 4;
+}
+.grid__item--span-5 {
+	grid-column: span 5;
+}
+.grid__item--span-6 {
+	grid-column: span 6;
+}
+.grid__item--span-7 {
+	grid-column: span 7;
+}
+.grid__item--span-8 {
+	grid-column: span 8;
+}
+.grid__item--span-9 {
+	grid-column: span 9;
+}
+.grid__item--span-10 {
+	grid-column: span 10;
+}
+.grid__item--span-11 {
+	grid-column: span 11;
+}
+.grid__item--span-12 {
+	grid-column: span 12;
+}
+.grid__item--span-full {
+	grid-column: 1 / -1;
+}
+
+/* Span строк */
+.grid__item--row-span-1 {
+	grid-row: span 1;
+}
+.grid__item--row-span-2 {
+	grid-row: span 2;
+}
+.grid__item--row-span-3 {
+	grid-row: span 3;
+}
+.grid__item--row-span-4 {
+	grid-row: span 4;
+}
+.grid__item--row-span-5 {
+	grid-row: span 5;
+}
+.grid__item--row-span-6 {
+	grid-row: span 6;
+}
+
+/* Начальные позиции */
+.grid__item--start-1 {
+	grid-column-start: 1;
+}
+.grid__item--start-2 {
+	grid-column-start: 2;
+}
+.grid__item--start-3 {
+	grid-column-start: 3;
+}
+.grid__item--start-4 {
+	grid-column-start: 4;
+}
+.grid__item--start-5 {
+	grid-column-start: 5;
+}
+.grid__item--start-6 {
+	grid-column-start: 6;
+}
+.grid__item--start-7 {
+	grid-column-start: 7;
+}
+.grid__item--start-8 {
+	grid-column-start: 8;
+}
+.grid__item--start-9 {
+	grid-column-start: 9;
+}
+.grid__item--start-10 {
+	grid-column-start: 10;
+}
+.grid__item--start-11 {
+	grid-column-start: 11;
+}
+.grid__item--start-12 {
+	grid-column-start: 12;
+}
+
+/* Конечные позиции */
+.grid__item--end-1 {
+	grid-column-end: 1;
+}
+.grid__item--end-2 {
+	grid-column-end: 2;
+}
+.grid__item--end-3 {
+	grid-column-end: 3;
+}
+.grid__item--end-4 {
+	grid-column-end: 4;
+}
+.grid__item--end-5 {
+	grid-column-end: 5;
+}
+.grid__item--end-6 {
+	grid-column-end: 6;
+}
+.grid__item--end-7 {
+	grid-column-end: 7;
+}
+.grid__item--end-8 {
+	grid-column-end: 8;
+}
+.grid__item--end-9 {
+	grid-column-end: 9;
+}
+.grid__item--end-10 {
+	grid-column-end: 10;
+}
+.grid__item--end-11 {
+	grid-column-end: 11;
+}
+.grid__item--end-12 {
+	grid-column-end: 12;
+}
+.grid__item--end-13 {
+	grid-column-end: 13;
+}
+
+/* Специальные сетки */
+
+/* Masonry-подобная сетка */
+.grid--masonry {
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-auto-rows: minmax(100px, auto);
+	grid-auto-flow: dense;
+}
+
+/* Сетка с фиксированной шириной колонок */
+.grid--fixed {
+	grid-template-columns: repeat(auto-fit, 300px);
+	justify-content: center;
+}
+
+/* Асимметричная сетка */
+.grid--asymmetric {
+	grid-template-columns: 2fr 1fr;
+}
+
+.grid--asymmetric-reverse {
+	grid-template-columns: 1fr 2fr;
+}
+
+/* Сетка с боковой панелью */
+.grid--sidebar {
+	grid-template-columns: 250px 1fr;
+}
+
+.grid--sidebar-right {
+	grid-template-columns: 1fr 250px;
+}
+
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
+
+/* Планшеты */
+@media (max-width: 1024px) {
+	.grid--cols-4 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.grid--cols-5 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.grid--cols-6 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.grid--sidebar,
+	.grid--sidebar-right {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+	/* Мобильные колонки */
+	.grid--cols-2-mobile {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.grid--cols-1-mobile {
+		grid-template-columns: 1fr;
+	}
+
+	/* Сброс колонок на мобильных */
+	.grid--cols-2,
+	.grid--cols-3,
+	.grid--cols-4,
+	.grid--cols-5,
+	.grid--cols-6 {
+		grid-template-columns: 1fr;
+	}
+
+	.grid--asymmetric,
+	.grid--asymmetric-reverse {
+		grid-template-columns: 1fr;
+	}
+
+	/* Мобильные span */
+	.grid__item--span-mobile-1 {
+		grid-column: span 1;
+	}
+	.grid__item--span-mobile-2 {
+		grid-column: span 2;
+	}
+	.grid__item--span-mobile-full {
+		grid-column: 1 / -1;
+	}
+
+	/* Уменьшенные отступы */
+	.grid {
+		gap: var(--spacing-md);
+	}
+
+	.grid--gap-lg {
+		gap: var(--spacing-lg);
+	}
+	.grid--gap-xl {
+		gap: var(--spacing-lg);
+	}
+	.grid--gap-2xl {
+		gap: var(--spacing-xl);
+	}
+}
+
+/* Маленькие экраны */
+@media (max-width: 480px) {
+	.grid {
+		gap: var(--spacing-sm);
+	}
+
+	.grid--gap-md {
+		gap: var(--spacing-md);
+	}
+	.grid--gap-lg {
+		gap: var(--spacing-md);
+	}
+	.grid--gap-xl {
+		gap: var(--spacing-lg);
+	}
+	.grid--gap-2xl {
+		gap: var(--spacing-lg);
+	}
+
+	/* Минимальные размеры для auto-fit */
+	.grid--auto-fit {
+		grid-template-columns: 1fr;
+	}
+
+	.grid--auto-fit-sm,
+	.grid--auto-fit-md,
+	.grid--auto-fit-lg,
+	.grid--auto-fit-xl {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ===============================================
+   УТИЛИТЫ ДЛЯ СЕТОК
+   =============================================== */
+
+/* Центрирование одного элемента */
+.grid--center-single {
+	place-items: center;
+}
+
+/* Равная высота всех элементов */
+.grid--equal-height {
+	grid-auto-rows: 1fr;
+}
+
+/* Минимальная высота строк */
+.grid--min-row-100 {
+	grid-auto-rows: minmax(100px, auto);
+}
+.grid--min-row-200 {
+	grid-auto-rows: minmax(200px, auto);
+}
+.grid--min-row-300 {
+	grid-auto-rows: minmax(300px, auto);
+}
+
+/* Dense packing */
+.grid--dense {
+	grid-auto-flow: dense;
+}
+
+/* Режим печати */
+@media print {
+	.grid {
+		display: block;
+	}
+
+	.grid__item {
+		page-break-inside: avoid;
+		margin-bottom: 1rem;
+	}
+}

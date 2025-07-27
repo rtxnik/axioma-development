@@ -1,0 +1,229 @@
+/* ===============================================
+   БЛОК: HERO (БЭМ)
+   =============================================== */
+
+.hero {
+	position: relative;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	background: var(--color-black);
+}
+
+/* Контейнер видео */
+.hero__video-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.hero__video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	will-change: transform;
+	transform: translateZ(0);
+}
+
+/* Оверлей для видео */
+.hero__video-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 0.1) 0%,
+		rgba(0, 0, 0, 0.05) 50%,
+		rgba(0, 0, 0, 0.1) 100%
+	);
+	z-index: 2;
+}
+
+/* Прогресс бар видео */
+.hero__progress {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 10;
+	opacity: 0;
+	transition: opacity var(--transition-slow);
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+	padding: 20px 0 10px 0;
+}
+
+.hero__progress--visible {
+	opacity: 1;
+}
+
+.hero__progress-bar {
+	width: 100%;
+	height: 3px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 0;
+	overflow: hidden;
+	position: relative;
+}
+
+.hero__progress-bar::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		rgba(255, 255, 255, 0.1) 20%,
+		rgba(255, 255, 255, 0.1) 80%,
+		transparent 100%
+	);
+	animation: shimmer 2s ease-in-out infinite;
+}
+
+.hero__progress-fill {
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		var(--color-white),
+		#e5e5e5,
+		var(--color-white)
+	);
+	border-radius: 0;
+	width: 0%;
+	transition: width 0.1s ease;
+	position: relative;
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+	will-change: width;
+	transform: translateZ(0);
+}
+
+/* Индикатор скролла */
+.hero__scroll-indicator {
+	position: absolute;
+	bottom: 2rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 15;
+	opacity: 0;
+	transition: opacity var(--transition-slow);
+	will-change: transform;
+	transform: translateZ(0);
+}
+
+.hero__scroll-indicator--visible {
+	opacity: 1;
+	animation: fadeInBounce 1s ease forwards;
+}
+
+.hero__scroll-button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: var(--transition-base);
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	will-change: transform;
+	transform: translateZ(0);
+}
+
+.hero__scroll-button:hover {
+	transform: translateY(-5px) scale(1.1);
+}
+
+.hero__scroll-button:active {
+	transform: translateY(-1px) scale(1.05);
+}
+
+.hero__scroll-button:focus {
+	outline: none;
+}
+
+.hero__scroll-button:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.8);
+	outline-offset: 2px;
+}
+
+/* Анимации */
+@keyframes fadeInBounce {
+	0% {
+		opacity: 0;
+		transform: translateX(-50%) translateY(20px);
+	}
+	60% {
+		opacity: 1;
+		transform: translateX(-50%) translateY(-5px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+	.hero__progress {
+		padding: 15px 0 8px 0;
+	}
+
+	.hero__progress-bar {
+		height: 2px;
+	}
+
+	.hero__scroll-indicator {
+		bottom: 1.5rem;
+	}
+
+	.hero__scroll-button {
+		width: 100px;
+		height: 100px;
+		padding: 1.2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero__scroll-button {
+		width: 90px;
+		height: 90px;
+		padding: 1rem;
+	}
+
+	.hero__progress {
+		padding: 12px 0 6px 0;
+	}
+
+	.hero__scroll-indicator {
+		bottom: 1rem;
+	}
+}
+
+/* Поддержка уменьшенной анимации */
+@media (prefers-reduced-motion: reduce) {
+	.hero__video {
+		will-change: auto;
+		transform: none;
+	}
+
+	.hero__progress-bar::before {
+		animation: none;
+	}
+
+	.hero__scroll-indicator {
+		animation: none;
+	}
+}

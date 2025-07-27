@@ -1,0 +1,201 @@
+/* ===============================================
+   БЛОК: LOGO (БЭМ)
+   =============================================== */
+
+.logo {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+	border-radius: var(--radius-sm);
+}
+
+/* Эффект блеска при наведении */
+.logo::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		45deg,
+		transparent,
+		rgba(255, 255, 255, 0.1),
+		transparent
+	);
+	transform: translateX(-100%) skewX(-15deg);
+	transition: transform var(--transition-base);
+}
+
+.logo:hover::before {
+	transform: translateX(100%) skewX(-15deg);
+}
+
+/* Изображение логотипа */
+.logo__image {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	filter: brightness(1.1) contrast(1.1);
+	transition: filter var(--transition-base);
+}
+
+.logo:hover .logo__image {
+	filter: brightness(1.15) contrast(1.15);
+}
+
+/* Модификаторы размера */
+.logo--small {
+	width: 160px;
+	height: 28px;
+}
+
+.logo--medium {
+	width: 200px;
+	height: 32px;
+}
+
+.logo--large {
+	width: 240px;
+	height: 40px;
+}
+
+.logo--xlarge {
+	width: 280px;
+	height: 48px;
+}
+
+/* Модификаторы стиля */
+.logo--dark .logo__image {
+	filter: brightness(0.9) contrast(1.1);
+}
+
+.logo--light .logo__image {
+	filter: brightness(1.2) contrast(1.1) invert(1);
+}
+
+/* Анимированный логотип */
+.logo--animated {
+	animation: logoFadeIn 0.8s ease-out;
+}
+
+.logo--animated .logo__image {
+	animation: logoScale 0.8s ease-out;
+}
+
+@keyframes logoFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes logoScale {
+	from {
+		transform: scale(0.9);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+
+/* Логотип с текстом */
+.logo--with-text {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-md);
+}
+
+.logo__text {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-white);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	white-space: nowrap;
+}
+
+.logo--dark .logo__text {
+	color: var(--color-primary);
+}
+
+/* Логотип-заглушка для загрузки */
+.logo--skeleton {
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		rgba(255, 255, 255, 0.2) 50%,
+		rgba(255, 255, 255, 0.1) 100%
+	);
+	animation: shimmer 2s ease-in-out infinite;
+}
+
+.logo--skeleton .logo__image {
+	opacity: 0;
+}
+
+/* Адаптивный логотип */
+@media (max-width: 768px) {
+	.logo--large {
+		width: 200px;
+		height: 32px;
+	}
+
+	.logo--medium {
+		width: 180px;
+		height: 28px;
+	}
+
+	.logo--small {
+		width: 140px;
+		height: 24px;
+	}
+}
+
+@media (max-width: 480px) {
+	.logo--large {
+		width: 160px;
+		height: 28px;
+	}
+
+	.logo--medium {
+		width: 140px;
+		height: 24px;
+	}
+
+	.logo--small {
+		width: 120px;
+		height: 20px;
+	}
+
+	.logo__text {
+		font-size: var(--font-size-sm);
+	}
+}
+
+/* Логотип для печати */
+@media print {
+	.logo::before {
+		display: none;
+	}
+
+	.logo__image {
+		filter: none;
+	}
+
+	.logo--light .logo__image {
+		filter: none;
+	}
+}
+
+/* Высокая контрастность */
+@media (prefers-contrast: high) {
+	.logo__image {
+		filter: brightness(1) contrast(1.5);
+	}
+
+	.logo--light .logo__image {
+		filter: brightness(1) contrast(1.5) invert(1);
+	}
+}

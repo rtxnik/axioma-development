@@ -1,0 +1,87 @@
+/* ===============================================
+   БЛОК: HEADER (БЭМ)
+   =============================================== */
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: var(--z-fixed);
+	background: var(--bg-opacity-95);
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	border-bottom: 1px solid var(--bg-white-opacity-10);
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+	transition: all var(--transition-base);
+	animation: slideDown 0.6s var(--ease-out-expo);
+}
+
+/* Псевдоэлемент для градиента */
+.header::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(
+		90deg,
+		rgba(102, 126, 234, 0.1) 0%,
+		rgba(118, 75, 162, 0.1) 50%,
+		rgba(102, 126, 234, 0.1) 100%
+	);
+	opacity: 0;
+	transition: opacity var(--transition-base);
+	pointer-events: none;
+}
+
+/* Состояния хедера */
+.header:hover::before {
+	opacity: 1;
+}
+
+.header--scrolled {
+	background: var(--bg-opacity-98);
+	backdrop-filter: blur(25px) saturate(200%);
+	border-bottom-color: rgba(229, 231, 235, 0.3);
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+}
+
+.header--hidden {
+	transform: translateY(-100%);
+}
+
+/* Элементы хедера */
+.header__nav {
+	position: relative;
+}
+
+/* Анимации */
+@keyframes slideDown {
+	from {
+		transform: translateY(-100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+	.header {
+		background: var(--bg-opacity-98);
+	}
+}
+
+/* Режим печати */
+@media print {
+	.header {
+		position: static;
+		background: transparent;
+		border-bottom: 1px solid var(--color-light);
+		box-shadow: none;
+	}
+}

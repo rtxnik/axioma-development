@@ -1,0 +1,380 @@
+/* ===============================================
+   КОМПОНЕНТ: КНОПКА (БЭМ)
+   =============================================== */
+
+/* Базовые стили кнопки */
+.button {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-sm);
+	padding: var(--spacing-md) var(--spacing-xl);
+	font-family: var(--font-primary);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--color-white);
+	background: transparent;
+	border: none;
+	border-radius: var(--radius-full);
+	cursor: pointer;
+	outline: none;
+	transition: all var(--transition-base);
+	overflow: hidden;
+	white-space: nowrap;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* Состояния кнопки */
+.button:hover {
+	transform: translateY(-2px);
+}
+
+.button:active {
+	transform: translateY(0);
+	transition-duration: 0.1s;
+}
+
+.button:focus-visible {
+	outline: 2px solid var(--color-blue);
+	outline-offset: 2px;
+}
+
+.button:disabled {
+	cursor: not-allowed;
+	opacity: 0.6;
+	transform: none;
+}
+
+/* Модификаторы кнопки */
+
+/* Primary кнопка */
+.button--primary {
+	width: 12rem;
+	height: auto;
+	padding: 0;
+	background: none;
+}
+
+/* Круг внутри primary кнопки */
+.button__circle {
+	position: relative;
+	display: block;
+	margin: 0;
+	width: 3rem;
+	height: 3rem;
+	background: var(--color-primary);
+	border-radius: 50%;
+	transition: all 450ms var(--ease-in-out-cubic);
+}
+
+/* Стрелка внутри круга */
+.button__arrow {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	left: 0.625rem;
+	width: 1.125rem;
+	height: 0.125rem;
+	background: none;
+	transition: all 450ms var(--ease-in-out-cubic);
+}
+
+.button__arrow::before {
+	position: absolute;
+	content: "";
+	top: -0.29rem;
+	right: 0.0625rem;
+	width: 0.625rem;
+	height: 0.625rem;
+	border-top: 0.125rem solid var(--color-white);
+	border-right: 0.125rem solid var(--color-white);
+	transform: rotate(45deg);
+}
+
+/* Текст primary кнопки */
+.button--primary .button__text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0.75rem 0;
+	margin: 0 0 0 1.85rem;
+	color: var(--color-primary);
+	font-weight: var(--font-weight-bold);
+	line-height: 1.6;
+	text-align: center;
+	text-transform: uppercase;
+	transition: all 450ms var(--ease-in-out-cubic);
+}
+
+/* Hover эффект для primary кнопки */
+.button--primary:hover .button__circle {
+	width: 100%;
+	border-radius: 1.625rem;
+}
+
+.button--primary:hover .button__arrow {
+	background: var(--color-white);
+	transform: translate(1rem, 0);
+}
+
+.button--primary:hover .button__text {
+	color: var(--color-white);
+}
+
+/* Secondary кнопка */
+.button--secondary {
+	padding: 0.75rem 1.5rem;
+	background-color: var(--color-blue);
+	color: var(--color-white);
+	font-size: var(--font-size-sm);
+	border-radius: 25px;
+	min-width: 120px;
+	max-width: 150px;
+}
+
+.button--secondary:hover {
+	background-color: var(--color-blue-dark);
+	box-shadow: var(--shadow-md);
+	transform: translateY(-2px) scale(1.02);
+}
+
+/* Submit кнопка */
+.button--submit {
+	width: 100%;
+	height: 56px;
+	background: var(--gradient-primary);
+	color: var(--color-white);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-md);
+}
+
+.button--submit:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4), 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Элементы кнопки */
+.button__text {
+	position: relative;
+	z-index: 2;
+	transition: all var(--transition-base);
+}
+
+.button__icon {
+	width: 20px;
+	height: 20px;
+	transition: transform var(--transition-base);
+}
+
+.button--submit:hover .button__icon {
+	transform: translateX(4px);
+}
+
+/* Эффект волны */
+.button__effect {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	transition: all var(--transition-slow);
+	pointer-events: none;
+}
+
+.button--submit:hover .button__effect {
+	width: 400px;
+	height: 400px;
+}
+
+/* Состояния загрузки */
+.button--loading {
+	pointer-events: none;
+	animation: pulse 1s infinite;
+}
+
+.button--loading .button__text::after {
+	content: ".";
+	display: inline-block;
+	animation: dots 1.4s infinite;
+}
+
+@keyframes dots {
+	0%,
+	20% {
+		content: ".";
+	}
+	40% {
+		content: "..";
+	}
+	60%,
+	100% {
+		content: "...";
+	}
+}
+
+/* Состояние успеха */
+.button--success {
+	background: var(--color-success);
+}
+
+.button--success .button__icon {
+	animation: checkmark 0.5s ease-out;
+}
+
+@keyframes checkmark {
+	0% {
+		transform: scale(0) rotate(-45deg);
+	}
+	100% {
+		transform: scale(1) rotate(0deg);
+	}
+}
+
+/* Состояние ошибки */
+.button--error {
+	background: var(--color-error);
+	animation: shake 0.5s ease-out;
+}
+
+/* Play кнопка для видео */
+.hero__play-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 20;
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-sm);
+	padding: var(--spacing-md) var(--spacing-xl);
+	background: rgba(255, 255, 255, 0.9);
+	color: var(--color-black);
+	border: none;
+	border-radius: 50px;
+	font-size: var(--font-size-base);
+	font-family: var(--font-primary);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+	transition: all var(--transition-base);
+}
+
+.hero__play-button:hover {
+	background: var(--color-white);
+	transform: translate(-50%, -50%) scale(1.05);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hero__play-button svg {
+	width: 24px;
+	height: 24px;
+}
+
+/* Scroll кнопка */
+.scroll-button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all var(--transition-base);
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	position: relative;
+}
+
+.scroll-button:hover {
+	transform: translateY(-5px) scale(1.1);
+}
+
+.scroll-button:active {
+	transform: translateY(-1px) scale(1.05);
+}
+
+.scroll-button:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.8);
+	outline-offset: 2px;
+}
+
+.scroll-button__icon {
+	width: 72px;
+	height: 72px;
+	color: var(--color-white);
+	opacity: 0.9;
+	transition: all var(--transition-base);
+	animation: gentleBounce 2.5s ease-in-out infinite;
+	stroke-width: 1.5;
+}
+
+.scroll-button:hover .scroll-button__icon {
+	transform: scale(1.05);
+	animation-duration: 1.2s;
+	opacity: 1;
+	filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+	stroke-width: 2;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+	.button {
+		font-size: var(--font-size-xs);
+		padding: var(--spacing-sm) var(--spacing-lg);
+	}
+
+	.button--primary {
+		width: 10rem;
+	}
+
+	.button__circle {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
+	.button--primary .button__text {
+		font-size: var(--font-size-xs);
+		margin-left: 1.5rem;
+	}
+
+	.scroll-button {
+		width: 100px;
+		height: 100px;
+		padding: 1.2rem;
+	}
+
+	.scroll-button__icon {
+		width: 60px;
+		height: 60px;
+	}
+}
+
+@media (max-width: 480px) {
+	.scroll-button {
+		width: 90px;
+		height: 90px;
+		padding: 1rem;
+	}
+
+	.scroll-button__icon {
+		width: 54px;
+		height: 54px;
+	}
+}

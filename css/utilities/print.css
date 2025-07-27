@@ -1,0 +1,350 @@
+/* ===============================================
+   СТИЛИ ДЛЯ ПЕЧАТИ
+   =============================================== */
+
+@media print {
+	/* Сброс базовых стилей */
+	*,
+	*::before,
+	*::after {
+		background: transparent !important;
+		color: #000 !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+
+	/* Основные стили страницы */
+	body {
+		font-family: "Georgia", "Times New Roman", serif;
+		font-size: 12pt;
+		line-height: 1.5;
+		color: #000;
+		background: #fff;
+	}
+
+	/* Заголовки */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: "Helvetica Neue", "Arial", sans-serif;
+		page-break-after: avoid;
+		page-break-inside: avoid;
+	}
+
+	h1 {
+		font-size: 24pt;
+	}
+	h2 {
+		font-size: 20pt;
+	}
+	h3 {
+		font-size: 16pt;
+	}
+	h4 {
+		font-size: 14pt;
+	}
+	h5 {
+		font-size: 12pt;
+	}
+	h6 {
+		font-size: 11pt;
+	}
+
+	/* Параграфы и текст */
+	p {
+		orphans: 3;
+		widows: 3;
+	}
+
+	/* Ссылки */
+	a,
+	a:visited {
+		text-decoration: underline;
+		color: #000;
+	}
+
+	a[href]::after {
+		content: " (" attr(href) ")";
+		font-size: 0.8em;
+	}
+
+	/* Исключения для внутренних ссылок */
+	a[href^="#"]::after,
+	a[href^="javascript:"]::after {
+		content: "";
+	}
+
+	/* Аббревиатуры */
+	abbr[title]::after {
+		content: " (" attr(title) ")";
+	}
+
+	/* Изображения */
+	img {
+		max-width: 100% !important;
+		page-break-inside: avoid;
+	}
+
+	/* Таблицы */
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	thead {
+		display: table-header-group;
+	}
+
+	tr {
+		page-break-inside: avoid;
+	}
+
+	td,
+	th {
+		border: 1px solid #000;
+		padding: 0.5em;
+	}
+
+	/* Списки */
+	ul,
+	ol {
+		page-break-inside: avoid;
+	}
+
+	/* Цитаты */
+	blockquote {
+		border-left: 3px solid #000;
+		padding-left: 1em;
+		margin: 1em 0;
+		page-break-inside: avoid;
+	}
+
+	/* Код */
+	pre,
+	code {
+		font-family: "Courier New", monospace;
+		font-size: 0.9em;
+	}
+
+	pre {
+		border: 1px solid #000;
+		padding: 1em;
+		page-break-inside: avoid;
+	}
+
+	/* ===============================================
+     СКРЫТИЕ ЭЛЕМЕНТОВ ПРИ ПЕЧАТИ
+     =============================================== */
+
+	/* Навигация и интерактивные элементы */
+	.header,
+	.nav,
+	.footer__social,
+	.hero__video-container,
+	.hero__progress,
+	.hero__scroll-indicator,
+	.loading,
+	.skip-link,
+	.button,
+	button,
+	form,
+	.form,
+	.contact-card__form,
+	.country-selector {
+		display: none !important;
+	}
+
+	/* Декоративные элементы */
+	.contact__particles,
+	.contact__circle,
+	.interaction__parallax,
+	.service-card__number,
+	*::before,
+	*::after {
+		display: none !important;
+	}
+
+	/* ===============================================
+     СПЕЦИФИЧНЫЕ СТИЛИ ДЛЯ БЛОКОВ
+     =============================================== */
+
+	/* Хедер - показываем только логотип */
+	.header {
+		display: block !important;
+		position: static;
+		background: none;
+		border-bottom: 2px solid #000;
+		margin-bottom: 20pt;
+		padding: 10pt 0;
+	}
+
+	.nav__list,
+	.nav__toggle {
+		display: none !important;
+	}
+
+	.nav__logo {
+		display: block !important;
+		width: 200px;
+	}
+
+	/* Hero секция */
+	.hero {
+		height: auto;
+		min-height: auto;
+		padding: 20pt 0;
+		text-align: center;
+	}
+
+	.hero::after {
+		content: "АКСИОМА КАПИТАЛ - Управляющая компания";
+		font-size: 24pt;
+		font-weight: bold;
+	}
+
+	/* About секция */
+	.about {
+		height: auto;
+		min-height: auto;
+		background: none !important;
+		padding: 20pt 0;
+		page-break-inside: avoid;
+	}
+
+	/* Services секция */
+	.services {
+		padding: 20pt 0;
+	}
+
+	.services__grid {
+		display: block;
+	}
+
+	.service-card {
+		border: 1px solid #000;
+		margin-bottom: 10pt;
+		padding: 10pt;
+		page-break-inside: avoid;
+	}
+
+	.service-card__button {
+		display: none !important;
+	}
+
+	/* Contact секция */
+	.contact {
+		min-height: auto;
+		padding: 20pt 0;
+		background: none !important;
+	}
+
+	.contact__bg-image,
+	.contact__overlay {
+		display: none !important;
+	}
+
+	.contact-card {
+		border: 1px solid #000;
+		background: none !important;
+		padding: 15pt;
+	}
+
+	.contact-card__info-link {
+		display: block;
+		margin: 5pt 0;
+	}
+
+	/* Footer */
+	.footer {
+		border-top: 2px solid #000;
+		padding: 20pt 0 10pt;
+		margin-top: 30pt;
+	}
+
+	.footer__content {
+		display: block;
+	}
+
+	.footer__brand,
+	.footer__links,
+	.footer__contact {
+		margin-bottom: 15pt;
+	}
+
+	.footer__legal {
+		border: 1px solid #000;
+		padding: 10pt;
+		margin-top: 15pt;
+	}
+
+	/* ===============================================
+     НУМЕРАЦИЯ СТРАНИЦ
+     =============================================== */
+
+	@page {
+		margin: 2cm;
+		size: A4;
+	}
+
+	@page :first {
+		margin-top: 3cm;
+	}
+
+	/* Номера страниц */
+	@page {
+		@bottom-center {
+			content: counter(page);
+		}
+	}
+
+	/* ===============================================
+     ОПТИМИЗАЦИЯ ДЛЯ ПЕЧАТИ
+     =============================================== */
+
+	/* Разрывы страниц */
+	.section {
+		page-break-before: auto;
+		page-break-after: auto;
+		page-break-inside: avoid;
+	}
+
+	/* Сохранение важного контента вместе */
+	.about__content,
+	.services__header,
+	.interaction__content,
+	.contact-card__header {
+		page-break-inside: avoid;
+		page-break-after: avoid;
+	}
+
+	/* Принудительный разрыв перед важными секциями */
+	.services,
+	.contact,
+	.footer {
+		page-break-before: always;
+	}
+
+	/* ===============================================
+     КОНТРАСТНОСТЬ И ЧИТАЕМОСТЬ
+     =============================================== */
+
+	/* Увеличение контраста для текста */
+	.text--secondary,
+	.service-card__description,
+	.about__description,
+	.footer__tagline {
+		color: #333 !important;
+	}
+
+	/* Границы для важных элементов */
+	.about,
+	.services,
+	.contact {
+		border-top: 1px solid #ccc;
+		padding-top: 20pt;
+		margin-top: 20pt;
+	}
+}
