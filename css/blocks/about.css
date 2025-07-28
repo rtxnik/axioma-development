@@ -16,6 +16,7 @@
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
+	padding-top: var(--header-height);
 }
 
 /* Градиентный оверлей */
@@ -127,11 +128,19 @@
 	}
 }
 
+/* Адаптивность */
+@media (max-width: 768px) {
+	.about {
+		padding-top: var(--header-height-mobile);
+	}
+}
+
 /* Планшеты средние (от 768px) */
 @media (min-width: 768px) {
 	.about {
 		height: 70vh;
 		min-height: 600px;
+		padding-top: var(--header-height);
 	}
 
 	/* .about::before {
@@ -252,6 +261,7 @@
 @media (max-width: 375px) {
 	.about {
 		min-height: 450px;
+		padding-top: var(--header-height-mobile);
 	}
 
 	.about::before {
@@ -297,6 +307,7 @@
 		min-height: auto;
 		background-image: none;
 		page-break-inside: avoid;
+		padding-top: 0;
 	}
 
 	.about::before {

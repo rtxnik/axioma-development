@@ -57,13 +57,12 @@
    =============================================== */
 
 .main {
-	padding-top: var(--header-height);
 	position: relative;
 }
 
 /* Секции основного контента */
 .main__hero {
-	margin-top: calc(var(--header-height) * -1);
+	/* Убираем отрицательный margin */
 }
 
 .main__about,
@@ -155,11 +154,11 @@
 
 @media (max-width: 768px) {
 	.main {
-		padding-top: var(--header-height-mobile);
+		/* Убираем padding-top */
 	}
 
 	.main__hero {
-		margin-top: calc(var(--header-height-mobile) * -1);
+		/* Убираем отрицательный margin */
 	}
 
 	.section {
