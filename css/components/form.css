@@ -398,3 +398,82 @@
 		gap: 1.5rem;
 	}
 }
+
+/* Убираем повторную границу между элементами */
+.form__group--phone .form__input {
+	margin-left: -1px;
+}
+.form__group--phone.form__group--error .form__input--phone {
+	border-color: var(--color-error);
+}
+
+.form__group--phone.form__group--error .country-selector__button {
+	border-color: var(--color-error);
+}
+.form__group--phone.form__group--focused .form__highlight {
+	width: 100%;
+}
+
+.form__group--phone.form__group--focused .country-selector__button {
+	border-color: var(--color-blue);
+	background: rgba(255, 255, 255, 0.08);
+}
+.form__input--phone:hover {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(59, 130, 246, 0.3);
+}
+
+.form__input--phone:hover ~ .form__country-selector .country-selector__button {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(59, 130, 246, 0.3);
+}
+.form__input--phone:focus {
+	outline: none;
+	background: rgba(255, 255, 255, 0.08);
+	border-color: var(--color-blue);
+	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+	border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.form__input--phone:focus ~ .form__country-selector .country-selector__button {
+	border-color: var(--color-blue);
+	background: rgba(255, 255, 255, 0.08);
+} /* Группа телефона */
+.form__group--phone {
+	position: relative;
+	z-index: 10;
+	overflow: visible;
+}
+
+.form__group--phone .form__highlight {
+	left: 0;
+	right: 0;
+	width: auto;
+	transform: none;
+}
+
+.form__input--phone {
+	padding-left: 5rem;
+	padding-top: 20px;
+	border-radius: 0 var(--radius-md) var(--radius-md) 0;
+	border-left: none;
+}
+
+.form__label--phone {
+	left: 5rem;
+}
+
+.form__input--phone:focus ~ .form__label--phone,
+.form__input--phone:not(:placeholder-shown) ~ .form__label--phone,
+.form__group--phone.form__group--filled .form__label--phone {
+	left: 5rem;
+}
+
+/* Селектор страны */
+.form__country-selector {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 56px;
+	z-index: 20;
+}
