@@ -4,12 +4,14 @@
 
 .hero {
 	position: relative;
-	height: 100vh;
+	height: 100vh !important;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
 	background: var(--color-black);
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 /* Контейнер видео */
@@ -111,39 +113,35 @@
 /* Индикатор скролла */
 .hero__scroll-indicator {
 	position: absolute;
-	bottom: 2rem;
+	bottom: 3rem;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 15;
 	opacity: 0;
 	transition: opacity var(--transition-slow);
-	will-change: transform;
-	transform: translateZ(0);
 }
 
 .hero__scroll-indicator--visible {
 	opacity: 1;
-	animation: fadeInBounce 1s ease forwards;
+	animation: fadeInUpScroll 1s ease forwards;
 }
 
 .hero__scroll-button {
 	background: transparent;
 	border: none;
 	cursor: pointer;
-	padding: 1.5rem;
+	padding: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: var(--transition-base);
-	border-radius: 50%;
-	width: 120px;
-	height: 120px;
-	will-change: transform;
-	transform: translateZ(0);
+	transition: transform var(--transition-base);
+	width: 40px;
+	height: 60px;
+	position: relative;
 }
 
 .hero__scroll-button:hover {
-	transform: translateY(-5px) scale(1.1);
+	transform: translateY(5px);
 }
 
 .hero__scroll-button:active {
@@ -155,11 +153,62 @@
 }
 
 .hero__scroll-button:focus-visible {
-	outline: 2px solid rgba(255, 255, 255, 0.8);
-	outline-offset: 2px;
+	outline: 2px solid rgba(255, 255, 255, 0.5);
+	outline-offset: 8px;
+	border-radius: 4px;
+}
+
+/* Иконка мыши */
+.scroll-icon {
+	width: 26px;
+	height: 40px;
+	border: 2px solid rgba(255, 255, 255, 0.8);
+	border-radius: 13px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	transition: all var(--transition-base);
+}
+
+.scroll-icon__wheel {
+	width: 3px;
+	height: 8px;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 2px;
+	position: absolute;
+	top: 8px;
+	animation: scrollWheel 2s ease-in-out infinite;
+}
+
+/* Убираем стрелки */
+.scroll-icon__arrows {
+	display: none;
+}
+
+.hero__scroll-button:hover .scroll-icon {
+	border-color: rgba(255, 255, 255, 1);
+	transform: scale(1.1);
+}
+
+/* Исправление позиционирования */
+.main {
+	padding-top: 0 !important;
+}
+
+.main__hero {
+	margin-top: 0 !important;
 }
 
 /* Анимации */
+@keyframes shimmer {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
+
 @keyframes fadeInBounce {
 	0% {
 		opacity: 0;
@@ -168,6 +217,32 @@
 	60% {
 		opacity: 1;
 		transform: translateX(-50%) translateY(-5px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+}
+
+@keyframes scrollWheel {
+	0% {
+		top: 8px;
+		opacity: 1;
+	}
+	50% {
+		top: 16px;
+		opacity: 0.5;
+	}
+	100% {
+		top: 8px;
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInUpScroll {
+	0% {
+		opacity: 0;
+		transform: translateX(-50%) translateY(20px);
 	}
 	100% {
 		opacity: 1;
@@ -186,21 +261,30 @@
 	}
 
 	.hero__scroll-indicator {
-		bottom: 1.5rem;
+		bottom: 2rem;
 	}
 
 	.hero__scroll-button {
-		width: 100px;
-		height: 100px;
-		padding: 1.2rem;
+		width: 35px;
+		height: 50px;
+	}
+
+	.scroll-icon {
+		width: 22px;
+		height: 34px;
+	}
+
+	.scroll-icon__wheel {
+		width: 2px;
+		height: 6px;
+		top: 6px;
 	}
 }
 
 @media (max-width: 480px) {
 	.hero__scroll-button {
-		width: 90px;
-		height: 90px;
-		padding: 1rem;
+		width: 30px;
+		height: 45px;
 	}
 
 	.hero__progress {
@@ -208,7 +292,19 @@
 	}
 
 	.hero__scroll-indicator {
-		bottom: 1rem;
+		bottom: 1.5rem;
+	}
+
+	.scroll-icon {
+		width: 20px;
+		height: 30px;
+		border-width: 1.5px;
+	}
+
+	.scroll-icon__wheel {
+		width: 2px;
+		height: 5px;
+		top: 5px;
 	}
 }
 
@@ -224,6 +320,10 @@
 	}
 
 	.hero__scroll-indicator {
+		animation: none;
+	}
+
+	.scroll-icon__wheel {
 		animation: none;
 	}
 }

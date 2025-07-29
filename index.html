@@ -681,25 +681,17 @@
 				<!-- Scroll Indicator -->
 				<div class="hero__scroll-indicator" id="scrollIndicator">
 					<button
-						class="scroll-button hero__scroll-button"
-						aria-label="Перейти к следующей секции"
+						class="hero__scroll-button"
+						aria-label="Прокрутить к следующей секции"
 						tabindex="0"
 					>
-						<svg
-							class="scroll-button__icon"
-							viewBox="0 0 24 24"
-							fill="none"
-							width="72"
-							height="72"
-						>
-							<path
-								d="M7 10L12 15L17 10"
-								stroke="currentColor"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
+						<div class="scroll-icon">
+							<div class="scroll-icon__wheel"></div>
+							<div class="scroll-icon__arrows">
+								<div class="scroll-icon__arrow"></div>
+								<div class="scroll-icon__arrow"></div>
+							</div>
+						</div>
 					</button>
 				</div>
 			</section>
