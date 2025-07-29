@@ -1,5 +1,5 @@
 /**
- * Модуль управления формами
+ * Модуль управления формами (исправленная версия)
  */
 import { CONFIG } from "../config/config.js"
 import { Utils } from "../utils/utils.js"
@@ -7,6 +7,9 @@ import { Utils } from "../utils/utils.js"
 export class FormManager {
 	constructor() {
 		this.form = document.getElementById("contactForm")
+		this.toastContainer = document.getElementById("toastContainer")
+		this.activeToasts = []
+
 		if (this.form) {
 			this.init()
 		}
@@ -16,65 +19,98 @@ export class FormManager {
 		this.setupFormValidation()
 		this.setupCountrySelector()
 		this.setupFormEffects()
+		this.setupRealTimeValidation()
 	}
 
+	/**
+	 * Настройка валидации формы
+	 */
 	setupFormValidation() {
 		const inputs = this.form.querySelectorAll(".form__input")
 
-		inputs.forEach(input => {
-			// Валидация при потере фокуса
-			input.addEventListener("blur", () => this.validateField(input))
+		// Обработка отправки формы
+		this.form.addEventListener("submit", e => this.handleSubmit(e))
 
+		// Валидация при потере фокуса
+		inputs.forEach(input => {
+			input.addEventListener("blur", () => {
+				if (input.value) {
+					this.validateField(input)
+				}
+			})
+		})
+	}
+
+	/**
+	 * Валидация в реальном времени
+	 */
+	setupRealTimeValidation() {
+		const inputs = this.form.querySelectorAll(".form__input")
+
+		inputs.forEach(input => {
 			// Валидация в реальном времени с debounce
 			input.addEventListener(
 				"input",
 				Utils.debounce(() => {
-					if (input.value) this.validateField(input)
+					const group = input.closest(".form__group")
+
+					// Обновление состояния заполненности
+					if (input.value) {
+						group.classList.add("form__group--filled")
+						this.validateField(input)
+					} else {
+						group.classList.remove("form__group--filled")
+						this.clearFieldError(input)
+					}
 				}, CONFIG.form.debounceDelay)
 			)
-
-			// Обновление состояния заполненности
-			input.addEventListener("input", () => {
-				const group = input.closest(".form__group")
-				if (input.value) {
-					group.classList.add("form__group--filled")
-				} else {
-					group.classList.remove("form__group--filled")
-				}
-			})
 		})
-
-		// Обработка отправки формы
-		this.form.addEventListener("submit", e => this.handleSubmit(e))
 	}
 
+	/**
+	 * Валидация отдельного поля
+	 */
 	validateField(input) {
 		const group = input.closest(".form__group")
 		const error = group.querySelector(".form__error")
 		let isValid = true
 		let errorMessage = ""
 
+		// Удаляем пробелы
+		const value = input.value.trim()
+
 		// Проверка обязательности
-		if (input.hasAttribute("required") && !input.value.trim()) {
+		if (input.hasAttribute("required") && !value) {
 			isValid = false
-			errorMessage = "Это поле обязательно"
+			errorMessage = "Это поле обязательно для заполнения"
 		}
 
 		// Проверка email
-		if (input.type === "email" && input.value) {
+		if (input.type === "email" && value) {
 			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-			if (!emailRegex.test(input.value)) {
+			if (!emailRegex.test(value)) {
 				isValid = false
-				errorMessage = "Введите корректный email"
+				errorMessage = "Введите корректный email адрес"
 			}
 		}
 
 		// Проверка телефона
-		if (input.type === "tel" && input.value) {
-			const phoneDigits = input.value.replace(/\D/g, "")
-			if (phoneDigits.length < 10) {
+		if (input.type === "tel" && value) {
+			const phoneDigits = value.replace(/\D/g, "")
+			if (phoneDigits.length < 10 || phoneDigits.length > 15) {
 				isValid = false
 				errorMessage = "Введите корректный номер телефона"
+			}
+		}
+
+		// Проверка имени
+		if (input.name === "name" && value) {
+			if (value.length < 2) {
+				isValid = false
+				errorMessage = "Имя должно содержать минимум 2 символа"
+			} else if (!/^[а-яА-ЯёЁa-zA-Z\s-]+$/.test(value)) {
+				isValid = false
+				errorMessage = "Имя может содержать только буквы"
 			}
 		}
 
@@ -90,6 +126,20 @@ export class FormManager {
 		return isValid
 	}
 
+	/**
+	 * Очистка ошибки поля
+	 */
+	clearFieldError(input) {
+		const group = input.closest(".form__group")
+		const error = group.querySelector(".form__error")
+
+		group.classList.remove("form__group--error")
+		error.textContent = ""
+	}
+
+	/**
+	 * Настройка селектора страны
+	 */
 	setupCountrySelector() {
 		const selector = this.form.querySelector(".country-selector")
 		if (!selector) return
@@ -112,7 +162,7 @@ export class FormManager {
 				this.closeCountryDropdown(button, dropdown)
 			} else {
 				this.openCountryDropdown(button, dropdown)
-				searchInput.focus()
+				if (searchInput) searchInput.focus()
 			}
 		})
 
@@ -125,14 +175,27 @@ export class FormManager {
 		})
 
 		// Поиск стран
-		searchInput.addEventListener("input", e => {
-			this.searchCountries(e.target.value, dropdown)
-		})
+		if (searchInput) {
+			searchInput.addEventListener("input", e => {
+				this.searchCountries(e.target.value, dropdown)
+			})
+		}
 
 		// Закрытие при клике вне
 		document.addEventListener("click", e => {
 			if (!selector.contains(e.target)) {
 				this.closeCountryDropdown(button, dropdown)
+			}
+		})
+
+		// Закрытие по Escape
+		document.addEventListener("keydown", e => {
+			if (
+				e.key === "Escape" &&
+				dropdown.classList.contains("country-selector__dropdown--open")
+			) {
+				this.closeCountryDropdown(button, dropdown)
+				button.focus()
 			}
 		})
 	}
@@ -164,7 +227,8 @@ export class FormManager {
 		item.setAttribute("aria-selected", "true")
 
 		// Обновление поля телефона
-		phoneInput.value = code + " "
+		const currentValue = phoneInput.value.replace(/^\+\d+\s*/, "")
+		phoneInput.value = code + " " + currentValue
 		phoneInput.focus()
 
 		// Закрытие dropdown
@@ -191,11 +255,14 @@ export class FormManager {
 		})
 	}
 
+	/**
+	 * Настройка эффектов формы
+	 */
 	setupFormEffects() {
-		// Эффект фокуса
 		const inputs = this.form.querySelectorAll(".form__input")
 
 		inputs.forEach(input => {
+			// Эффект фокуса
 			input.addEventListener("focus", () => {
 				input.closest(".form__group").classList.add("form__group--focused")
 			})
@@ -206,6 +273,9 @@ export class FormManager {
 		})
 	}
 
+	/**
+	 * Обработка отправки формы
+	 */
 	async handleSubmit(e) {
 		e.preventDefault()
 
@@ -219,25 +289,42 @@ export class FormManager {
 			}
 		})
 
-		if (!isValid) return
+		if (!isValid) {
+			this.showToast(
+				"error",
+				"Ошибка валидации",
+				"Пожалуйста, проверьте все поля"
+			)
+			return
+		}
 
-		// Анимация отправки
+		// Получение данных формы
+		const formData = new FormData(this.form)
+		const data = Object.fromEntries(formData)
+
+		// Анимация кнопки
 		const submitButton = this.form.querySelector(".button--submit")
 		const buttonText = submitButton.querySelector(".button__text")
 		const originalText = buttonText.textContent
 
 		submitButton.classList.add("button--loading")
-		buttonText.textContent = "Отправляется..."
 		submitButton.disabled = true
 
 		try {
-			// Имитация отправки
+			// Имитация отправки (замените на реальный API вызов)
 			await new Promise(resolve => setTimeout(resolve, CONFIG.form.submitDelay))
 
 			// Успех
 			submitButton.classList.remove("button--loading")
 			submitButton.classList.add("button--success")
 			buttonText.textContent = "Отправлено!"
+
+			// Показываем уведомление об успехе
+			this.showToast(
+				"success",
+				"Заявка отправлена!",
+				"Мы свяжемся с вами в ближайшее время"
+			)
 
 			// Сброс формы
 			setTimeout(() => {
@@ -254,7 +341,13 @@ export class FormManager {
 			// Ошибка
 			submitButton.classList.remove("button--loading")
 			submitButton.classList.add("button--error")
-			buttonText.textContent = "Ошибка"
+
+			// Показываем уведомление об ошибке
+			this.showToast(
+				"error",
+				"Ошибка отправки",
+				"Произошла ошибка. Попробуйте позже"
+			)
 
 			setTimeout(() => {
 				submitButton.classList.remove("button--error")
@@ -262,5 +355,98 @@ export class FormManager {
 				submitButton.disabled = false
 			}, 2000)
 		}
+	}
+
+	/**
+	 * Показ toast уведомления
+	 */
+	showToast(type, title, message, duration = 4000) {
+		// Создаем контейнер если его нет
+		if (!this.toastContainer) {
+			this.toastContainer = document.getElementById("toastContainer")
+			if (!this.toastContainer) {
+				console.error("Toast container not found")
+				return
+			}
+		}
+
+		const toast = document.createElement("div")
+		toast.className = `toast toast--${type}`
+
+		// Иконки для разных типов
+		const icons = {
+			success: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+				<polyline points="22 4 12 14.01 9 11.01"></polyline>
+			</svg>`,
+			error: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<circle cx="12" cy="12" r="10"></circle>
+				<line x1="12" y1="8" x2="12" y2="12"></line>
+				<line x1="12" y1="16" x2="12.01" y2="16"></line>
+			</svg>`,
+		}
+
+		toast.innerHTML = `
+			${icons[type] || ""}
+			<div class="toast__content">
+				<h4 class="toast__title">${title}</h4>
+				<p class="toast__message">${message}</p>
+			</div>
+			<button class="toast__close" aria-label="Закрыть">
+				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+					<line x1="5" y1="5" x2="15" y2="15"></line>
+					<line x1="15" y1="5" x2="5" y2="15"></line>
+				</svg>
+			</button>
+			<div class="toast__progress"></div>
+		`
+
+		// Добавляем в контейнер
+		this.toastContainer.appendChild(toast)
+		this.activeToasts.push(toast)
+
+		// Обработчик закрытия
+		const closeBtn = toast.querySelector(".toast__close")
+		closeBtn.addEventListener("click", () => this.hideToast(toast))
+
+		// Автоматическое скрытие
+		const autoHideTimeout = setTimeout(() => {
+			this.hideToast(toast)
+		}, duration)
+
+		// Сохраняем таймер для возможной отмены
+		toast.autoHideTimeout = autoHideTimeout
+
+		// Пауза при наведении
+		toast.addEventListener("mouseenter", () => {
+			clearTimeout(toast.autoHideTimeout)
+			const progress = toast.querySelector(".toast__progress")
+			if (progress) progress.style.animationPlayState = "paused"
+		})
+
+		toast.addEventListener("mouseleave", () => {
+			toast.autoHideTimeout = setTimeout(() => {
+				this.hideToast(toast)
+			}, 2000)
+			const progress = toast.querySelector(".toast__progress")
+			if (progress) progress.style.animationPlayState = "running"
+		})
+	}
+
+	/**
+	 * Скрытие toast уведомления
+	 */
+	hideToast(toast) {
+		toast.classList.add("toast--hiding")
+
+		setTimeout(() => {
+			if (toast && toast.parentNode) {
+				toast.remove()
+			}
+			const index = this.activeToasts.indexOf(toast)
+			if (index > -1) {
+				this.activeToasts.splice(index, 1)
+			}
+		}, 400)
 	}
 }

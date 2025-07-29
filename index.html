@@ -899,21 +899,10 @@
 				<!-- Background Layers -->
 				<div class="contact__bg-image" aria-hidden="true"></div>
 				<div class="contact__overlay" aria-hidden="true"></div>
-				<div class="contact__particles" aria-hidden="true"></div>
 
 				<!-- Content -->
 				<div class="container">
 					<div class="contact__wrapper">
-						<!-- Decorative Elements -->
-						<div
-							class="contact__circle contact__circle--primary"
-							aria-hidden="true"
-						></div>
-						<div
-							class="contact__circle contact__circle--secondary"
-							aria-hidden="true"
-						></div>
-
 						<!-- Form Card -->
 						<div class="contact-card contact__card">
 							<!-- Header -->
@@ -947,7 +936,6 @@
 										aria-describedby="email-error"
 									/>
 									<label class="form__label" for="email">Email</label>
-									<span class="form__highlight"></span>
 									<span
 										class="form__error"
 										id="email-error"
@@ -965,7 +953,7 @@
 											aria-expanded="false"
 											aria-controls="countryDropdown"
 										>
-											<span class="country-selector__flag">🇺🇸</span>
+											<span class="country-selector__flag">🇷🇺</span>
 											<svg
 												class="country-selector__arrow"
 												width="10"
@@ -999,9 +987,22 @@
 												<li
 													class="country-selector__item country-selector__item--selected"
 													role="option"
+													data-code="+7"
+													data-flag="🇷🇺"
+													aria-selected="true"
+												>
+													<span class="country-selector__item-flag">🇷🇺</span>
+													<span class="country-selector__item-name"
+														>Россия</span
+													>
+													<span class="country-selector__item-code">+7</span>
+												</li>
+												<li
+													class="country-selector__item"
+													role="option"
 													data-code="+1"
 													data-flag="🇺🇸"
-													aria-selected="true"
+													aria-selected="false"
 												>
 													<span class="country-selector__item-flag">🇺🇸</span>
 													<span class="country-selector__item-name">США</span>
@@ -1010,17 +1011,68 @@
 												<li
 													class="country-selector__item"
 													role="option"
-													data-code="+7"
-													data-flag="🇷🇺"
+													data-code="+44"
+													data-flag="🇬🇧"
 													aria-selected="false"
 												>
-													<span class="country-selector__item-flag">🇷🇺</span>
+													<span class="country-selector__item-flag">🇬🇧</span>
 													<span class="country-selector__item-name"
-														>Россия</span
+														>Великобритания</span
+													>
+													<span class="country-selector__item-code">+44</span>
+												</li>
+												<li
+													class="country-selector__item"
+													role="option"
+													data-code="+49"
+													data-flag="🇩🇪"
+													aria-selected="false"
+												>
+													<span class="country-selector__item-flag">🇩🇪</span>
+													<span class="country-selector__item-name"
+														>Германия</span
+													>
+													<span class="country-selector__item-code">+49</span>
+												</li>
+												<li
+													class="country-selector__item"
+													role="option"
+													data-code="+375"
+													data-flag="🇧🇾"
+													aria-selected="false"
+												>
+													<span class="country-selector__item-flag">🇧🇾</span>
+													<span class="country-selector__item-name"
+														>Беларусь</span
+													>
+													<span class="country-selector__item-code">+375</span>
+												</li>
+												<li
+													class="country-selector__item"
+													role="option"
+													data-code="+380"
+													data-flag="🇺🇦"
+													aria-selected="false"
+												>
+													<span class="country-selector__item-flag">🇺🇦</span>
+													<span class="country-selector__item-name"
+														>Украина</span
+													>
+													<span class="country-selector__item-code">+380</span>
+												</li>
+												<li
+													class="country-selector__item"
+													role="option"
+													data-code="+7"
+													data-flag="🇰🇿"
+													aria-selected="false"
+												>
+													<span class="country-selector__item-flag">🇰🇿</span>
+													<span class="country-selector__item-name"
+														>Казахстан</span
 													>
 													<span class="country-selector__item-code">+7</span>
 												</li>
-												<!-- More countries... -->
 											</ul>
 										</div>
 									</div>
@@ -1038,7 +1090,6 @@
 									<label class="form__label form__label--phone" for="phone"
 										>Телефон</label
 									>
-									<span class="form__highlight"></span>
 									<span
 										class="form__error"
 										id="phone-error"
@@ -1059,7 +1110,6 @@
 										aria-describedby="name-error"
 									/>
 									<label class="form__label" for="name">Имя</label>
-									<span class="form__highlight"></span>
 									<span class="form__error" id="name-error" role="alert"></span>
 								</div>
 
@@ -1069,7 +1119,6 @@
 									class="button button--submit form__submit"
 								>
 									<span class="button__text">ОТПРАВИТЬ</span>
-									<div class="button__effect" aria-hidden="true"></div>
 									<svg
 										class="button__icon"
 										width="20"
@@ -1086,6 +1135,11 @@
 											stroke-linejoin="round"
 										/>
 									</svg>
+									<span class="button__loader" aria-hidden="true">
+										<span></span>
+										<span></span>
+										<span></span>
+									</span>
 								</button>
 							</form>
 
@@ -1094,57 +1148,64 @@
 								<p class="contact-card__info-text">
 									Или свяжитесь с нами напрямую:
 								</p>
-								<a href="tel:+74959703757" class="contact-card__info-link">
-									<svg
-										width="16"
-										height="16"
-										viewBox="0 0 16 16"
-										fill="none"
-										aria-hidden="true"
+								<div class="contact-card__info-links">
+									<a href="tel:+74959703757" class="contact-card__info-link">
+										<svg
+											width="16"
+											height="16"
+											viewBox="0 0 16 16"
+											fill="none"
+											aria-hidden="true"
+										>
+											<path
+												d="M2 3.5C2 2.67157 2.67157 2 3.5 2H5.37285C5.69602 2 5.98816 2.18537 6.11775 2.47819L7.36259 5.26367C7.51051 5.59832 7.40739 5.98956 7.11885 6.20743L5.91612 7.15848C5.87678 7.18714 5.86048 7.23553 5.87311 7.28113C6.25601 8.64682 7.35318 9.74399 8.71887 10.1269C8.76447 10.1395 8.81286 10.1232 8.84152 10.0839L9.79257 8.88115C10.0104 8.59261 10.4017 8.48949 10.7363 8.63741L13.5218 9.88225C13.8146 10.0118 14 10.304 14 10.6271V12.5C14 13.3284 13.3284 14 12.5 14H11C5.47715 14 1 9.52285 1 4V3.5Z"
+												stroke="currentColor"
+												stroke-width="1.5"
+											/>
+										</svg>
+										+7 (495) 970-37-57
+									</a>
+									<a
+										href="mailto:info@axiomacapital.ru"
+										class="contact-card__info-link"
 									>
-										<path
-											d="M2 3.5C2 2.67157 2.67157 2 3.5 2H5.37285C5.69602 2 5.98816 2.18537 6.11775 2.47819L7.36259 5.26367C7.51051 5.59832 7.40739 5.98956 7.11885 6.20743L5.91612 7.15848C5.87678 7.18714 5.86048 7.23553 5.87311 7.28113C6.25601 8.64682 7.35318 9.74399 8.71887 10.1269C8.76447 10.1395 8.81286 10.1232 8.84152 10.0839L9.79257 8.88115C10.0104 8.59261 10.4017 8.48949 10.7363 8.63741L13.5218 9.88225C13.8146 10.0118 14 10.304 14 10.6271V12.5C14 13.3284 13.3284 14 12.5 14H11C5.47715 14 1 9.52285 1 4V3.5Z"
-											stroke="currentColor"
-											stroke-width="1.5"
-										/>
-									</svg>
-									+7 (495) 970-37-57
-								</a>
-								<a
-									href="mailto:info@axiomacapital.ru"
-									class="contact-card__info-link"
-								>
-									<svg
-										width="16"
-										height="16"
-										viewBox="0 0 16 16"
-										fill="none"
-										aria-hidden="true"
-									>
-										<rect
-											x="1.5"
-											y="3.5"
-											width="13"
-											height="9"
-											rx="1.5"
-											stroke="currentColor"
-											stroke-width="1.5"
-										/>
-										<path
-											d="M1.5 5.5L7.29289 9.29289C7.68342 9.68342 8.31658 9.68342 8.70711 9.29289L14.5 5.5"
-											stroke="currentColor"
-											stroke-width="1.5"
-										/>
-									</svg>
-									info@axiomacapital.ru
-								</a>
+										<svg
+											width="16"
+											height="16"
+											viewBox="0 0 16 16"
+											fill="none"
+											aria-hidden="true"
+										>
+											<rect
+												x="1.5"
+												y="3.5"
+												width="13"
+												height="9"
+												rx="1.5"
+												stroke="currentColor"
+												stroke-width="1.5"
+											/>
+											<path
+												d="M1.5 5.5L7.29289 9.29289C7.68342 9.68342 8.31658 9.68342 8.70711 9.29289L14.5 5.5"
+												stroke="currentColor"
+												stroke-width="1.5"
+											/>
+										</svg>
+										info@axiomacapital.ru
+									</a>
+								</div>
 							</div>
 						</div>
-
-						<!-- Footer -->
-						<p class="contact__footer">УК "АКСИОМА КАПИТАЛ"</p>
 					</div>
 				</div>
+
+				<!-- Toast Container -->
+				<div
+					class="toast-container"
+					id="toastContainer"
+					aria-live="polite"
+					aria-atomic="true"
+				></div>
 			</section>
 		</main>
 
