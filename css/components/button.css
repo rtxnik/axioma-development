@@ -261,86 +261,76 @@
 	display: flex;
 	align-items: center;
 	gap: var(--spacing-sm);
-	padding: var(--spacing-sm) var(--spacing-lg);
+	padding: var(--spacing-md) var(--spacing-xl);
 	background: rgba(255, 255, 255, 0.9);
 	color: var(--color-black);
 	border: none;
 	border-radius: 50px;
-	font-size: var(--font-size-sm);
+	font-size: var(--font-size-base);
 	font-family: var(--font-primary);
 	font-weight: var(--font-weight-medium);
 	cursor: pointer;
 	backdrop-filter: blur(10px);
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 	transition: all var(--transition-base);
 }
 
 .hero__play-button:hover {
 	background: var(--color-white);
 	transform: translate(-50%, -50%) scale(1.05);
-	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
 .hero__play-button svg {
-	width: 20px;
-	height: 20px;
+	width: 24px;
+	height: 24px;
 }
 
 /* Scroll кнопка */
 .scroll-button {
 	background: transparent;
-	border: 1px solid rgba(255, 255, 255, 0.3);
+	border: none;
 	cursor: pointer;
-	padding: 1rem;
+	padding: 1.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	transition: all var(--transition-base);
 	border-radius: 50%;
-	width: 72px;
-	height: 72px;
+	width: 120px;
+	height: 120px;
 	position: relative;
 }
 
 .scroll-button:hover {
-	transform: translateY(-3px);
-	border-color: rgba(255, 255, 255, 0.6);
-	background: rgba(255, 255, 255, 0.1);
+	transform: translateY(-5px) scale(1.1);
 }
 
 .scroll-button:active {
-	transform: translateY(-1px);
+	transform: translateY(-1px) scale(1.05);
 }
 
 .scroll-button:focus-visible {
-	outline: 2px solid rgba(255, 255, 255, 0.5);
+	outline: 2px solid rgba(255, 255, 255, 0.8);
 	outline-offset: 2px;
 }
 
 .scroll-button__icon {
-	width: 50px;
-	height: 50px;
+	width: 72px;
+	height: 72px;
 	color: var(--color-white);
-	opacity: 0.8;
+	opacity: 0.9;
 	transition: all var(--transition-base);
-	animation: subtleBounce 3s ease-in-out infinite;
+	animation: gentleBounce 2.5s ease-in-out infinite;
 	stroke-width: 1.5;
 }
 
 .scroll-button:hover .scroll-button__icon {
+	transform: scale(1.05);
+	animation-duration: 1.2s;
 	opacity: 1;
-	animation-play-state: paused;
-}
-
-/* Более минималистичная анимация */
-@keyframes subtleBounce {
-	0%,
-	100% {
-		transform: translateY(0);
-	}
-	50% {
-		transform: translateY(4px);
-	}
+	filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+	stroke-width: 2;
 }
 
 /* Адаптивность */
@@ -365,26 +355,26 @@
 	}
 
 	.scroll-button {
-		width: 40px;
-		height: 40px;
-		padding: 0.8rem;
+		width: 100px;
+		height: 100px;
+		padding: 1.2rem;
 	}
 
 	.scroll-button__icon {
-		width: 20px;
-		height: 20px;
+		width: 60px;
+		height: 60px;
 	}
 }
 
 @media (max-width: 480px) {
 	.scroll-button {
-		width: 36px;
-		height: 36px;
-		padding: 0.6rem;
+		width: 90px;
+		height: 90px;
+		padding: 1rem;
 	}
 
 	.scroll-button__icon {
-		width: 18px;
-		height: 18px;
+		width: 54px;
+		height: 54px;
 	}
 }
