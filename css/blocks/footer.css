@@ -451,6 +451,13 @@
 		text-align: center;
 	}
 
+	/* Центрируем логотип на планшетах */
+	.footer__logo {
+		display: flex;
+		justify-content: center;
+		margin: 0 auto 1.5rem;
+	}
+
 	.footer__newsletter-form {
 		max-width: 100%;
 		margin: 0 auto;
@@ -514,8 +521,10 @@
 		text-transform: none;
 		letter-spacing: normal;
 		padding: 0;
+		text-align: center;
 	}
 
+	/* Убираем декоративную линию под заголовками на мобильных */
 	.footer__heading::after {
 		display: none;
 	}
@@ -601,6 +610,30 @@
 		width: 20px;
 		height: 20px;
 		color: var(--color-secondary);
+		transition: color var(--transition-base);
+	}
+
+	/* Hover эффект для мобильных устройств */
+	.footer__social-link:hover {
+		background: var(--color-blue);
+		border-color: var(--color-blue);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+	}
+
+	.footer__social-link:hover svg {
+		color: white;
+	}
+
+	/* Active состояние для тач-устройств */
+	.footer__social-link:active {
+		background: var(--color-blue);
+		border-color: var(--color-blue);
+		transform: scale(0.95);
+	}
+
+	.footer__social-link:active svg {
+		color: white;
 	}
 
 	/* Навигация */
@@ -618,18 +651,32 @@
 
 	.footer__column {
 		min-width: 0;
+		text-align: center;
 	}
 
 	.footer__list {
 		gap: 0.625rem;
+		align-items: center;
 	}
 
 	.footer__link {
 		font-size: 0.9375rem;
 		padding: 0.5rem 0;
 		color: var(--color-primary);
-		display: block;
+		display: inline-block;
 		opacity: 0.8;
+		position: relative;
+	}
+
+	.footer__link::after {
+		left: 50%;
+		transform: translateX(-50%);
+		width: 0;
+	}
+
+	.footer__link:hover::after {
+		width: 100%;
+		transform: translateX(-50%);
 	}
 
 	.footer__link:active {
@@ -645,13 +692,16 @@
 	}
 
 	.footer__logo {
-		margin-bottom: 1rem;
+		margin: 0 auto 1rem;
+		display: flex;
+		justify-content: center;
 	}
 
 	.footer__logo img {
 		width: 140px;
 		height: auto;
 		opacity: 0.9;
+		margin: 0 auto;
 	}
 
 	.footer__description {
@@ -803,6 +853,11 @@
 		width: 40px;
 		height: 40px;
 	}
+
+	/* Убеждаемся, что линия скрыта */
+	.footer__heading::after {
+		display: none !important;
+	}
 }
 
 /* iPhone SE и очень маленькие экраны */
@@ -843,21 +898,12 @@
 		min-height: 44px;
 		display: flex;
 		align-items: center;
+		justify-content: center;
 	}
 
 	/* Active состояния для мобильных */
 	.footer__contact-item:active {
 		background: #f8f9fa;
-	}
-
-	.footer__social-link:active {
-		background: var(--color-blue);
-		border-color: var(--color-blue);
-		transform: scale(0.95);
-	}
-
-	.footer__social-link:active svg {
-		color: white;
 	}
 
 	.footer__bottom-link:active {
