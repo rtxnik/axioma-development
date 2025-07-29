@@ -1,5 +1,5 @@
 /**
- * Модуль управления формами (исправленная версия)
+ * Модуль управления формами (обновленная версия с статичными лейблами)
  */
 import { CONFIG } from "../config/config.js"
 import { Utils } from "../utils/utils.js"
@@ -52,14 +52,9 @@ export class FormManager {
 			input.addEventListener(
 				"input",
 				Utils.debounce(() => {
-					const group = input.closest(".form__group")
-
-					// Обновление состояния заполненности
 					if (input.value) {
-						group.classList.add("form__group--filled")
 						this.validateField(input)
 					} else {
-						group.classList.remove("form__group--filled")
 						this.clearFieldError(input)
 					}
 				}, CONFIG.form.debounceDelay)
@@ -203,11 +198,17 @@ export class FormManager {
 	openCountryDropdown(button, dropdown) {
 		dropdown.classList.add("country-selector__dropdown--open")
 		button.setAttribute("aria-expanded", "true")
+		// Добавляем класс для оверлея
+		button.closest(".country-selector").classList.add("country-selector--open")
 	}
 
 	closeCountryDropdown(button, dropdown) {
 		dropdown.classList.remove("country-selector__dropdown--open")
 		button.setAttribute("aria-expanded", "false")
+		// Убираем класс оверлея
+		button
+			.closest(".country-selector")
+			.classList.remove("country-selector--open")
 	}
 
 	selectCountry(item, button, dropdown, phoneInput) {
@@ -330,7 +331,7 @@ export class FormManager {
 			setTimeout(() => {
 				this.form.reset()
 				this.form.querySelectorAll(".form__group").forEach(group => {
-					group.classList.remove("form__group--filled", "form__group--error")
+					group.classList.remove("form__group--error")
 				})
 
 				submitButton.classList.remove("button--success")

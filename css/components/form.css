@@ -27,30 +27,16 @@
 }
 
 /* Состояния группы */
-.form__group--filled .form__label {
-	top: -8px;
-	transform: translateY(0) scale(0.85);
-	font-size: var(--font-size-sm);
-	color: var(--color-blue-light);
-	left: 12px;
-	font-weight: var(--font-weight-medium);
-	letter-spacing: 0.03em;
-}
-
-.form__group--filled .form__label::before {
-	opacity: 1;
-}
-
 .form__group--focused .form__highlight {
 	width: 100%;
 }
 
 .form__group--error .form__input {
-	border-color: var(--color-error);
+	border-color: rgba(239, 68, 68, 0.5);
 }
 
 .form__group--error .form__label {
-	color: var(--color-error);
+	color: #ef4444;
 }
 
 .form__group--error .form__error {
@@ -62,74 +48,38 @@
 .form__input {
 	width: 100%;
 	height: 56px;
-	padding: 20px 1rem 6px;
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	padding: 16px;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.12);
 	color: var(--color-white);
-	font-size: var(--font-size-base);
-	border-radius: var(--radius-md);
-	transition: all var(--transition-base);
-	backdrop-filter: blur(10px);
+	font-size: 1rem;
+	font-weight: 400;
+	border-radius: 12px;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(8px);
+	outline: none;
 }
 
-.form__input:hover {
+.form__input:hover:not(:focus) {
 	background: rgba(255, 255, 255, 0.08);
-	border-color: rgba(59, 130, 246, 0.3);
+	border-color: rgba(255, 255, 255, 0.18);
 }
 
 .form__input:focus {
-	outline: none;
-	background: rgba(255, 255, 255, 0.08);
-	border-color: var(--color-blue);
-	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+	background: rgba(255, 255, 255, 0.09);
+	border-color: rgba(96, 165, 250, 0.5);
+	box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
 }
 
-/* Лейбл */
+/* Статичный лейбл */
 .form__label {
-	position: absolute;
-	left: 1rem;
-	top: 50%;
-	transform: translateY(-50%);
-	color: rgba(255, 255, 255, 0.7);
-	font-size: var(--font-size-base);
-	font-weight: var(--font-weight-regular);
-	transition: all 0.3s var(--ease-in-out-cubic);
-	pointer-events: none;
-	padding: 0 6px;
-	background: transparent;
-	z-index: 1;
-	text-shadow: 0 0 8px rgba(30, 30, 30, 0.95);
+	display: block;
+	margin-bottom: 8px;
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 0.875rem;
+	font-weight: 500;
 	letter-spacing: 0.02em;
-}
-
-/* Фон для лейбла */
-.form__label::before {
-	content: "";
-	position: absolute;
-	inset: -2px -4px;
-	background: rgba(30, 30, 30, 0.98);
-	border-radius: 4px;
-	z-index: -1;
-	opacity: 0;
-	transition: opacity var(--transition-base);
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Активное состояние лейбла */
-.form__input:focus ~ .form__label,
-.form__input:not(:placeholder-shown) ~ .form__label {
-	top: -8px;
-	transform: translateY(0) scale(0.85);
-	font-size: var(--font-size-sm);
-	color: var(--color-blue-light);
-	left: 12px;
-	font-weight: var(--font-weight-medium);
-	letter-spacing: 0.03em;
-}
-
-.form__input:focus ~ .form__label::before,
-.form__input:not(:placeholder-shown) ~ .form__label::before {
-	opacity: 1;
+	transition: color var(--transition-base);
 }
 
 /* Подсветка */
@@ -148,11 +98,12 @@
 .form__error {
 	position: absolute;
 	bottom: -22px;
-	left: 0;
-	font-size: var(--font-size-xs);
-	color: var(--color-error);
+	left: 16px;
+	font-size: 0.75rem;
+	color: #ef4444;
 	opacity: 0;
-	transition: opacity var(--transition-base);
+	transform: translateY(-4px);
+	transition: all 0.2s ease;
 	white-space: nowrap;
 	display: none;
 }
@@ -160,31 +111,46 @@
 /* Группа телефона */
 .form__group--phone {
 	position: relative;
-	z-index: 10;
+	z-index: 30; /* Еще больше увеличен z-index */
+	overflow: visible;
+}
+
+/* Обертка для телефона */
+.form__phone-wrapper {
+	display: flex;
+	gap: 0;
+	align-items: stretch;
+	position: relative;
 }
 
 .form__input--phone {
-	padding-left: 4.5rem;
-	padding-top: 20px;
-}
-
-.form__label--phone {
-	left: 4.5rem;
-}
-
-.form__input--phone:focus ~ .form__label--phone,
-.form__input--phone:not(:placeholder-shown) ~ .form__label--phone,
-.form__group--phone.form__group--filled .form__label--phone {
-	left: 4.5rem;
+	padding-left: 16px;
+	border-radius: 0 12px 12px 0;
+	border-left: none;
+	flex: 1;
 }
 
 /* Селектор страны */
 .form__country-selector {
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 56px;
-	z-index: 20;
+	flex-shrink: 0;
+	position: relative;
+}
+
+/* Оверлей для лучшего контраста (появляется при открытом dropdown) */
+.country-selector::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.4);
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+	z-index: 1999;
+}
+
+.country-selector--open::after {
+	opacity: 1;
+	visibility: visible;
 }
 
 /* Кнопка submit */
@@ -211,22 +177,24 @@
 
 .country-selector {
 	position: relative;
+	height: 100%;
 }
 
 /* Кнопка */
 .country-selector__button {
 	height: 56px;
-	padding: 0 12px;
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	border-right: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: var(--radius-md) 0 0 var(--radius-md);
+	padding: 0 14px;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-right: none;
+	border-radius: 12px 0 0 12px;
 	color: var(--color-white);
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-	gap: 6px;
-	transition: all var(--transition-base);
+	gap: 8px;
+	transition: all 0.3s ease;
+	white-space: nowrap;
 }
 
 .country-selector__button:hover {
@@ -234,21 +202,23 @@
 }
 
 .country-selector__button[aria-expanded="true"] {
-	background: rgba(59, 130, 246, 0.15);
-	border-color: var(--color-blue);
+	background: rgba(255, 255, 255, 0.12);
+	border-color: rgba(96, 165, 250, 0.6);
+	box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
 }
 
 /* Флаг */
 .country-selector__flag {
 	font-size: 1.25rem;
+	line-height: 1;
 }
 
 /* Стрелка */
 .country-selector__arrow {
 	width: 10px;
 	height: 6px;
-	opacity: 0.7;
-	transition: transform var(--transition-base);
+	opacity: 0.6;
+	transition: transform 0.3s ease;
 }
 
 .country-selector__button[aria-expanded="true"] .country-selector__arrow {
@@ -261,18 +231,30 @@
 	top: calc(100% + 8px);
 	left: 0;
 	min-width: 280px;
-	background: rgba(26, 26, 26, 0.98);
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	border-radius: var(--radius-md);
-	max-height: 340px;
+	background: #1a1a1a; /* Полностью непрозрачный темный фон */
+	border: 2px solid rgba(255, 255, 255, 0.25); /* Усилена граница */
+	border-radius: 12px;
+	max-height: 320px;
 	overflow: hidden;
 	opacity: 0;
 	visibility: hidden;
-	transform: translateY(-10px);
-	transition: all var(--transition-base);
-	z-index: 100;
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-	backdrop-filter: blur(20px);
+	transform: translateY(-8px);
+	transition: all 0.3s ease;
+	z-index: 2000; /* Еще больше увеличен z-index */
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95),
+		0 15px 30px -8px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(59, 130, 246, 0.3),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+	/* Убираем backdrop-filter для лучшей читаемости */
+}
+
+/* Дополнительный фоновый слой для контраста */
+.country-selector__dropdown::before {
+	content: "";
+	position: absolute;
+	inset: -1px;
+	background: #1a1a1a;
+	border-radius: 12px;
+	z-index: -1;
 }
 
 .country-selector__dropdown--open {
@@ -284,89 +266,223 @@
 /* Поиск */
 .country-selector__search {
 	padding: 1rem;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Более яркая граница */
+	background: #161616; /* Еще более темный фон для контраста */
 }
 
 .country-selector__search-input {
 	width: 100%;
 	padding: 0.625rem 0.875rem;
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: var(--radius-sm);
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 8px;
 	color: var(--color-white);
-	font-size: var(--font-size-sm);
-	transition: all var(--transition-base);
+	font-size: 0.875rem;
+	transition: all 0.2s ease;
+	outline: none;
 }
 
 .country-selector__search-input:focus {
-	outline: none;
-	border-color: var(--color-blue);
-	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(96, 165, 250, 0.6);
+	background: rgba(255, 255, 255, 0.1);
+	box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
 }
 
 .country-selector__search-input::placeholder {
-	color: rgba(255, 255, 255, 0.4);
+	color: rgba(255, 255, 255, 0.5); /* Более яркий placeholder */
 }
 
 /* Список стран */
 .country-selector__list {
 	list-style: none;
-	max-height: 280px;
+	max-height: 250px;
 	overflow-y: auto;
 	padding: 0.5rem 0;
+	background: #1a1a1a; /* Темный непрозрачный фон */
 }
 
 .country-selector__item {
 	padding: 0.75rem 1rem;
 	cursor: pointer;
 	transition: all 0.2s ease;
-	color: rgba(255, 255, 255, 0.8);
+	color: rgba(255, 255, 255, 0.9); /* Увеличена яркость текста */
 	display: flex;
 	align-items: center;
 	gap: 0.75rem;
 }
 
 .country-selector__item:hover {
-	background: rgba(255, 255, 255, 0.05);
+	background: rgba(59, 130, 246, 0.15); /* Синяя подсветка при наведении */
 	color: var(--color-white);
 }
 
 .country-selector__item--selected {
-	background: rgba(59, 130, 246, 0.15);
-	color: var(--color-blue-light);
+	background: rgba(59, 130, 246, 0.25); /* Более яркий фон для выбранного */
+	color: var(--color-white);
+	font-weight: 500;
 }
 
 .country-selector__item-flag {
 	font-size: 1.25rem;
+	line-height: 1;
 }
 
 .country-selector__item-name {
 	flex: 1;
+	font-size: 0.9375rem; /* Увеличен размер шрифта */
+	font-weight: 500;
 }
 
 .country-selector__item-code {
-	font-size: var(--font-size-sm);
-	opacity: 0.7;
+	font-size: 0.875rem;
+	opacity: 0.8; /* Увеличена видимость кода */
+	font-family: monospace;
+	font-weight: 500;
 }
 
-/* Scrollbar */
+/* Scrollbar для списка стран */
 .country-selector__list::-webkit-scrollbar {
-	width: 6px;
+	width: 8px;
 }
 
 .country-selector__list::-webkit-scrollbar-track {
 	background: rgba(255, 255, 255, 0.05);
-	border-radius: 3px;
+	border-radius: 4px;
 }
 
 .country-selector__list::-webkit-scrollbar-thumb {
-	background: rgba(59, 130, 246, 0.3);
-	border-radius: 3px;
-	transition: background var(--transition-base);
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 4px;
+	transition: var(--transition-base);
 }
 
 .country-selector__list::-webkit-scrollbar-thumb:hover {
-	background: rgba(59, 130, 246, 0.5);
+	background: rgba(255, 255, 255, 0.5);
+}
+
+/* ===============================================
+   КНОПКА ОТПРАВКИ
+   =============================================== */
+
+.button--submit {
+	width: 100%;
+	height: 56px;
+	background: linear-gradient(
+		135deg,
+		var(--color-blue),
+		var(--color-blue-dark)
+	);
+	color: var(--color-white);
+	font-size: 0.9375rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	border-radius: 12px;
+	border: none;
+	cursor: pointer;
+	box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	position: relative;
+	overflow: hidden;
+	margin-top: 0.5rem;
+}
+
+.button--submit:hover:not(:disabled) {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.button--submit:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+.button--submit:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.button__text {
+	position: relative;
+	z-index: 2;
+	transition: opacity 0.3s ease;
+}
+
+.button__icon {
+	width: 20px;
+	height: 20px;
+	transition: transform 0.3s ease;
+	position: relative;
+	z-index: 2;
+}
+
+.button--submit:hover:not(:disabled) .button__icon {
+	transform: translateX(4px);
+}
+
+/* Loader */
+.button__loader {
+	position: absolute;
+	display: flex;
+	gap: 4px;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.button__loader span {
+	width: 6px;
+	height: 6px;
+	background: var(--color-white);
+	border-radius: 50%;
+	animation: loaderDot 1.4s ease-in-out infinite;
+}
+
+.button__loader span:nth-child(1) {
+	animation-delay: -0.32s;
+}
+.button__loader span:nth-child(2) {
+	animation-delay: -0.16s;
+}
+.button__loader span:nth-child(3) {
+	animation-delay: 0;
+}
+
+@keyframes loaderDot {
+	0%,
+	80%,
+	100% {
+		transform: scale(0.6);
+		opacity: 0.5;
+	}
+	40% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/* Loading state */
+.button--submit.button--loading .button__text,
+.button--submit.button--loading .button__icon {
+	opacity: 0;
+}
+
+.button--submit.button--loading .button__loader {
+	opacity: 1;
+}
+
+/* Success state */
+.button--submit.button--success {
+	background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+/* Error state */
+.button--submit.button--error {
+	background: linear-gradient(135deg, #ef4444, #dc2626);
+	animation: shake 0.5s ease-out;
 }
 
 /* ===============================================
@@ -378,6 +494,46 @@
 		margin-bottom: 1rem;
 	}
 
+	.form__label {
+		font-size: 0.8125rem;
+	}
+
+	/* Мобильная адаптация поля телефона - компактная версия */
+	.form__phone-wrapper {
+		display: flex;
+		flex-direction: row;
+		gap: 0;
+		position: relative;
+	}
+
+	.country-selector {
+		position: relative;
+		flex-shrink: 0;
+	}
+
+	.country-selector__button {
+		width: auto;
+		min-width: 65px;
+		padding: 0 10px;
+		border-radius: 12px 0 0 12px;
+		border-right: none;
+		justify-content: center;
+		gap: 4px;
+	}
+
+	/* Скрываем стрелку на мобильных для экономии места */
+	.country-selector__arrow {
+		display: none;
+	}
+
+	.form__input--phone {
+		border-radius: 0 12px 12px 0;
+		padding-left: 12px;
+		border-left: none;
+		flex: 1;
+	}
+
+	/* Dropdown на мобильных */
 	.country-selector__dropdown {
 		position: fixed;
 		left: 1rem;
@@ -386,10 +542,17 @@
 		transform: translateY(-50%);
 		max-width: calc(100% - 2rem);
 		margin: 0 auto;
+		z-index: 2001;
+		background: #1a1a1a; /* Темный фон и на мобильных */
 	}
 
 	.country-selector__dropdown--open {
 		transform: translateY(-50%);
+	}
+
+	/* Оверлей на мобильных занимает весь экран */
+	.country-selector::after {
+		z-index: 2000;
 	}
 }
 
@@ -397,83 +560,131 @@
 	.form {
 		gap: 1.5rem;
 	}
+
+	.form__label {
+		font-size: 0.75rem;
+		margin-bottom: 6px;
+	}
+
+	.form__input,
+	.country-selector__button,
+	.button--submit {
+		height: 52px;
+	}
+
+	.form__input {
+		font-size: var(--font-size-sm);
+	}
+
+	.button--submit {
+		font-size: 0.875rem;
+	}
+
+	/* Еще более компактный селектор страны */
+	.country-selector__button {
+		min-width: 60px;
+		padding: 0 8px;
+	}
+
+	.country-selector__flag {
+		font-size: 1.125rem;
+	}
 }
 
-/* Убираем повторную границу между элементами */
-.form__group--phone .form__input {
-	margin-left: -1px;
-}
-.form__group--phone.form__group--error .form__input--phone {
-	border-color: var(--color-error);
+/* Очень маленькие экраны */
+@media (max-width: 375px) {
+	.form__label {
+		font-size: 0.75rem;
+	}
+
+	.form__input {
+		font-size: 0.875rem;
+		padding: 14px;
+	}
 }
 
-.form__group--phone.form__group--error .country-selector__button {
-	border-color: var(--color-error);
-}
-.form__group--phone.form__group--focused .form__highlight {
-	width: 100%;
-}
-
-.form__group--phone.form__group--focused .country-selector__button {
-	border-color: var(--color-blue);
-	background: rgba(255, 255, 255, 0.08);
-}
+/* Hover эффекты для телефона */
 .form__input--phone:hover {
 	background: rgba(255, 255, 255, 0.08);
-	border-color: rgba(59, 130, 246, 0.3);
+	border-color: rgba(255, 255, 255, 0.18);
 }
 
 .form__input--phone:hover ~ .form__country-selector .country-selector__button {
 	background: rgba(255, 255, 255, 0.08);
-	border-color: rgba(59, 130, 246, 0.3);
+	border-color: rgba(255, 255, 255, 0.18);
 }
+
 .form__input--phone:focus {
-	outline: none;
-	background: rgba(255, 255, 255, 0.08);
-	border-color: var(--color-blue);
-	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-	border-radius: 0 var(--radius-md) var(--radius-md) 0;
+	background: rgba(255, 255, 255, 0.09);
+	border-color: rgba(96, 165, 250, 0.5);
+	box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
 }
 
 .form__input--phone:focus ~ .form__country-selector .country-selector__button {
-	border-color: var(--color-blue);
-	background: rgba(255, 255, 255, 0.08);
-} /* Группа телефона */
-.form__group--phone {
-	position: relative;
-	z-index: 10;
-	overflow: visible;
+	border-color: rgba(96, 165, 250, 0.5);
+	background: rgba(255, 255, 255, 0.09);
 }
 
-.form__group--phone .form__highlight {
-	left: 0;
-	right: 0;
-	width: auto;
-	transform: none;
+/* Состояния ошибки для группы телефона */
+.form__group--phone.form__group--error .form__input--phone {
+	border-color: rgba(239, 68, 68, 0.5);
 }
 
-.form__input--phone {
-	padding-left: 5rem;
-	padding-top: 20px;
-	border-radius: 0 var(--radius-md) var(--radius-md) 0;
-	border-left: none;
+.form__group--phone.form__group--error .country-selector__button {
+	border-color: rgba(239, 68, 68, 0.5);
 }
 
-.form__label--phone {
-	left: 5rem;
+/* Анимация fadeInUp */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
-.form__input--phone:focus ~ .form__label--phone,
-.form__input--phone:not(:placeholder-shown) ~ .form__label--phone,
-.form__group--phone.form__group--filled .form__label--phone {
-	left: 5rem;
+/* Анимация shake для ошибки */
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	10%,
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: translateX(-4px);
+	}
+	20%,
+	40%,
+	60%,
+	80% {
+		transform: translateX(4px);
+	}
 }
 
-/* Селектор страны */
-.form__country-selector {
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 56px;
-	z-index: 20;
+/* Desktop-specific styles */
+@media (min-width: 769px) {
+	/* Убеждаемся, что на десктопе dropdown позиционируется правильно */
+	.country-selector__dropdown {
+		position: absolute !important;
+		/* Дополнительные стили для десктопа */
+		min-width: 320px;
+		box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 1),
+			0 20px 40px -10px rgba(0, 0, 0, 0.95), 0 0 0 2px rgba(59, 130, 246, 0.4),
+			inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+	}
+
+	.country-selector__list {
+		max-height: 320px;
+	}
+
+	.country-selector__item {
+		padding: 0.875rem 1.25rem;
+		font-size: 0.9375rem;
+	}
 }

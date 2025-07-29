@@ -925,17 +925,18 @@
 							>
 								<!-- Email Field -->
 								<div class="form__group">
+									<label class="form__label form__label--static" for="email"
+										>Email</label
+									>
 									<input
 										type="email"
 										class="form__input"
 										name="email"
 										id="email"
-										placeholder=" "
 										required
 										autocomplete="email"
 										aria-describedby="email-error"
 									/>
-									<label class="form__label" for="email">Email</label>
 									<span
 										class="form__error"
 										id="email-error"
@@ -945,151 +946,283 @@
 
 								<!-- Phone Field -->
 								<div class="form__group form__group--phone">
-									<div class="country-selector form__country-selector">
-										<button
-											type="button"
-											class="country-selector__button"
-											aria-label="Выбрать страну"
-											aria-expanded="false"
-											aria-controls="countryDropdown"
-										>
-											<span class="country-selector__flag">🇷🇺</span>
-											<svg
-												class="country-selector__arrow"
-												width="10"
-												height="6"
-												viewBox="0 0 10 6"
-												fill="none"
-												aria-hidden="true"
-											>
-												<path
-													d="M1 1L5 5L9 1"
-													stroke="currentColor"
-													stroke-width="1.5"
-													stroke-linecap="round"
-												/>
-											</svg>
-										</button>
-
-										<div
-											class="country-selector__dropdown"
-											id="countryDropdown"
-										>
-											<div class="country-selector__search">
-												<input
-													type="text"
-													placeholder="Поиск страны..."
-													class="country-selector__search-input"
-													aria-label="Поиск страны"
-												/>
-											</div>
-											<ul class="country-selector__list" role="listbox">
-												<li
-													class="country-selector__item country-selector__item--selected"
-													role="option"
-													data-code="+7"
-													data-flag="🇷🇺"
-													aria-selected="true"
-												>
-													<span class="country-selector__item-flag">🇷🇺</span>
-													<span class="country-selector__item-name"
-														>Россия</span
-													>
-													<span class="country-selector__item-code">+7</span>
-												</li>
-												<li
-													class="country-selector__item"
-													role="option"
-													data-code="+1"
-													data-flag="🇺🇸"
-													aria-selected="false"
-												>
-													<span class="country-selector__item-flag">🇺🇸</span>
-													<span class="country-selector__item-name">США</span>
-													<span class="country-selector__item-code">+1</span>
-												</li>
-												<li
-													class="country-selector__item"
-													role="option"
-													data-code="+44"
-													data-flag="🇬🇧"
-													aria-selected="false"
-												>
-													<span class="country-selector__item-flag">🇬🇧</span>
-													<span class="country-selector__item-name"
-														>Великобритания</span
-													>
-													<span class="country-selector__item-code">+44</span>
-												</li>
-												<li
-													class="country-selector__item"
-													role="option"
-													data-code="+49"
-													data-flag="🇩🇪"
-													aria-selected="false"
-												>
-													<span class="country-selector__item-flag">🇩🇪</span>
-													<span class="country-selector__item-name"
-														>Германия</span
-													>
-													<span class="country-selector__item-code">+49</span>
-												</li>
-												<li
-													class="country-selector__item"
-													role="option"
-													data-code="+375"
-													data-flag="🇧🇾"
-													aria-selected="false"
-												>
-													<span class="country-selector__item-flag">🇧🇾</span>
-													<span class="country-selector__item-name"
-														>Беларусь</span
-													>
-													<span class="country-selector__item-code">+375</span>
-												</li>
-												<li
-													class="country-selector__item"
-													role="option"
-													data-code="+380"
-													data-flag="🇺🇦"
-													aria-selected="false"
-												>
-													<span class="country-selector__item-flag">🇺🇦</span>
-													<span class="country-selector__item-name"
-														>Украина</span
-													>
-													<span class="country-selector__item-code">+380</span>
-												</li>
-												<li
-													class="country-selector__item"
-													role="option"
-													data-code="+7"
-													data-flag="🇰🇿"
-													aria-selected="false"
-												>
-													<span class="country-selector__item-flag">🇰🇿</span>
-													<span class="country-selector__item-name"
-														>Казахстан</span
-													>
-													<span class="country-selector__item-code">+7</span>
-												</li>
-											</ul>
-										</div>
-									</div>
-
-									<input
-										type="tel"
-										class="form__input form__input--phone"
-										name="phone"
-										id="phone"
-										placeholder=" "
-										required
-										autocomplete="tel"
-										aria-describedby="phone-error"
-									/>
-									<label class="form__label form__label--phone" for="phone"
+									<label
+										class="form__label form__label--static form__label--phone-static"
+										for="phone"
 										>Телефон</label
 									>
+									<div class="form__phone-wrapper">
+										<div class="country-selector form__country-selector">
+											<button
+												type="button"
+												class="country-selector__button"
+												aria-label="Выбрать страну"
+												aria-expanded="false"
+												aria-controls="countryDropdown"
+											>
+												<span class="country-selector__flag">🇷🇺</span>
+												<svg
+													class="country-selector__arrow"
+													width="10"
+													height="6"
+													viewBox="0 0 10 6"
+													fill="none"
+													aria-hidden="true"
+												>
+													<path
+														d="M1 1L5 5L9 1"
+														stroke="currentColor"
+														stroke-width="1.5"
+														stroke-linecap="round"
+													/>
+												</svg>
+											</button>
+
+											<div
+												class="country-selector__dropdown"
+												id="countryDropdown"
+											>
+												<div class="country-selector__search">
+													<input
+														type="text"
+														placeholder="Поиск страны..."
+														class="country-selector__search-input"
+														aria-label="Поиск страны"
+													/>
+												</div>
+												<ul class="country-selector__list" role="listbox">
+													<li
+														class="country-selector__item country-selector__item--selected"
+														role="option"
+														data-code="+7"
+														data-flag="🇷🇺"
+														aria-selected="true"
+													>
+														<span class="country-selector__item-flag">🇷🇺</span>
+														<span class="country-selector__item-name"
+															>Россия</span
+														>
+														<span class="country-selector__item-code">+7</span>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+1"
+														data-flag="🇺🇸"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇺🇸</span>
+														<span class="country-selector__item-name">США</span>
+														<span class="country-selector__item-code">+1</span>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+86"
+														data-flag="🇨🇳"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇨🇳</span>
+														<span class="country-selector__item-name"
+															>Китай</span
+														>
+														<span class="country-selector__item-code">+86</span>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+91"
+														data-flag="🇮🇳"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇮🇳</span>
+														<span class="country-selector__item-name"
+															>Индия</span
+														>
+														<span class="country-selector__item-code">+91</span>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+55"
+														data-flag="🇧🇷"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇧🇷</span>
+														<span class="country-selector__item-name"
+															>Бразилия</span
+														>
+														<span class="country-selector__item-code">+55</span>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+98"
+														data-flag="🇮🇷"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇮🇷</span>
+														<span class="country-selector__item-name"
+															>Иран</span
+														>
+														<span class="country-selector__item-code">+98</span>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+375"
+														data-flag="🇧🇾"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇧🇾</span>
+														<span class="country-selector__item-name"
+															>Беларусь</span
+														>
+														<span class="country-selector__item-code"
+															>+375</span
+														>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+7"
+														data-flag="🇰🇿"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇰🇿</span>
+														<span class="country-selector__item-name"
+															>Казахстан</span
+														>
+														<span class="country-selector__item-code">+7</span>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+992"
+														data-flag="🇹🇯"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇹🇯</span>
+														<span class="country-selector__item-name"
+															>Таджикистан</span
+														>
+														<span class="country-selector__item-code"
+															>+992</span
+														>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+998"
+														data-flag="🇺🇿"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇺🇿</span>
+														<span class="country-selector__item-name"
+															>Узбекистан</span
+														>
+														<span class="country-selector__item-code"
+															>+998</span
+														>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+994"
+														data-flag="🇦🇿"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇦🇿</span>
+														<span class="country-selector__item-name"
+															>Азербайджан</span
+														>
+														<span class="country-selector__item-code"
+															>+994</span
+														>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+374"
+														data-flag="🇦🇲"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇦🇲</span>
+														<span class="country-selector__item-name"
+															>Армения</span
+														>
+														<span class="country-selector__item-code"
+															>+374</span
+														>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+996"
+														data-flag="🇰🇬"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇰🇬</span>
+														<span class="country-selector__item-name"
+															>Кыргызстан</span
+														>
+														<span class="country-selector__item-code"
+															>+996</span
+														>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+66"
+														data-flag="🇹🇭"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇹🇭</span>
+														<span class="country-selector__item-name"
+															>Таиланд</span
+														>
+														<span class="country-selector__item-code">+66</span>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+84"
+														data-flag="🇻🇳"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇻🇳</span>
+														<span class="country-selector__item-name"
+															>Вьетнам</span
+														>
+														<span class="country-selector__item-code">+84</span>
+													</li>
+													<li
+														class="country-selector__item"
+														role="option"
+														data-code="+62"
+														data-flag="🇮🇩"
+														aria-selected="false"
+													>
+														<span class="country-selector__item-flag">🇮🇩</span>
+														<span class="country-selector__item-name"
+															>Индонезия</span
+														>
+														<span class="country-selector__item-code">+62</span>
+													</li>
+												</ul>
+											</div>
+										</div>
+
+										<input
+											type="tel"
+											class="form__input form__input--phone"
+											name="phone"
+											id="phone"
+											required
+											autocomplete="tel"
+											aria-describedby="phone-error"
+										/>
+									</div>
 									<span
 										class="form__error"
 										id="phone-error"
@@ -1099,17 +1232,18 @@
 
 								<!-- Name Field -->
 								<div class="form__group">
+									<label class="form__label form__label--static" for="name"
+										>Имя</label
+									>
 									<input
 										type="text"
 										class="form__input"
 										name="name"
 										id="name"
-										placeholder=" "
 										required
 										autocomplete="name"
 										aria-describedby="name-error"
 									/>
-									<label class="form__label" for="name">Имя</label>
 									<span class="form__error" id="name-error" role="alert"></span>
 								</div>
 
