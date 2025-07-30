@@ -5,7 +5,7 @@ import { FormManager } from "../modules/FormManager.js"
 import { LazyLoadManager } from "../modules/LazyLoadManager.js"
 import { LoadingManager } from "../modules/LoadingManager.js"
 import { NavigationManager } from "../modules/NavigationManager.js"
-import { ParallaxManager } from "../modules/ParallaxManager.js"
+// import { ParallaxManager } from "../modules/ParallaxManager.js"
 import { ScrollAnimationManager } from "../modules/ScrollAnimationManager.js"
 import { VideoManager } from "../modules/VideoManager.js"
 
