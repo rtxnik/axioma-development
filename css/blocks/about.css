@@ -192,7 +192,7 @@
 	}
 
 	/* Включаем градиентный оверлей для десктопа */
-	.about::before {
+	/* .about::before {
 		background: linear-gradient(
 			90deg,
 			rgba(255, 255, 255, 1) 0%,
@@ -201,7 +201,7 @@
 			rgba(255, 255, 255, 0) 100%
 		);
 		opacity: 1;
-	}
+	} */
 
 	.about .container {
 		align-items: center; /* Центрируем контент на десктопе */
@@ -252,7 +252,7 @@
 	}
 
 	/* Усиливаем градиент */
-	.about::before {
+	/* .about::before {
 		background: linear-gradient(
 			90deg,
 			rgba(255, 255, 255, 1) 0%,
@@ -260,7 +260,7 @@
 			rgba(255, 255, 255, 0.85) 50%,
 			rgba(255, 255, 255, 0) 70%
 		);
-	}
+	} */
 
 	.about__content {
 		max-width: 700px;
@@ -288,7 +288,7 @@
 		height: 55vh;
 		min-height: 700px;
 		background-position: center right;
-		background-size: 110%; /* Немного отдаляем для показа всего здания */
+		background-size: 100%;
 	}
 
 	.about__title {
