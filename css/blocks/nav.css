@@ -1,5 +1,5 @@
 /* ===============================================
-   БЛОК: НАВИГАЦИЯ (БЭМ)
+   БЛОК: НАВИГАЦИЯ (БЭМ) - Оптимизированная версия
    =============================================== */
 
 .nav {
@@ -49,6 +49,9 @@
 	border-radius: var(--radius-sm);
 	transition: var(--transition-base);
 	position: relative;
+	/* Увеличиваем touch target */
+	min-width: 48px;
+	min-height: 48px;
 }
 
 .nav__toggle:hover {
@@ -133,6 +136,9 @@
 	white-space: nowrap;
 	position: relative;
 	overflow: hidden;
+	cursor: pointer;
+	/* Touch target */
+	min-height: 48px;
 }
 
 .nav__link-text {
@@ -160,16 +166,19 @@
 	width: 100%;
 }
 
-/* Стрелка dropdown */
+/* Стрелка dropdown - всегда видима для пунктов с подменю */
 .nav__link-arrow {
 	transition: var(--transition-base);
 	opacity: 0.7;
 }
 
-.nav__item--has-dropdown:hover .nav__link-arrow,
-.nav__item--has-mega:hover .nav__link-arrow {
-	transform: rotate(180deg);
-	opacity: 1;
+/* Hover эффекты для десктопа */
+@media (hover: hover) and (pointer: fine) {
+	.nav__item--has-dropdown:hover .nav__link-arrow,
+	.nav__item--has-mega:hover .nav__link-arrow {
+		transform: rotate(180deg);
+		opacity: 1;
+	}
 }
 
 /* Dropdown меню */
@@ -205,11 +214,20 @@
 	pointer-events: none;
 }
 
-/* Показ dropdown при hover */
-.nav__item--has-dropdown:hover .nav__dropdown {
-	opacity: 1;
-	visibility: visible;
-	transform: translateY(0) scale(1);
+/* Показ dropdown при hover на десктопе */
+@media (hover: hover) and (pointer: fine) {
+	.nav__item--has-dropdown:hover .nav__dropdown {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0) scale(1);
+	}
+}
+
+/* Активный dropdown на мобильных */
+.nav__dropdown--open {
+	opacity: 1 !important;
+	visibility: visible !important;
+	transform: translateY(0) scale(1) !important;
 }
 
 /* Элементы dropdown */
@@ -250,6 +268,10 @@
 	margin: 0 0.75rem;
 	position: relative;
 	overflow: hidden;
+	/* Touch target */
+	min-height: 48px;
+	display: flex;
+	align-items: center;
 }
 
 .nav__dropdown-link span {
@@ -333,10 +355,13 @@
 	pointer-events: none;
 }
 
-.nav__item--has-mega:hover .nav__mega-menu {
-	opacity: 1;
-	visibility: visible;
-	transform: translateY(0) scale(1);
+/* Показ mega menu при hover на десктопе */
+@media (hover: hover) and (pointer: fine) {
+	.nav__item--has-mega:hover .nav__mega-menu {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0) scale(1);
+	}
 }
 
 .nav__mega-content {
@@ -386,6 +411,10 @@
 	position: relative;
 	border-radius: var(--radius-sm);
 	padding-left: 1rem;
+	/* Touch target */
+	min-height: 44px;
+	display: flex;
+	align-items: center;
 }
 
 .nav__mega-link span {
@@ -413,17 +442,12 @@
 	width: 3px;
 }
 
-/* Мобильная навигация */
-.nav__link--desktop {
-	display: flex;
-}
-
-.nav__link--mobile {
-	display: none;
-}
-
-.nav__dropdown-toggle {
-	display: none;
+/* Focus состояния для клавиатурной навигации */
+.nav__item--focus .nav__dropdown,
+.nav__item--focus .nav__mega-menu {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0) scale(1);
 }
 
 /* Анимации */
@@ -449,7 +473,10 @@
 	}
 }
 
-/* Адаптивность */
+/* ===============================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ
+   =============================================== */
+
 @media (max-width: 1024px) {
 	.nav__list {
 		gap: 2rem;
@@ -494,13 +521,15 @@
 		align-items: stretch;
 		gap: 0;
 		padding: 6rem 2rem 2rem;
-		transition: var(--transition-slow);
+		transition: right 0.3s ease-out;
 		overflow-y: auto;
 		border-left: none;
+		-webkit-overflow-scrolling: touch;
 	}
 
 	/* Показ мобильного меню */
-	.nav__toggle-input:checked ~ .nav__list {
+	.nav__toggle-input:checked ~ .nav__list,
+	.nav__list--open {
 		right: 0;
 	}
 
@@ -514,34 +543,41 @@
 		font-size: var(--font-size-base);
 		width: 100%;
 		justify-content: space-between;
-	}
-
-	.nav__link--desktop {
-		display: none;
-	}
-
-	.nav__link--mobile {
-		display: flex;
-		cursor: pointer;
+		min-height: 56px;
 		position: relative;
 	}
 
-	.nav__link--mobile::after {
+	/* Визуальный индикатор для пунктов с подменю */
+	.nav__item--has-dropdown .nav__link::after,
+	.nav__item--has-mega .nav__link::after {
 		content: "";
 		position: absolute;
 		right: 0;
 		top: 50%;
-		width: 0;
-		height: 0;
-		border-left: 6px solid transparent;
-		border-right: 6px solid transparent;
-		border-top: 8px solid rgba(255, 255, 255, 0.8);
+		width: 44px;
+		height: 44px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		transform: translateY(-50%);
-		transition: var(--transition-base);
+		/* Увеличиваем область клика */
+		margin: -8px -8px -8px 0;
 	}
 
-	.nav__dropdown-toggle:checked + .nav__link--mobile::after {
-		transform: translateY(-50%) rotate(180deg);
+	/* Стрелка всегда видна на мобильных */
+	.nav__link-arrow {
+		opacity: 0.8;
+		transition: transform 0.3s ease;
+		pointer-events: none;
+	}
+
+	/* Активное состояние */
+	.nav__item--open .nav__link {
+		color: var(--color-white);
+	}
+
+	.nav__item--open .nav__link-arrow {
+		transform: rotate(180deg);
 	}
 
 	/* Dropdown в мобильной версии */
@@ -558,13 +594,13 @@
 		margin-top: 0;
 		padding: 0;
 		overflow: hidden;
-		transition: all var(--transition-base);
+		transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+		width: 100%;
 	}
 
-	.nav__dropdown-toggle:checked ~ .nav__dropdown {
+	.nav__item--open .nav__dropdown {
 		opacity: 1;
 		visibility: visible;
-		max-height: 500px;
 		padding: 1rem 0;
 	}
 
@@ -572,6 +608,13 @@
 		margin: 0;
 		padding: 0.875rem 1.5rem;
 		font-size: var(--font-size-sm);
+		min-height: 48px;
+		background: rgba(255, 255, 255, 0.02);
+		margin-bottom: 2px;
+	}
+
+	.nav__dropdown-link:active {
+		background: rgba(59, 130, 246, 0.15);
 	}
 
 	/* Mega menu в мобильной версии */
@@ -588,24 +631,49 @@
 		max-height: 0;
 		transform: none;
 		overflow: hidden;
-		transition: all var(--transition-base);
+		transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
 	}
 
-	.nav__dropdown-toggle:checked ~ .nav__mega-menu {
+	.nav__item--open .nav__mega-menu {
 		opacity: 1;
 		visibility: visible;
-		max-height: 800px;
-		padding: 1.5rem;
+		padding: 1.5rem 0;
 	}
 
 	.nav__mega-content {
 		grid-template-columns: 1fr;
 		gap: 1.5rem;
+		padding: 0 1rem;
 	}
 
 	.nav__mega-link {
-		padding: 0.75rem 0;
-		padding-left: 0;
+		padding: 0.75rem 1rem;
+		background: rgba(255, 255, 255, 0.02);
+		margin-bottom: 2px;
+		min-height: 48px;
+	}
+
+	.nav__mega-link:active {
+		background: rgba(59, 130, 246, 0.15);
+	}
+
+	/* Убираем анимации на мобильных для производительности */
+	.nav__dropdown-item,
+	.nav__mega-item {
+		animation: none;
+	}
+
+	/* Состояния touch */
+	@media (hover: none) and (pointer: coarse) {
+		.nav__link:active {
+			background: rgba(255, 255, 255, 0.05);
+		}
+
+		.nav__dropdown-link:active,
+		.nav__mega-link:active {
+			background: rgba(59, 130, 246, 0.2);
+			color: var(--color-white);
+		}
 	}
 }
 
@@ -626,5 +694,25 @@
 	.nav__dropdown-link {
 		padding: 0.75rem 1rem;
 		font-size: 0.85rem;
+	}
+
+	.nav__mega-link {
+		padding: 0.625rem 0.75rem;
+		font-size: 0.85rem;
+	}
+}
+
+/* Доступность */
+@media (prefers-reduced-motion: reduce) {
+	.nav__list,
+	.nav__dropdown,
+	.nav__mega-menu,
+	.nav__link-arrow {
+		transition: none;
+	}
+
+	.nav__dropdown-item,
+	.nav__mega-item {
+		animation: none;
 	}
 }
