@@ -308,12 +308,12 @@
 
 /* Правовая информация */
 .footer__legal {
-	background: linear-gradient(
+	/* background: linear-gradient(
 		135deg,
 		rgba(220, 220, 220, 0.92) 0%,
-		/* #dcdcdc - очень светлый серый */ rgba(220, 220, 220, 0.88) 50%,
+		rgba(220, 220, 220, 0.88) 50%,
 		rgba(220, 220, 220, 0.92) 100%
-	);
+	); */
 	backdrop-filter: blur(5px);
 	padding: 3rem 0;
 	border-top: 1px solid #e9ecef;

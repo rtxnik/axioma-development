@@ -297,9 +297,9 @@
 		padding-top: max(0px, env(safe-area-inset-top));
 	}
 
-	.footer {
+	/* .footer {
 		padding-bottom: max(2rem, env(safe-area-inset-bottom));
-	}
+	} */
 }
 
 /* iPad Pro */
