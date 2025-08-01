@@ -5,7 +5,6 @@ import { FormManager } from "../modules/FormManager.js"
 import { LazyLoadManager } from "../modules/LazyLoadManager.js"
 import { LoadingManager } from "../modules/LoadingManager.js"
 import { NavigationManager } from "../modules/NavigationManager.js"
-// import { ParallaxManager } from "../modules/ParallaxManager.js"
 import { ScrollAnimationManager } from "../modules/ScrollAnimationManager.js"
 import { VideoManager } from "../modules/VideoManager.js"
 
@@ -23,7 +22,6 @@ export class App {
 		this.modules.video = new VideoManager(this.modules.loading)
 		this.modules.navigation = new NavigationManager()
 		this.modules.form = new FormManager()
-		this.modules.parallax = new ParallaxManager()
 		this.modules.lazyLoad = new LazyLoadManager()
 		this.modules.scrollAnimation = new ScrollAnimationManager()
 
