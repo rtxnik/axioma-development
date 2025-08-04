@@ -1245,6 +1245,51 @@
 									<span class="form__error" id="name-error" role="alert"></span>
 								</div>
 
+								<!-- Privacy Policy Checkbox -->
+								<div class="form__group form__group--checkbox">
+									<label class="form__checkbox-wrapper">
+										<input
+											type="checkbox"
+											class="form__checkbox"
+											name="privacy"
+											id="privacy"
+											required
+											aria-describedby="privacy-error"
+										/>
+										<span class="form__checkbox-box">
+											<svg
+												class="form__checkbox-icon"
+												width="12"
+												height="10"
+												viewBox="0 0 12 10"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d="M1 5L4.5 8.5L11 1.5" />
+											</svg>
+										</span>
+										<span class="form__checkbox-label">
+											Даю согласие на
+											<a
+												href="/privacy"
+												class="form__link"
+												target="_blank"
+												rel="noopener"
+											>
+												обработку персональных данных
+											</a>
+										</span>
+									</label>
+									<span
+										class="form__error"
+										id="privacy-error"
+										role="alert"
+									></span>
+								</div>
+
 								<!-- Submit Button -->
 								<button
 									type="submit"

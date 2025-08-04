@@ -94,3 +94,7 @@ lighthouse-report/
 
 # Performance budgets
 .size-limit.json
+
+# Directories 
+/src
+/assets

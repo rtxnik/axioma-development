@@ -1,5 +1,5 @@
 /**
- * Модуль управления формами (обновленная версия с статичными лейблами)
+ * Модуль управления формами (обновленная версия с чекбоксом)
  */
 import { CONFIG } from "../config/config.js"
 import { Utils } from "../utils/utils.js"
@@ -20,6 +20,50 @@ export class FormManager {
 		this.setupCountrySelector()
 		this.setupFormEffects()
 		this.setupRealTimeValidation()
+		this.setupCheckbox()
+	}
+
+	/**
+	 * Настройка чекбокса
+	 */
+	setupCheckbox() {
+		const checkbox = this.form.querySelector(".form__checkbox")
+		const checkboxWrapper = this.form.querySelector(".form__checkbox-wrapper")
+
+		if (checkbox && checkboxWrapper) {
+			// Обработка клика по всей области чекбокса
+			checkboxWrapper.addEventListener("click", e => {
+				// Если клик не по самому чекбоксу или ссылке
+				if (e.target.tagName !== "INPUT" && e.target.tagName !== "A") {
+					checkbox.checked = !checkbox.checked
+					checkbox.dispatchEvent(new Event("change"))
+				}
+			})
+
+			// Валидация при изменении
+			checkbox.addEventListener("change", () => {
+				this.validateCheckbox(checkbox)
+			})
+		}
+	}
+
+	/**
+	 * Валидация чекбокса
+	 */
+	validateCheckbox(checkbox) {
+		const group = checkbox.closest(".form__group")
+		const error = group.querySelector(".form__error")
+
+		if (!checkbox.checked) {
+			group.classList.add("form__group--error")
+			error.textContent =
+				"Необходимо дать согласие на обработку персональных данных"
+			return false
+		} else {
+			group.classList.remove("form__group--error")
+			error.textContent = ""
+			return true
+		}
 	}
 
 	/**
@@ -282,6 +326,7 @@ export class FormManager {
 
 		// Валидация всех полей
 		const inputs = this.form.querySelectorAll(".form__input")
+		const checkbox = this.form.querySelector(".form__checkbox")
 		let isValid = true
 
 		inputs.forEach(input => {
@@ -289,6 +334,11 @@ export class FormManager {
 				isValid = false
 			}
 		})
+
+		// Валидация чекбокса
+		if (checkbox && !this.validateCheckbox(checkbox)) {
+			isValid = false
+		}
 
 		if (!isValid) {
 			this.showToast(
@@ -382,8 +432,8 @@ export class FormManager {
 			</svg>`,
 			error: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<circle cx="12" cy="12" r="10"></circle>
-				<line x1="12" y1="8" x2="12" y2="12"></line>
-				<line x1="12" y1="16" x2="12.01" y2="16"></line>
+				<line x1="15" y1="9" x2="9" y2="15"></line>
+				<line x1="9" y1="9" x2="15" y2="15"></line>
 			</svg>`,
 		}
 
