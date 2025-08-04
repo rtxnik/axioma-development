@@ -64,9 +64,9 @@ a {
 	transition: color var(--transition-fast);
 }
 
-a:hover {
+/* a:hover {
 	color: var(--color-blue-dark);
-}
+} */
 
 /* Strong and emphasis */
 strong,

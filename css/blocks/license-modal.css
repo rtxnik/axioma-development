@@ -156,6 +156,45 @@
 	color: var(--color-blue);
 }
 
+/* Кнопка загрузки */
+.license-modal__download {
+	margin-top: var(--spacing-xl);
+	margin-bottom: var(--spacing-xl);
+	text-align: center;
+}
+
+.license-modal__download-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.875rem 1.75rem;
+	background: var(--gradient-primary);
+	color: var(--color-white);
+	font-size: 0.9375rem;
+	font-weight: var(--font-weight-semibold);
+	text-decoration: none;
+	border: none;
+	border-radius: 12px;
+	cursor: pointer;
+	transition: all var(--transition-base);
+	box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.license-modal__download-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+.license-modal__download-btn:active {
+	transform: translateY(0);
+}
+
+.license-modal__download-btn svg {
+	width: 20px;
+	height: 20px;
+	flex-shrink: 0;
+}
+
 /* Подвал модального окна */
 .license-modal__footer {
 	text-align: center;
@@ -234,6 +273,14 @@
 	.license-modal__value,
 	.license-modal__note {
 		font-size: 0.75rem;
+	}
+
+	/* Адаптивность кнопки загрузки */
+	.license-modal__download-btn {
+		width: 100%;
+		justify-content: center;
+		padding: 0.75rem 1.5rem;
+		font-size: 0.875rem;
 	}
 }
 

@@ -3,6 +3,7 @@
  */
 import { FormManager } from "../modules/FormManager.js"
 import { LazyLoadManager } from "../modules/LazyLoadManager.js"
+import { LicenseModal } from "../modules/LicenseModal.js"
 import { LoadingManager } from "../modules/LoadingManager.js"
 import { NavigationManager } from "../modules/NavigationManager.js"
 import { ScrollAnimationManager } from "../modules/ScrollAnimationManager.js"
@@ -24,6 +25,7 @@ export class App {
 		this.modules.form = new FormManager()
 		this.modules.lazyLoad = new LazyLoadManager()
 		this.modules.scrollAnimation = new ScrollAnimationManager()
+		this.modules.licenseModal = new LicenseModal()
 
 		// Глобальные ссылки (для обратной совместимости)
 		window.loadingManager = this.modules.loading

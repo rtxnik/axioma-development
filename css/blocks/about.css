@@ -186,7 +186,7 @@
 		min-height: 600px;
 		align-items: center; /* Центрируем на десктопе */
 		/* Десктопное изображение */
-		background-image: url("/assets/about-desktop.png");
+		background-image: url("/assets/about-desktop.jpg");
 		background-position: center center;
 		background-size: cover;
 	}
