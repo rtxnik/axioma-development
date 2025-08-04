@@ -147,14 +147,18 @@
 	cursor: pointer;
 	position: relative;
 	padding: 0.25rem 0;
+	user-select: none;
 }
 
 .form__checkbox {
 	position: absolute;
+	top: 0;
+	left: 0;
 	opacity: 0;
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
+	z-index: 2;
 }
 
 .form__checkbox-box {
@@ -169,9 +173,15 @@
 	align-items: center;
 	justify-content: center;
 	position: relative;
+	cursor: pointer;
+	z-index: 1;
 }
 
 .form__checkbox:hover ~ .form__checkbox-box {
+	border-color: var(--color-blue);
+}
+
+.form__checkbox-wrapper:hover .form__checkbox-box {
 	border-color: var(--color-blue);
 }
 
@@ -189,6 +199,7 @@
 	transform: scale(0.8);
 	transition: all 0.2s ease;
 	color: var(--color-white);
+	pointer-events: none;
 }
 
 .form__checkbox:checked ~ .form__checkbox-box .form__checkbox-icon {
@@ -202,6 +213,7 @@
 	line-height: 1.5;
 	flex: 1;
 	user-select: none;
+	cursor: pointer;
 }
 
 .form__link {

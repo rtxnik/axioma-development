@@ -135,11 +135,10 @@
 }
 
 /* Темная тема (опционально) */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
 	:root {
-		/* Можно переопределить цвета для темной темы */
 	}
-}
+} */
 
 /* Режим высокой контрастности */
 @media (prefers-contrast: high) {

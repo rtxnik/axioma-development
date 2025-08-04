@@ -29,12 +29,27 @@ export class FormManager {
 	setupCheckbox() {
 		const checkbox = this.form.querySelector(".form__checkbox")
 		const checkboxWrapper = this.form.querySelector(".form__checkbox-wrapper")
+		const checkboxBox = this.form.querySelector(".form__checkbox-box")
 
 		if (checkbox && checkboxWrapper) {
-			// Обработка клика по всей области чекбокса
+			// Обработка клика по кастомному чекбоксу (квадратику)
+			if (checkboxBox) {
+				checkboxBox.addEventListener("click", e => {
+					e.preventDefault()
+					checkbox.checked = !checkbox.checked
+					checkbox.dispatchEvent(new Event("change"))
+				})
+			}
+
+			// Обработка клика по тексту лейбла
 			checkboxWrapper.addEventListener("click", e => {
-				// Если клик не по самому чекбоксу или ссылке
-				if (e.target.tagName !== "INPUT" && e.target.tagName !== "A") {
+				// Если клик по ссылке - не переключаем чекбокс
+				if (e.target.tagName === "A" || e.target.closest(".form__link")) {
+					return
+				}
+				// Если клик не по самому чекбоксу и не по box
+				if (e.target !== checkbox && !e.target.closest(".form__checkbox-box")) {
+					e.preventDefault()
 					checkbox.checked = !checkbox.checked
 					checkbox.dispatchEvent(new Event("change"))
 				}
