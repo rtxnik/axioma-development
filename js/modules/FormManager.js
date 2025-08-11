@@ -21,6 +21,58 @@ export class FormManager {
 		this.setupFormEffects()
 		this.setupRealTimeValidation()
 		this.setupCheckbox()
+		this.setupPhoneFieldFocus() // НОВЫЙ МЕТОД
+	}
+
+	/**
+	 * НОВЫЙ МЕТОД: Настройка фокуса для поля телефона
+	 */
+	setupPhoneFieldFocus() {
+		const phoneInput = this.form.querySelector(".form__input--phone")
+		const phoneGroup = this.form.querySelector(".form__group--phone")
+		const countryButton = this.form.querySelector(".country-selector__button")
+
+		if (phoneInput && phoneGroup) {
+			// При фокусе на поле телефона
+			phoneInput.addEventListener("focus", () => {
+				phoneGroup.classList.add("form__group--phone-focused")
+			})
+
+			// При потере фокуса
+			phoneInput.addEventListener("blur", () => {
+				// Небольшая задержка, чтобы проверить, не перешел ли фокус на кнопку страны
+				setTimeout(() => {
+					if (!phoneGroup.contains(document.activeElement)) {
+						phoneGroup.classList.remove("form__group--phone-focused")
+					}
+				}, 100)
+			})
+
+			// При клике на селектор страны также показываем фокус
+			if (countryButton) {
+				countryButton.addEventListener("focus", () => {
+					phoneGroup.classList.add("form__group--phone-focused")
+				})
+
+				countryButton.addEventListener("blur", () => {
+					setTimeout(() => {
+						if (!phoneGroup.contains(document.activeElement)) {
+							phoneGroup.classList.remove("form__group--phone-focused")
+						}
+					}, 100)
+				})
+			}
+
+			// При открытии dropdown оставляем фокус
+			const dropdown = this.form.querySelector(".country-selector__dropdown")
+			if (dropdown) {
+				// Обработка кликов внутри dropdown
+				dropdown.addEventListener("mousedown", e => {
+					// Предотвращаем потерю фокуса при клике внутри dropdown
+					e.preventDefault()
+				})
+			}
+		}
 	}
 
 	/**
@@ -204,6 +256,7 @@ export class FormManager {
 			".country-selector__search-input"
 		)
 		const phoneInput = this.form.querySelector(".form__input--phone")
+		const phoneGroup = this.form.querySelector(".form__group--phone") // НОВОЕ
 
 		// Открытие/закрытие dropdown
 		button.addEventListener("click", e => {
@@ -216,6 +269,8 @@ export class FormManager {
 				this.closeCountryDropdown(button, dropdown)
 			} else {
 				this.openCountryDropdown(button, dropdown)
+				// НОВОЕ: Сохраняем фокус на группе при открытии dropdown
+				phoneGroup.classList.add("form__group--phone-focused")
 				if (searchInput) searchInput.focus()
 			}
 		})
@@ -225,6 +280,8 @@ export class FormManager {
 			const item = e.target.closest(".country-selector__item")
 			if (item) {
 				this.selectCountry(item, button, dropdown, phoneInput)
+				// НОВОЕ: Возвращаем фокус на поле телефона после выбора
+				phoneInput.focus()
 			}
 		})
 
@@ -397,6 +454,7 @@ export class FormManager {
 				this.form.reset()
 				this.form.querySelectorAll(".form__group").forEach(group => {
 					group.classList.remove("form__group--error")
+					group.classList.remove("form__group--phone-focused") // НОВОЕ
 				})
 
 				submitButton.classList.remove("button--success")

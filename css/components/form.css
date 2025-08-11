@@ -61,6 +61,8 @@
 	transition: all 0.3s ease;
 	outline: none;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	/* Предотвращаем zoom на iOS */
+	-webkit-text-size-adjust: 100%;
 }
 
 .form__input:hover:not(:focus) {
@@ -120,12 +122,51 @@
 	overflow: visible;
 }
 
+/* ОБНОВЛЕНО: Состояние фокуса для всей группы телефона */
+.form__group--phone.form__group--phone-focused .form__phone-wrapper {
+	position: relative;
+	z-index: 2;
+}
+
+.form__group--phone.form__group--phone-focused .form__phone-wrapper::before {
+	content: "";
+	position: absolute;
+	inset: -4px;
+	border-radius: 16px;
+	background: rgba(59, 130, 246, 0.08);
+	pointer-events: none;
+	z-index: -1;
+	animation: focusPulse 0.3s ease-out;
+}
+
+@keyframes focusPulse {
+	from {
+		transform: scale(0.98);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
 /* Обертка для телефона */
 .form__phone-wrapper {
 	display: flex;
 	gap: 0;
 	align-items: stretch;
 	position: relative;
+	transition: all 0.3s ease;
+}
+
+/* ОБНОВЛЕНО: Визуальное объединение при фокусе */
+.form__group--phone-focused .country-selector__button {
+	border-color: var(--color-blue) !important;
+	box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.form__group--phone-focused .form__input--phone {
+	border-color: var(--color-blue) !important;
 }
 
 .form__input--phone {
@@ -266,6 +307,9 @@
 	transition: all 0.3s ease;
 	white-space: nowrap;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	/* Предотвращаем zoom на iOS */
+	font-size: 1rem;
+	-webkit-text-size-adjust: 100%;
 }
 
 .country-selector__button:hover {
@@ -442,6 +486,8 @@
 	position: relative;
 	overflow: hidden;
 	margin-top: 0.5rem;
+	/* Предотвращаем zoom на iOS */
+	-webkit-text-size-adjust: 100%;
 }
 
 .button--submit:hover:not(:disabled) {
@@ -561,6 +607,27 @@
 		font-size: 0.8125rem;
 	}
 
+	/* ОБНОВЛЕНО: Минимальный размер шрифта 16px для предотвращения zoom на iOS */
+	.form__input {
+		font-size: 16px !important; /* Важно для предотвращения zoom */
+		/* Компенсируем визуально большим размером области */
+		height: 52px;
+	}
+
+	/* ОБНОВЛЕНО: Размер шрифта для селектора страны */
+	.country-selector__button {
+		font-size: 16px !important;
+		height: 52px;
+	}
+
+	/* ОБНОВЛЕНО: Размер шрифта для кнопки отправки */
+	.button--submit {
+		font-size: 16px !important;
+		text-transform: none; /* Убираем uppercase на мобильных для лучшей читаемости */
+		letter-spacing: normal;
+		height: 52px;
+	}
+
 	/* Адаптация чекбокса */
 	.form__checkbox-wrapper {
 		align-items: flex-start;
@@ -603,6 +670,7 @@
 		padding-left: 12px;
 		border-left: none;
 		flex: 1;
+		font-size: 16px !important; /* Важно для предотвращения zoom */
 	}
 
 	/* Dropdown на мобильных */
@@ -620,6 +688,12 @@
 
 	.country-selector__dropdown--open {
 		transform: translateY(-50%);
+	}
+
+	/* Поиск стран - увеличиваем размер шрифта */
+	.country-selector__search-input {
+		font-size: 16px !important;
+		padding: 0.75rem 1rem;
 	}
 
 	/* Оверлей на мобильных занимает весь экран */
@@ -641,15 +715,8 @@
 	.form__input,
 	.country-selector__button,
 	.button--submit {
-		height: 52px;
-	}
-
-	.form__input {
-		font-size: var(--font-size-sm);
-	}
-
-	.button--submit {
-		font-size: 0.875rem;
+		height: 48px;
+		font-size: 16px !important; /* Сохраняем минимальный размер */
 	}
 
 	/* Еще более компактный селектор страны */
@@ -670,7 +737,7 @@
 	}
 
 	.form__input {
-		font-size: 0.875rem;
+		font-size: 16px !important; /* Важно сохранить минимальный размер */
 		padding: 14px;
 	}
 }
