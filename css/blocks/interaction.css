@@ -1,0 +1,562 @@
+/* ===============================================
+   БЛОК: INTERACTION (БЭМ)
+   =============================================== */
+
+.interaction {
+	position: relative;
+	background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+	padding: 80px 0;
+	overflow: hidden;
+	min-height: 500px;
+	display: flex;
+	align-items: center;
+	border-top: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+/* Параллакс контейнер для изображения */
+.interaction__parallax {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	z-index: 1;
+}
+
+/* Фоновое изображение - улучшенное позиционирование */
+.interaction__parallax::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: -5%;
+	transform: translateY(-50%);
+	width: 600px;
+	height: 600px;
+	background-image: url("/assets/4logo.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: left;
+	opacity: 0.12;
+	will-change: transform;
+	z-index: 0;
+	transition: transform 0.3s ease;
+	filter: blur(0.5px);
+}
+
+/* Декоративные элементы */
+.interaction__parallax::after {
+	content: "";
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	background: radial-gradient(circle, var(--color-blue) 0%, transparent 70%);
+	bottom: 10%;
+	left: 5%;
+	opacity: 0.03;
+	animation: float 20s ease-in-out infinite;
+}
+
+/* Контент */
+.interaction__content {
+	text-align: center;
+	position: relative;
+	z-index: 3;
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 0 20px;
+	opacity: 0;
+	animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+/* Заголовок - уменьшенный размер */
+.interaction__title {
+	font-size: clamp(1.25rem, 3.5vw, 2rem);
+	font-weight: var(--font-weight-light);
+	color: var(--color-primary);
+	line-height: 1.3;
+	margin-bottom: 16px;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	position: relative;
+}
+
+/* Декоративная линия под заголовком */
+.interaction__title::after {
+	content: "";
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 60px;
+	height: 2px;
+	background: var(--gradient-primary);
+	opacity: 0.6;
+}
+
+/* Описание - уменьшенный размер */
+.interaction__description {
+	font-size: clamp(0.875rem, 1.8vw, 1rem);
+	color: var(--color-secondary);
+	margin-bottom: 32px;
+	margin-top: 24px;
+	font-weight: var(--font-weight-regular);
+	line-height: 1.6;
+	opacity: 0.9;
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Кнопка */
+.interaction__button {
+	margin: 0 auto;
+	opacity: 0;
+	animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+/* Дополнительные декоративные элементы */
+.interaction::after {
+	content: "";
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	background: var(--color-blue);
+	border-radius: 50%;
+	top: 20%;
+	left: 10%;
+	opacity: 0.2;
+	animation: floatDot 15s ease-in-out infinite;
+}
+
+/* Состояние когда секция видна */
+.interaction--visible .interaction__content {
+	animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.interaction--visible .interaction__title {
+	animation: fadeInUp 0.8s ease-out 0.1s forwards;
+}
+
+.interaction--visible .interaction__description {
+	animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.interaction--visible .interaction__button {
+	animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+/* Эффект свечения (опционально) */
+.interaction__glow {
+	position: absolute;
+	width: 500px;
+	height: 500px;
+	background: radial-gradient(
+		circle,
+		rgba(59, 130, 246, 0.1) 0%,
+		transparent 70%
+	);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.interaction:hover .interaction__glow {
+	opacity: 1;
+	animation: glow 3s ease-in-out infinite;
+}
+
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
+
+/* Большие экраны (1440px+) */
+@media (min-width: 1440px) {
+	.interaction {
+		padding: 100px 0;
+		min-height: 550px;
+	}
+
+	.interaction__parallax::before {
+		width: 700px;
+		height: 700px;
+		right: 0;
+		opacity: 0.15;
+	}
+
+	.interaction__title {
+		font-size: 1.5rem;
+		margin-bottom: 20px;
+	}
+
+	.interaction__description {
+		font-size: 1rem;
+		margin-bottom: 40px;
+	}
+
+	.interaction__content {
+		max-width: 700px;
+	}
+}
+
+/* Большие десктопы (1920px+) */
+@media (min-width: 1920px) {
+	.interaction__parallax::before {
+		width: 800px;
+		height: 800px;
+		right: 5%;
+		opacity: 0.18;
+	}
+
+	.interaction__title {
+		font-size: 1.5rem;
+	}
+
+	.interaction__description {
+		font-size: 1rem;
+		max-width: 600px;
+	}
+}
+
+/* Планшеты (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+	.interaction {
+		padding: 60px 0;
+		min-height: 450px;
+	}
+
+	.interaction__parallax::before {
+		width: 450px;
+		height: 450px;
+		right: -10%;
+		opacity: 0.1;
+	}
+
+	.interaction__title {
+		font-size: 1.75rem;
+		margin-bottom: 16px;
+	}
+
+	.interaction__description {
+		font-size: 1rem;
+		margin-bottom: 32px;
+	}
+}
+
+/* Мобильные устройства (до 768px) */
+@media (max-width: 768px) {
+	.interaction {
+		padding: 50px 0;
+		min-height: auto;
+		background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+	}
+
+	.interaction__parallax::before {
+		width: 300px;
+		height: 300px;
+		right: -20%;
+		top: 20%;
+		opacity: 0.08;
+		transform: translateY(0);
+	}
+
+	.interaction__parallax::after {
+		width: 150px;
+		height: 150px;
+		opacity: 0.02;
+	}
+
+	.interaction__content {
+		padding: 0 16px;
+	}
+
+	.interaction__title {
+		font-size: 1.5rem;
+		margin-bottom: 14px;
+		letter-spacing: 0;
+	}
+
+	.interaction__title::after {
+		width: 40px;
+		height: 1.5px;
+	}
+
+	.interaction__description {
+		font-size: 0.9375rem;
+		margin-bottom: 28px;
+		margin-top: 20px;
+		line-height: 1.5;
+	}
+
+	/* Убираем сложные эффекты на мобильных */
+	.interaction::after,
+	.interaction__glow {
+		display: none;
+	}
+
+	/* Адаптация кнопки для мобильных */
+	.interaction__button .learn-more {
+		width: 10rem;
+		height: auto;
+	}
+
+	.interaction__button .circle {
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 1.25rem;
+	}
+
+	.interaction__button .button-text {
+		font-size: 0.875rem;
+		padding: 0.625rem 0;
+		margin-left: 1.5rem;
+	}
+}
+
+/* Маленькие экраны (до 480px) */
+@media (max-width: 480px) {
+	.interaction {
+		padding: 40px 0;
+	}
+
+	.interaction__parallax::before {
+		width: 250px;
+		height: 250px;
+		right: -30%;
+		opacity: 0.06;
+	}
+
+	.interaction__title {
+		font-size: 1.25rem;
+		line-height: 1.4;
+	}
+
+	.interaction__description {
+		font-size: 0.875rem;
+		margin-bottom: 24px;
+	}
+
+	/* Еще меньше кнопка */
+	.interaction__button .learn-more {
+		width: 9rem;
+	}
+
+	.interaction__button .circle {
+		width: 2.25rem;
+		height: 2.25rem;
+	}
+
+	.interaction__button .button-text {
+		font-size: 0.8125rem;
+		margin-left: 1.25rem;
+		padding: 0.5rem 0;
+	}
+}
+
+/* Очень маленькие экраны (до 375px) */
+@media (max-width: 375px) {
+	.interaction {
+		padding: 35px 0;
+	}
+
+	.interaction__title {
+		font-size: 1.125rem;
+	}
+
+	.interaction__description {
+		font-size: 0.8125rem;
+		margin-bottom: 20px;
+		padding: 0 10px;
+	}
+
+	.interaction__parallax::before {
+		width: 200px;
+		height: 200px;
+		opacity: 0.05;
+	}
+
+	/* Минимальный размер кнопки */
+	.interaction__button .learn-more {
+		width: 8rem;
+	}
+
+	.interaction__button .circle {
+		width: 2rem;
+		height: 2rem;
+		border-radius: 1rem;
+	}
+
+	.interaction__button .button-text {
+		font-size: 0.75rem;
+		margin-left: 1rem;
+	}
+
+	.interaction__button .circle .icon.arrow {
+		left: 0.5rem;
+		width: 1rem;
+		height: 0.125rem;
+	}
+}
+
+/* Альбомная ориентация на мобильных */
+@media (max-width: 768px) and (orientation: landscape) {
+	.interaction {
+		padding: 30px 0;
+		min-height: auto;
+	}
+
+	.interaction__title {
+		font-size: 1.25rem;
+		margin-bottom: 10px;
+	}
+
+	.interaction__description {
+		font-size: 0.875rem;
+		margin-bottom: 20px;
+		margin-top: 16px;
+	}
+}
+
+/* ===============================================
+   ЭФФЕКТЫ И АНИМАЦИИ
+   =============================================== */
+
+/* Hover эффекты только для десктопа */
+@media (hover: hover) and (pointer: fine) {
+	.interaction__parallax::before {
+		transition: all 0.5s ease;
+	}
+
+	.interaction:hover .interaction__parallax::before {
+		transform: translateY(-50%) scale(1.05);
+		opacity: 0.2;
+	}
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: translate(0, 0) rotate(0deg);
+	}
+	33% {
+		transform: translate(30px, -30px) rotate(120deg);
+	}
+	66% {
+		transform: translate(-20px, 20px) rotate(240deg);
+	}
+}
+
+@keyframes floatDot {
+	0%,
+	100% {
+		transform: translate(0, 0);
+		opacity: 0.2;
+	}
+	25% {
+		transform: translate(50px, -30px);
+		opacity: 0.4;
+	}
+	50% {
+		transform: translate(-30px, 40px);
+		opacity: 0.3;
+	}
+	75% {
+		transform: translate(40px, 20px);
+		opacity: 0.5;
+	}
+}
+
+@keyframes glow {
+	0%,
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 0.5;
+	}
+	50% {
+		transform: translate(-50%, -50%) scale(1.2);
+		opacity: 0.3;
+	}
+}
+
+/* ===============================================
+   СПЕЦИАЛЬНЫЕ РЕЖИМЫ
+   =============================================== */
+
+/* Отключение анимаций для reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.interaction__parallax::before,
+	.interaction__parallax::after,
+	.interaction::after {
+		animation: none;
+		transition: none;
+	}
+
+	.interaction__content,
+	.interaction__button {
+		animation: none;
+		opacity: 1;
+	}
+}
+
+/* Режим высокой контрастности */
+@media (prefers-contrast: high) {
+	.interaction {
+		border-top: 2px solid var(--color-primary);
+		border-bottom: 2px solid var(--color-primary);
+	}
+
+	.interaction__title::after {
+		background: var(--color-primary);
+		height: 3px;
+	}
+}
+
+/* Печать */
+@media print {
+	.interaction {
+		background: white;
+		border: 1px solid #000;
+		page-break-inside: avoid;
+		padding: 2rem 0;
+	}
+
+	.interaction__parallax,
+	.interaction::after,
+	.interaction__glow {
+		display: none;
+	}
+
+	.interaction__title {
+		font-size: 1.5rem;
+		color: #000;
+	}
+
+	.interaction__title::after {
+		display: none;
+	}
+
+	.interaction__description {
+		color: #000;
+		font-size: 1rem;
+	}
+
+	.interaction__button {
+		display: none;
+	}
+}

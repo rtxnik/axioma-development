@@ -870,17 +870,32 @@
 
 				<!-- Interaction Section -->
 				<div class="interaction services__interaction">
-					<div class="interaction__parallax" data-parallax></div>
+					<!-- Параллакс слой с улучшенными эффектами -->
+					<div
+						class="interaction__parallax"
+						data-parallax
+						aria-hidden="true"
+					></div>
+
+					<!-- Декоративное свечение (опционально) -->
+					<div class="interaction__glow" aria-hidden="true"></div>
+
+					<!-- Основной контент -->
 					<div class="container">
 						<div class="interaction__content">
+							<!-- Заголовок с переносом строки для лучшей читаемости -->
 							<h2 class="interaction__title">
 								Схема взаимосвязи участников<br />
 								управляющей компании
 							</h2>
+
+							<!-- Краткое описание -->
 							<p class="interaction__description">
 								Прозрачная структура для эффективного управления активами
 							</p>
-							<button class="learn-more">
+
+							<!-- Кнопка с сохранением оригинального стиля -->
+							<button class="learn-more interaction__button">
 								<span class="circle" aria-hidden="true">
 									<span class="icon arrow"></span>
 								</span>

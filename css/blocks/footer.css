@@ -265,18 +265,6 @@
 	position: relative;
 }
 
-.footer-light__legal::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 100px;
-	height: 1px;
-	background: var(--color-blue);
-	opacity: 0.3;
-}
-
 .footer-light__legal-content {
 	max-width: 1000px;
 	margin: 0 auto;
