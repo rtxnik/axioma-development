@@ -1,10 +1,12 @@
 /**
- * Модуль управления навигацией - Оптимизированная версия
+ * Модуль управления навигацией - Улучшенная версия 2.0
+ * С автоматическим позиционированием dropdown и оптимизацией производительности
  */
 import { CONFIG } from "../config/config.js"
 
 export class NavigationManager {
 	constructor() {
+		// DOM элементы
 		this.header = document.querySelector(".header")
 		this.nav = document.querySelector(".nav")
 		this.navList = document.querySelector(".nav__list")
@@ -12,17 +14,25 @@ export class NavigationManager {
 		this.scrollButton = document.getElementById("heroScrollButton")
 		this.heroSection = document.querySelector(".hero")
 		this.aboutSection = document.getElementById("about")
+
+		// Состояние
 		this.lastScrollY = 0
 		this.ticking = false
-		this.touchStartX = 0
-		this.touchStartY = 0
 		this.isMobile = window.matchMedia("(max-width: 768px)").matches
 		this.activeDropdown = null
+		this.isScrolling = false
+		this.scrollTimeout = null
 
-		// Оптимизация: кэширование размеров
+		// Кэширование размеров
+		this.viewportWidth = window.innerWidth
+		this.viewportHeight = window.innerHeight
 		this.heroHeight = 0
 		this.headerHeight = 80
 		this.scrollButtonClicking = false
+
+		// Флаги для оптимизации
+		this.dropdownPositionsCalculated = new WeakMap()
+		this.resizeDebounceTimer = null
 
 		this.init()
 	}
@@ -33,189 +43,441 @@ export class NavigationManager {
 		this.setupSmoothScrolling()
 		this.setupMobileMenu()
 		this.setupDropdowns()
-		this.handleResize()
+		this.setupKeyboardNavigation()
+		this.setupViewportTracking()
 		this.cacheHeights()
+		this.setupAccessibility()
 	}
 
 	/**
-	 * Кэширование высот элементов для производительности
+	 * Отслеживание изменений viewport
 	 */
-	cacheHeights() {
-		if (this.heroSection) {
-			this.heroHeight = this.heroSection.offsetHeight
-		}
-		if (this.header) {
-			this.headerHeight = this.header.offsetHeight
+	setupViewportTracking() {
+		const updateViewport = () => {
+			this.viewportWidth = window.innerWidth
+			this.viewportHeight = window.innerHeight
+			this.recalculateDropdownPositions()
 		}
 
-		// Обновляем кэш при изменении размера окна
-		let resizeTimer
+		// Debounced resize handler
 		window.addEventListener(
 			"resize",
 			() => {
-				clearTimeout(resizeTimer)
-				resizeTimer = setTimeout(() => {
-					if (this.heroSection) {
-						this.heroHeight = this.heroSection.offsetHeight
-					}
-					if (this.header) {
-						this.headerHeight = this.header.offsetHeight
-					}
+				clearTimeout(this.resizeDebounceTimer)
+				this.resizeDebounceTimer = setTimeout(() => {
+					updateViewport()
+					this.handleResize()
 				}, 250)
 			},
 			{ passive: true }
 		)
+
+		// Обновление при изменении ориентации
+		window.addEventListener("orientationchange", () => {
+			setTimeout(updateViewport, 100)
+		})
 	}
 
 	/**
-	 * ОПТИМИЗИРОВАННАЯ настройка кнопки скролла
+	 * Настройка dropdown меню с автопозиционированием
 	 */
-	setupOptimizedScrollButton() {
-		if (!this.scrollButton) return
+	setupDropdowns() {
+		const dropdownItems = document.querySelectorAll(
+			".nav__item--has-dropdown, .nav__item--has-mega"
+		)
 
-		// Убираем все задержки и делаем мгновенный отклик
-		const handleScrollClick = e => {
-			e.preventDefault()
-			e.stopPropagation()
+		dropdownItems.forEach(item => {
+			const link = item.querySelector(".nav__link")
+			const dropdown = item.querySelector(".nav__dropdown, .nav__mega-menu")
 
-			// Предотвращаем двойные клики
-			if (this.scrollButtonClicking) return
-			this.scrollButtonClicking = true
+			if (!link || !dropdown) return
 
-			// Мгновенная визуальная обратная связь
-			this.scrollButton.style.transform = "scale(0.95)"
+			// Добавляем уникальный идентификатор
+			const dropdownId = `dropdown-${Math.random().toString(36).substr(2, 9)}`
+			dropdown.setAttribute("id", dropdownId)
+			link.setAttribute("aria-controls", dropdownId)
 
-			// Быстрое вычисление целевой позиции
-			const targetPosition = this.calculateScrollTarget()
-
-			// Запускаем плавную прокрутку
-			this.performOptimizedScroll(targetPosition)
-
-			// Восстанавливаем состояние кнопки
-			setTimeout(() => {
-				this.scrollButton.style.transform = ""
-				this.scrollButtonClicking = false
-			}, 300)
-		}
-
-		// Используем несколько типов событий для максимальной отзывчивости
-		this.scrollButton.addEventListener("click", handleScrollClick)
-
-		// Для тач-устройств добавляем touchend для более быстрого отклика
-		if ("ontouchstart" in window) {
-			let touchStarted = false
-
-			this.scrollButton.addEventListener(
-				"touchstart",
-				e => {
-					touchStarted = true
-					// Визуальная обратная связь при касании
-					this.scrollButton.style.transform = "scale(0.95)"
-				},
-				{ passive: true }
-			)
-
-			this.scrollButton.addEventListener(
-				"touchend",
-				e => {
-					if (touchStarted) {
-						e.preventDefault()
-						handleScrollClick(e)
-						touchStarted = false
-					}
-				},
-				{ passive: false }
-			)
-
-			this.scrollButton.addEventListener(
-				"touchcancel",
-				() => {
-					touchStarted = false
-					this.scrollButton.style.transform = ""
-				},
-				{ passive: true }
-			)
-		}
-
-		// Обработка клавиатуры (Enter и Space)
-		this.scrollButton.addEventListener("keydown", e => {
-			if (e.key === "Enter" || e.key === " ") {
-				e.preventDefault()
-				handleScrollClick(e)
+			if (this.isMobile) {
+				this.setupMobileDropdown(item, link, dropdown)
+			} else {
+				this.setupDesktopDropdown(item, link, dropdown)
 			}
 		})
 	}
 
 	/**
-	 * Быстрое вычисление целевой позиции прокрутки
+	 * Настройка десктопного dropdown с автопозиционированием
 	 */
-	calculateScrollTarget() {
-		const currentScroll = window.pageYOffset
+	setupDesktopDropdown(item, link, dropdown) {
+		let hoverTimeout = null
+		let isOpen = false
 
-		// Используем кэшированную высоту hero
-		if (currentScroll < this.heroHeight - 10) {
-			// Если мы в hero секции - скроллим к концу hero
-			return this.heroHeight
-		} else if (this.aboutSection) {
-			// Если мы ниже hero - скроллим к about с учетом header
-			const aboutRect = this.aboutSection.getBoundingClientRect()
-			return window.pageYOffset + aboutRect.top - this.headerHeight
+		// Обработка hover с задержкой
+		const handleMouseEnter = () => {
+			clearTimeout(hoverTimeout)
+			hoverTimeout = setTimeout(() => {
+				if (!isOpen) {
+					this.openDropdown(item, dropdown)
+					isOpen = true
+				}
+			}, 100) // Небольшая задержка для предотвращения случайных открытий
 		}
 
-		// Fallback
-		return this.heroHeight
+		const handleMouseLeave = () => {
+			clearTimeout(hoverTimeout)
+			hoverTimeout = setTimeout(() => {
+				if (isOpen) {
+					this.closeDropdown(item, dropdown)
+					isOpen = false
+				}
+			}, 300) // Задержка закрытия для удобства
+		}
+
+		// События мыши
+		item.addEventListener("mouseenter", handleMouseEnter)
+		item.addEventListener("mouseleave", handleMouseLeave)
+
+		// Клавиатурная навигация
+		link.addEventListener("click", e => {
+			// На десктопе клик по ссылке с dropdown предотвращаем
+			if (
+				dropdown.classList.contains("nav__dropdown") ||
+				dropdown.classList.contains("nav__mega-menu")
+			) {
+				e.preventDefault()
+				if (isOpen) {
+					this.closeDropdown(item, dropdown)
+					isOpen = false
+				} else {
+					this.openDropdown(item, dropdown)
+					isOpen = true
+				}
+			}
+		})
+
+		// Focus события для доступности
+		link.addEventListener("focus", () => {
+			this.openDropdown(item, dropdown)
+			isOpen = true
+		})
+
+		// Закрытие при потере фокуса
+		const handleFocusOut = e => {
+			setTimeout(() => {
+				if (!item.contains(document.activeElement)) {
+					this.closeDropdown(item, dropdown)
+					isOpen = false
+				}
+			}, 100)
+		}
+
+		item.addEventListener("focusout", handleFocusOut)
 	}
 
 	/**
-	 * Оптимизированная плавная прокрутка
+	 * Открытие dropdown с автопозиционированием
 	 */
-	performOptimizedScroll(targetPosition, duration = 800) {
-		const startPosition = window.pageYOffset
-		const distance = targetPosition - startPosition
+	openDropdown(item, dropdown) {
+		// Закрываем другие открытые dropdown
+		if (this.activeDropdown && this.activeDropdown !== item) {
+			const prevDropdown = this.activeDropdown.querySelector(
+				".nav__dropdown, .nav__mega-menu"
+			)
+			this.closeDropdown(this.activeDropdown, prevDropdown)
+		}
 
-		// Если расстояние очень маленькое, делаем мгновенный переход
-		if (Math.abs(distance) < 10) {
-			window.scrollTo(0, targetPosition)
+		// Позиционируем dropdown
+		this.positionDropdown(item, dropdown)
+
+		// Открываем с анимацией
+		item.classList.add("nav__item--active")
+		dropdown.classList.add("nav__dropdown--visible", "nav__mega-menu--visible")
+
+		// Обновляем ARIA атрибуты
+		const link = item.querySelector(".nav__link")
+		link.setAttribute("aria-expanded", "true")
+
+		this.activeDropdown = item
+	}
+
+	/**
+	 * Закрытие dropdown
+	 */
+	closeDropdown(item, dropdown) {
+		item.classList.remove("nav__item--active")
+		dropdown.classList.remove(
+			"nav__dropdown--visible",
+			"nav__mega-menu--visible"
+		)
+
+		// Обновляем ARIA атрибуты
+		const link = item.querySelector(".nav__link")
+		link.setAttribute("aria-expanded", "false")
+
+		if (this.activeDropdown === item) {
+			this.activeDropdown = null
+		}
+	}
+
+	/**
+	 * Автоматическое позиционирование dropdown
+	 */
+	positionDropdown(item, dropdown) {
+		// Пропускаем для мобильных
+		if (this.isMobile) return
+
+		// Проверяем кэш
+		if (this.dropdownPositionsCalculated.has(dropdown)) {
 			return
 		}
 
-		let startTime = null
+		const rect = item.getBoundingClientRect()
+		const dropdownRect = dropdown.getBoundingClientRect()
+		const isRegularDropdown = dropdown.classList.contains("nav__dropdown")
+		const isMegaMenu = dropdown.classList.contains("nav__mega-menu")
 
-		// Используем оптимизированную easing функцию
-		const easeOutCubic = t => {
-			return 1 - Math.pow(1 - t, 3)
-		}
+		if (isRegularDropdown) {
+			// Позиционирование обычного dropdown
+			const spaceOnRight = this.viewportWidth - rect.left
+			const spaceOnLeft = rect.left + rect.width
+			const dropdownWidth = dropdown.offsetWidth || 320
 
-		const animation = currentTime => {
-			if (!startTime) startTime = currentTime
+			// Сброс классов позиционирования
+			dropdown.classList.remove(
+				"nav__dropdown--align-right",
+				"nav__dropdown--align-center"
+			)
 
-			const elapsed = currentTime - startTime
-			const progress = Math.min(elapsed / duration, 1)
+			if (spaceOnRight < dropdownWidth && spaceOnLeft > dropdownWidth) {
+				// Выравниваем по правому краю элемента
+				dropdown.classList.add("nav__dropdown--align-right")
+			} else if (
+				spaceOnRight < dropdownWidth / 2 &&
+				spaceOnLeft < dropdownWidth / 2
+			) {
+				// Центрируем если места мало с обеих сторон
+				dropdown.classList.add("nav__dropdown--align-center")
+			}
 
-			const easeProgress = easeOutCubic(progress)
-			const currentPosition = startPosition + distance * easeProgress
+			// Позиционируем стрелку
+			const arrowPosition = Math.min(rect.width / 2, 30)
+			dropdown.style.setProperty("--arrow-position", `${arrowPosition}px`)
+		} else if (isMegaMenu) {
+			// Mega menu всегда центрируется, но проверяем границы
+			const megaWidth = dropdown.offsetWidth || 700
+			const centerPosition = this.viewportWidth / 2
+			const megaHalfWidth = megaWidth / 2
 
-			window.scrollTo(0, currentPosition)
-
-			if (progress < 1) {
-				requestAnimationFrame(animation)
-			} else {
-				// Финальная корректировка позиции
-				window.scrollTo(0, targetPosition)
+			if (centerPosition - megaHalfWidth < 20) {
+				// Слишком близко к левому краю
+				dropdown.style.left = "20px"
+				dropdown.style.transform = "translateX(0) translateY(-10px) scale(0.98)"
+			} else if (centerPosition + megaHalfWidth > this.viewportWidth - 20) {
+				// Слишком близко к правому краю
+				dropdown.style.left = "auto"
+				dropdown.style.right = "20px"
+				dropdown.style.transform = "translateX(0) translateY(-10px) scale(0.98)"
 			}
 		}
 
-		requestAnimationFrame(animation)
+		// Помечаем как рассчитанное
+		this.dropdownPositionsCalculated.set(dropdown, true)
+	}
+
+	/**
+	 * Пересчет позиций всех dropdown при изменении размера окна
+	 */
+	recalculateDropdownPositions() {
+		// Сбрасываем кэш
+		this.dropdownPositionsCalculated = new WeakMap()
+
+		// Если есть активный dropdown, пересчитываем его позицию
+		if (this.activeDropdown) {
+			const dropdown = this.activeDropdown.querySelector(
+				".nav__dropdown, .nav__mega-menu"
+			)
+			if (dropdown) {
+				this.positionDropdown(this.activeDropdown, dropdown)
+			}
+		}
+	}
+
+	/**
+	 * Настройка мобильного dropdown
+	 */
+	setupMobileDropdown(item, link, dropdown) {
+		link.addEventListener("click", e => {
+			e.preventDefault()
+			e.stopPropagation()
+			this.toggleMobileDropdown(item, dropdown)
+		})
+
+		// Touch события для лучшего отклика
+		let touchStartTime = 0
+
+		link.addEventListener(
+			"touchstart",
+			() => {
+				touchStartTime = Date.now()
+			},
+			{ passive: true }
+		)
+
+		link.addEventListener(
+			"touchend",
+			e => {
+				const touchDuration = Date.now() - touchStartTime
+				if (touchDuration < 500) {
+					e.preventDefault()
+					e.stopPropagation()
+					this.toggleMobileDropdown(item, dropdown)
+				}
+			},
+			{ passive: false }
+		)
+	}
+
+	/**
+	 * Переключение мобильного dropdown
+	 */
+	toggleMobileDropdown(item, dropdown) {
+		const isOpen = item.classList.contains("nav__item--open")
+
+		// Закрываем все другие dropdown
+		this.closeAllDropdowns()
+
+		if (!isOpen) {
+			// Открываем текущий dropdown
+			item.classList.add("nav__item--open")
+
+			// Устанавливаем max-height для анимации
+			const contentHeight = dropdown.scrollHeight
+			dropdown.style.maxHeight = `${contentHeight}px`
+
+			// ARIA
+			const link = item.querySelector(".nav__link")
+			link.setAttribute("aria-expanded", "true")
+
+			this.activeDropdown = item
+		} else {
+			// Закрываем
+			this.closeMobileDropdown(item, dropdown)
+		}
+	}
+
+	/**
+	 * Закрытие мобильного dropdown
+	 */
+	closeMobileDropdown(item, dropdown) {
+		item.classList.remove("nav__item--open")
+		dropdown.style.maxHeight = "0"
+
+		// ARIA
+		const link = item.querySelector(".nav__link")
+		link.setAttribute("aria-expanded", "false")
+
+		if (this.activeDropdown === item) {
+			this.activeDropdown = null
+		}
+	}
+
+	/**
+	 * Закрытие всех dropdown
+	 */
+	closeAllDropdowns() {
+		document.querySelectorAll(".nav__item--open").forEach(item => {
+			const dropdown = item.querySelector(".nav__dropdown, .nav__mega-menu")
+			if (dropdown) {
+				this.closeMobileDropdown(item, dropdown)
+			}
+		})
+
+		// Для десктопа
+		document
+			.querySelectorAll(".nav__dropdown--visible, .nav__mega-menu--visible")
+			.forEach(dropdown => {
+				const item = dropdown.closest(".nav__item")
+				if (item) {
+					this.closeDropdown(item, dropdown)
+				}
+			})
+	}
+
+	/**
+	 * Настройка клавиатурной навигации
+	 */
+	setupKeyboardNavigation() {
+		// Навигация по Tab
+		this.nav?.addEventListener("keydown", e => {
+			if (e.key === "Escape") {
+				this.closeAllDropdowns()
+				if (this.isMobile && this.menuToggle?.checked) {
+					this.closeMobileMenu()
+				}
+			}
+
+			// Навигация стрелками для десктопа
+			if (!this.isMobile && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+				const activeElement = document.activeElement
+				const dropdown = activeElement.closest(
+					".nav__dropdown, .nav__mega-menu"
+				)
+
+				if (dropdown) {
+					e.preventDefault()
+					const links = dropdown.querySelectorAll(
+						".nav__dropdown-link, .nav__mega-link"
+					)
+					const currentIndex = Array.from(links).indexOf(activeElement)
+
+					let nextIndex
+					if (e.key === "ArrowDown") {
+						nextIndex = currentIndex + 1 < links.length ? currentIndex + 1 : 0
+					} else {
+						nextIndex =
+							currentIndex - 1 >= 0 ? currentIndex - 1 : links.length - 1
+					}
+
+					links[nextIndex]?.focus()
+				}
+			}
+		})
+	}
+
+	/**
+	 * Настройка доступности
+	 */
+	setupAccessibility() {
+		// Добавляем роли и ARIA атрибуты
+		this.navList?.setAttribute("role", "menubar")
+
+		document.querySelectorAll(".nav__item").forEach(item => {
+			item.setAttribute("role", "none")
+
+			const link = item.querySelector(".nav__link")
+			if (link) {
+				link.setAttribute("role", "menuitem")
+
+				const dropdown = item.querySelector(".nav__dropdown, .nav__mega-menu")
+				if (dropdown) {
+					link.setAttribute("aria-haspopup", "true")
+					link.setAttribute("aria-expanded", "false")
+					dropdown.setAttribute("role", "menu")
+
+					dropdown
+						.querySelectorAll(".nav__dropdown-link, .nav__mega-link")
+						.forEach(dropdownLink => {
+							dropdownLink.setAttribute("role", "menuitem")
+						})
+				}
+			}
+		})
 	}
 
 	/**
 	 * Настройка мобильного меню
 	 */
 	setupMobileMenu() {
-		// Удаляем старые чекбоксы и дублирующие элементы
-		this.cleanupOldElements()
-
-		// Обработка открытия/закрытия мобильного меню
 		if (this.menuToggle) {
 			this.menuToggle.addEventListener("change", e => {
 				if (e.target.checked) {
@@ -235,169 +497,19 @@ export class NavigationManager {
 			}
 		})
 
-		// Закрытие меню при свайпе влево
+		// Закрытие меню при свайпе
 		this.setupSwipeGestures()
-	}
 
-	/**
-	 * Очистка старых элементов
-	 */
-	cleanupOldElements() {
-		// Удаляем дублирующие мобильные элементы
-		document.querySelectorAll(".nav__link--mobile").forEach(el => el.remove())
-		document
-			.querySelectorAll(".nav__dropdown-toggle")
-			.forEach(el => el.remove())
-
-		// Оставляем только один набор ссылок
-		document.querySelectorAll(".nav__link--desktop").forEach(link => {
-			link.classList.remove("nav__link--desktop")
-		})
-	}
-
-	/**
-	 * Настройка dropdown меню
-	 */
-	setupDropdowns() {
-		const dropdownItems = document.querySelectorAll(
-			".nav__item--has-dropdown, .nav__item--has-mega"
-		)
-
-		dropdownItems.forEach(item => {
-			const link = item.querySelector(".nav__link")
-			const dropdown = item.querySelector(".nav__dropdown, .nav__mega-menu")
-
-			if (!link || !dropdown) return
-
-			// Добавляем data-атрибут для идентификации
-			item.dataset.hasDropdown = "true"
-
-			// Обработка для мобильных устройств
-			if (this.isMobile) {
-				this.setupMobileDropdown(item, link, dropdown)
-			} else {
-				this.setupDesktopDropdown(item, link, dropdown)
-			}
-		})
-	}
-
-	/**
-	 * Настройка dropdown для мобильных
-	 */
-	setupMobileDropdown(item, link, dropdown) {
-		// Предотвращаем переход по ссылке
-		link.addEventListener("click", e => {
-			e.preventDefault()
-			e.stopPropagation()
-			this.toggleMobileDropdown(item, dropdown)
-		})
-
-		// Touch события для лучшего отклика
-		link.addEventListener(
-			"touchstart",
-			e => {
-				this.touchStartTime = Date.now()
-			},
-			{ passive: true }
-		)
-
-		link.addEventListener(
-			"touchend",
-			e => {
-				const touchDuration = Date.now() - this.touchStartTime
-				// Предотвращаем случайные касания
-				if (touchDuration < 500) {
-					e.preventDefault()
-					e.stopPropagation()
-					this.toggleMobileDropdown(item, dropdown)
-				}
-			},
-			{ passive: false }
-		)
-
-		// Обработка кликов внутри dropdown
-		dropdown.addEventListener("click", e => {
-			e.stopPropagation()
-		})
-	}
-
-	/**
-	 * Переключение мобильного dropdown
-	 */
-	toggleMobileDropdown(item, dropdown) {
-		const isOpen = item.classList.contains("nav__item--open")
-
-		// Закрываем все другие dropdown
-		this.closeAllDropdowns()
-
-		if (!isOpen) {
-			// Открываем текущий dropdown
-			item.classList.add("nav__item--open")
-			dropdown.classList.add("nav__dropdown--open")
-
-			// Анимация стрелки
-			const arrow = item.querySelector(".nav__link-arrow")
-			if (arrow) {
-				arrow.style.transform = "rotate(180deg)"
-			}
-
-			// Установка максимальной высоты для анимации
-			dropdown.style.maxHeight = dropdown.scrollHeight + "px"
-			dropdown.style.opacity = "1"
-			dropdown.style.visibility = "visible"
-
-			this.activeDropdown = item
-		}
-	}
-
-	/**
-	 * Закрытие всех dropdown
-	 */
-	closeAllDropdowns() {
-		document.querySelectorAll(".nav__item--open").forEach(item => {
-			item.classList.remove("nav__item--open")
-
-			const dropdown = item.querySelector(".nav__dropdown, .nav__mega-menu")
-			const arrow = item.querySelector(".nav__link-arrow")
-
-			if (dropdown) {
-				dropdown.classList.remove("nav__dropdown--open")
-				dropdown.style.maxHeight = "0"
-				dropdown.style.opacity = "0"
-				dropdown.style.visibility = "hidden"
-			}
-
-			if (arrow) {
-				arrow.style.transform = "rotate(0deg)"
-			}
-		})
-
-		this.activeDropdown = null
-	}
-
-	/**
-	 * Настройка dropdown для десктопа
-	 */
-	setupDesktopDropdown(item, link, dropdown) {
-		// Сохраняем стандартное поведение hover из CSS
-		// Дополнительно добавляем поддержку клавиатурной навигации
-		link.addEventListener("focus", () => {
-			item.classList.add("nav__item--focus")
-		})
-
-		link.addEventListener("blur", () => {
-			setTimeout(() => {
-				if (!item.contains(document.activeElement)) {
-					item.classList.remove("nav__item--focus")
-				}
-			}, 100)
-		})
-
-		// Поддержка Enter для открытия dropdown
-		link.addEventListener("keydown", e => {
-			if (e.key === "Enter" || e.key === " ") {
-				e.preventDefault()
-				link.click()
+		// Закрытие при клике на ссылку меню (не dropdown)
+		document.querySelectorAll(".nav__link").forEach(link => {
+			if (
+				!link.parentElement.querySelector(".nav__dropdown, .nav__mega-menu")
+			) {
+				link.addEventListener("click", () => {
+					if (this.isMobile) {
+						this.closeMobileMenu()
+					}
+				})
 			}
 		})
 	}
@@ -407,12 +519,15 @@ export class NavigationManager {
 	 */
 	setupSwipeGestures() {
 		let touchStartX = 0
+		let touchStartY = 0
 		let touchEndX = 0
+		let touchEndY = 0
 
 		this.navList?.addEventListener(
 			"touchstart",
 			e => {
 				touchStartX = e.changedTouches[0].screenX
+				touchStartY = e.changedTouches[0].screenY
 			},
 			{ passive: true }
 		)
@@ -421,17 +536,24 @@ export class NavigationManager {
 			"touchend",
 			e => {
 				touchEndX = e.changedTouches[0].screenX
-				this.handleSwipe(touchStartX, touchEndX)
+				touchEndY = e.changedTouches[0].screenY
+				this.handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY)
 			},
 			{ passive: true }
 		)
 	}
 
-	handleSwipe(startX, endX) {
+	handleSwipe(startX, startY, endX, endY) {
 		const swipeThreshold = 50
-		if (startX - endX > swipeThreshold) {
-			// Свайп влево - закрываем меню
-			this.closeMobileMenu()
+		const horizontalSwipe = Math.abs(endX - startX)
+		const verticalSwipe = Math.abs(endY - startY)
+
+		// Проверяем, что свайп горизонтальный
+		if (horizontalSwipe > verticalSwipe && horizontalSwipe > swipeThreshold) {
+			if (startX - endX > swipeThreshold) {
+				// Свайп влево - закрываем меню
+				this.closeMobileMenu()
+			}
 		}
 	}
 
@@ -441,9 +563,16 @@ export class NavigationManager {
 	openMobileMenu() {
 		this.navList?.classList.add("nav__list--open")
 		document.body.style.overflow = "hidden"
-
-		// Сброс всех dropdown при открытии меню
 		this.closeAllDropdowns()
+
+		// ARIA
+		this.menuToggle?.setAttribute("aria-expanded", "true")
+
+		// Фокус на первый элемент меню для доступности
+		setTimeout(() => {
+			const firstLink = this.navList?.querySelector(".nav__link")
+			firstLink?.focus()
+		}, 300)
 	}
 
 	/**
@@ -455,34 +584,155 @@ export class NavigationManager {
 		}
 		this.navList?.classList.remove("nav__list--open")
 		document.body.style.overflow = ""
-
-		// Закрываем все dropdown
 		this.closeAllDropdowns()
+
+		// ARIA
+		this.menuToggle?.setAttribute("aria-expanded", "false")
 	}
 
 	/**
 	 * Обработка изменения размера окна
 	 */
 	handleResize() {
-		let resizeTimer
-		window.addEventListener("resize", () => {
-			clearTimeout(resizeTimer)
-			resizeTimer = setTimeout(() => {
-				const wasMobile = this.isMobile
-				this.isMobile = window.matchMedia("(max-width: 768px)").matches
+		const wasMobile = this.isMobile
+		this.isMobile = window.matchMedia("(max-width: 768px)").matches
 
-				// Если изменился режим, переинициализируем dropdown
-				if (wasMobile !== this.isMobile) {
-					this.closeMobileMenu()
-					this.closeAllDropdowns()
-					this.setupDropdowns()
-				}
-			}, 250)
+		if (wasMobile !== this.isMobile) {
+			this.closeMobileMenu()
+			this.closeAllDropdowns()
+
+			// Переинициализация dropdown для нового режима
+			this.setupDropdowns()
+		}
+	}
+
+	/**
+	 * Кэширование высот элементов
+	 */
+	cacheHeights() {
+		if (this.heroSection) {
+			this.heroHeight = this.heroSection.offsetHeight
+		}
+		if (this.header) {
+			this.headerHeight = this.header.offsetHeight
+		}
+	}
+
+	/**
+	 * Оптимизированная кнопка скролла
+	 */
+	setupOptimizedScrollButton() {
+		if (!this.scrollButton) return
+
+		const handleScrollClick = e => {
+			e.preventDefault()
+			e.stopPropagation()
+
+			if (this.scrollButtonClicking) return
+			this.scrollButtonClicking = true
+
+			// Визуальная обратная связь
+			this.scrollButton.style.transform = "scale(0.95)"
+
+			const targetPosition = this.calculateScrollTarget()
+			this.performOptimizedScroll(targetPosition)
+
+			setTimeout(() => {
+				this.scrollButton.style.transform = ""
+				this.scrollButtonClicking = false
+			}, 300)
+		}
+
+		this.scrollButton.addEventListener("click", handleScrollClick)
+
+		// Touch оптимизация
+		if ("ontouchstart" in window) {
+			let touchStarted = false
+
+			this.scrollButton.addEventListener(
+				"touchstart",
+				() => {
+					touchStarted = true
+					this.scrollButton.style.transform = "scale(0.95)"
+				},
+				{ passive: true }
+			)
+
+			this.scrollButton.addEventListener(
+				"touchend",
+				e => {
+					if (touchStarted) {
+						e.preventDefault()
+						handleScrollClick(e)
+						touchStarted = false
+					}
+				},
+				{ passive: false }
+			)
+		}
+
+		// Клавиатурная поддержка
+		this.scrollButton.addEventListener("keydown", e => {
+			if (e.key === "Enter" || e.key === " ") {
+				e.preventDefault()
+				handleScrollClick(e)
+			}
 		})
 	}
 
 	/**
-	 * Оптимизированные эффекты скролла
+	 * Вычисление целевой позиции прокрутки
+	 */
+	calculateScrollTarget() {
+		const currentScroll = window.pageYOffset
+
+		if (currentScroll < this.heroHeight - 10) {
+			return this.heroHeight
+		} else if (this.aboutSection) {
+			const aboutRect = this.aboutSection.getBoundingClientRect()
+			return window.pageYOffset + aboutRect.top - this.headerHeight
+		}
+
+		return this.heroHeight
+	}
+
+	/**
+	 * Оптимизированная плавная прокрутка
+	 */
+	performOptimizedScroll(targetPosition, duration = 800) {
+		const startPosition = window.pageYOffset
+		const distance = targetPosition - startPosition
+
+		if (Math.abs(distance) < 10) {
+			window.scrollTo(0, targetPosition)
+			return
+		}
+
+		let startTime = null
+		const easeOutCubic = t => 1 - Math.pow(1 - t, 3)
+
+		const animation = currentTime => {
+			if (!startTime) startTime = currentTime
+
+			const elapsed = currentTime - startTime
+			const progress = Math.min(elapsed / duration, 1)
+			const easeProgress = easeOutCubic(progress)
+			const currentPosition = startPosition + distance * easeProgress
+
+			window.scrollTo(0, currentPosition)
+
+			if (progress < 1) {
+				requestAnimationFrame(animation)
+			} else {
+				window.scrollTo(0, targetPosition)
+			}
+		}
+
+		requestAnimationFrame(animation)
+	}
+
+	/**
+	 * Эффекты при скролле
 	 */
 	setupScrollEffects() {
 		let isScrolling = false
@@ -490,24 +740,27 @@ export class NavigationManager {
 		const updateHeader = () => {
 			const currentScrollY = window.pageYOffset
 
-			// Используем transform вместо классов для лучшей производительности
 			if (currentScrollY > 100) {
-				this.header.classList.add("header--scrolled")
+				this.header?.classList.add("header--scrolled")
 			} else {
-				this.header.classList.remove("header--scrolled")
+				this.header?.classList.remove("header--scrolled")
 			}
 
+			// Скрытие/показ header при скролле
 			if (
 				currentScrollY > this.lastScrollY &&
 				currentScrollY > CONFIG.scroll.headerHideThreshold
 			) {
 				this.header.style.transform = "translateY(-100%)"
+				// Закрываем dropdown при скролле вниз
+				if (!this.isMobile) {
+					this.closeAllDropdowns()
+				}
 			} else {
 				this.header.style.transform = "translateY(0)"
 			}
 
 			this.updateScrollIndicator(currentScrollY)
-
 			this.lastScrollY = currentScrollY
 			isScrolling = false
 		}
@@ -519,6 +772,14 @@ export class NavigationManager {
 					window.requestAnimationFrame(updateHeader)
 					isScrolling = true
 				}
+
+				// Определяем, что скролл закончился
+				clearTimeout(this.scrollTimeout)
+				this.scrollTimeout = setTimeout(() => {
+					this.isScrolling = false
+				}, 150)
+
+				this.isScrolling = true
 			},
 			{ passive: true }
 		)
@@ -539,13 +800,7 @@ export class NavigationManager {
 				1 - (scrollY - fadeStart) / (this.heroHeight * 0.2)
 			)
 			scrollIndicator.style.opacity = opacity
-
-			// Скрываем элемент полностью при opacity = 0 для производительности
-			if (opacity === 0) {
-				scrollIndicator.style.visibility = "hidden"
-			} else {
-				scrollIndicator.style.visibility = "visible"
-			}
+			scrollIndicator.style.visibility = opacity === 0 ? "hidden" : "visible"
 		} else {
 			scrollIndicator.style.opacity = 1
 			scrollIndicator.style.visibility = "visible"
@@ -565,7 +820,6 @@ export class NavigationManager {
 				if (targetElement) {
 					e.preventDefault()
 
-					// Закрываем мобильное меню при переходе
 					if (this.isMobile) {
 						this.closeMobileMenu()
 					}
@@ -578,5 +832,21 @@ export class NavigationManager {
 				}
 			})
 		})
+	}
+
+	/**
+	 * Очистка ресурсов
+	 */
+	destroy() {
+		// Удаляем обработчики событий
+		clearTimeout(this.resizeDebounceTimer)
+		clearTimeout(this.scrollTimeout)
+
+		// Сбрасываем состояния
+		this.closeAllDropdowns()
+		this.closeMobileMenu()
+
+		// Очищаем кэш
+		this.dropdownPositionsCalculated = new WeakMap()
 	}
 }

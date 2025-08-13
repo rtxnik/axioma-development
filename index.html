@@ -197,7 +197,12 @@
 						</div>
 
 						<!-- Mobile Menu Toggle -->
-						<input type="checkbox" id="menuToggle" class="nav__toggle-input" />
+						<input
+							type="checkbox"
+							id="menuToggle"
+							class="nav__toggle-input"
+							aria-hidden="true"
+						/>
 						<label
 							for="menuToggle"
 							class="nav__toggle"
@@ -218,7 +223,7 @@
 							<li class="nav__item nav__item--has-dropdown" role="none">
 								<a
 									href="#"
-									class="nav__link nav__link--desktop"
+									class="nav__link"
 									role="menuitem"
 									aria-haspopup="true"
 									aria-expanded="false"
@@ -238,16 +243,11 @@
 									</svg>
 								</a>
 
-								<input
-									type="checkbox"
-									id="aboutDropdown"
-									class="nav__dropdown-toggle"
-								/>
-								<label for="aboutDropdown" class="nav__link nav__link--mobile"
-									>О компании</label
+								<ul
+									class="nav__dropdown"
+									role="menu"
+									aria-label="Подменю О компании"
 								>
-
-								<ul class="nav__dropdown" role="menu">
 									<li class="nav__dropdown-item" role="none">
 										<a
 											class="nav__dropdown-link"
@@ -298,7 +298,7 @@
 							<li class="nav__item nav__item--has-dropdown" role="none">
 								<a
 									href="#"
-									class="nav__link nav__link--desktop"
+									class="nav__link"
 									role="menuitem"
 									aria-haspopup="true"
 									aria-expanded="false"
@@ -318,16 +318,11 @@
 									</svg>
 								</a>
 
-								<input
-									type="checkbox"
-									id="libraryDropdown"
-									class="nav__dropdown-toggle"
-								/>
-								<label for="libraryDropdown" class="nav__link nav__link--mobile"
-									>Инвестиционная библиотека</label
+								<ul
+									class="nav__dropdown"
+									role="menu"
+									aria-label="Подменю Инвестиционная библиотека"
 								>
-
-								<ul class="nav__dropdown" role="menu">
 									<li class="nav__dropdown-item" role="none">
 										<a
 											class="nav__dropdown-link"
@@ -389,7 +384,7 @@
 							<li class="nav__item nav__item--has-mega" role="none">
 								<a
 									href="#"
-									class="nav__link nav__link--desktop"
+									class="nav__link"
 									role="menuitem"
 									aria-haspopup="true"
 									aria-expanded="false"
@@ -409,18 +404,14 @@
 									</svg>
 								</a>
 
-								<input
-									type="checkbox"
-									id="megaDropdown"
-									class="nav__dropdown-toggle"
-								/>
-								<label for="megaDropdown" class="nav__link nav__link--mobile"
-									>Раскрытие информации</label
+								<div
+									class="nav__mega-menu"
+									role="menu"
+									aria-label="Подменю Раскрытие информации"
 								>
-
-								<div class="nav__mega-menu" role="menu">
 									<div class="nav__mega-content">
 										<div class="nav__mega-column">
+											<h3 class="nav__mega-heading">Документы</h3>
 											<ul class="nav__mega-list" role="none">
 												<li class="nav__mega-item" role="none">
 													<a
@@ -461,6 +452,7 @@
 											</ul>
 										</div>
 										<div class="nav__mega-column">
+											<h3 class="nav__mega-heading">Правовая информация</h3>
 											<ul class="nav__mega-list" role="none">
 												<li class="nav__mega-item" role="none">
 													<a
@@ -501,6 +493,7 @@
 											</ul>
 										</div>
 										<div class="nav__mega-column">
+											<h3 class="nav__mega-heading">Отчетность</h3>
 											<ul class="nav__mega-list" role="none">
 												<li class="nav__mega-item" role="none">
 													<a
@@ -539,7 +532,7 @@
 							<li class="nav__item nav__item--has-dropdown" role="none">
 								<a
 									href="#"
-									class="nav__link nav__link--desktop"
+									class="nav__link"
 									role="menuitem"
 									aria-haspopup="true"
 									aria-expanded="false"
@@ -559,16 +552,11 @@
 									</svg>
 								</a>
 
-								<input
-									type="checkbox"
-									id="fundsDropdown"
-									class="nav__dropdown-toggle"
-								/>
-								<label for="fundsDropdown" class="nav__link nav__link--mobile"
-									>Фонды</label
+								<ul
+									class="nav__dropdown nav__dropdown--scrollable"
+									role="menu"
+									aria-label="Подменю Фонды"
 								>
-
-								<ul class="nav__dropdown nav__dropdown--scrollable" role="menu">
 									<li class="nav__dropdown-item" role="none">
 										<a
 											class="nav__dropdown-link"

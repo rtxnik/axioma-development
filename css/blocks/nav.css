@@ -1,5 +1,5 @@
 /* ===============================================
-   БЛОК: НАВИГАЦИЯ (БЭМ) - Оптимизированная версия
+   БЛОК: НАВИГАЦИЯ (БЭМ) - Улучшенная версия 2.0
    =============================================== */
 
 .nav {
@@ -49,13 +49,17 @@
 	border-radius: var(--radius-sm);
 	transition: var(--transition-base);
 	position: relative;
-	/* Увеличиваем touch target */
 	min-width: 48px;
 	min-height: 48px;
 }
 
 .nav__toggle:hover {
 	background: var(--bg-white-opacity-10);
+}
+
+.nav__toggle:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.5);
+	outline-offset: 2px;
 }
 
 /* Иконка гамбургер */
@@ -119,7 +123,7 @@
 
 .nav__item--has-dropdown,
 .nav__item--has-mega {
-	position: relative;
+	position: static; /* Важно для правильного позиционирования */
 }
 
 /* Ссылка навигации */
@@ -137,7 +141,6 @@
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
-	/* Touch target */
 	min-height: 48px;
 }
 
@@ -166,7 +169,13 @@
 	width: 100%;
 }
 
-/* Стрелка dropdown - всегда видима для пунктов с подменю */
+.nav__link:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.5);
+	outline-offset: 4px;
+	border-radius: 4px;
+}
+
+/* Стрелка dropdown */
 .nav__link-arrow {
 	transition: var(--transition-base);
 	opacity: 0.7;
@@ -181,12 +190,16 @@
 	}
 }
 
-/* Dropdown меню */
+/* ===============================================
+   DROPDOWN МЕНЮ - УЛУЧШЕННОЕ ПОЗИЦИОНИРОВАНИЕ
+   =============================================== */
+
 .nav__dropdown {
 	position: absolute;
 	top: calc(100% + 10px);
 	left: 0;
-	min-width: 320px;
+	min-width: 280px;
+	max-width: 380px;
 	background: var(--bg-opacity-95);
 	backdrop-filter: blur(20px) saturate(180%);
 	border: 1px solid var(--bg-white-opacity-10);
@@ -200,6 +213,25 @@
 	padding: 1rem 0;
 	z-index: var(--z-dropdown);
 	overflow: hidden;
+
+	/* Автоматическое позиционирование */
+	--dropdown-offset: 0px;
+}
+
+/* Класс для выравнивания по правому краю */
+.nav__dropdown--align-right {
+	left: auto;
+	right: 0;
+}
+
+/* Класс для центрирования */
+.nav__dropdown--align-center {
+	left: 50%;
+	transform: translateX(-50%) translateY(-10px) scale(0.98);
+}
+
+.nav__dropdown--align-center.nav__dropdown--visible {
+	transform: translateX(-50%) translateY(0) scale(1);
 }
 
 .nav__dropdown::before {
@@ -214,20 +246,30 @@
 	pointer-events: none;
 }
 
+/* Стрелка указатель на dropdown */
+.nav__dropdown::after {
+	content: "";
+	position: absolute;
+	top: -6px;
+	left: var(--arrow-position, 20px);
+	width: 12px;
+	height: 12px;
+	background: var(--bg-opacity-95);
+	border: 1px solid var(--bg-white-opacity-10);
+	border-right: none;
+	border-bottom: none;
+	transform: rotate(45deg);
+	z-index: -1;
+}
+
 /* Показ dropdown при hover на десктопе */
 @media (hover: hover) and (pointer: fine) {
-	.nav__item--has-dropdown:hover .nav__dropdown {
+	.nav__item--has-dropdown:hover .nav__dropdown,
+	.nav__dropdown--visible {
 		opacity: 1;
 		visibility: visible;
 		transform: translateY(0) scale(1);
 	}
-}
-
-/* Активный dropdown на мобильных */
-.nav__dropdown--open {
-	opacity: 1 !important;
-	visibility: visible !important;
-	transform: translateY(0) scale(1) !important;
 }
 
 /* Элементы dropdown */
@@ -255,6 +297,12 @@
 .nav__dropdown-item:nth-child(6) {
 	animation-delay: 0.3s;
 }
+.nav__dropdown-item:nth-child(7) {
+	animation-delay: 0.35s;
+}
+.nav__dropdown-item:nth-child(8) {
+	animation-delay: 0.4s;
+}
 
 .nav__dropdown-link {
 	display: block;
@@ -268,10 +316,10 @@
 	margin: 0 0.75rem;
 	position: relative;
 	overflow: hidden;
-	/* Touch target */
 	min-height: 48px;
 	display: flex;
 	align-items: center;
+	white-space: nowrap;
 }
 
 .nav__dropdown-link span {
@@ -298,10 +346,16 @@
 	transform: translateX(0);
 }
 
+.nav__dropdown-link:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.5);
+	outline-offset: -2px;
+}
+
 /* Scrollable dropdown */
 .nav__dropdown--scrollable {
 	max-height: 420px;
 	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .nav__dropdown--scrollable::-webkit-scrollbar {
@@ -323,12 +377,17 @@
 	background: rgba(255, 255, 255, 0.3);
 }
 
-/* Mega menu */
+/* ===============================================
+   MEGA MENU - УЛУЧШЕННОЕ ПОЗИЦИОНИРОВАНИЕ
+   =============================================== */
+
 .nav__mega-menu {
-	position: absolute;
-	top: calc(100% + 10px);
-	left: -100px;
-	width: 700px;
+	position: fixed; /* Используем fixed для лучшего контроля */
+	top: var(--header-height);
+	left: 50%;
+	transform: translateX(-50%) translateY(-10px) scale(0.98);
+	width: min(90vw, 900px); /* Адаптивная ширина */
+	max-width: 900px;
 	background: var(--bg-opacity-95);
 	backdrop-filter: blur(20px) saturate(180%);
 	border: 1px solid var(--bg-white-opacity-10);
@@ -336,11 +395,12 @@
 	box-shadow: var(--shadow-xl);
 	opacity: 0;
 	visibility: hidden;
-	transform: translateY(-10px) scale(0.98);
 	transition: var(--transition-base);
 	z-index: var(--z-dropdown);
 	padding: 2.5rem;
 	overflow: hidden;
+	max-height: calc(100vh - var(--header-height) - 40px);
+	overflow-y: auto;
 }
 
 .nav__mega-menu::before {
@@ -357,16 +417,17 @@
 
 /* Показ mega menu при hover на десктопе */
 @media (hover: hover) and (pointer: fine) {
-	.nav__item--has-mega:hover .nav__mega-menu {
+	.nav__item--has-mega:hover .nav__mega-menu,
+	.nav__mega-menu--visible {
 		opacity: 1;
 		visibility: visible;
-		transform: translateY(0) scale(1);
+		transform: translateX(-50%) translateY(0) scale(1);
 	}
 }
 
 .nav__mega-content {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	gap: 3rem;
 	position: relative;
 	z-index: 2;
@@ -375,6 +436,18 @@
 .nav__mega-column {
 	display: flex;
 	flex-direction: column;
+	min-width: 0; /* Предотвращаем переполнение */
+}
+
+.nav__mega-heading {
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-semibold);
+	color: rgba(255, 255, 255, 0.5);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin-bottom: 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav__mega-list {
@@ -411,15 +484,20 @@
 	position: relative;
 	border-radius: var(--radius-sm);
 	padding-left: 1rem;
-	/* Touch target */
 	min-height: 44px;
 	display: flex;
 	align-items: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .nav__mega-link span {
 	position: relative;
 	z-index: 2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .nav__mega-link::before {
@@ -436,10 +514,16 @@
 
 .nav__mega-link:hover {
 	color: var(--color-white);
+	padding-left: 1.5rem;
 }
 
 .nav__mega-link:hover::before {
 	width: 3px;
+}
+
+.nav__mega-link:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.5);
+	outline-offset: -2px;
 }
 
 /* Focus состояния для клавиатурной навигации */
@@ -448,6 +532,10 @@
 	opacity: 1;
 	visibility: visible;
 	transform: translateY(0) scale(1);
+}
+
+.nav__item--focus .nav__mega-menu {
+	transform: translateX(-50%) translateY(0) scale(1);
 }
 
 /* Анимации */
@@ -477,18 +565,39 @@
    МОБИЛЬНАЯ АДАПТАЦИЯ
    =============================================== */
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
 	.nav__list {
 		gap: 2rem;
 	}
 
 	.nav__mega-menu {
-		width: 600px;
-		left: -80px;
+		width: min(95vw, 800px);
+		padding: 2rem;
 	}
 
 	.nav__mega-content {
 		gap: 2rem;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	}
+}
+
+@media (max-width: 1024px) {
+	.nav__list {
+		gap: 1.5rem;
+	}
+
+	.nav__mega-menu {
+		width: min(95vw, 700px);
+		padding: 1.5rem;
+	}
+
+	.nav__mega-content {
+		gap: 1.5rem;
+	}
+
+	.nav__dropdown {
+		min-width: 260px;
+		max-width: 340px;
 	}
 }
 
@@ -513,18 +622,22 @@
 		top: 0;
 		right: -100%;
 		width: 100%;
+		max-width: 100%;
 		height: 100vh;
+		height: 100dvh; /* Dynamic viewport height */
 		background: var(--bg-opacity-98);
 		backdrop-filter: blur(20px) saturate(180%);
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: stretch;
 		gap: 0;
-		padding: 6rem 2rem 2rem;
+		padding: 6rem 1.5rem 2rem;
 		transition: right 0.3s ease-out;
 		overflow-y: auto;
+		overflow-x: hidden;
 		border-left: none;
 		-webkit-overflow-scrolling: touch;
+		z-index: var(--z-fixed);
 	}
 
 	/* Показ мобильного меню */
@@ -545,23 +658,6 @@
 		justify-content: space-between;
 		min-height: 56px;
 		position: relative;
-	}
-
-	/* Визуальный индикатор для пунктов с подменю */
-	.nav__item--has-dropdown .nav__link::after,
-	.nav__item--has-mega .nav__link::after {
-		content: "";
-		position: absolute;
-		right: 0;
-		top: 50%;
-		width: 44px;
-		height: 44px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		transform: translateY(-50%);
-		/* Увеличиваем область клика */
-		margin: -8px -8px -8px 0;
 	}
 
 	/* Стрелка всегда видна на мобильных */
@@ -598,10 +694,15 @@
 		width: 100%;
 	}
 
+	.nav__dropdown::after {
+		display: none;
+	}
+
 	.nav__item--open .nav__dropdown {
 		opacity: 1;
 		visibility: visible;
 		padding: 1rem 0;
+		max-height: 500px; /* Достаточно для контента */
 	}
 
 	.nav__dropdown-link {
@@ -611,6 +712,7 @@
 		min-height: 48px;
 		background: rgba(255, 255, 255, 0.02);
 		margin-bottom: 2px;
+		white-space: normal; /* Разрешаем перенос текста */
 	}
 
 	.nav__dropdown-link:active {
@@ -638,6 +740,7 @@
 		opacity: 1;
 		visibility: visible;
 		padding: 1.5rem 0;
+		max-height: 800px; /* Достаточно для контента */
 	}
 
 	.nav__mega-content {
@@ -646,11 +749,21 @@
 		padding: 0 1rem;
 	}
 
+	.nav__mega-heading {
+		font-size: var(--font-size-xs);
+		margin-bottom: 0.75rem;
+	}
+
 	.nav__mega-link {
 		padding: 0.75rem 1rem;
 		background: rgba(255, 255, 255, 0.02);
 		margin-bottom: 2px;
 		min-height: 48px;
+		white-space: normal; /* Разрешаем перенос текста */
+	}
+
+	.nav__mega-link span {
+		white-space: normal;
 	}
 
 	.nav__mega-link:active {
@@ -684,11 +797,12 @@
 	}
 
 	.nav__list {
-		padding: 5rem 1.5rem 2rem;
+		padding: 5rem 1rem 2rem;
 	}
 
 	.nav__link {
 		font-size: 0.95rem;
+		padding: 1rem 0;
 	}
 
 	.nav__dropdown-link {
@@ -714,5 +828,43 @@
 	.nav__dropdown-item,
 	.nav__mega-item {
 		animation: none;
+	}
+}
+
+/* Поддержка высокой контрастности */
+@media (prefers-contrast: high) {
+	.nav__link,
+	.nav__dropdown-link,
+	.nav__mega-link {
+		font-weight: var(--font-weight-semibold);
+	}
+
+	.nav__dropdown,
+	.nav__mega-menu {
+		border-width: 2px;
+	}
+}
+
+/* Темная тема (если нужна) */
+@media (prefers-color-scheme: dark) {
+	/* Дополнительные стили для темной темы */
+}
+
+/* Печать */
+@media print {
+	.nav__toggle,
+	.nav__dropdown,
+	.nav__mega-menu {
+		display: none !important;
+	}
+
+	.nav__list {
+		display: block;
+		position: static;
+	}
+
+	.nav__link {
+		color: black;
+		text-decoration: underline;
 	}
 }

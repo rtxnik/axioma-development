@@ -1,120 +1,244 @@
 /**
- * Конфигурация приложения - Оптимизированная версия
+ * Конфигурация приложения - Оптимизированная версия 2.0
  */
 export const CONFIG = {
 	// Анимации
 	animation: {
 		duration: {
-			instant: 100, // Мгновенный отклик
+			instant: 100,
 			fast: 150,
 			base: 300,
 			slow: 500,
 			slower: 700,
-			smooth: 800, // Оптимизированная плавная прокрутка
+			smooth: 800,
 		},
 		easing: {
 			default: "ease",
-			smooth: "cubic-bezier(0.25, 0.46, 0.45, 0.94)", // Более плавная анимация
+			smooth: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
 			bounce: "cubic-bezier(0.34, 1.56, 0.64, 1)",
 			expo: "cubic-bezier(0.16, 1, 0.3, 1)",
-			outCubic: "cubic-bezier(0.33, 1, 0.68, 1)", // Для скролла
+			outCubic: "cubic-bezier(0.33, 1, 0.68, 1)",
+			inOutCubic: "cubic-bezier(0.65, 0, 0.35, 1)",
+			outQuart: "cubic-bezier(0.25, 1, 0.5, 1)",
 		},
 	},
 
-	// Видео - оптимизированные параметры
+	// Навигация
+	navigation: {
+		// Задержки для hover эффектов
+		hoverDelay: {
+			open: 100, // Задержка перед открытием dropdown
+			close: 300, // Задержка перед закрытием dropdown
+		},
+		// Мобильная навигация
+		mobile: {
+			breakpoint: 768,
+			swipeThreshold: 50, // Минимальное расстояние для свайпа
+			scrollLock: true, // Блокировать скролл при открытом меню
+		},
+		// Dropdown настройки
+		dropdown: {
+			autoPosition: true, // Автоматическое позиционирование
+			maxHeight: 420, // Максимальная высота scrollable dropdown
+			edgeMargin: 20, // Минимальный отступ от края экрана
+			arrowSize: 12, // Размер стрелки-указателя
+		},
+		// Mega menu настройки
+		megaMenu: {
+			maxWidth: 900, // Максимальная ширина
+			minWidth: 700, // Минимальная ширина
+			columnMinWidth: 200, // Минимальная ширина колонки
+			responsiveWidth: "min(90vw, 900px)", // Адаптивная ширина
+		},
+		// Производительность
+		performance: {
+			throttleScroll: 10, // Throttle для скролла
+			debounceResize: 250, // Debounce для resize
+			cachePositions: true, // Кэшировать позиции dropdown
+		},
+		// Доступность
+		accessibility: {
+			focusTimeout: 100, // Задержка для focus событий
+			announceChanges: true, // Объявлять изменения для screen readers
+			keyboardNavigation: true, // Поддержка клавиатурной навигации
+		},
+	},
+
+	// Видео
 	video: {
-		minLoadingTime: 1000, // Уменьшено для более быстрой загрузки
-		autoplayDelay: 200, // Быстрее начинаем autoplay
-		autoplayTimeout: 3000, // Таймаут для autoplay
-		progressUpdateRate: 100, // Частота обновления прогресса (ms)
-		mobileBreakpoint: 768, // Точка переключения видео
+		minLoadingTime: 1000,
+		autoplayDelay: 200,
+		autoplayTimeout: 3000,
+		progressUpdateRate: 100,
+		mobileBreakpoint: 768,
 		preloadStrategy: {
-			desktop: "auto", // Полная предзагрузка на десктопе
-			mobile: "metadata", // Только метаданные на мобильных
+			desktop: "auto",
+			mobile: "metadata",
 		},
 	},
 
-	// Скролл - оптимизированные параметры
+	// Скролл
 	scroll: {
-		smoothDuration: 800, // Быстрее для лучшего отклика
+		smoothDuration: 800,
 		headerHideThreshold: 200,
 		indicatorFadeThreshold: 0.8,
-		sectionOffset: 0, // Убираем лишний отступ
-		buttonResponseTime: 50, // Время отклика кнопки (ms)
+		sectionOffset: 0,
+		buttonResponseTime: 50,
 		precision: {
 			enabled: true,
 			finalAdjustment: true,
-			adjustmentDelay: 30, // Уменьшено для быстрой корректировки
+			adjustmentDelay: 30,
 		},
-		// Новые параметры для оптимизации
-		useNativeSmooth: false, // Использовать кастомную реализацию
-		easeFunction: "outCubic", // Функция плавности
-		interruptible: true, // Можно прервать скролл новым действием
+		useNativeSmooth: false,
+		easeFunction: "outCubic",
+		interruptible: true,
 	},
 
 	// Форма
 	form: {
-		debounceDelay: 300, // Уменьшено для более быстрого отклика
+		debounceDelay: 300,
 		submitDelay: 1500,
-		validationDelay: 200, // Задержка валидации
+		validationDelay: 200,
 		phoneValidation: {
 			minLength: 10,
 			maxLength: 15,
 		},
+		countrySelector: {
+			searchDebounce: 200, // Задержка поиска стран
+			maxVisibleItems: 10, // Максимум видимых стран
+		},
+		toast: {
+			duration: 4000, // Длительность показа уведомления
+			position: "top-right", // Позиция уведомлений
+			maxToasts: 3, // Максимум уведомлений одновременно
+		},
 	},
 
-	// Производительность - оптимизированные параметры
+	// Производительность
 	performance: {
 		throttleDelay: 16, // ~60fps
-		scrollThrottle: 10, // Throttle для скролла
-		resizeDebounce: 250, // Debounce для resize
+		scrollThrottle: 10,
+		resizeDebounce: 250,
 		intersectionThreshold: 0.1,
-		lazyLoadOffset: "50px", // Отступ для lazy load
-		// Новые параметры
-		usePassiveListeners: true, // Passive event listeners
-		useRAF: true, // RequestAnimationFrame для анимаций
-		enableGPUAcceleration: true, // GPU ускорение
+		lazyLoadOffset: "50px",
+		usePassiveListeners: true,
+		useRAF: true,
+		enableGPUAcceleration: true,
 		reducedMotion: {
 			respectUserPreference: true,
 			fallbackDuration: 0,
 		},
+		// Оптимизация изображений
+		images: {
+			webpSupport: true, // Проверять поддержку WebP
+			lazyLoad: true, // Ленивая загрузка
+			placeholder: true, // Показывать placeholder
+		},
 	},
 
-	// Параметры кнопки скролла - оптимизированные
+	// Параметры кнопки скролла
 	scrollButton: {
-		fadeInDelay: 300, // Быстрее показываем
+		fadeInDelay: 300,
 		animationDuration: 2000,
 		hoverScale: 1.05,
-		activeScale: 0.95, // Масштаб при нажатии
-		touchFeedback: true, // Визуальная обратная связь на touch
-		hapticFeedback: true, // Вибрация на поддерживаемых устройствах
-		preventDoubleClick: true, // Предотвращение двойных кликов
-		doubleClickTimeout: 300, // Таймаут для двойных кликов
+		activeScale: 0.95,
+		touchFeedback: true,
+		hapticFeedback: true,
+		preventDoubleClick: true,
+		doubleClickTimeout: 300,
 	},
 
 	// Мобильная оптимизация
 	mobile: {
 		breakpoint: 768,
-		touchThreshold: 10, // Порог для определения touch события
-		swipeThreshold: 50, // Порог для свайпа
-		videoQuality: "low", // Качество видео на мобильных
-		disableEffects: false, // Отключать ли эффекты на слабых устройствах
-		useReducedMotion: true, // Учитывать настройки reduced motion
+		touchThreshold: 10,
+		swipeThreshold: 50,
+		videoQuality: "low",
+		disableEffects: false,
+		useReducedMotion: true,
+		// iOS специфичные настройки
+		ios: {
+			preventZoom: true, // Предотвращать zoom при двойном тапе
+			fixViewportHeight: true, // Фиксить высоту viewport
+			smoothScroll: true, // Плавный скролл
+		},
+		// Android специфичные настройки
+		android: {
+			addressBarHeight: 56, // Высота адресной строки
+			navigationBarHeight: 48, // Высота навигации
+		},
 	},
 
 	// Кэширование
 	cache: {
 		enabled: true,
-		duration: 3600000, // 1 час в ms
-		videoCache: true, // Кэшировать видео
-		imageCache: true, // Кэшировать изображения
+		duration: 3600000, // 1 час
+		videoCache: true,
+		imageCache: true,
+		// Стратегии кэширования
+		strategies: {
+			static: "cacheFirst", // Статичные ресурсы
+			dynamic: "networkFirst", // Динамический контент
+			images: "staleWhileRevalidate", // Изображения
+		},
+	},
+
+	// Аналитика (если используется)
+	analytics: {
+		enabled: false,
+		trackEvents: false,
+		trackPerformance: false,
+		ga4: {
+			measurementId: "", // Google Analytics 4 ID
+		},
 	},
 
 	// Отладка
 	debug: {
-		enabled: false, // Включить режим отладки
-		logPerformance: false, // Логировать производительность
-		showFPS: false, // Показывать FPS
-		logEvents: false, // Логировать события
+		enabled: false,
+		logPerformance: false,
+		showFPS: false,
+		logEvents: false,
+		// Дополнительные опции отладки
+		showTouchPoints: false, // Показывать точки касания
+		showScrollPosition: false, // Показывать позицию скролла
+		showViewportSize: false, // Показывать размер viewport
+		highlightUpdates: false, // Подсвечивать обновления DOM
+	},
+
+	// Безопасность
+	security: {
+		csp: {
+			enabled: false, // Content Security Policy
+			reportOnly: false,
+		},
+		sanitizeInput: true, // Санитизация пользовательского ввода
+		preventXSS: true, // Предотвращение XSS атак
+	},
+
+	// API endpoints (если используются)
+	api: {
+		baseURL: "",
+		timeout: 10000, // 10 секунд
+		retryAttempts: 3,
+		retryDelay: 1000,
+		endpoints: {
+			contact: "/api/contact",
+			newsletter: "/api/newsletter",
+		},
+	},
+
+	// Локализация
+	i18n: {
+		defaultLocale: "ru",
+		supportedLocales: ["ru", "en"],
+		detectBrowserLocale: false,
+	},
+
+	// Темы
+	themes: {
+		default: "dark",
+		available: ["dark", "light"],
+		autoDetect: false, // Автоопределение темы системы
 	},
 }
