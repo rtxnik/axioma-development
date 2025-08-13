@@ -669,9 +669,44 @@
 						preload="metadata"
 						poster="./assets/hero-poster.jpg"
 					>
-						<source src="./assets/hero-video.mp4" type="video/mp4" />
+						<!-- Источник для больших экранов -->
+						<source
+							src="./assets/hero-video.mp4"
+							type="video/mp4"
+							media="(min-width: 768px)"
+							data-src-desktop="./assets/hero-video.mp4"
+						/>
+						<!-- Источник для мобильных устройств -->
+						<source
+							src="./assets/hero-video-small.mp4"
+							type="video/mp4"
+							media="(max-width: 767px)"
+							data-src-mobile="./assets/hero-video-small.mp4"
+						/>
+						<!-- Fallback -->
+						<source src="./assets/hero-video-small.mp4" type="video/mp4" />
 					</video>
 					<div class="hero__video-overlay"></div>
+
+					<!-- Кнопка воспроизведения (скрыта по умолчанию) -->
+					<button
+						class="hero__play-button"
+						id="heroPlayButton"
+						aria-label="Воспроизвести видео"
+						style="display: none"
+					>
+						<svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+							<circle
+								cx="30"
+								cy="30"
+								r="29"
+								stroke="currentColor"
+								stroke-width="2"
+								opacity="0.8"
+							/>
+							<path d="M24 20V40L40 30L24 20Z" fill="currentColor" />
+						</svg>
+					</button>
 				</div>
 
 				<!-- Video Progress -->
@@ -685,15 +720,13 @@
 				<div class="hero__scroll-indicator" id="scrollIndicator">
 					<button
 						class="hero__scroll-button"
+						id="heroScrollButton"
 						aria-label="Прокрутить к следующей секции"
 						tabindex="0"
+						type="button"
 					>
 						<div class="scroll-icon">
 							<div class="scroll-icon__wheel"></div>
-							<div class="scroll-icon__arrows">
-								<div class="scroll-icon__arrow"></div>
-								<div class="scroll-icon__arrow"></div>
-							</div>
 						</div>
 					</button>
 				</div>

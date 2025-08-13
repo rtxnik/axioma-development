@@ -1,8 +1,7 @@
 /**
- * Модуль управления навигацией - Оптимизированная версия для мобильных
+ * Модуль управления навигацией - Оптимизированная версия
  */
 import { CONFIG } from "../config/config.js"
-import { Utils } from "../utils/utils.js"
 
 export class NavigationManager {
 	constructor() {
@@ -10,7 +9,7 @@ export class NavigationManager {
 		this.nav = document.querySelector(".nav")
 		this.navList = document.querySelector(".nav__list")
 		this.menuToggle = document.getElementById("menuToggle")
-		this.scrollButton = document.querySelector(".hero__scroll-button")
+		this.scrollButton = document.getElementById("heroScrollButton")
 		this.heroSection = document.querySelector(".hero")
 		this.aboutSection = document.getElementById("about")
 		this.lastScrollY = 0
@@ -20,16 +19,193 @@ export class NavigationManager {
 		this.isMobile = window.matchMedia("(max-width: 768px)").matches
 		this.activeDropdown = null
 
+		// Оптимизация: кэширование размеров
+		this.heroHeight = 0
+		this.headerHeight = 80
+		this.scrollButtonClicking = false
+
 		this.init()
 	}
 
 	init() {
 		this.setupScrollEffects()
-		this.setupScrollButton()
+		this.setupOptimizedScrollButton()
 		this.setupSmoothScrolling()
 		this.setupMobileMenu()
 		this.setupDropdowns()
 		this.handleResize()
+		this.cacheHeights()
+	}
+
+	/**
+	 * Кэширование высот элементов для производительности
+	 */
+	cacheHeights() {
+		if (this.heroSection) {
+			this.heroHeight = this.heroSection.offsetHeight
+		}
+		if (this.header) {
+			this.headerHeight = this.header.offsetHeight
+		}
+
+		// Обновляем кэш при изменении размера окна
+		let resizeTimer
+		window.addEventListener(
+			"resize",
+			() => {
+				clearTimeout(resizeTimer)
+				resizeTimer = setTimeout(() => {
+					if (this.heroSection) {
+						this.heroHeight = this.heroSection.offsetHeight
+					}
+					if (this.header) {
+						this.headerHeight = this.header.offsetHeight
+					}
+				}, 250)
+			},
+			{ passive: true }
+		)
+	}
+
+	/**
+	 * ОПТИМИЗИРОВАННАЯ настройка кнопки скролла
+	 */
+	setupOptimizedScrollButton() {
+		if (!this.scrollButton) return
+
+		// Убираем все задержки и делаем мгновенный отклик
+		const handleScrollClick = e => {
+			e.preventDefault()
+			e.stopPropagation()
+
+			// Предотвращаем двойные клики
+			if (this.scrollButtonClicking) return
+			this.scrollButtonClicking = true
+
+			// Мгновенная визуальная обратная связь
+			this.scrollButton.style.transform = "scale(0.95)"
+
+			// Быстрое вычисление целевой позиции
+			const targetPosition = this.calculateScrollTarget()
+
+			// Запускаем плавную прокрутку
+			this.performOptimizedScroll(targetPosition)
+
+			// Восстанавливаем состояние кнопки
+			setTimeout(() => {
+				this.scrollButton.style.transform = ""
+				this.scrollButtonClicking = false
+			}, 300)
+		}
+
+		// Используем несколько типов событий для максимальной отзывчивости
+		this.scrollButton.addEventListener("click", handleScrollClick)
+
+		// Для тач-устройств добавляем touchend для более быстрого отклика
+		if ("ontouchstart" in window) {
+			let touchStarted = false
+
+			this.scrollButton.addEventListener(
+				"touchstart",
+				e => {
+					touchStarted = true
+					// Визуальная обратная связь при касании
+					this.scrollButton.style.transform = "scale(0.95)"
+				},
+				{ passive: true }
+			)
+
+			this.scrollButton.addEventListener(
+				"touchend",
+				e => {
+					if (touchStarted) {
+						e.preventDefault()
+						handleScrollClick(e)
+						touchStarted = false
+					}
+				},
+				{ passive: false }
+			)
+
+			this.scrollButton.addEventListener(
+				"touchcancel",
+				() => {
+					touchStarted = false
+					this.scrollButton.style.transform = ""
+				},
+				{ passive: true }
+			)
+		}
+
+		// Обработка клавиатуры (Enter и Space)
+		this.scrollButton.addEventListener("keydown", e => {
+			if (e.key === "Enter" || e.key === " ") {
+				e.preventDefault()
+				handleScrollClick(e)
+			}
+		})
+	}
+
+	/**
+	 * Быстрое вычисление целевой позиции прокрутки
+	 */
+	calculateScrollTarget() {
+		const currentScroll = window.pageYOffset
+
+		// Используем кэшированную высоту hero
+		if (currentScroll < this.heroHeight - 10) {
+			// Если мы в hero секции - скроллим к концу hero
+			return this.heroHeight
+		} else if (this.aboutSection) {
+			// Если мы ниже hero - скроллим к about с учетом header
+			const aboutRect = this.aboutSection.getBoundingClientRect()
+			return window.pageYOffset + aboutRect.top - this.headerHeight
+		}
+
+		// Fallback
+		return this.heroHeight
+	}
+
+	/**
+	 * Оптимизированная плавная прокрутка
+	 */
+	performOptimizedScroll(targetPosition, duration = 800) {
+		const startPosition = window.pageYOffset
+		const distance = targetPosition - startPosition
+
+		// Если расстояние очень маленькое, делаем мгновенный переход
+		if (Math.abs(distance) < 10) {
+			window.scrollTo(0, targetPosition)
+			return
+		}
+
+		let startTime = null
+
+		// Используем оптимизированную easing функцию
+		const easeOutCubic = t => {
+			return 1 - Math.pow(1 - t, 3)
+		}
+
+		const animation = currentTime => {
+			if (!startTime) startTime = currentTime
+
+			const elapsed = currentTime - startTime
+			const progress = Math.min(elapsed / duration, 1)
+
+			const easeProgress = easeOutCubic(progress)
+			const currentPosition = startPosition + distance * easeProgress
+
+			window.scrollTo(0, currentPosition)
+
+			if (progress < 1) {
+				requestAnimationFrame(animation)
+			} else {
+				// Финальная корректировка позиции
+				window.scrollTo(0, targetPosition)
+			}
+		}
+
+		requestAnimationFrame(animation)
 	}
 
 	/**
@@ -305,12 +481,16 @@ export class NavigationManager {
 		})
 	}
 
-	// ... остальные методы остаются без изменений ...
-
+	/**
+	 * Оптимизированные эффекты скролла
+	 */
 	setupScrollEffects() {
+		let isScrolling = false
+
 		const updateHeader = () => {
 			const currentScrollY = window.pageYOffset
 
+			// Используем transform вместо классов для лучшей производительности
 			if (currentScrollY > 100) {
 				this.header.classList.add("header--scrolled")
 			} else {
@@ -321,116 +501,60 @@ export class NavigationManager {
 				currentScrollY > this.lastScrollY &&
 				currentScrollY > CONFIG.scroll.headerHideThreshold
 			) {
-				this.header.classList.add("header--hidden")
+				this.header.style.transform = "translateY(-100%)"
 			} else {
-				this.header.classList.remove("header--hidden")
+				this.header.style.transform = "translateY(0)"
 			}
 
 			this.updateScrollIndicator(currentScrollY)
 
 			this.lastScrollY = currentScrollY
-			this.ticking = false
-		}
-
-		const requestTick = () => {
-			if (!this.ticking) {
-				requestAnimationFrame(updateHeader)
-				this.ticking = true
-			}
+			isScrolling = false
 		}
 
 		window.addEventListener(
 			"scroll",
-			Utils.throttle(requestTick, CONFIG.performance.throttleDelay),
+			() => {
+				if (!isScrolling) {
+					window.requestAnimationFrame(updateHeader)
+					isScrolling = true
+				}
+			},
 			{ passive: true }
 		)
 	}
 
+	/**
+	 * Обновление индикатора скролла
+	 */
 	updateScrollIndicator(scrollY) {
 		const scrollIndicator = document.getElementById("scrollIndicator")
 		if (!scrollIndicator) return
 
-		const heroHeight = window.innerHeight
-		const fadeStart = heroHeight * CONFIG.scroll.indicatorFadeThreshold
+		const fadeStart = this.heroHeight * CONFIG.scroll.indicatorFadeThreshold
 
 		if (scrollY > fadeStart) {
 			const opacity = Math.max(
 				0,
-				1 - (scrollY - fadeStart) / (heroHeight * 0.2)
+				1 - (scrollY - fadeStart) / (this.heroHeight * 0.2)
 			)
 			scrollIndicator.style.opacity = opacity
+
+			// Скрываем элемент полностью при opacity = 0 для производительности
+			if (opacity === 0) {
+				scrollIndicator.style.visibility = "hidden"
+			} else {
+				scrollIndicator.style.visibility = "visible"
+			}
 		} else {
 			scrollIndicator.style.opacity = 1
+			scrollIndicator.style.visibility = "visible"
 		}
 	}
 
-	setupScrollButton() {
-		if (this.scrollButton && this.heroSection) {
-			this.scrollButton.addEventListener("click", e => {
-				e.preventDefault()
-
-				const heroRect = this.heroSection.getBoundingClientRect()
-				const heroHeight = heroRect.height
-				const currentScroll = window.pageYOffset
-
-				let targetPosition
-
-				if (currentScroll < heroHeight) {
-					targetPosition = heroHeight
-				} else {
-					const aboutRect = this.aboutSection.getBoundingClientRect()
-					const headerHeight = this.header ? this.header.offsetHeight : 80
-					targetPosition = window.pageYOffset + aboutRect.top - headerHeight
-				}
-
-				targetPosition = Math.max(targetPosition, heroHeight)
-
-				this.smoothScrollToPosition(targetPosition, 1200)
-			})
-		}
-	}
-
-	smoothScrollToPosition(target, duration = 1200) {
-		const start = window.pageYOffset
-		const distance = target - start
-
-		if (Math.abs(distance) < 1) {
-			window.scrollTo({ top: target, behavior: "instant" })
-			return
-		}
-
-		const startTime = performance.now()
-
-		const easeOutQuart = t => {
-			return 1 - Math.pow(1 - t, 4)
-		}
-
-		const scroll = currentTime => {
-			const elapsed = currentTime - startTime
-			const progress = Math.min(elapsed / duration, 1)
-
-			const ease = easeOutQuart(progress)
-			const newPosition = start + distance * ease
-
-			window.scrollTo(0, newPosition)
-
-			if (progress < 1) {
-				requestAnimationFrame(scroll)
-			} else {
-				window.scrollTo(0, target)
-
-				setTimeout(() => {
-					const currentPos = window.pageYOffset
-					if (Math.abs(currentPos - target) > 1) {
-						window.scrollTo(0, target)
-					}
-				}, 50)
-			}
-		}
-
-		requestAnimationFrame(scroll)
-	}
-
+	/**
+	 * Настройка плавной прокрутки для якорных ссылок
+	 */
 	setupSmoothScrolling() {
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 			anchor.addEventListener("click", e => {
@@ -446,25 +570,11 @@ export class NavigationManager {
 						this.closeMobileMenu()
 					}
 
-					if (targetId === "#about" && this.heroSection) {
-						const heroHeight = this.heroSection.offsetHeight
-						const targetRect = targetElement.getBoundingClientRect()
-						const headerHeight = this.header ? this.header.offsetHeight : 80
+					const rect = targetElement.getBoundingClientRect()
+					const absoluteTop = window.pageYOffset + rect.top
+					const targetPosition = absoluteTop - this.headerHeight
 
-						const aboutPosition =
-							window.pageYOffset + targetRect.top - headerHeight
-
-						const finalPosition = Math.max(heroHeight, aboutPosition)
-
-						this.smoothScrollToPosition(finalPosition, 1000)
-					} else {
-						const rect = targetElement.getBoundingClientRect()
-						const absoluteTop = window.pageYOffset + rect.top
-						const headerHeight = this.header ? this.header.offsetHeight : 80
-						const targetPosition = absoluteTop - headerHeight
-
-						this.smoothScrollToPosition(targetPosition, 1000)
-					}
+					this.performOptimizedScroll(targetPosition, 800)
 				}
 			})
 		})

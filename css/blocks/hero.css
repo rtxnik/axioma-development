@@ -1,5 +1,5 @@
 /* ===============================================
-   БЛОК: HERO (БЭМ)
+   БЛОК: HERO (БЭМ) - ОПТИМИЗИРОВАННАЯ ВЕРСИЯ
    =============================================== */
 
 .hero {
@@ -12,6 +12,10 @@
 	background: var(--color-black);
 	margin: 0 !important;
 	padding: 0 !important;
+	/* Оптимизация для производительности */
+	will-change: auto;
+	transform: translateZ(0);
+	backface-visibility: hidden;
 }
 
 /* Контейнер видео */
@@ -29,8 +33,13 @@
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
-	will-change: transform;
+	/* Оптимизация производительности */
+	will-change: auto;
 	transform: translateZ(0);
+	backface-visibility: hidden;
+	/* Предотвращаем мерцание на iOS */
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translateZ(0);
 }
 
 /* Оверлей для видео */
@@ -47,6 +56,52 @@
 		rgba(0, 0, 0, 0.1) 100%
 	);
 	z-index: 2;
+	pointer-events: none;
+}
+
+/* Кнопка воспроизведения */
+.hero__play-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 3;
+	background: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: rgba(255, 255, 255, 0.9);
+	transition: all 0.3s ease;
+	opacity: 0;
+	scale: 0.8;
+}
+
+.hero__play-button--visible {
+	opacity: 1;
+	scale: 1;
+}
+
+.hero__play-button:hover {
+	background: rgba(0, 0, 0, 0.8);
+	border-color: rgba(255, 255, 255, 0.4);
+	color: white;
+	transform: translate(-50%, -50%) scale(1.1);
+}
+
+.hero__play-button:active {
+	transform: translate(-50%, -50%) scale(0.95);
+}
+
+.hero__play-button svg {
+	width: 100%;
+	height: 100%;
 }
 
 /* Прогресс бар видео */
@@ -61,6 +116,7 @@
 	transition: opacity var(--transition-slow);
 	background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 	padding: 20px 0 10px 0;
+	pointer-events: none;
 }
 
 .hero__progress--visible {
@@ -102,15 +158,17 @@
 		var(--color-white)
 	);
 	border-radius: 0;
-	width: 0%;
-	transition: width 0.1s ease;
+	width: 100%;
+	transition: transform 0.1s linear;
 	position: relative;
 	box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-	will-change: width;
-	transform: translateZ(0);
+	/* Оптимизация: используем transform вместо width */
+	transform: scaleX(0);
+	transform-origin: left;
+	will-change: transform;
 }
 
-/* Индикатор скролла */
+/* Индикатор скролла - ОПТИМИЗИРОВАННЫЙ */
 .hero__scroll-indicator {
 	position: absolute;
 	bottom: 3rem;
@@ -119,6 +177,7 @@
 	z-index: 15;
 	opacity: 0;
 	transition: opacity var(--transition-slow);
+	pointer-events: auto;
 }
 
 .hero__scroll-indicator--visible {
@@ -134,10 +193,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: transform var(--transition-base);
-	width: 40px;
-	height: 60px;
+	transition: transform 0.2s ease;
+	width: 44px;
+	height: 64px;
 	position: relative;
+	/* Увеличенная область клика для мобильных */
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
 }
 
 .hero__scroll-button:hover {
@@ -145,7 +207,8 @@
 }
 
 .hero__scroll-button:active {
-	transform: translateY(-1px) scale(1.05);
+	transform: scale(0.95);
+	transition: transform 0.1s ease;
 }
 
 .hero__scroll-button:focus {
@@ -209,21 +272,6 @@
 	}
 }
 
-@keyframes fadeInBounce {
-	0% {
-		opacity: 0;
-		transform: translateX(-50%) translateY(20px);
-	}
-	60% {
-		opacity: 1;
-		transform: translateX(-50%) translateY(-5px);
-	}
-	100% {
-		opacity: 1;
-		transform: translateX(-50%) translateY(0);
-	}
-}
-
 @keyframes scrollWheel {
 	0% {
 		top: 8px;
@@ -250,8 +298,25 @@
 	}
 }
 
-/* Адаптивность */
+/* ===============================================
+   АДАПТИВНОСТЬ
+   =============================================== */
+
 @media (max-width: 768px) {
+	.hero {
+		/* Оптимизация высоты для мобильных */
+		height: 100vh !important;
+		height: -webkit-fill-available !important;
+		height: 100dvh !important; /* Dynamic viewport height */
+	}
+
+	/* Кнопка воспроизведения на мобильных */
+	.hero__play-button {
+		width: 70px;
+		height: 70px;
+		border-width: 1.5px;
+	}
+
 	.hero__progress {
 		padding: 15px 0 8px 0;
 	}
@@ -265,8 +330,11 @@
 	}
 
 	.hero__scroll-button {
-		width: 35px;
-		height: 50px;
+		width: 40px;
+		height: 56px;
+		/* Еще больше увеличиваем область касания */
+		padding: 8px;
+		margin: -8px;
 	}
 
 	.scroll-icon {
@@ -282,9 +350,14 @@
 }
 
 @media (max-width: 480px) {
+	.hero__play-button {
+		width: 60px;
+		height: 60px;
+	}
+
 	.hero__scroll-button {
-		width: 30px;
-		height: 45px;
+		width: 36px;
+		height: 50px;
 	}
 
 	.hero__progress {
@@ -308,6 +381,36 @@
 	}
 }
 
+/* Альбомная ориентация на мобильных */
+@media (orientation: landscape) and (max-height: 500px) {
+	.hero {
+		height: 100vh;
+		min-height: 400px;
+	}
+
+	.hero__scroll-indicator {
+		bottom: 1rem;
+	}
+
+	.hero__scroll-button {
+		width: 32px;
+		height: 44px;
+	}
+
+	.scroll-icon {
+		width: 18px;
+		height: 28px;
+	}
+}
+
+/* Оптимизация для высокой плотности пикселей */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+	.hero__video {
+		image-rendering: optimizeSpeed;
+		image-rendering: -webkit-optimize-contrast;
+	}
+}
+
 /* Поддержка уменьшенной анимации */
 @media (prefers-reduced-motion: reduce) {
 	.hero__video {
@@ -325,5 +428,32 @@
 
 	.scroll-icon__wheel {
 		animation: none;
+		top: 12px;
+	}
+
+	.hero__play-button,
+	.hero__scroll-button {
+		transition: none;
+	}
+}
+
+/* Поддержка iOS Safe Area */
+@supports (padding: max(0px)) {
+	.hero {
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+}
+
+/* Оптимизация производительности для слабых устройств */
+@media (max-width: 768px) and (hover: none) {
+	.hero__video {
+		/* Отключаем сложные трансформации на мобильных */
+		will-change: auto;
+		transform: none;
+	}
+
+	.hero__video-overlay {
+		/* Упрощаем градиент для производительности */
+		background: rgba(0, 0, 0, 0.05);
 	}
 }
