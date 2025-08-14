@@ -8,6 +8,7 @@ import { LicenseModal } from "../modules/LicenseModal.js"
 import { LoadingManager } from "../modules/LoadingManager.js"
 import { NavigationManager } from "../modules/NavigationManager.js"
 import { ScrollAnimationManager } from "../modules/ScrollAnimationManager.js"
+import { ServiceModalManager } from "../modules/ServiceModalManager.js"
 import { VideoManager } from "../modules/VideoManager.js"
 
 export class App {
@@ -85,10 +86,25 @@ export class App {
 	initDeferredModules() {
 		// Используем requestIdleCallback для некритичных модулей
 		const initDeferred = () => {
-			this.modules.form = new FormManager()
-			this.modules.lazyLoad = new LazyLoadManager()
-			this.modules.scrollAnimation = new ScrollAnimationManager()
-			this.modules.licenseModal = new LicenseModal()
+			try {
+				this.modules.form = new FormManager()
+				this.modules.lazyLoad = new LazyLoadManager()
+				this.modules.scrollAnimation = new ScrollAnimationManager()
+				this.modules.licenseModal = new LicenseModal()
+
+				// Инициализируем модальные окна услуг
+				this.modules.serviceModal = new ServiceModalManager()
+
+				// Глобальные ссылки для некритичных модулей
+				window.serviceModalManager = this.modules.serviceModal
+
+				if (CONFIG.debug.enabled) {
+					console.log("✅ Deferred modules initialized successfully")
+				}
+			} catch (error) {
+				console.error("❌ Error initializing deferred modules:", error)
+				this.logError(error)
+			}
 		}
 
 		if ("requestIdleCallback" in window) {
@@ -194,6 +210,7 @@ export class App {
 		// Группируем чтение и запись DOM
 		const readQueue = []
 		const writeQueue = []
+		const readResults = []
 
 		window.batchRead = fn => {
 			readQueue.push(fn)
@@ -218,11 +235,16 @@ export class App {
 
 			// Сначала все чтения
 			const reads = readQueue.splice(0)
-			reads.forEach(fn => fn())
+			readResults.length = 0
+			reads.forEach(fn => {
+				readResults.push(fn())
+			})
 
 			// Затем все записи
 			const writes = writeQueue.splice(0)
-			writes.forEach(fn => fn())
+			writes.forEach((fn, index) => {
+				fn(readResults[index])
+			})
 		}
 	}
 
@@ -269,7 +291,9 @@ export class App {
 		if (cores < 4 || memory < 4) {
 			document.documentElement.classList.add("low-performance")
 			// Отключаем тяжелые эффекты
-			CONFIG.mobile.disableEffects = true
+			if (typeof CONFIG !== "undefined" && CONFIG.mobile) {
+				CONFIG.mobile.disableEffects = true
+			}
 		} else if (cores >= 8 && memory >= 8) {
 			document.documentElement.classList.add("high-performance")
 		}
@@ -291,7 +315,9 @@ export class App {
 			if (effectiveType === "slow-2g" || effectiveType === "2g") {
 				document.documentElement.classList.add("slow-connection")
 				// Используем минимальное качество видео
-				CONFIG.mobile.videoQuality = "minimal"
+				if (typeof CONFIG !== "undefined" && CONFIG.mobile) {
+					CONFIG.mobile.videoQuality = "minimal"
+				}
 			} else if (effectiveType === "4g") {
 				document.documentElement.classList.add("fast-connection")
 			}
@@ -309,8 +335,10 @@ export class App {
 	 * Проверка, мобильное ли устройство
 	 */
 	isMobile() {
+		const mobileBreakpoint =
+			(typeof CONFIG !== "undefined" && CONFIG.mobile?.breakpoint) || 768
 		return (
-			window.matchMedia(`(max-width: ${CONFIG.mobile.breakpoint}px)`).matches ||
+			window.matchMedia(`(max-width: ${mobileBreakpoint}px)`).matches ||
 			"ontouchstart" in window ||
 			navigator.maxTouchPoints > 0
 		)
@@ -324,7 +352,7 @@ export class App {
 			console.error("Global error:", e.error)
 
 			// Отправка ошибки в аналитику (если настроено)
-			if (CONFIG.debug.enabled) {
+			if (typeof CONFIG !== "undefined" && CONFIG.debug?.enabled) {
 				this.logError(e.error)
 			}
 		})
@@ -333,7 +361,7 @@ export class App {
 			console.error("Unhandled promise rejection:", e.reason)
 
 			// Отправка ошибки в аналитику (если настроено)
-			if (CONFIG.debug.enabled) {
+			if (typeof CONFIG !== "undefined" && CONFIG.debug?.enabled) {
 				this.logError(e.reason)
 			}
 		})
@@ -345,14 +373,14 @@ export class App {
 	logError(error) {
 		// Здесь можно отправить ошибку на сервер
 		const errorData = {
-			message: error.message,
+			message: error.message || error.toString(),
 			stack: error.stack,
 			userAgent: navigator.userAgent,
 			timestamp: Date.now(),
 			performance: this.performance.metrics,
 		}
 
-		if (CONFIG.debug.logEvents) {
+		if (typeof CONFIG !== "undefined" && CONFIG.debug?.logEvents) {
 			console.log("Error logged:", errorData)
 		}
 	}
@@ -370,7 +398,7 @@ export class App {
 		// Получаем метрики Core Web Vitals
 		this.measureCoreWebVitals()
 
-		if (CONFIG.debug.logPerformance) {
+		if (typeof CONFIG !== "undefined" && CONFIG.debug?.logPerformance) {
 			console.log("⚡ Performance metrics:", this.performance.metrics)
 		}
 

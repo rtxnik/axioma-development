@@ -678,13 +678,13 @@
 						/>
 						<!-- Источник для мобильных устройств -->
 						<source
-							src="./assets/small.mp4"
+							src="./assets/hero-video-small.mp4"
 							type="video/mp4"
 							media="(max-width: 767px)"
-							data-src-mobile="./assets/small.mp4"
+							data-src-mobile="./assets/hero-video-small.mp4"
 						/>
 						<!-- Fallback -->
-						<source src="./assets/small.mp4" type="video/mp4" />
+						<source src="./assets/hero-video-small.mp4" type="video/mp4" />
 					</video>
 					<div class="hero__video-overlay"></div>
 
@@ -781,20 +781,31 @@
 
 					<div class="services__grid">
 						<!-- Service Card 1 -->
-						<article class="service-card services__card">
+						<article
+							class="service-card services__card"
+							data-service="family-office"
+						>
 							<div class="service-card__content">
 								<h3 class="service-card__title">Family Office</h3>
 								<p class="service-card__description">
 									Собственникам и бенефициарам бизнеса
 								</p>
 								<div class="service-card__button">
-									<button class="button button--secondary">Подробнее</button>
+									<button
+										class="button button--secondary"
+										data-service-trigger="family-office"
+									>
+										Подробнее
+									</button>
 								</div>
 							</div>
 						</article>
 
 						<!-- Service Card 2 -->
-						<article class="service-card services__card">
+						<article
+							class="service-card services__card"
+							data-service="mezzanine"
+						>
 							<div class="service-card__content">
 								<h3 class="service-card__title">Мезонинное кредитование</h3>
 								<p class="service-card__description">
@@ -803,13 +814,21 @@
 									инфраструктурного строительства
 								</p>
 								<div class="service-card__button">
-									<button class="button button--secondary">Подробнее</button>
+									<button
+										class="button button--secondary"
+										data-service-trigger="mezzanine"
+									>
+										Подробнее
+									</button>
 								</div>
 							</div>
 						</article>
 
 						<!-- Service Card 3 -->
-						<article class="service-card services__card">
+						<article
+							class="service-card services__card"
+							data-service="ma-financing"
+						>
 							<div class="service-card__content">
 								<h3 class="service-card__title">
 									M&A и проектное финансирование
@@ -819,13 +838,21 @@
 									девелоперам, энергетических и инфраструктурных проектов
 								</p>
 								<div class="service-card__button">
-									<button class="button button--secondary">Подробнее</button>
+									<button
+										class="button button--secondary"
+										data-service-trigger="ma-financing"
+									>
+										Подробнее
+									</button>
 								</div>
 							</div>
 						</article>
 
 						<!-- Service Card 4 -->
-						<article class="service-card services__card">
+						<article
+							class="service-card services__card"
+							data-service="factoring"
+						>
 							<div class="service-card__content">
 								<h3 class="service-card__title">
 									Финансирование контрактов (факторинг)
@@ -835,13 +862,21 @@
 									получателей
 								</p>
 								<div class="service-card__button">
-									<button class="button button--secondary">Подробнее</button>
+									<button
+										class="button button--secondary"
+										data-service-trigger="factoring"
+									>
+										Подробнее
+									</button>
 								</div>
 							</div>
 						</article>
 
 						<!-- Service Card 5 -->
-						<article class="service-card services__card">
+						<article
+							class="service-card services__card"
+							data-service="bridge-financing"
+						>
 							<div class="service-card__content">
 								<h3 class="service-card__title">Бридж-Финансирование</h3>
 								<p class="service-card__description">
@@ -849,13 +884,21 @@
 									девелоперам
 								</p>
 								<div class="service-card__button">
-									<button class="button button--secondary">Подробнее</button>
+									<button
+										class="button button--secondary"
+										data-service-trigger="bridge-financing"
+									>
+										Подробнее
+									</button>
 								</div>
 							</div>
 						</article>
 
 						<!-- Service Card 6 -->
-						<article class="service-card services__card">
+						<article
+							class="service-card services__card"
+							data-service="financial-engineering"
+						>
 							<div class="service-card__content">
 								<h3 class="service-card__title">Финансовая инженерия</h3>
 								<p class="service-card__description">
@@ -865,13 +908,21 @@
 									иностранных партнёрств, дискретных фондов
 								</p>
 								<div class="service-card__button">
-									<button class="button button--secondary">Подробнее</button>
+									<button
+										class="button button--secondary"
+										data-service-trigger="financial-engineering"
+									>
+										Подробнее
+									</button>
 								</div>
 							</div>
 						</article>
 
 						<!-- Service Card 7 -->
-						<article class="service-card services__card">
+						<article
+							class="service-card services__card"
+							data-service="non-core-assets"
+						>
 							<div class="service-card__content">
 								<h3 class="service-card__title">
 									Структурирование сделок с непрофильными активами
@@ -882,13 +933,21 @@
 									фокуса, объектов, не приносящих прибыли
 								</p>
 								<div class="service-card__button">
-									<button class="button button--secondary">Подробнее</button>
+									<button
+										class="button button--secondary"
+										data-service-trigger="non-core-assets"
+									>
+										Подробнее
+									</button>
 								</div>
 							</div>
 						</article>
 
 						<!-- Service Card 8 -->
-						<article class="service-card services__card">
+						<article
+							class="service-card services__card"
+							data-service="agency-participation"
+						>
 							<div class="service-card__content">
 								<h3 class="service-card__title">Агентское участие</h3>
 								<p class="service-card__description">
@@ -896,7 +955,12 @@
 									капиталоемких проектов и активов
 								</p>
 								<div class="service-card__button">
-									<button class="button button--secondary">Подробнее</button>
+									<button
+										class="button button--secondary"
+										data-service-trigger="agency-participation"
+									>
+										Подробнее
+									</button>
 								</div>
 							</div>
 						</article>
