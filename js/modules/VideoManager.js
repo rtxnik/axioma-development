@@ -13,7 +13,7 @@ export class VideoManager {
 		// Параметры адаптивного видео
 		this.sources = {
 			desktop: "./assets/hero-video.mp4",
-			mobile: "./assets/hero-video-small.mp4",
+			mobile: "./assets/small.mp4",
 		}
 
 		// Оптимизированные параметры
