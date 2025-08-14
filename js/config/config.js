@@ -1,120 +1,213 @@
 /**
- * Конфигурация приложения - Оптимизированная версия
+ * Конфигурация приложения - Оптимизированная версия для мобильных
  */
 export const CONFIG = {
 	// Анимации
 	animation: {
 		duration: {
-			instant: 100, // Мгновенный отклик
+			instant: 100,
 			fast: 150,
 			base: 300,
 			slow: 500,
 			slower: 700,
-			smooth: 800, // Оптимизированная плавная прокрутка
+			smooth: 600, // ИСПРАВЛЕНО: Быстрее для мобильных
 		},
 		easing: {
 			default: "ease",
-			smooth: "cubic-bezier(0.25, 0.46, 0.45, 0.94)", // Более плавная анимация
+			smooth: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
 			bounce: "cubic-bezier(0.34, 1.56, 0.64, 1)",
 			expo: "cubic-bezier(0.16, 1, 0.3, 1)",
-			outCubic: "cubic-bezier(0.33, 1, 0.68, 1)", // Для скролла
+			outCubic: "cubic-bezier(0.33, 1, 0.68, 1)",
 		},
 	},
 
 	// Видео - оптимизированные параметры
 	video: {
-		minLoadingTime: 1000, // Уменьшено для более быстрой загрузки
-		autoplayDelay: 200, // Быстрее начинаем autoplay
-		autoplayTimeout: 3000, // Таймаут для autoplay
-		progressUpdateRate: 100, // Частота обновления прогресса (ms)
-		mobileBreakpoint: 768, // Точка переключения видео
+		minLoadingTime: 800, // ИСПРАВЛЕНО: Еще быстрее на мобильных
+		autoplayDelay: 100, // ИСПРАВЛЕНО: Мгновенный autoplay
+		autoplayTimeout: 2000, // ИСПРАВЛЕНО: Короче таймаут
+		progressUpdateRate: 150, // ИСПРАВЛЕНО: Реже обновления на мобильных
+		mobileBreakpoint: 768,
 		preloadStrategy: {
-			desktop: "auto", // Полная предзагрузка на десктопе
-			mobile: "metadata", // Только метаданные на мобильных
+			desktop: "auto",
+			mobile: "none", // ИСПРАВЛЕНО: Не предзагружаем на мобильных
 		},
 	},
 
-	// Скролл - оптимизированные параметры
+	// ИСПРАВЛЕНО: Скролл - оптимизированные параметры для мобильных
 	scroll: {
-		smoothDuration: 800, // Быстрее для лучшего отклика
-		headerHideThreshold: 200,
-		indicatorFadeThreshold: 0.8,
-		sectionOffset: 0, // Убираем лишний отступ
-		buttonResponseTime: 50, // Время отклика кнопки (ms)
+		smoothDuration: 600, // ИСПРАВЛЕНО: Быстрее для мобильных
+		headerHideThreshold: 150, // ИСПРАВЛЕНО: Меньше порог
+		indicatorFadeThreshold: 0.75, // ИСПРАВЛЕНО: Раньше скрываем
+		sectionOffset: 0,
+		buttonResponseTime: 30, // ИСПРАВЛЕНО: Быстрее отклик
 		precision: {
-			enabled: true,
-			finalAdjustment: true,
-			adjustmentDelay: 30, // Уменьшено для быстрой корректировки
+			enabled: false, // ИСПРАВЛЕНО: Отключаем на мобильных
+			finalAdjustment: false,
+			adjustmentDelay: 50,
 		},
-		// Новые параметры для оптимизации
-		useNativeSmooth: false, // Использовать кастомную реализацию
-		easeFunction: "outCubic", // Функция плавности
-		interruptible: true, // Можно прервать скролл новым действием
+		// ИСПРАВЛЕНО: Параметры для нативного скролла на мобильных
+		useNativeSmooth: true, // ИСПРАВЛЕНО: Используем нативный на мобильных
+		easeFunction: "outCubic",
+		interruptible: false, // ИСПРАВЛЕНО: Не прерываем на мобильных
+		// ДОБАВЛЕНО: Мобильные настройки
+		mobile: {
+			useNativeSmooth: true,
+			disableCustomScroll: true,
+			reducedAnimations: true,
+		},
 	},
 
 	// Форма
 	form: {
-		debounceDelay: 300, // Уменьшено для более быстрого отклика
-		submitDelay: 1500,
-		validationDelay: 200, // Задержка валидации
+		debounceDelay: 200, // ИСПРАВЛЕНО: Быстрее отклик
+		submitDelay: 1200, // ИСПРАВЛЕНО: Быстрее отправка
+		validationDelay: 150,
 		phoneValidation: {
 			minLength: 10,
 			maxLength: 15,
 		},
 	},
 
-	// Производительность - оптимизированные параметры
+	// ИСПРАВЛЕНО: Производительность - оптимизированные параметры для мобильных
 	performance: {
-		throttleDelay: 16, // ~60fps
-		scrollThrottle: 10, // Throttle для скролла
-		resizeDebounce: 250, // Debounce для resize
-		intersectionThreshold: 0.1,
-		lazyLoadOffset: "50px", // Отступ для lazy load
-		// Новые параметры
-		usePassiveListeners: true, // Passive event listeners
-		useRAF: true, // RequestAnimationFrame для анимаций
-		enableGPUAcceleration: true, // GPU ускорение
+		throttleDelay: 32, // ИСПРАВЛЕНО: ~30fps для мобильных
+		scrollThrottle: 32, // ИСПРАВЛЕНО: Реже на мобильных
+		resizeDebounce: 300, // ИСПРАВЛЕНО: Больше debounce
+		intersectionThreshold: 0.15, // ИСПРАВЛЕНО: Больше порог
+		lazyLoadOffset: "100px", // ИСПРАВЛЕНО: Больше отступ
+		usePassiveListeners: true,
+		useRAF: true,
+		enableGPUAcceleration: false, // ИСПРАВЛЕНО: Отключаем на мобильных
 		reducedMotion: {
 			respectUserPreference: true,
 			fallbackDuration: 0,
 		},
+		// ДОБАВЛЕНО: Мобильные настройки производительности
+		mobile: {
+			throttleDelay: 50, // Еще реже на мобильных
+			disableParallax: true,
+			disableBackdropFilter: false, // Можем оставить современные фильтры
+			simplifyAnimations: true,
+			reduceEffects: true,
+		},
 	},
 
-	// Параметры кнопки скролла - оптимизированные
+	// ИСПРАВЛЕНО: Параметры кнопки скролла
 	scrollButton: {
-		fadeInDelay: 300, // Быстрее показываем
-		animationDuration: 2000,
-		hoverScale: 1.05,
-		activeScale: 0.95, // Масштаб при нажатии
-		touchFeedback: true, // Визуальная обратная связь на touch
-		hapticFeedback: true, // Вибрация на поддерживаемых устройствах
-		preventDoubleClick: true, // Предотвращение двойных кликов
-		doubleClickTimeout: 300, // Таймаут для двойных кликов
+		fadeInDelay: 200, // ИСПРАВЛЕНО: Быстрее показываем
+		animationDuration: 1500, // ИСПРАВЛЕНО: Короче анимация
+		hoverScale: 1.03, // ИСПРАВЛЕНО: Меньше hover эффект
+		activeScale: 0.9, // ИСПРАВЛЕНО: Больше активный эффект
+		touchFeedback: true,
+		hapticFeedback: true,
+		preventDoubleClick: true,
+		doubleClickTimeout: 500, // ИСПРАВЛЕНО: Больше таймаут для мобильных
+		// ДОБАВЛЕНО: Мобильные настройки кнопки
+		mobile: {
+			enlargedTouchTarget: true,
+			visualFeedbackDuration: 200,
+			hapticIntensity: "light",
+		},
 	},
 
-	// Мобильная оптимизация
+	// ИСПРАВЛЕНО: Мобильная оптимизация
 	mobile: {
 		breakpoint: 768,
-		touchThreshold: 10, // Порог для определения touch события
-		swipeThreshold: 50, // Порог для свайпа
-		videoQuality: "low", // Качество видео на мобильных
-		disableEffects: false, // Отключать ли эффекты на слабых устройствах
-		useReducedMotion: true, // Учитывать настройки reduced motion
+		touchThreshold: 15, // ИСПРАВЛЕНО: Больше порог для touch
+		swipeThreshold: 60, // ИСПРАВЛЕНО: Больше порог для свайпа
+		videoQuality: "low",
+		disableEffects: true, // ИСПРАВЛЕНО: Отключаем эффекты по умолчанию
+		useReducedMotion: true,
+		// ДОБАВЛЕНО: Дополнительные мобильные настройки
+		optimizations: {
+			disableHoverEffects: true,
+			simplifyBackgrounds: true,
+			reduceBlurEffects: true,
+			disableParallax: true,
+			fastTapResponse: true,
+		},
+		// ДОБАВЛЕНО: Настройки производительности для разных типов устройств
+		performance: {
+			lowEnd: {
+				disableAnimations: true,
+				disableBlur: true,
+				simplifyUI: true,
+			},
+			midRange: {
+				reduceAnimations: true,
+				limitBlur: true,
+			},
+			highEnd: {
+				fullEffects: false, // Все равно ограничиваем на мобильных
+			},
+		},
 	},
 
 	// Кэширование
 	cache: {
 		enabled: true,
-		duration: 3600000, // 1 час в ms
-		videoCache: true, // Кэшировать видео
-		imageCache: true, // Кэшировать изображения
+		duration: 1800000, // ИСПРАВЛЕНО: 30 минут для мобильных
+		videoCache: false, // ИСПРАВЛЕНО: Не кэшируем видео на мобильных
+		imageCache: true,
+	},
+
+	// ДОБАВЛЕНО: Настройки доступности
+	accessibility: {
+		respectReducedMotion: true,
+		respectHighContrast: true,
+		minTouchTarget: 44, // Минимальный размер touch target
+		focusVisible: true,
+		announceChanges: true,
+	},
+
+	// ДОБАВЛЕНО: Настройки сети
+	network: {
+		slowConnection: {
+			disableAnimations: true,
+			reducedQuality: true,
+			minimalEffects: true,
+		},
+		adaptiveLoading: true,
+		preloadCritical: true,
+		lazyLoadNonCritical: true,
 	},
 
 	// Отладка
 	debug: {
-		enabled: false, // Включить режим отладки
-		logPerformance: false, // Логировать производительность
-		showFPS: false, // Показывать FPS
-		logEvents: false, // Логировать события
+		enabled: false,
+		logPerformance: false,
+		showFPS: false,
+		logEvents: false,
+		// ДОБАВЛЕНО: Мобильная отладка
+		mobile: {
+			showTouchEvents: false,
+			logScrollPerformance: false,
+			showViewportInfo: false,
+		},
+	},
+
+	// ДОБАВЛЕНО: Пороги производительности
+	thresholds: {
+		fps: {
+			good: 50,
+			ok: 30,
+			poor: 20,
+		},
+		memory: {
+			low: 2, // GB
+			medium: 4,
+			high: 8,
+		},
+		cores: {
+			low: 2,
+			medium: 4,
+			high: 8,
+		},
+		connection: {
+			slow: ["slow-2g", "2g"],
+			medium: ["3g"],
+			fast: ["4g"],
+		},
 	},
 }

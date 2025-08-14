@@ -1,5 +1,5 @@
 /* ===============================================
-   RESET & NORMALIZE
+   RESET & NORMALIZE - ОПТИМИЗИРОВАНО ДЛЯ МОБИЛЬНЫХ
    =============================================== */
 
 /* Box sizing */
@@ -20,6 +20,8 @@ html {
 	-moz-text-size-adjust: none;
 	-webkit-text-size-adjust: none;
 	text-size-adjust: none;
+	/* ИСПРАВЛЕНО: Отключаем smooth scroll на мобильных */
+	scroll-behavior: auto;
 }
 
 /* Core body defaults */
@@ -29,6 +31,9 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
+	/* ДОБАВЛЕНО: Оптимизация для мобильных */
+	-webkit-overflow-scrolling: touch;
+	overscroll-behavior: none;
 }
 
 /* Improve media defaults */
@@ -56,6 +61,9 @@ button {
 	background: none;
 	border: none;
 	cursor: pointer;
+	/* ДОБАВЛЕНО: Убираем outline на мобильных */
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
 }
 
 /* Remove list styles */
@@ -68,6 +76,9 @@ ol {
 a {
 	text-decoration: none;
 	color: inherit;
+	/* ДОБАВЛЕНО: Убираем highlight на мобильных */
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
 }
 
 /* Make sure textareas without a rows attribute are not tiny */
@@ -152,10 +163,58 @@ table {
 	scrollbar-color: var(--color-secondary) var(--color-light);
 }
 
-/* Smooth scroll for HTML */
-@media (prefers-reduced-motion: no-preference) {
+/* ИСПРАВЛЕНО: Smooth scroll только для десктопа */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
 	html {
 		scroll-behavior: smooth;
+	}
+}
+
+/* ДОБАВЛЕНО: Оптимизация скролла для мобильных */
+@media (max-width: 768px) {
+	html {
+		scroll-behavior: auto !important;
+	}
+
+	body {
+		/* Убираем momentum scrolling на проблемных устройствах */
+		-webkit-overflow-scrolling: auto;
+		/* Предотвращаем bounce эффект */
+		overscroll-behavior-y: none;
+	}
+
+	/* Оптимизация для touch устройств */
+	*,
+	*::before,
+	*::after {
+		/* Отключаем подсветку при касании */
+		-webkit-tap-highlight-color: transparent;
+		/* Убираем callout на iOS */
+		-webkit-touch-callout: none;
+		/* Предотвращаем выделение текста при случайном долгом касании */
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	/* Разрешаем выделение для текстовых элементов */
+	p,
+	span,
+	div,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	input,
+	textarea,
+	[contenteditable] {
+		-webkit-user-select: text;
+		-moz-user-select: text;
+		-ms-user-select: text;
+		user-select: text;
 	}
 }
 

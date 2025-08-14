@@ -1,3 +1,7 @@
+/* ===============================================
+   ОПТИМИЗИРОВАННЫЕ КНОПКИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+   =============================================== */
+
 button {
 	position: relative;
 	display: inline-block;
@@ -10,11 +14,22 @@ button {
 	padding: 0;
 	font-size: inherit;
 	font-family: inherit;
+	/* ДОБАВЛЕНО: Оптимизация для мобильных */
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+	min-width: 44px;
+	min-height: 44px;
 }
 
+/* Основная кнопка learn-more */
 button.learn-more {
 	width: 12rem;
 	height: auto;
+	min-height: 48px;
+	/* ДОБАВЛЕНО: Лучшая адаптация */
+	display: inline-flex;
+	align-items: center;
+	transition: all 0.3s cubic-bezier(0.65, 0, 0.076, 1);
 }
 
 button.learn-more .circle {
@@ -26,6 +41,10 @@ button.learn-more .circle {
 	height: 3rem;
 	background: #282936;
 	border-radius: 1.625rem;
+	flex-shrink: 0;
+	/* ДОБАВЛЕНО: Минимальный размер касания */
+	min-width: 44px;
+	min-height: 44px;
 }
 
 button.learn-more .circle .icon {
@@ -71,17 +90,397 @@ button.learn-more .button-text {
 	line-height: 1.6;
 	text-align: center;
 	text-transform: uppercase;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-button:hover .circle {
+/* ИСПРАВЛЕНО: Hover только для устройств с мышью */
+@media (hover: hover) and (pointer: fine) {
+	button.learn-more:hover .circle {
+		width: 100%;
+	}
+
+	button.learn-more:hover .circle .icon.arrow {
+		background: #fff;
+		transform: translate(1rem, 0);
+	}
+
+	button.learn-more:hover .button-text {
+		color: #fff;
+	}
+}
+
+/* ДОБАВЛЕНО: Touch states для мобильных */
+@media (hover: none) and (pointer: coarse) {
+	button.learn-more:active {
+		transform: scale(0.96);
+	}
+
+	button.learn-more:active .circle {
+		background: #1a1a2e;
+		transform: scale(0.95);
+	}
+
+	button.learn-more:active .button-text {
+		color: #555;
+	}
+}
+
+/* ===============================================
+   ВТОРИЧНЫЕ КНОПКИ (для карточек сервисов)
+   =============================================== */
+
+.button--secondary {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5rem 1.125rem;
+	background: rgba(255, 255, 255, 0.95);
+	border: 1px solid rgba(17, 24, 39, 0.8);
+	color: var(--color-primary);
+	font-size: 0.6875rem;
+	font-weight: var(--font-weight-medium);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	border-radius: 18px;
+	cursor: pointer;
+	transition: all var(--transition-base);
+	text-decoration: none;
+	position: relative;
+	z-index: 2;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+	/* ДОБАВЛЕНО: Минимальный размер касания */
+	min-width: 44px;
+	min-height: 44px;
+	min-width: 80px;
+	/* ДОБАВЛЕНО: Убираем highlight */
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+}
+
+/* ИСПРАВЛЕНО: Hover только для десктопа */
+@media (hover: hover) and (pointer: fine) {
+	.button--secondary:hover {
+		background: var(--color-primary);
+		border-color: var(--color-primary);
+		color: var(--color-white);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+}
+
+/* ДОБАВЛЕНО: Touch states для мобильных */
+@media (hover: none) and (pointer: coarse) {
+	.button--secondary:active {
+		background: var(--color-primary);
+		border-color: var(--color-primary);
+		color: var(--color-white);
+		transform: scale(0.95);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	}
+}
+
+/* ===============================================
+   КНОПКА ОТПРАВКИ ФОРМЫ
+   =============================================== */
+
+.button--submit {
 	width: 100%;
+	height: 56px;
+	background: linear-gradient(
+		135deg,
+		var(--color-blue),
+		var(--color-blue-dark)
+	);
+	color: var(--color-white);
+	font-size: 0.9375rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	border-radius: 12px;
+	border: none;
+	cursor: pointer;
+	box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	position: relative;
+	overflow: hidden;
+	margin-top: 0.5rem;
+	/* ДОБАВЛЕНО: Минимальный размер касания */
+	min-height: 48px;
+	/* ДОБАВЛЕНО: Убираем highlight */
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+	/* Предотвращаем zoom на iOS */
+	-webkit-text-size-adjust: 100%;
 }
 
-button:hover .circle .icon.arrow {
-	background: #fff;
-	transform: translate(1rem, 0);
+/* ИСПРАВЛЕНО: Hover только для десктопа */
+@media (hover: hover) and (pointer: fine) {
+	.button--submit:hover:not(:disabled) {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4),
+			0 4px 8px rgba(0, 0, 0, 0.15);
+	}
 }
 
-button:hover .button-text {
-	color: #fff;
+/* ДОБАВЛЕНО: Touch states для мобильных */
+@media (hover: none) and (pointer: coarse) {
+	.button--submit:active:not(:disabled) {
+		transform: scale(0.98);
+		box-shadow: 0 2px 8px rgba(59, 130, 246, 0.5), 0 1px 4px rgba(0, 0, 0, 0.2);
+	}
+}
+
+.button--submit:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+.button--submit:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.button__text {
+	position: relative;
+	z-index: 2;
+	transition: opacity 0.3s ease;
+}
+
+.button__icon {
+	width: 20px;
+	height: 20px;
+	transition: transform 0.3s ease;
+	position: relative;
+	z-index: 2;
+}
+
+/* ИСПРАВЛЕНО: Иконка анимация только для десктопа */
+@media (hover: hover) and (pointer: fine) {
+	.button--submit:hover:not(:disabled) .button__icon {
+		transform: translateX(4px);
+	}
+}
+
+/* Loading состояния */
+.button__loader {
+	position: absolute;
+	display: flex;
+	gap: 4px;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.button__loader span {
+	width: 6px;
+	height: 6px;
+	background: var(--color-white);
+	border-radius: 50%;
+	animation: loaderDot 1.4s ease-in-out infinite;
+}
+
+.button__loader span:nth-child(1) {
+	animation-delay: -0.32s;
+}
+.button__loader span:nth-child(2) {
+	animation-delay: -0.16s;
+}
+.button__loader span:nth-child(3) {
+	animation-delay: 0;
+}
+
+@keyframes loaderDot {
+	0%,
+	80%,
+	100% {
+		transform: scale(0.6);
+		opacity: 0.5;
+	}
+	40% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.button--submit.button--loading .button__text,
+.button--submit.button--loading .button__icon {
+	opacity: 0;
+}
+
+.button--submit.button--loading .button__loader {
+	opacity: 1;
+}
+
+.button--submit.button--success {
+	background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.button--submit.button--error {
+	background: linear-gradient(135deg, #ef4444, #dc2626);
+	animation: shake 0.5s ease-out;
+}
+
+/* ===============================================
+   АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+   =============================================== */
+
+@media (max-width: 768px) {
+	/* Основная кнопка learn-more */
+	button.learn-more {
+		width: 10rem;
+		min-height: 48px;
+	}
+
+	button.learn-more .circle {
+		width: 2.5rem;
+		height: 2.5rem;
+		min-width: 44px;
+		min-height: 44px;
+	}
+
+	button.learn-more .button-text {
+		font-size: 0.875rem;
+		padding: 0.625rem 0;
+		margin-left: 1.5rem;
+	}
+
+	/* Вторичные кнопки */
+	.button--secondary {
+		padding: 0.625rem 1rem;
+		font-size: 0.75rem;
+		min-height: 48px;
+		min-width: 88px;
+		border-radius: 16px;
+	}
+
+	/* Submit кнопка */
+	.button--submit {
+		height: 52px;
+		font-size: 16px !important; /* Предотвращаем zoom на iOS */
+		text-transform: none;
+		letter-spacing: normal;
+		min-height: 52px;
+	}
+}
+
+@media (max-width: 480px) {
+	/* Еще меньше для маленьких экранов */
+	button.learn-more {
+		width: 9rem;
+	}
+
+	button.learn-more .circle {
+		width: 2.25rem;
+		height: 2.25rem;
+	}
+
+	button.learn-more .button-text {
+		font-size: 0.8125rem;
+		margin-left: 1.25rem;
+		padding: 0.5rem 0;
+	}
+
+	.button--secondary {
+		padding: 0.5rem 0.875rem;
+		font-size: 0.6875rem;
+		min-width: 80px;
+		border-radius: 14px;
+	}
+
+	.button--submit {
+		height: 48px;
+		min-height: 48px;
+	}
+}
+
+@media (max-width: 375px) {
+	/* Минимальные размеры */
+	button.learn-more {
+		width: 8rem;
+	}
+
+	button.learn-more .circle {
+		width: 2rem;
+		height: 2rem;
+		min-width: 40px;
+		min-height: 40px;
+	}
+
+	button.learn-more .button-text {
+		font-size: 0.75rem;
+		margin-left: 1rem;
+	}
+
+	.button--secondary {
+		padding: 0.5rem 0.75rem;
+		font-size: 0.625rem;
+		min-width: 76px;
+	}
+}
+
+/* ===============================================
+   АНИМАЦИЯ SHAKE ДЛЯ ОШИБОК
+   =============================================== */
+
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	10%,
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: translateX(-4px);
+	}
+	20%,
+	40%,
+	60%,
+	80% {
+		transform: translateX(4px);
+	}
+}
+
+/* ===============================================
+   КНОПКИ В ВЫСОКОМ КОНТРАСТЕ
+   =============================================== */
+
+@media (prefers-contrast: high) {
+	button.learn-more .circle {
+		border: 2px solid #fff;
+	}
+
+	.button--secondary {
+		border-width: 2px;
+	}
+
+	.button--submit {
+		border: 2px solid transparent;
+	}
+}
+
+/* ===============================================
+   ОТКЛЮЧЕНИЕ АНИМАЦИЙ ДЛЯ REDUCED MOTION
+   =============================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	button.learn-more,
+	button.learn-more .circle,
+	button.learn-more .circle .icon,
+	button.learn-more .button-text,
+	.button--secondary,
+	.button--submit,
+	.button__icon {
+		transition: none;
+	}
+
+	.button__loader span {
+		animation: none;
+	}
 }

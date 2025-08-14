@@ -1,5 +1,5 @@
 /* ===============================================
-   БЛОК: HERO (БЭМ) - ОПТИМИЗИРОВАННАЯ ВЕРСИЯ
+   БЛОК: HERO (БЭМ) - ОПТИМИЗИРОВАННАЯ ВЕРСИЯ ДЛЯ МОБИЛЬНЫХ
    =============================================== */
 
 .hero {
@@ -12,8 +12,7 @@
 	background: var(--color-black);
 	margin: 0 !important;
 	padding: 0 !important;
-	/* Оптимизация для производительности */
-	will-change: auto;
+	/* ИСПРАВЛЕНО: Убираем will-change для лучшей производительности */
 	transform: translateZ(0);
 	backface-visibility: hidden;
 }
@@ -33,13 +32,8 @@
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
-	/* Оптимизация производительности */
-	will-change: auto;
-	transform: translateZ(0);
+	/* ИСПРАВЛЕНО: Убираем лишние transform на мобильных */
 	backface-visibility: hidden;
-	/* Предотвращаем мерцание на iOS */
-	-webkit-backface-visibility: hidden;
-	-webkit-transform: translateZ(0);
 }
 
 /* Оверлей для видео */
@@ -59,7 +53,7 @@
 	pointer-events: none;
 }
 
-/* Кнопка воспроизведения */
+/* Кнопка воспроизведения - УЛУЧШЕНО ДЛЯ МОБИЛЬНЫХ */
 .hero__play-button {
 	position: absolute;
 	top: 50%;
@@ -81,6 +75,12 @@
 	transition: all 0.3s ease;
 	opacity: 0;
 	scale: 0.8;
+	/* ДОБАВЛЕНО: Увеличиваем touch target */
+	min-width: 44px;
+	min-height: 44px;
+	/* ДОБАВЛЕНО: Убираем highlight */
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
 }
 
 .hero__play-button--visible {
@@ -97,6 +97,7 @@
 
 .hero__play-button:active {
 	transform: translate(-50%, -50%) scale(0.95);
+	background: rgba(0, 0, 0, 0.9);
 }
 
 .hero__play-button svg {
@@ -162,13 +163,12 @@
 	transition: transform 0.1s linear;
 	position: relative;
 	box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-	/* Оптимизация: используем transform вместо width */
 	transform: scaleX(0);
 	transform-origin: left;
 	will-change: transform;
 }
 
-/* Индикатор скролла - ОПТИМИЗИРОВАННЫЙ */
+/* Индикатор скролла - ОПТИМИЗИРОВАННЫЙ ДЛЯ МОБИЛЬНЫХ */
 .hero__scroll-indicator {
 	position: absolute;
 	bottom: 3rem;
@@ -189,17 +189,22 @@
 	background: transparent;
 	border: none;
 	cursor: pointer;
-	padding: 0;
+	padding: 8px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	transition: transform 0.2s ease;
-	width: 44px;
-	height: 64px;
+	width: 60px;
+	height: 80px;
 	position: relative;
-	/* Увеличенная область клика для мобильных */
+	/* ДОБАВЛЕНО: Увеличиваем touch target */
+	min-width: 44px;
+	min-height: 44px;
+	/* ДОБАВЛЕНО: Убираем highlight */
 	-webkit-tap-highlight-color: transparent;
 	touch-action: manipulation;
+	/* ДОБАВЛЕНО: Визуальная обратная связь */
+	border-radius: 8px;
 }
 
 .hero__scroll-button:hover {
@@ -209,6 +214,7 @@
 .hero__scroll-button:active {
 	transform: scale(0.95);
 	transition: transform 0.1s ease;
+	background: rgba(255, 255, 255, 0.1);
 }
 
 .hero__scroll-button:focus {
@@ -241,11 +247,6 @@
 	position: absolute;
 	top: 8px;
 	animation: scrollWheel 2s ease-in-out infinite;
-}
-
-/* Убираем стрелки */
-.scroll-icon__arrows {
-	display: none;
 }
 
 .hero__scroll-button:hover .scroll-icon {
@@ -299,15 +300,24 @@
 }
 
 /* ===============================================
-   АДАПТИВНОСТЬ
+   АДАПТИВНОСТЬ - ОПТИМИЗИРОВАННАЯ ДЛЯ МОБИЛЬНЫХ
    =============================================== */
 
 @media (max-width: 768px) {
 	.hero {
-		/* Оптимизация высоты для мобильных */
+		/* ИСПРАВЛЕНО: Стабильная высота для мобильных */
 		height: 100vh !important;
 		height: -webkit-fill-available !important;
-		height: 100dvh !important; /* Dynamic viewport height */
+		height: 100dvh !important;
+		/* ДОБАВЛЕНО: Отключаем сложные эффекты */
+		will-change: auto;
+	}
+
+	.hero__video {
+		/* ИСПРАВЛЕНО: Убираем лишние transform на мобильных */
+		will-change: auto;
+		transform: none;
+		-webkit-transform: none;
 	}
 
 	/* Кнопка воспроизведения на мобильных */
@@ -315,6 +325,14 @@
 		width: 70px;
 		height: 70px;
 		border-width: 1.5px;
+		/* ДОБАВЛЕНО: Лучшая видимость на мобильных */
+		background: rgba(0, 0, 0, 0.8);
+		backdrop-filter: blur(8px);
+	}
+
+	.hero__play-button:active {
+		background: rgba(0, 0, 0, 0.95);
+		transform: translate(-50%, -50%) scale(0.9);
 	}
 
 	.hero__progress {
@@ -330,11 +348,16 @@
 	}
 
 	.hero__scroll-button {
-		width: 40px;
-		height: 56px;
-		/* Еще больше увеличиваем область касания */
-		padding: 8px;
-		margin: -8px;
+		width: 56px;
+		height: 72px;
+		/* ДОБАВЛЕНО: Увеличиваем область касания */
+		padding: 12px;
+		margin: -12px;
+	}
+
+	.hero__scroll-button:active {
+		background: rgba(255, 255, 255, 0.15);
+		transform: scale(0.9);
 	}
 
 	.scroll-icon {
@@ -353,11 +376,20 @@
 	.hero__play-button {
 		width: 60px;
 		height: 60px;
+		/* ДОБАВЛЕНО: Еще лучшая визуальная обратная связь */
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	.hero__play-button:active {
+		transform: translate(-50%, -50%) scale(0.85);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 	}
 
 	.hero__scroll-button {
-		width: 36px;
-		height: 50px;
+		width: 52px;
+		height: 68px;
+		padding: 10px;
+		margin: -10px;
 	}
 
 	.hero__progress {
@@ -393,8 +425,8 @@
 	}
 
 	.hero__scroll-button {
-		width: 32px;
-		height: 44px;
+		width: 48px;
+		height: 60px;
 	}
 
 	.scroll-icon {
@@ -403,7 +435,7 @@
 	}
 }
 
-/* Оптимизация для высокой плотности пикселей */
+/* ДОБАВЛЕНО: Оптимизация для высокой плотности пикселей */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 	.hero__video {
 		image-rendering: optimizeSpeed;
@@ -411,7 +443,7 @@
 	}
 }
 
-/* Поддержка уменьшенной анимации */
+/* ИСПРАВЛЕНО: Поддержка уменьшенной анимации */
 @media (prefers-reduced-motion: reduce) {
 	.hero__video {
 		will-change: auto;
@@ -437,23 +469,19 @@
 	}
 }
 
-/* Поддержка iOS Safe Area */
+/* ДОБАВЛЕНО: Поддержка iOS Safe Area */
 @supports (padding: max(0px)) {
 	.hero {
 		padding-bottom: env(safe-area-inset-bottom);
 	}
-}
 
-/* Оптимизация производительности для слабых устройств */
-@media (max-width: 768px) and (hover: none) {
-	.hero__video {
-		/* Отключаем сложные трансформации на мобильных */
-		will-change: auto;
-		transform: none;
+	.hero__scroll-indicator {
+		bottom: calc(3rem + env(safe-area-inset-bottom));
 	}
 
-	.hero__video-overlay {
-		/* Упрощаем градиент для производительности */
-		background: rgba(0, 0, 0, 0.05);
+	@media (max-width: 768px) {
+		.hero__scroll-indicator {
+			bottom: calc(2rem + env(safe-area-inset-bottom));
+		}
 	}
 }

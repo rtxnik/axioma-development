@@ -138,7 +138,7 @@
 		<a href="#main" class="skip-link">Перейти к основному содержимому</a>
 
 		<!-- Loading Screen -->
-		<div class="loading" id="loadingScreen" role="status" aria-live="polite">
+		<!-- <div class="loading" id="loadingScreen" role="status" aria-live="polite">
 			<div class="loading__spinner">
 				<svg class="loading__icon" viewBox="0 0 50 50" width="60" height="60">
 					<circle
@@ -167,7 +167,7 @@
 					</circle>
 				</svg>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- Header -->
 		<header class="header page__header" role="banner">
@@ -741,26 +741,24 @@
 				<div class="container">
 					<div class="about__content">
 						<h1 id="about-title" class="about__title">АКСИОМА КАПИТАЛ</h1>
+						<!-- Декоративная линия - скрыта на мобильных через CSS -->
+						<span class="about__decorative-line"></span>
 						<p class="about__description">
-							Осуществляет доверительное управление<br />
+							Создание и профессиональное <br />
+							доверительное управление<br />
 							индивидуальными закрытыми паевыми<br />
-							инвестиционными фондами.<br />
-							ЗПИФ обеспечивают защиту интересов<br />
-							бенефициаров и высокий уровень<br />
-							безопасности активов
+							инвестиционными фондами<br />
 						</p>
-						<!-- <button class="button button--primary about__button">
-							<span class="button__circle" aria-hidden="true">
-								<span class="button__arrow"></span>
-							</span>
-							<span class="button__text">Подробнее</span>
-						</button> -->
-						<button class="learn-more">
-							<span class="circle" aria-hidden="true">
-								<span class="icon arrow"></span>
-							</span>
-							<span class="button-text">Подробнее</span>
-						</button>
+						<div class="about__button">
+							<button class="learn-more">
+								<span class="circle" aria-hidden="true">
+									<span class="icon arrow"></span>
+								</span>
+								<a href="/src/investment_library/what_is_zpif/">
+									<span class="button-text">Подробнее</span></a
+								>
+							</button>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -785,13 +783,9 @@
 						<!-- Service Card 1 -->
 						<article class="service-card services__card">
 							<div class="service-card__content">
-								<h3 class="service-card__title">
-									Структурирование сделок с непрофильными активами
-								</h3>
+								<h3 class="service-card__title">Family Office</h3>
 								<p class="service-card__description">
-									Для владельцев залоговых активов, имущества дефолтных
-									заемщиков, портфелей разнородных активов, земельных участков и
-									зданий вне фокуса
+									Собственникам и бенефициарам бизнеса
 								</p>
 								<div class="service-card__button">
 									<button class="button button--secondary">Подробнее</button>
@@ -802,13 +796,11 @@
 						<!-- Service Card 2 -->
 						<article class="service-card services__card">
 							<div class="service-card__content">
-								<h3 class="service-card__title">
-									M&A и проектное финансирование
-								</h3>
+								<h3 class="service-card__title">Мезонинное кредитование</h3>
 								<p class="service-card__description">
-									Для собственников бизнеса, стартапов и IT-компаний,
-									застройщиков и девелоперов, энергетических и инфраструктурных
-									проектов
+									Финансирование и участие в капитализации крупных
+									инвестиционных проектов, промышленных объектов, энергетики,
+									инфраструктурного строительства
 								</p>
 								<div class="service-card__button">
 									<button class="button button--secondary">Подробнее</button>
@@ -819,10 +811,12 @@
 						<!-- Service Card 3 -->
 						<article class="service-card services__card">
 							<div class="service-card__content">
-								<h3 class="service-card__title">Финансирование контрактов</h3>
+								<h3 class="service-card__title">
+									M&A и проектное финансирование
+								</h3>
 								<p class="service-card__description">
-									Факторинг для финансирования экспортеров и импортеров,
-									поставщиков и покупателей
+									Собственникам бизнеса, стартапов и IT-компаний, застройщикам и
+									девелоперам, энергетических и инфраструктурных проектов
 								</p>
 								<div class="service-card__button">
 									<button class="button button--secondary">Подробнее</button>
@@ -833,10 +827,12 @@
 						<!-- Service Card 4 -->
 						<article class="service-card services__card">
 							<div class="service-card__content">
-								<h3 class="service-card__title">Мезонинное кредитование</h3>
+								<h3 class="service-card__title">
+									Финансирование контрактов (факторинг)
+								</h3>
 								<p class="service-card__description">
-									Финансирование и участие в капитализации крупных
-									инвестиционных проектов, промышленных объектов
+									Финансирование экспортеров и импортеров, поставщиков и
+									получателей
 								</p>
 								<div class="service-card__button">
 									<button class="button button--secondary">Подробнее</button>
@@ -849,8 +845,8 @@
 							<div class="service-card__content">
 								<h3 class="service-card__title">Бридж-Финансирование</h3>
 								<p class="service-card__description">
-									Для владельцев крупных земельных участков, застройщиков и
-									девелоперов
+									Владельцам крупных земельных участков, застройщикам и
+									девелоперам
 								</p>
 								<div class="service-card__button">
 									<button class="button button--secondary">Подробнее</button>
@@ -861,10 +857,12 @@
 						<!-- Service Card 6 -->
 						<article class="service-card services__card">
 							<div class="service-card__content">
-								<h3 class="service-card__title">Венчурные инвестиции</h3>
+								<h3 class="service-card__title">Финансовая инженерия</h3>
 								<p class="service-card__description">
-									Инвестиции в стартапы и инновационные проекты на ранних
-									стадиях развития
+									Реализации комбинированных сделок по финансированию, владению
+									и управлению имуществом с использование личных
+									(наследственных) фондов, инвестиционных товариществ,
+									иностранных партнёрств, дискретных фондов
 								</p>
 								<div class="service-card__button">
 									<button class="button button--secondary">Подробнее</button>
@@ -875,9 +873,13 @@
 						<!-- Service Card 7 -->
 						<article class="service-card services__card">
 							<div class="service-card__content">
-								<h3 class="service-card__title">Инвестиции в недвижимость</h3>
+								<h3 class="service-card__title">
+									Структурирование сделок с непрофильными активами
+								</h3>
 								<p class="service-card__description">
-									Приобретение и управление коммерческой и жилой недвижимостью
+									Владельцам залоговых активов, имущества дефолтных заемщиков,
+									портфелей разнородных активов, земельных участков и зданий вне
+									фокуса, объектов, не приносящих прибыли
 								</p>
 								<div class="service-card__button">
 									<button class="button button--secondary">Подробнее</button>
@@ -888,10 +890,10 @@
 						<!-- Service Card 8 -->
 						<article class="service-card services__card">
 							<div class="service-card__content">
-								<h3 class="service-card__title">Прямые инвестиции</h3>
+								<h3 class="service-card__title">Агентское участие</h3>
 								<p class="service-card__description">
-									Инвестиции в капитал компаний для получения контроля и
-									управления
+									Для мотивации лиц за привлечение соинвесторов, продажу
+									капиталоемких проектов и активов
 								</p>
 								<div class="service-card__button">
 									<button class="button button--secondary">Подробнее</button>
@@ -921,12 +923,6 @@
 								Схема взаимосвязи участников<br />
 								управляющей компании
 							</h2>
-
-							<!-- Краткое описание -->
-							<p class="interaction__description">
-								Прозрачная структура для эффективного управления активами
-							</p>
-
 							<!-- Кнопка с сохранением оригинального стиля -->
 							<button class="learn-more interaction__button">
 								<span class="circle" aria-hidden="true">
@@ -1445,7 +1441,7 @@
 					<div class="footer-light__content">
 						<!-- Секция бренда -->
 						<div class="footer-light__section footer-light__section--brand">
-							<div class="footer-light__logo">
+							<!-- <div class="footer-light__logo">
 								<img
 									src="https://static.tildacdn.com/tild6337-3833-4836-a436-656266346565/____compressed_2_8.png"
 									alt="Аксиома Капитал"
@@ -1453,13 +1449,8 @@
 									height="40"
 									loading="lazy"
 								/>
-							</div>
-							<p class="footer-light__description">
-								ООО УК «Аксиома Капитал» — лицензированная управляющая компания,
-								осуществляющая доверительное управление закрытыми паевыми
-								инвестиционными фондами.
-							</p>
-							<div class="footer-light__social">
+							</div> -->
+							<!-- <div class="footer-light__social">
 								<a
 									href="#"
 									class="footer-light__social-link"
@@ -1524,7 +1515,7 @@
 										/>
 									</svg>
 								</a>
-							</div>
+							</div> -->
 						</div>
 
 						<!-- Навигационные колонки -->
@@ -1544,31 +1535,36 @@
 										<a href="/team" class="footer-light__link">Команда</a>
 									</li>
 									<li>
-										<a href="/licenses" class="footer-light__link">Лицензии</a>
+										<a href="/licenses" class="footer-light__link">Контакты</a>
 									</li>
 								</ul>
 							</div>
 							<div class="footer-light__column">
-								<h3 class="footer-light__heading">Услуги</h3>
+								<h3 class="footer-light__heading">Библиотека</h3>
 								<ul class="footer-light__list">
 									<li>
 										<a href="/services/zpif" class="footer-light__link"
-											>Управление ЗПИФ</a
+											>Что такое ЗПИФ</a
 										>
 									</li>
 									<li>
 										<a href="/services/structuring" class="footer-light__link"
-											>Структурирование сделок</a
+											>Как работает ЗПИФ</a
 										>
 									</li>
 									<li>
 										<a href="/services/financing" class="footer-light__link"
-											>Проектное финансирование</a
+											>Решения для бизнеса</a
 										>
 									</li>
 									<li>
 										<a href="/services/consulting" class="footer-light__link"
-											>Консалтинг</a
+											>Этапы создания ЗПИФ</a
+										>
+									</li>
+									<li>
+										<a href="/services/consulting" class="footer-light__link"
+											>Состав имущества ЗПИФ</a
 										>
 									</li>
 								</ul>
@@ -1582,9 +1578,7 @@
 										>
 									</li>
 									<li>
-										<a href="/documents" class="footer-light__link"
-											>Документы</a
-										>
+										<a href="/documents" class="footer-light__link">Фонды</a>
 									</li>
 									<li>
 										<a href="/news" class="footer-light__link">Новости</a>

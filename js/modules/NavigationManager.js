@@ -1,5 +1,5 @@
 /**
- * Модуль управления навигацией - Оптимизированная версия
+ * Модуль управления навигацией - Оптимизированная версия для мобильных
  */
 import { CONFIG } from "../config/config.js"
 
@@ -14,8 +14,6 @@ export class NavigationManager {
 		this.aboutSection = document.getElementById("about")
 		this.lastScrollY = 0
 		this.ticking = false
-		this.touchStartX = 0
-		this.touchStartY = 0
 		this.isMobile = window.matchMedia("(max-width: 768px)").matches
 		this.activeDropdown = null
 
@@ -23,6 +21,11 @@ export class NavigationManager {
 		this.heroHeight = 0
 		this.headerHeight = 80
 		this.scrollButtonClicking = false
+
+		// ДОБАВЛЕНО: Флаги для оптимизации мобильных
+		this.isScrolling = false
+		this.scrollEndTimer = null
+		this.touchStartTime = 0
 
 		this.init()
 	}
@@ -68,12 +71,11 @@ export class NavigationManager {
 	}
 
 	/**
-	 * ОПТИМИЗИРОВАННАЯ настройка кнопки скролла
+	 * ИСПРАВЛЕНО: Оптимизированная настройка кнопки скролла для мобильных
 	 */
 	setupOptimizedScrollButton() {
 		if (!this.scrollButton) return
 
-		// Убираем все задержки и делаем мгновенный отклик
 		const handleScrollClick = e => {
 			e.preventDefault()
 			e.stopPropagation()
@@ -85,11 +87,14 @@ export class NavigationManager {
 			// Мгновенная визуальная обратная связь
 			this.scrollButton.style.transform = "scale(0.95)"
 
-			// Быстрое вычисление целевой позиции
-			const targetPosition = this.calculateScrollTarget()
-
-			// Запускаем плавную прокрутку
-			this.performOptimizedScroll(targetPosition)
+			// ИСПРАВЛЕНО: На мобильных используем нативный скролл
+			if (this.isMobile) {
+				this.performMobileScroll()
+			} else {
+				// На десктопе используем плавную прокрутку
+				const targetPosition = this.calculateScrollTarget()
+				this.performOptimizedScroll(targetPosition)
+			}
 
 			// Восстанавливаем состояние кнопки
 			setTimeout(() => {
@@ -98,17 +103,20 @@ export class NavigationManager {
 			}, 300)
 		}
 
-		// Используем несколько типов событий для максимальной отзывчивости
+		// ИСПРАВЛЕНО: Упрощаем обработчики для мобильных
 		this.scrollButton.addEventListener("click", handleScrollClick)
 
-		// Для тач-устройств добавляем touchend для более быстрого отклика
+		// ИСПРАВЛЕНО: Улучшенная обработка touch событий
 		if ("ontouchstart" in window) {
 			let touchStarted = false
+			let touchMoved = false
 
 			this.scrollButton.addEventListener(
 				"touchstart",
 				e => {
 					touchStarted = true
+					touchMoved = false
+					this.touchStartTime = Date.now()
 					// Визуальная обратная связь при касании
 					this.scrollButton.style.transform = "scale(0.95)"
 				},
@@ -116,13 +124,27 @@ export class NavigationManager {
 			)
 
 			this.scrollButton.addEventListener(
+				"touchmove",
+				e => {
+					touchMoved = true
+				},
+				{ passive: true }
+			)
+
+			this.scrollButton.addEventListener(
 				"touchend",
 				e => {
-					if (touchStarted) {
-						e.preventDefault()
-						handleScrollClick(e)
-						touchStarted = false
+					if (touchStarted && !touchMoved) {
+						const touchDuration = Date.now() - this.touchStartTime
+						// Предотвращаем случайные касания
+						if (touchDuration < 500) {
+							e.preventDefault()
+							handleScrollClick(e)
+						}
 					}
+					touchStarted = false
+					touchMoved = false
+					this.scrollButton.style.transform = ""
 				},
 				{ passive: false }
 			)
@@ -131,13 +153,14 @@ export class NavigationManager {
 				"touchcancel",
 				() => {
 					touchStarted = false
+					touchMoved = false
 					this.scrollButton.style.transform = ""
 				},
 				{ passive: true }
 			)
 		}
 
-		// Обработка клавиатуры (Enter и Space)
+		// Обработка клавиатуры
 		this.scrollButton.addEventListener("keydown", e => {
 			if (e.key === "Enter" || e.key === " ") {
 				e.preventDefault()
@@ -147,29 +170,59 @@ export class NavigationManager {
 	}
 
 	/**
+	 * ДОБАВЛЕНО: Нативный скролл для мобильных устройств
+	 */
+	performMobileScroll() {
+		const currentScroll = window.pageYOffset
+		let targetPosition
+
+		if (currentScroll < this.heroHeight - 10) {
+			// Скроллим к концу hero
+			targetPosition = this.heroHeight
+		} else if (this.aboutSection) {
+			// Скроллим к about секции
+			const aboutRect = this.aboutSection.getBoundingClientRect()
+			targetPosition = window.pageYOffset + aboutRect.top - this.headerHeight
+		} else {
+			targetPosition = this.heroHeight
+		}
+
+		// ИСПРАВЛЕНО: Используем нативный скролл на мобильных
+		window.scrollTo({
+			top: targetPosition,
+			behavior: "smooth",
+		})
+	}
+
+	/**
 	 * Быстрое вычисление целевой позиции прокрутки
 	 */
 	calculateScrollTarget() {
 		const currentScroll = window.pageYOffset
 
-		// Используем кэшированную высоту hero
 		if (currentScroll < this.heroHeight - 10) {
-			// Если мы в hero секции - скроллим к концу hero
 			return this.heroHeight
 		} else if (this.aboutSection) {
-			// Если мы ниже hero - скроллим к about с учетом header
 			const aboutRect = this.aboutSection.getBoundingClientRect()
 			return window.pageYOffset + aboutRect.top - this.headerHeight
 		}
 
-		// Fallback
 		return this.heroHeight
 	}
 
 	/**
-	 * Оптимизированная плавная прокрутка
+	 * ИСПРАВЛЕНО: Оптимизированная плавная прокрутка только для десктопа
 	 */
 	performOptimizedScroll(targetPosition, duration = 800) {
+		// На мобильных не используем кастомную прокрутку
+		if (this.isMobile) {
+			window.scrollTo({
+				top: targetPosition,
+				behavior: "smooth",
+			})
+			return
+		}
+
 		const startPosition = window.pageYOffset
 		const distance = targetPosition - startPosition
 
@@ -181,7 +234,6 @@ export class NavigationManager {
 
 		let startTime = null
 
-		// Используем оптимизированную easing функцию
 		const easeOutCubic = t => {
 			return 1 - Math.pow(1 - t, 3)
 		}
@@ -200,7 +252,6 @@ export class NavigationManager {
 			if (progress < 1) {
 				requestAnimationFrame(animation)
 			} else {
-				// Финальная корректировка позиции
 				window.scrollTo(0, targetPosition)
 			}
 		}
@@ -209,13 +260,11 @@ export class NavigationManager {
 	}
 
 	/**
-	 * Настройка мобильного меню
+	 * ИСПРАВЛЕНО: Упрощенная настройка мобильного меню
 	 */
 	setupMobileMenu() {
-		// Удаляем старые чекбоксы и дублирующие элементы
 		this.cleanupOldElements()
 
-		// Обработка открытия/закрытия мобильного меню
 		if (this.menuToggle) {
 			this.menuToggle.addEventListener("change", e => {
 				if (e.target.checked) {
@@ -226,33 +275,91 @@ export class NavigationManager {
 			})
 		}
 
-		// Закрытие меню при клике вне
-		document.addEventListener("click", e => {
-			if (this.isMobile && this.menuToggle?.checked) {
-				if (!this.nav?.contains(e.target)) {
-					this.closeMobileMenu()
+		// ИСПРАВЛЕНО: Убираем агрессивные обработчики кликов
+		document.addEventListener(
+			"click",
+			e => {
+				if (this.isMobile && this.menuToggle?.checked) {
+					if (!this.nav?.contains(e.target) && !e.target.closest(".nav")) {
+						this.closeMobileMenu()
+					}
 				}
-			}
-		})
+			},
+			{ passive: true }
+		)
 
-		// Закрытие меню при свайпе влево
-		this.setupSwipeGestures()
+		// ИСПРАВЛЕНО: Улучшенные свайп жесты
+		this.setupImprovedSwipeGestures()
 	}
 
 	/**
 	 * Очистка старых элементов
 	 */
 	cleanupOldElements() {
-		// Удаляем дублирующие мобильные элементы
 		document.querySelectorAll(".nav__link--mobile").forEach(el => el.remove())
 		document
 			.querySelectorAll(".nav__dropdown-toggle")
 			.forEach(el => el.remove())
 
-		// Оставляем только один набор ссылок
 		document.querySelectorAll(".nav__link--desktop").forEach(link => {
 			link.classList.remove("nav__link--desktop")
 		})
+	}
+
+	/**
+	 * ИСПРАВЛЕНО: Улучшенные свайп жесты для мобильного меню
+	 */
+	setupImprovedSwipeGestures() {
+		if (!this.navList) return
+
+		let touchStartX = 0
+		let touchStartY = 0
+		let touchMoved = false
+
+		this.navList.addEventListener(
+			"touchstart",
+			e => {
+				touchStartX = e.changedTouches[0].screenX
+				touchStartY = e.changedTouches[0].screenY
+				touchMoved = false
+			},
+			{ passive: true }
+		)
+
+		this.navList.addEventListener(
+			"touchmove",
+			e => {
+				const currentX = e.changedTouches[0].screenX
+				const currentY = e.changedTouches[0].screenY
+				const deltaX = Math.abs(currentX - touchStartX)
+				const deltaY = Math.abs(currentY - touchStartY)
+
+				// Считаем что это свайп только если горизонтальное движение больше вертикального
+				if (deltaX > deltaY && deltaX > 10) {
+					touchMoved = true
+				}
+			},
+			{ passive: true }
+		)
+
+		this.navList.addEventListener(
+			"touchend",
+			e => {
+				if (touchMoved) {
+					const touchEndX = e.changedTouches[0].screenX
+					this.handleSwipe(touchStartX, touchEndX)
+				}
+			},
+			{ passive: true }
+		)
+	}
+
+	handleSwipe(startX, endX) {
+		const swipeThreshold = 50
+		if (startX - endX > swipeThreshold) {
+			// Свайп влево - закрываем меню
+			this.closeMobileMenu()
+		}
 	}
 
 	/**
@@ -269,10 +376,8 @@ export class NavigationManager {
 
 			if (!link || !dropdown) return
 
-			// Добавляем data-атрибут для идентификации
 			item.dataset.hasDropdown = "true"
 
-			// Обработка для мобильных устройств
 			if (this.isMobile) {
 				this.setupMobileDropdown(item, link, dropdown)
 			} else {
@@ -282,31 +387,21 @@ export class NavigationManager {
 	}
 
 	/**
-	 * Настройка dropdown для мобильных
+	 * ИСПРАВЛЕНО: Упрощенная настройка dropdown для мобильных
 	 */
 	setupMobileDropdown(item, link, dropdown) {
-		// Предотвращаем переход по ссылке
 		link.addEventListener("click", e => {
 			e.preventDefault()
 			e.stopPropagation()
 			this.toggleMobileDropdown(item, dropdown)
 		})
 
-		// Touch события для лучшего отклика
-		link.addEventListener(
-			"touchstart",
-			e => {
-				this.touchStartTime = Date.now()
-			},
-			{ passive: true }
-		)
-
+		// ИСПРАВЛЕНО: Упрощенная обработка touch
 		link.addEventListener(
 			"touchend",
 			e => {
 				const touchDuration = Date.now() - this.touchStartTime
-				// Предотвращаем случайные касания
-				if (touchDuration < 500) {
+				if (touchDuration < 300) {
 					e.preventDefault()
 					e.stopPropagation()
 					this.toggleMobileDropdown(item, dropdown)
@@ -315,10 +410,14 @@ export class NavigationManager {
 			{ passive: false }
 		)
 
-		// Обработка кликов внутри dropdown
-		dropdown.addEventListener("click", e => {
-			e.stopPropagation()
-		})
+		// Предотвращаем закрытие при клике внутри dropdown
+		dropdown.addEventListener(
+			"click",
+			e => {
+				e.stopPropagation()
+			},
+			{ passive: true }
+		)
 	}
 
 	/**
@@ -331,17 +430,14 @@ export class NavigationManager {
 		this.closeAllDropdowns()
 
 		if (!isOpen) {
-			// Открываем текущий dropdown
 			item.classList.add("nav__item--open")
 			dropdown.classList.add("nav__dropdown--open")
 
-			// Анимация стрелки
 			const arrow = item.querySelector(".nav__link-arrow")
 			if (arrow) {
 				arrow.style.transform = "rotate(180deg)"
 			}
 
-			// Установка максимальной высоты для анимации
 			dropdown.style.maxHeight = dropdown.scrollHeight + "px"
 			dropdown.style.opacity = "1"
 			dropdown.style.visibility = "visible"
@@ -379,8 +475,6 @@ export class NavigationManager {
 	 * Настройка dropdown для десктопа
 	 */
 	setupDesktopDropdown(item, link, dropdown) {
-		// Сохраняем стандартное поведение hover из CSS
-		// Дополнительно добавляем поддержку клавиатурной навигации
 		link.addEventListener("focus", () => {
 			item.classList.add("nav__item--focus")
 		})
@@ -393,7 +487,6 @@ export class NavigationManager {
 			}, 100)
 		})
 
-		// Поддержка Enter для открытия dropdown
 		link.addEventListener("keydown", e => {
 			if (e.key === "Enter" || e.key === " ") {
 				e.preventDefault()
@@ -403,46 +496,11 @@ export class NavigationManager {
 	}
 
 	/**
-	 * Настройка свайп-жестов
-	 */
-	setupSwipeGestures() {
-		let touchStartX = 0
-		let touchEndX = 0
-
-		this.navList?.addEventListener(
-			"touchstart",
-			e => {
-				touchStartX = e.changedTouches[0].screenX
-			},
-			{ passive: true }
-		)
-
-		this.navList?.addEventListener(
-			"touchend",
-			e => {
-				touchEndX = e.changedTouches[0].screenX
-				this.handleSwipe(touchStartX, touchEndX)
-			},
-			{ passive: true }
-		)
-	}
-
-	handleSwipe(startX, endX) {
-		const swipeThreshold = 50
-		if (startX - endX > swipeThreshold) {
-			// Свайп влево - закрываем меню
-			this.closeMobileMenu()
-		}
-	}
-
-	/**
 	 * Открытие мобильного меню
 	 */
 	openMobileMenu() {
 		this.navList?.classList.add("nav__list--open")
 		document.body.style.overflow = "hidden"
-
-		// Сброс всех dropdown при открытии меню
 		this.closeAllDropdowns()
 	}
 
@@ -455,8 +513,6 @@ export class NavigationManager {
 		}
 		this.navList?.classList.remove("nav__list--open")
 		document.body.style.overflow = ""
-
-		// Закрываем все dropdown
 		this.closeAllDropdowns()
 	}
 
@@ -465,24 +521,27 @@ export class NavigationManager {
 	 */
 	handleResize() {
 		let resizeTimer
-		window.addEventListener("resize", () => {
-			clearTimeout(resizeTimer)
-			resizeTimer = setTimeout(() => {
-				const wasMobile = this.isMobile
-				this.isMobile = window.matchMedia("(max-width: 768px)").matches
+		window.addEventListener(
+			"resize",
+			() => {
+				clearTimeout(resizeTimer)
+				resizeTimer = setTimeout(() => {
+					const wasMobile = this.isMobile
+					this.isMobile = window.matchMedia("(max-width: 768px)").matches
 
-				// Если изменился режим, переинициализируем dropdown
-				if (wasMobile !== this.isMobile) {
-					this.closeMobileMenu()
-					this.closeAllDropdowns()
-					this.setupDropdowns()
-				}
-			}, 250)
-		})
+					if (wasMobile !== this.isMobile) {
+						this.closeMobileMenu()
+						this.closeAllDropdowns()
+						this.setupDropdowns()
+					}
+				}, 250)
+			},
+			{ passive: true }
+		)
 	}
 
 	/**
-	 * Оптимизированные эффекты скролла
+	 * ИСПРАВЛЕНО: Оптимизированные эффекты скролла для мобильных
 	 */
 	setupScrollEffects() {
 		let isScrolling = false
@@ -490,20 +549,30 @@ export class NavigationManager {
 		const updateHeader = () => {
 			const currentScrollY = window.pageYOffset
 
-			// Используем transform вместо классов для лучшей производительности
-			if (currentScrollY > 100) {
-				this.header.classList.add("header--scrolled")
+			// ИСПРАВЛЕНО: Более мягкие эффекты на мобильных
+			if (this.isMobile) {
+				// На мобильных только меняем стили, без transform
+				if (currentScrollY > 100) {
+					this.header.classList.add("header--scrolled")
+				} else {
+					this.header.classList.remove("header--scrolled")
+				}
 			} else {
-				this.header.classList.remove("header--scrolled")
-			}
+				// На десктопе используем полные эффекты
+				if (currentScrollY > 100) {
+					this.header.classList.add("header--scrolled")
+				} else {
+					this.header.classList.remove("header--scrolled")
+				}
 
-			if (
-				currentScrollY > this.lastScrollY &&
-				currentScrollY > CONFIG.scroll.headerHideThreshold
-			) {
-				this.header.style.transform = "translateY(-100%)"
-			} else {
-				this.header.style.transform = "translateY(0)"
+				if (
+					currentScrollY > this.lastScrollY &&
+					currentScrollY > CONFIG.scroll.headerHideThreshold
+				) {
+					this.header.style.transform = "translateY(-100%)"
+				} else {
+					this.header.style.transform = "translateY(0)"
+				}
 			}
 
 			this.updateScrollIndicator(currentScrollY)
@@ -512,11 +581,16 @@ export class NavigationManager {
 			isScrolling = false
 		}
 
+		// ИСПРАВЛЕНО: Разная частота обновления для мобильных и десктопа
+		const throttleDelay = this.isMobile ? 32 : 16 // ~30fps на мобильных, ~60fps на десктопе
+
 		window.addEventListener(
 			"scroll",
 			() => {
 				if (!isScrolling) {
-					window.requestAnimationFrame(updateHeader)
+					setTimeout(() => {
+						requestAnimationFrame(updateHeader)
+					}, throttleDelay)
 					isScrolling = true
 				}
 			},
@@ -540,7 +614,6 @@ export class NavigationManager {
 			)
 			scrollIndicator.style.opacity = opacity
 
-			// Скрываем элемент полностью при opacity = 0 для производительности
 			if (opacity === 0) {
 				scrollIndicator.style.visibility = "hidden"
 			} else {
@@ -553,7 +626,7 @@ export class NavigationManager {
 	}
 
 	/**
-	 * Настройка плавной прокрутки для якорных ссылок
+	 * ИСПРАВЛЕНО: Настройка плавной прокрутки для якорных ссылок
 	 */
 	setupSmoothScrolling() {
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -565,7 +638,6 @@ export class NavigationManager {
 				if (targetElement) {
 					e.preventDefault()
 
-					// Закрываем мобильное меню при переходе
 					if (this.isMobile) {
 						this.closeMobileMenu()
 					}
@@ -574,7 +646,15 @@ export class NavigationManager {
 					const absoluteTop = window.pageYOffset + rect.top
 					const targetPosition = absoluteTop - this.headerHeight
 
-					this.performOptimizedScroll(targetPosition, 800)
+					// ИСПРАВЛЕНО: Разный подход для мобильных и десктопа
+					if (this.isMobile) {
+						window.scrollTo({
+							top: targetPosition,
+							behavior: "smooth",
+						})
+					} else {
+						this.performOptimizedScroll(targetPosition, 800)
+					}
 				}
 			})
 		})

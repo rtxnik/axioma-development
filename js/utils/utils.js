@@ -1,5 +1,5 @@
 /**
- * Утилиты и вспомогательные функции - Оптимизированная версия
+ * Утилиты и вспомогательные функции - Оптимизированная версия для мобильных
  */
 import { CONFIG } from "../config/config.js"
 
@@ -15,7 +15,6 @@ export const Utils = {
 			const context = this
 			const currentTime = Date.now()
 
-			// Проверяем, не слишком ли часто вызывается функция
 			if (currentTime - lastCallTime < wait / 2 && !immediate) {
 				return
 			}
@@ -70,7 +69,7 @@ export const Utils = {
 	},
 
 	/**
-	 * Оптимизированная плавная прокрутка с поддержкой прерывания
+	 * ИСПРАВЛЕНО: Оптимизированная плавная прокрутка с поддержкой мобильных
 	 */
 	smoothScrollTo(
 		target,
@@ -84,6 +83,28 @@ export const Utils = {
 			interruptible = true,
 		} = options
 
+		const isMobile = Utils.isMobile()
+
+		// ИСПРАВЛЕНО: На мобильных используем нативный smooth scroll
+		if (isMobile) {
+			const targetPosition = target - offset
+
+			window.scrollTo({
+				top: targetPosition,
+				behavior: "smooth",
+			})
+
+			// Симулируем callback через setTimeout
+			if (callback) {
+				// Примерная длительность нативного скролла
+				const estimatedDuration = Math.min(duration, 800)
+				setTimeout(callback, estimatedDuration)
+			}
+
+			return () => {} // Возвращаем пустую функцию отмены
+		}
+
+		// Кастомная прокрутка только для десктопа
 		const start = window.pageYOffset
 		const distance = target - start - offset
 
@@ -111,7 +132,7 @@ export const Utils = {
 		const easingFunction =
 			easingFunctions[easing] || easingFunctions.easeOutCubic
 
-		// Обработчик прерывания скролла пользователем
+		// ИСПРАВЛЕНО: Убираем обработчики прерывания на мобильных
 		const handleUserScroll = () => {
 			if (interruptible) {
 				isInterrupted = true
@@ -122,8 +143,8 @@ export const Utils = {
 			}
 		}
 
-		// Слушаем события прерывания
-		if (interruptible) {
+		// Слушаем события прерывания только на десктопе
+		if (interruptible && !isMobile) {
 			window.addEventListener("wheel", handleUserScroll, {
 				passive: true,
 				once: true,
@@ -155,7 +176,6 @@ export const Utils = {
 			if (progress < 1) {
 				animationId = requestAnimationFrame(animate)
 			} else {
-				// Финальная позиция
 				window.scrollTo(0, target)
 				cleanup()
 				if (callback) callback()
@@ -175,12 +195,12 @@ export const Utils = {
 	},
 
 	/**
-	 * Проверка мобильного устройства с кэшированием
+	 * ИСПРАВЛЕНО: Проверка мобильного устройства с кэшированием и оптимизацией
 	 */
 	isMobile: (() => {
 		let cached = null
 		let lastCheck = 0
-		const cacheTime = 1000 // 1 секунда
+		const cacheTime = 1000
 
 		return () => {
 			const now = Date.now()
@@ -188,15 +208,26 @@ export const Utils = {
 				return cached
 			}
 
+			// ИСПРАВЛЕНО: Более точное определение мобильных устройств
 			cached =
 				window.innerWidth <= CONFIG.mobile.breakpoint ||
 				"ontouchstart" in window ||
-				navigator.maxTouchPoints > 0
+				navigator.maxTouchPoints > 0 ||
+				/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+					navigator.userAgent
+				)
 
 			lastCheck = now
 			return cached
 		}
 	})(),
+
+	/**
+	 * ДОБАВЛЕНО: Проверка поддержки smooth scroll
+	 */
+	supportsSmoothScroll() {
+		return "scrollBehavior" in document.documentElement.style
+	},
 
 	/**
 	 * Проверка поддержки функций
@@ -205,7 +236,7 @@ export const Utils = {
 		const features = {
 			intersectionObserver: "IntersectionObserver" in window,
 			smoothScroll: "scrollBehavior" in document.documentElement.style,
-			webp: false, // Требует асинхронной проверки
+			webp: false,
 			passiveListeners: (() => {
 				let supportsPassive = false
 				try {
@@ -248,7 +279,7 @@ export const Utils = {
 	},
 
 	/**
-	 * Оптимизированная функция для пакетной обработки DOM операций
+	 * ИСПРАВЛЕНО: Оптимизированная функция для пакетной обработки DOM операций
 	 */
 	batchDOM(operations) {
 		const reads = []
@@ -265,12 +296,18 @@ export const Utils = {
 		// Сначала все чтения
 		const readResults = reads.map(fn => fn())
 
-		// Затем все записи
-		requestAnimationFrame(() => {
+		// ИСПРАВЛЕНО: Используем requestAnimationFrame только если нет reduce motion
+		const executeWrites = () => {
 			writes.forEach((fn, index) => {
 				fn(readResults[index])
 			})
-		})
+		}
+
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+			executeWrites()
+		} else {
+			requestAnimationFrame(executeWrites)
+		}
 	},
 
 	/**
@@ -285,7 +322,6 @@ export const Utils = {
 				onProgress = null,
 			} = options
 
-			// Проверяем, не загружен ли уже скрипт
 			const existingScript = document.querySelector(`script[src="${src}"]`)
 			if (existingScript) {
 				resolve(existingScript)
@@ -304,7 +340,6 @@ export const Utils = {
 			script.onload = () => resolve(script)
 			script.onerror = () => reject(new Error(`Failed to load script: ${src}`))
 
-			// Добавляем прогресс загрузки если поддерживается
 			if (onProgress && "onprogress" in script) {
 				script.onprogress = onProgress
 			}
@@ -341,9 +376,14 @@ export const Utils = {
 	},
 
 	/**
-	 * Оптимизированная функция для определения видимости элемента
+	 * ИСПРАВЛЕНО: Оптимизированная функция для определения видимости элемента
 	 */
 	isElementVisible(element, threshold = 0) {
+		// ДОБАВЛЕНО: Быстрая проверка на скрытые элементы
+		if (!element || element.offsetParent === null) {
+			return false
+		}
+
 		const rect = element.getBoundingClientRect()
 		const windowHeight =
 			window.innerHeight || document.documentElement.clientHeight
@@ -359,10 +399,20 @@ export const Utils = {
 	},
 
 	/**
-	 * Функция для получения оптимального качества видео
+	 * ИСПРАВЛЕНО: Функция для получения оптимального качества видео
 	 */
 	getOptimalVideoQuality() {
-		// Проверяем тип соединения
+		// ДОБАВЛЕНО: Быстрая проверка для слабых устройств
+		if (Utils.isMobile()) {
+			const deviceMemory = navigator.deviceMemory || 4
+			const hardwareConcurrency = navigator.hardwareConcurrency || 4
+
+			// Для очень слабых мобильных устройств
+			if (deviceMemory < 3 || hardwareConcurrency < 4) {
+				return "minimal"
+			}
+		}
+
 		const connection =
 			navigator.connection ||
 			navigator.mozConnection ||
@@ -372,17 +422,15 @@ export const Utils = {
 			const effectiveType = connection.effectiveType
 			const downlink = connection.downlink
 
-			// Определяем качество на основе типа соединения
 			if (effectiveType === "slow-2g" || effectiveType === "2g") {
-				return "low"
+				return "minimal"
 			} else if (effectiveType === "3g") {
-				return "medium"
+				return "low"
 			} else if (effectiveType === "4g" && downlink > 5) {
 				return "high"
 			}
 		}
 
-		// Проверяем размер экрана
 		if (window.innerWidth < 768) {
 			return "low"
 		} else if (window.innerWidth < 1920) {
@@ -412,7 +460,6 @@ export const Utils = {
 				await navigator.clipboard.writeText(text)
 				return true
 			} else {
-				// Fallback для старых браузеров
 				const textarea = document.createElement("textarea")
 				textarea.value = text
 				textarea.style.position = "fixed"
@@ -445,6 +492,67 @@ export const Utils = {
 		} catch (e) {
 			console.warn("Failed to parse JSON:", e)
 			return fallback
+		}
+	},
+
+	/**
+	 * ДОБАВЛЕНО: Функция для определения типа устройства
+	 */
+	getDeviceType() {
+		if (Utils.isMobile()) {
+			return window.innerWidth < 768 ? "phone" : "tablet"
+		}
+		return "desktop"
+	},
+
+	/**
+	 * ДОБАВЛЕНО: Функция для оптимизации производительности на слабых устройствах
+	 */
+	isLowPerformanceDevice() {
+		const deviceMemory = navigator.deviceMemory || 4
+		const hardwareConcurrency = navigator.hardwareConcurrency || 4
+
+		return deviceMemory < 4 || hardwareConcurrency < 4 || Utils.isMobile()
+	},
+
+	/**
+	 * ДОБАВЛЕНО: Функция для детекции медленного соединения
+	 */
+	isSlowConnection() {
+		const connection =
+			navigator.connection ||
+			navigator.mozConnection ||
+			navigator.webkitConnection
+
+		if (connection) {
+			return (
+				connection.effectiveType === "slow-2g" ||
+				connection.effectiveType === "2g" ||
+				connection.effectiveType === "3g" ||
+				(connection.effectiveType === "4g" && connection.downlink < 1.5)
+			)
+		}
+
+		return false
+	},
+
+	/**
+	 * ДОБАВЛЕНО: Функция для настройки производительности
+	 */
+	optimizeForDevice() {
+		const isLowPerf = Utils.isLowPerformanceDevice()
+		const isSlow = Utils.isSlowConnection()
+
+		if (isLowPerf || isSlow) {
+			// Отключаем сложные анимации
+			document.documentElement.classList.add("low-performance")
+
+			// Уменьшаем частоту обновлений
+			CONFIG.performance.throttleDelay = 32
+			CONFIG.performance.scrollThrottle = 50
+
+			// Отключаем параллакс эффекты
+			CONFIG.mobile.disableEffects = true
 		}
 	},
 }
