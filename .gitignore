@@ -96,5 +96,11 @@ lighthouse-report/
 .size-limit.json
 
 # Directories 
-/src
+/src/contacts
+/src/funds
+/src/information
+/src/investment_library
+/src/news
+/src/req
+/src/team
 /assets
