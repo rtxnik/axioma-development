@@ -18,6 +18,7 @@
 @import url("components/form.css");
 @import url("components/loading.css");
 @import url("components/skip-link.css");
+@import url("components/service-modal.css");
 
 /* Blocks */
 @import url("blocks/header.css");
