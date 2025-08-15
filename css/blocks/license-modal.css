@@ -1,18 +1,23 @@
 /* ===============================================
-   МИНИМАЛИСТИЧНОЕ МОДАЛЬНОЕ ОКНО ЛИЦЕНЗИИ
+   МОДАЛЬНОЕ ОКНО ЛИЦЕНЗИИ - УНИФИЦИРОВАННЫЙ ДИЗАЙН
    =============================================== */
 
 .license-modal {
 	position: fixed;
-	inset: 0;
-	z-index: var(--z-modal);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: var(--spacing-lg);
+	padding: 20px;
 	opacity: 0;
 	visibility: hidden;
-	transition: all 0.3s ease;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+	/* ИСПРАВЛЕНО: Добавлен isolation для правильного z-index */
+	isolation: isolate;
 }
 
 .license-modal--visible {
@@ -20,54 +25,71 @@
 	visibility: visible;
 }
 
-/* Фоновая подложка */
+/* ИСПРАВЛЕНО: Упрощенный backdrop как в service-modal */
 .license-modal__backdrop {
 	position: absolute;
-	inset: 0;
-	background: rgba(0, 0, 0, 0.4);
-	backdrop-filter: blur(8px);
-	-webkit-backdrop-filter: blur(8px);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
 }
 
-/* Контент модального окна */
+/* ИСПРАВЛЕНО: Контент модального окна - унифицирован со стилем service-modal */
 .license-modal__content {
 	position: relative;
 	width: 100%;
 	max-width: 520px;
 	background: #ffffff;
-	border-radius: 20px;
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-	padding: var(--spacing-2xl);
-	transform: scale(0.95) translateY(20px);
-	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+	padding: 40px;
+	opacity: 0;
+	transform: translateY(20px);
+	transition: all 0.3s ease;
+	max-height: 90vh;
+	overflow-y: auto;
+	/* ИСПРАВЛЕНО: Убраны лишние эффекты */
+	will-change: auto;
 }
 
 .license-modal--visible .license-modal__content {
-	transform: scale(1) translateY(0);
+	opacity: 1;
+	transform: translateY(0);
 }
 
-/* Кнопка закрытия */
+/* ИСПРАВЛЕНО: Кнопка закрытия - такая же как в service-modal */
 .license-modal__close {
 	position: absolute;
-	top: var(--spacing-lg);
-	right: var(--spacing-lg);
-	width: 36px;
-	height: 36px;
+	top: 20px;
+	right: 20px;
+	width: 40px;
+	height: 40px;
+	border: none;
+	background: #f3f4f6;
+	border-radius: 50%;
+	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: transparent;
-	border: none;
-	border-radius: 50%;
-	color: #adb5bd;
-	cursor: pointer;
-	transition: all var(--transition-base);
+	color: #6b7280;
+	transition: all 0.2s ease;
+	z-index: 10;
 }
 
 .license-modal__close:hover {
-	background: #f8f9fa;
-	color: var(--color-primary);
-	transform: rotate(90deg);
+	background: #e5e7eb;
+	color: #111827;
+}
+
+.license-modal__close:active {
+	transform: scale(0.95);
+}
+
+.license-modal__close:focus {
+	outline: 2px solid #3b82f6;
+	outline-offset: 2px;
 }
 
 /* Заголовок с печатью */
@@ -76,39 +98,25 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	margin-bottom: var(--spacing-xl);
+	margin-bottom: 32px;
 }
 
+/* ИСПРАВЛЕНО: Убрана анимация печати */
 .license-modal__seal {
-	margin-bottom: var(--spacing-lg);
+	margin-bottom: 20px;
 	position: relative;
-	animation: sealAppear 0.8s ease-out;
-}
-
-@keyframes sealAppear {
-	0% {
-		transform: scale(0) rotate(-180deg);
-		opacity: 0;
-	}
-	50% {
-		transform: scale(1.1) rotate(-90deg);
-	}
-	100% {
-		transform: scale(1) rotate(0deg);
-		opacity: 1;
-	}
 }
 
 .license-modal__seal svg {
-	filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.2));
+	filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.15));
 }
 
 .license-modal__title {
-	font-size: var(--font-size-xl);
-	font-weight: var(--font-weight-light);
-	color: var(--color-primary);
+	font-size: 24px;
+	font-weight: 600;
+	color: #111827;
 	margin: 0;
-	letter-spacing: -0.02em;
+	letter-spacing: -0.01em;
 	line-height: 1.3;
 }
 
@@ -116,73 +124,76 @@
 .license-modal__info {
 	display: flex;
 	flex-direction: column;
-	gap: var(--spacing-sm);
-	margin-bottom: var(--spacing-xl);
-	padding: var(--spacing-lg);
-	background: #f8f9fa;
-	border-radius: 12px;
+	gap: 12px;
+	margin-bottom: 28px;
+	padding: 20px;
+	background: #f9fafb;
+	border: 1px solid #e5e7eb;
+	border-radius: 6px;
 }
 
 .license-modal__row {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
-	gap: var(--spacing-md);
-	padding: var(--spacing-xs) 0;
+	gap: 16px;
+	padding: 8px 0;
 }
 
 .license-modal__row + .license-modal__row {
-	border-top: 1px solid #e9ecef;
-	padding-top: var(--spacing-sm);
+	border-top: 1px solid #e5e7eb;
+	padding-top: 12px;
 }
 
 .license-modal__label {
-	font-size: var(--font-size-xs);
-	font-weight: var(--font-weight-medium);
-	color: #6c757d;
+	font-size: 14px;
+	font-weight: 500;
+	color: #6b7280;
 	white-space: nowrap;
 	flex-shrink: 0;
 }
 
 .license-modal__value {
-	font-size: var(--font-size-xs);
-	color: var(--color-primary);
+	font-size: 14px;
+	color: #111827;
 	text-align: right;
 	line-height: 1.5;
 }
 
 .license-modal__value strong {
-	font-weight: var(--font-weight-semibold);
-	color: var(--color-blue);
+	font-weight: 600;
+	color: #3b82f6;
 }
 
 /* Кнопка загрузки */
 .license-modal__download {
-	margin-top: var(--spacing-xl);
-	margin-bottom: var(--spacing-xl);
+	margin-top: 28px;
+	margin-bottom: 28px;
 	text-align: center;
 }
 
+/* ИСПРАВЛЕНО: Кнопка загрузки - унифицирована с CTA кнопкой из service-modal */
 .license-modal__download-btn {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.75rem;
-	padding: 0.875rem 1.75rem;
-	background: var(--gradient-primary);
-	color: var(--color-white);
-	font-size: 0.9375rem;
-	font-weight: var(--font-weight-semibold);
+	gap: 10px;
+	padding: 14px 28px;
+	background: #3b82f6;
+	color: white;
+	font-size: 15px;
+	font-weight: 500;
 	text-decoration: none;
 	border: none;
-	border-radius: 12px;
+	border-radius: 6px;
 	cursor: pointer;
-	transition: all var(--transition-base);
-	box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+	transition: all 0.2s ease;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .license-modal__download-btn:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+	background: #2563eb;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .license-modal__download-btn:active {
@@ -198,66 +209,112 @@
 /* Подвал модального окна */
 .license-modal__footer {
 	text-align: center;
-	padding-top: var(--spacing-lg);
-	border-top: 1px solid #f1f3f5;
+	padding-top: 20px;
+	border-top: 1px solid #e5e7eb;
 }
 
 .license-modal__note {
-	font-size: var(--font-size-xs);
-	color: #adb5bd;
+	font-size: 14px;
+	color: #6b7280;
 	margin: 0;
 	line-height: 1.5;
+}
+
+/* ИСПРАВЛЕНО: Скроллбар - унифицирован с service-modal */
+.license-modal__content::-webkit-scrollbar {
+	width: 6px;
+}
+
+.license-modal__content::-webkit-scrollbar-track {
+	background: #f3f4f6;
+}
+
+.license-modal__content::-webkit-scrollbar-thumb {
+	background: #d1d5db;
+	border-radius: 3px;
+}
+
+.license-modal__content::-webkit-scrollbar-thumb:hover {
+	background: #9ca3af;
 }
 
 /* ===============================================
    АДАПТИВНОСТЬ МОДАЛЬНОГО ОКНА
    =============================================== */
 
+/* ИСПРАВЛЕНО: Мобильная адаптация как в service-modal */
 @media (max-width: 768px) {
 	.license-modal {
-		padding: var(--spacing-md);
+		padding: 10px;
+		align-items: flex-start;
+		padding-top: 20px;
 	}
 
 	.license-modal__content {
 		max-width: 100%;
-		padding: var(--spacing-xl);
-		border-radius: 16px;
+		padding: 32px 24px;
+		border-radius: 6px;
+		max-height: 95vh;
+		margin-top: 0;
 	}
 
 	.license-modal__close {
-		width: 32px;
-		height: 32px;
-		top: var(--spacing-md);
-		right: var(--spacing-md);
+		top: 16px;
+		right: 16px;
+		width: 36px;
+		height: 36px;
 	}
 
 	.license-modal__title {
-		font-size: var(--font-size-lg);
+		font-size: 22px;
+		margin-bottom: 4px;
 	}
 
 	.license-modal__info {
-		padding: var(--spacing-md);
-		gap: var(--spacing-xs);
+		padding: 16px;
+		gap: 8px;
 	}
 
 	.license-modal__row {
 		flex-direction: column;
-		gap: var(--spacing-xs);
+		gap: 8px;
 		text-align: left;
+		padding: 8px 0;
 	}
 
 	.license-modal__value {
 		text-align: left;
 	}
+
+	.license-modal__label,
+	.license-modal__value {
+		font-size: 14px;
+	}
+
+	.license-modal__download-btn {
+		width: 100%;
+		justify-content: center;
+		padding: 12px 24px;
+	}
 }
 
 @media (max-width: 480px) {
+	.license-modal {
+		padding: 10px;
+		padding-top: 10px;
+	}
+
 	.license-modal__content {
-		padding: var(--spacing-lg);
+		padding: 28px 20px;
+		max-height: 98vh;
+	}
+
+	.license-modal__header {
+		margin-bottom: 24px;
 	}
 
 	.license-modal__seal {
-		margin-bottom: var(--spacing-md);
+		margin-bottom: 16px;
 	}
 
 	.license-modal__seal svg {
@@ -266,31 +323,114 @@
 	}
 
 	.license-modal__title {
-		font-size: var(--font-size-base);
+		font-size: 20px;
+	}
+
+	.license-modal__info {
+		padding: 14px;
+		margin-bottom: 20px;
 	}
 
 	.license-modal__label,
 	.license-modal__value,
 	.license-modal__note {
-		font-size: 0.75rem;
+		font-size: 13px;
 	}
 
-	/* Адаптивность кнопки загрузки */
+	.license-modal__download {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
 	.license-modal__download-btn {
-		width: 100%;
-		justify-content: center;
-		padding: 0.75rem 1.5rem;
-		font-size: 0.875rem;
+		font-size: 14px;
+		padding: 12px 20px;
+	}
+
+	.license-modal__download-btn svg {
+		width: 18px;
+		height: 18px;
 	}
 }
+
+/* Очень маленькие экраны */
+@media (max-width: 375px) {
+	.license-modal__content {
+		padding: 24px 16px;
+	}
+
+	.license-modal__close {
+		width: 32px;
+		height: 32px;
+		top: 12px;
+		right: 12px;
+	}
+
+	.license-modal__title {
+		font-size: 18px;
+	}
+
+	.license-modal__info {
+		padding: 12px;
+	}
+
+	.license-modal__label,
+	.license-modal__value,
+	.license-modal__note {
+		font-size: 12px;
+	}
+}
+
+/* ===============================================
+   ДОСТУПНОСТЬ
+   =============================================== */
 
 /* Анимация только если нет preference для reduced motion */
 @media (prefers-reduced-motion: reduce) {
 	.license-modal,
 	.license-modal__content,
-	.license-modal__close,
-	.license-modal__seal {
+	.license-modal__close {
 		transition: none;
 		animation: none;
 	}
+}
+
+/* Высокая контрастность */
+@media (prefers-contrast: high) {
+	.license-modal__content {
+		border: 2px solid #000;
+	}
+
+	.license-modal__close {
+		border: 2px solid currentColor;
+	}
+
+	.license-modal__info {
+		border: 2px solid #000;
+	}
+}
+
+/* ===============================================
+   ИСПРАВЛЕНИЯ ДЛЯ ПРЕДОТВРАЩЕНИЯ МЕРЦАНИЯ
+   =============================================== */
+
+/* Отключаем will-change для предотвращения мерцания */
+.license-modal,
+.license-modal__content,
+.license-modal__backdrop {
+	will-change: auto;
+}
+
+/* Убираем hardware acceleration где не нужно */
+.license-modal__content {
+	-webkit-backface-visibility: visible;
+	backface-visibility: visible;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+/* Предотвращаем мерцание при скролле */
+.license-modal__content {
+	-webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch;
 }
