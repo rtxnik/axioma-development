@@ -1,0 +1,250 @@
+// components/_contacts-form-big.scss
+
+.contact-section-big {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 80px 120px;
+	background-color: var(--color-white);
+
+	@media (max-width: 1024px) {
+		padding: 40px 20px;
+	}
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 40px;
+		gap: 40px;
+		width: 100%;
+
+		@media (max-width: 1200px) {
+			padding-bottom: 40px;
+		}
+	}
+
+	&__content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 80px;
+		flex-wrap: wrap;
+		width: 100%;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			gap: 10px;
+		}
+	}
+
+	&__description {
+		font-family: var(--font-family-regular);
+		font-size: 12px;
+		font-weight: 300;
+		color: #111827;
+		margin-top: 15px;
+		text-align: center;
+		line-height: 1.5;
+		padding: 10px;
+		border-radius: 5px;
+
+		a {
+			color: #111827;
+			text-decoration: underline;
+
+			&:hover {
+				color: var(--color-secondary);
+			}
+		}
+
+		/* Адаптивность для мобильных устройств */
+		@media (max-width: 768px) {
+			font-size: 14px;
+			margin-top: 10px;
+		}
+	}
+}
+
+.contact-form-big {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+
+	&__fields {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		width: 100%;
+	}
+
+	&__row {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		gap: 20px;
+
+		// Специфичные стили для разных рядов
+		&:first-child .contact-form-big__field {
+			flex: 1 1 calc(50% - 10px);
+		}
+
+		&:nth-child(2) .contact-form-big__field,
+		&:nth-child(3) .contact-form-big__field {
+			flex: 1 1 100%;
+		}
+
+		&:last-child {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.contact-form-big__field {
+				flex: 1 1 calc(50% - 10px);
+			}
+
+			.contact-form-big__field--checkbox {
+				flex: 1 1 50%;
+			}
+
+			.contact-form-big__field:last-child {
+				flex: 0 0 40%;
+			}
+		}
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+
+			.contact-form-big__field {
+				flex: 1 1 100%;
+			}
+		}
+	}
+
+	&__field {
+		background-color: var(--color-secondary);
+		border-radius: 20px;
+		transition: all 0.3s ease;
+		padding: 10px 20px;
+
+		&:hover {
+			background-color: #dee2e6;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+			cursor: pointer;
+		}
+	}
+
+	&__field-wrapper {
+		display: flex;
+		gap: 5px;
+		align-items: normal;
+	}
+
+	&__label {
+		width: 162px;
+		font-family: var(--font-family-bold);
+		font-weight: 700;
+		color: #111827;
+		font-size: 16px;
+	}
+
+	&__input,
+	&__textarea {
+		font-family: var(--font-family-regular);
+		font-size: 14px;
+		border: 1px solid var(--border-color);
+		border-radius: 5px;
+		width: 100%;
+		background-color: transparent;
+		color: #111827;
+	}
+
+	&__textarea {
+		resize: vertical;
+		min-height: 150px;
+	}
+
+	&__checkbox {
+		margin-right: 10px;
+	}
+
+	&__label--checkbox {
+		font-family: var(--font-family-regular);
+		font-weight: 400;
+		font-size: 12px;
+		color: #111827;
+	}
+
+	&__submit {
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		width: 100%;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&:hover {
+			background-color: var(--button-hover-bg);
+		}
+	}
+
+	&__submit-text {
+		font-family: var(--font-family-bold);
+		font-weight: 700;
+		color: #111827;
+		font-size: 16px;
+	}
+
+	&__file-upload {
+		display: flex;
+		align-items: center;
+		margin-top: 10px;
+	}
+
+	&__file-label {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		color: var(--color-white);
+	}
+
+	&__file-input {
+		display: none;
+	}
+
+	&__file-icon {
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		background-image: url("/assets/img/icons/attachment.svg");
+		background-size: contain;
+		background-repeat: no-repeat;
+		margin-right: 10px;
+	}
+
+	&__file-text {
+		color: #111827;
+		font-size: 14px;
+	}
+
+	&__file-remove {
+		background: none;
+		border: none;
+		cursor: pointer;
+		margin-left: 10px;
+		padding: 0;
+	}
+
+	&__remove-icon {
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		background-image: url("/assets/img/icons/close-attachment.svg");
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
+}

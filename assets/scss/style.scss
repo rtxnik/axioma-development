@@ -1,0 +1,47 @@
+// config
+@import "config/variables";
+
+// base
+@import "base/base";
+@import "base/reset";
+
+// layout
+@import "layout/layout";
+@import "layout/breadcrumb";
+@import "layout/buttons";
+@import "layout/title";
+@import "layout/link";
+
+// components
+@import "components/preloader";
+@import "components/header";
+@import "components/hero";
+// @import "components/breakpoints";
+@import "components/leadership";
+@import "components/document-card";
+@import "components/section-about";
+@import "components/sidebar-menu";
+@import "components/dropdown";
+@import "components/vertical-slider";
+@import "components/load-news";
+@import "components/news-more";
+@import "components/funds-block";
+@import "components/modal";
+@import "components/contacts";
+@import "components/contacts-map";
+@import "components/contacts-form-small";
+@import "components/contacts-form-big";
+// @import "components/map";
+@import "components/footer";
+@import "components/pdf-viewer";
+
+// pages
+@import "pages/faq-page";
+@import "pages/news-page";
+@import "pages/about-page";
+@import "pages/funds-page";
+@import "pages/information-page";
+@import "pages/zpif-page";
+@import "pages/library-page";
+@import "pages/req-page";
+@import "pages/business-page";

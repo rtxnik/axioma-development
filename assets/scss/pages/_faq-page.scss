@@ -1,0 +1,126 @@
+// pages/_faq-page.scss
+
+.faq {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 20px;
+	padding: 0 120px;
+	position: relative;
+	flex: 1;
+	width: 100%;
+
+	@media (max-width: 1024px) {
+		margin-bottom: 60px;
+		padding: 0 40px;
+	}
+
+	@media (max-width: 576px) {
+		margin-top: 60px;
+		padding: 0 20px;
+	}
+
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		width: 100%;
+	}
+
+	&__item {
+		padding-bottom: 10px;
+		border-bottom: 1px solid #111827;
+		cursor: pointer;
+		color: #111827;
+
+		&--active {
+			.faq__details {
+				max-height: 1000px;
+				animation: fade 1s ease-in-out;
+			}
+
+			.faq__icon {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	&__question {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__title {
+		flex-basis: 95%;
+		font-family: var(--font-family-bold);
+		font-weight: 700;
+		font-size: 26px;
+		color: #111827;
+		flex-grow: 1;
+
+		@media (max-width: 576px) {
+			font-size: 18px;
+		}
+	}
+
+	&__icon {
+		flex-basis: 2%;
+		width: 50px;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		transition: transform 0.5s ease-in-out;
+
+		&::before {
+			content: "";
+			position: absolute;
+			width: 12px;
+			height: 12px;
+			border-right: 2px solid #111827;
+			border-bottom: 2px solid #111827;
+			transform: rotate(45deg);
+		}
+	}
+
+	&__details {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 1.4s ease;
+
+		.faq__answer {
+			font-family: var(--font-family-regular);
+			font-weight: 400;
+			color: #111827;
+			font-size: 18px;
+			padding-top: 10px;
+
+			@media (max-width: 576px) {
+				font-size: 14px;
+			}
+		}
+
+		.faq__list {
+			list-style-type: disc;
+			margin-left: 20px;
+
+			.faq__list-item {
+				font-size: 17px;
+				padding-top: 10px;
+			}
+		}
+	}
+
+	@keyframes fade {
+		from {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0px);
+		}
+	}
+}

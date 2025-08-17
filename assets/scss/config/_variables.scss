@@ -1,0 +1,78 @@
+/*=============== FONTS ===============*/
+@font-face {
+	font-family: "Actay";
+	src: url("/assets/fonts/Actay-Regular.otf") format("opentype");
+	font-weight: 400; /* Эквивалент normal */
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Actay";
+	src: url("/assets/fonts/ActayWide-Bold.otf") format("opentype");
+	font-weight: 700; /* Эквивалент bold */
+	font-style: normal;
+}
+
+/*=============== CSS VARIABLES ===============*/
+:root {
+	--header-height: 3.5rem;
+	/*========== Colors ==========*/
+	/* Основные цвета */
+	--color-black: hsl(220, 24%, 12%);
+	--color-black-light: hsl(220, 24%, 15%);
+	--color-black-lighter: hsl(220, 20%, 18%);
+	--color-body: hsl(220, 100%, 97%);
+	--color-white: rgba(255, 255, 255, 1);
+
+	/* Основные и вторичные цвета */
+	--color-primary: rgba(80, 76, 71, 1);
+	--color-primary-light: #f1f3f5;
+	--color-secondary: var(--color-primary-light);
+
+	/* Дополнительные цвета */
+	--color-accent: rgba(43, 43, 42, 1);
+	--color-dark: rgba(0, 0, 0, 1);
+	--color-muted: #dee2e6;
+
+	/*========== Typography ==========*/
+	/* Шрифты */
+	--font-family-regular: "Actay", Helvetica, sans-serif;
+	--font-family-bold: "Actay", Helvetica, sans-serif;
+
+	/* Размеры шрифтов */
+	--font-size-base: 0.938rem; /* ~15px */
+	--font-size-lg: 1rem; /* ~16px */
+
+	/*========== Font Weights ==========*/
+	--font-weight-regular: 400;
+	--font-weight-bold: 700;
+
+	/*========== Z-Indices ==========*/
+	--z-tooltip: 10;
+	--z-fixed: 100;
+}
+
+/*========== Responsive Typography ==========*/
+@media screen and (min-width: 1024px) {
+	:root {
+		--font-size-base: 1rem; /* ~16px */
+	}
+}
+
+/*=============== Usage Examples ===============*/
+/* Применение переменных в стилях */
+
+body {
+	font-family: var(--font-family-regular);
+	font-size: var(--font-size-base);
+	color: var(--color-body);
+	background-color: var(--color-white);
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--font-family-bold);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-primary);
+}

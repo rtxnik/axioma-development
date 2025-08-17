@@ -1,0 +1,238 @@
+// pages/_news-page.scss
+
+.news-filter {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+
+	&__buttons {
+		display: flex;
+		gap: 10px;
+	}
+
+	&__button {
+		background-color: #111827;
+		color: var(--color-white);
+		padding: 10px 30px;
+		border: none;
+		border-radius: 30px;
+		cursor: pointer;
+		font-size: 18px;
+		transition: background-color 0.3s;
+		font-family: var(--font-family-bold);
+
+		&:hover,
+		&.active {
+			background-color: #3b82f6;
+		}
+
+		@media (max-width: 768px) {
+			padding: 8px 20px;
+			font-size: 16px;
+		}
+	}
+}
+
+.news-section {
+	padding: 100px 120px;
+	background-color: var(--color-white);
+
+	@media (max-width: 1200px) {
+		padding: 60px 40px;
+	}
+
+	@media (max-width: 768px) {
+		padding: 40px 20px;
+		margin-top: 90px; // Уменьшаем для мобильных устройств
+	}
+
+	&__container {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 40px;
+
+		@media (max-width: 1200px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@media (max-width: 768px) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		border-radius: 20px;
+		box-sizing: border-box;
+		position: relative;
+		min-height: 420px; // Увеличиваем минимальную высоту
+		height: auto; // Позволяем карточке растягиваться по содержимому
+
+		&:hover {
+			.news-section__image::after {
+				opacity: 0.4;
+			}
+		}
+
+		a {
+			display: contents; // Растягиваем ссылку на весь элемент, но не нарушаем flex-структуру
+			text-decoration: none;
+			color: inherit;
+		}
+	}
+
+	&__image {
+		width: 100%;
+		height: 230px;
+		border-radius: 20px;
+		background-size: cover;
+		background-position: center;
+		position: relative;
+		flex-shrink: 0;
+
+		@media (max-width: 768px) {
+			height: 180px;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #504c47;
+			opacity: 0.5;
+			border-radius: 20px;
+			transition: opacity 0.3s;
+		}
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 20px 0;
+		flex-grow: 1; // Заполняем оставшееся пространство
+		word-wrap: break-word; // Чтобы текст не выходил за границы
+	}
+
+	&__title {
+		font-family: var(--font-family-bold);
+		font-weight: 700;
+		color: #111827;
+		font-size: 18px;
+		line-height: 1.2;
+		margin: 0;
+
+		@media (max-width: 768px) {
+			font-size: 20px;
+		}
+	}
+
+	&__description {
+		font-family: var(--font-family-regular);
+		font-weight: 400;
+		color: #111827;
+		font-size: 14px;
+		line-height: 1.5;
+		margin: 0;
+		// Убираем ограничение по количеству строк, чтобы весь текст был виден
+	}
+
+	&__date {
+		font-family: var(--font-family-regular);
+		font-weight: 400;
+		color: #111827;
+		font-size: 12px;
+		line-height: 1.5;
+		margin-top: auto; // Прижимаем дату к низу если есть место
+	}
+}
+
+// Пагинация остается без изменений
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+
+	@media (max-width: 768px) {
+		margin-bottom: 60px;
+	}
+
+	&__list {
+		display: flex;
+		gap: 8px;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__item {
+		transition: box-shadow 0.3s, background-color 0.3s;
+
+		&--disabled .pagination__arrow,
+		&--disabled .pagination__link {
+			opacity: 0.4;
+			cursor: not-allowed;
+			pointer-events: none;
+		}
+
+		&--active .pagination__link {
+			background-color: var(--color-secondary);
+			color: #111827;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			cursor: default;
+			pointer-events: none;
+		}
+
+		&:hover {
+			background-color: var(--color-muted);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+		}
+	}
+
+	&__link,
+	&__arrow {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		color: #111827;
+		text-decoration: none;
+		font-size: 16px;
+		transition: background-color 0.3s, box-shadow 0.3s;
+
+		&:hover {
+			background-color: var(--color-muted);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		@media (max-width: 768px) {
+			width: 32px;
+			height: 32px;
+			font-size: 14px;
+		}
+
+		@media (max-width: 576px) {
+			width: 28px;
+			height: 28px;
+			font-size: 12px;
+		}
+
+		svg {
+			width: 30%;
+			height: 30%;
+		}
+	}
+
+	&__arrow {
+		// Специфичные стили для стрелок
+	}
+}

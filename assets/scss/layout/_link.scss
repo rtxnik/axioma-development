@@ -1,0 +1,28 @@
+// layout/_link.scss
+
+.link {
+	color: #111827;
+	text-decoration: none;
+	font-family: var(--font-family-regular);
+	font-size: 16px;
+	transition: color 0.3s, text-decoration 0.3s;
+	text-decoration: underline;
+
+	@media (max-width: 576px) {
+		font-size: 12px;
+	}
+
+	&:hover,
+	&:focus {
+		color: #3b82f6;
+	}
+
+	&:focus {
+		outline: 2px dashed var(--color-muted);
+		outline-offset: 4px;
+	}
+}
+
+.link-small {
+	font-size: 12px;
+}

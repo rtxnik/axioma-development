@@ -1,0 +1,60 @@
+// base/_base.scss
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: var(--font-family-regular);
+  font-size: var(--font-size-base);
+  background-color: var(--color-black);
+}
+
+/* Добавьте этот код в ваш глобальный CSS файл */
+
+/* Основной контейнер контента, применяется ко всем страницам */
+.main-content {
+  padding-top: 110px; /* Высота хедера (70px) + дополнительный отступ */
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 90px; /* Меньший отступ для мобильных устройств */
+  }
+}
+
+/* Альтернативный способ: использовать CSS-переменную */
+:root {
+  --header-height: 70px;
+  --content-offset: 110px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 50px;
+    --content-offset: 90px;
+  }
+}
+
+/* Затем все контентные блоки можно отступать на эту переменную */
+.alternative-content {
+  padding-top: var(--content-offset);
+}

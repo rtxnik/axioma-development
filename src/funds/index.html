@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<title>Аксиома Капитал - Фонды в управлении</title>
+		<link rel="icon" href="assets/img/fav/favicon.ico" type="image/x-icon" />
+		<link
+			rel="icon"
+			sizes="32x32"
+			href="/assets/img/fav/favicon-32x32.png"
+			type="image/png"
+		/>
+		<link
+			rel="icon"
+			sizes="16x16"
+			href="/assets/img/fav/favicon-16x16.png"
+			type="image/png"
+		/>
+		<link rel="apple-touch-icon" href="/assets/img/fav/apple-touch-icon.png" />
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Управляющая компания Аксиома Капитал" />
+		<meta name="author" content="" />
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/swiper/swiper-bundle.min.css"
+		/>
+		<link rel="stylesheet" href="/assets/css/normalize.css" />
+		<link rel="stylesheet" href="/assets/css/style.min.css" />
+	</head>
+	<body>
+		<div class="container">
+			<header class="header">
+				<nav class="nav">
+					<div class="nav__wrapper">
+						<div class="nav__logo">
+							<a href="/">
+								<img
+									class="logo"
+									src="/assets/img/icons/axioma_logo.svg"
+									alt="Logo"
+								/>
+							</a>
+						</div>
+
+						<input type="radio" name="slider" id="nav__menu-btn" />
+						<input type="radio" name="slider" id="nav__close-btn" />
+
+						<ul class="nav__list">
+							<label for="nav__close-btn" class="nav__btn nav__btn--close">
+								<img
+									height="20"
+									width="20"
+									src="/assets/img/icons/close-attachment.svg"
+									alt="close-attachment"
+								/>
+							</label>
+
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									О компании
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
+									/>
+								</a>
+								<input type="checkbox" id="nav__showDropInfo" />
+								<label
+									for="nav__showDropInfo"
+									class="nav__link nav__link--mobile"
+								>
+									О компании
+								</label>
+								<ul class="nav__sub-list nav__sub-list--dropdown">
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/about"
+											>Информация об организации</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/req/"
+											>Реквизиты организации</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/team/">Команда</a>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/contacts/">Контакты</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="nav__item">
+								<a class="nav__link" href="/src/news/">Новости</a>
+							</li>
+
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									Инвестиционная библиотека
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
+									/>
+								</a>
+								<input type="checkbox" id="nav__showDropLibrary" />
+								<label
+									for="nav__showDropLibrary"
+									class="nav__link nav__link--mobile"
+								>
+									Инвестиционная библиотека
+								</label>
+								<ul class="nav__sub-list nav__sub-list--dropdown">
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/what_is_zpif"
+											>Что такое ЗПИФ</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/how_does_zpif_work"
+											>Как работает ЗПИФ</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/business_solutions"
+											>Решения для бизнеса</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/stages_of_creating_zpif"
+											>Этапы создания ЗПИФ</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/composition_of_the_assets_zpif"
+											>Состав имущества ЗПИФ</a
+										>
+									</li>
+									<!-- <li class="nav__sub-item">
+                    <a
+                      class="nav__sub-link"
+                      href="/src/investment_library/regulatory_documents"
+                      >Нормативные документы</a
+                    >
+                  </li> -->
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/investment_library/faq"
+											>Вопросы и ответы</a
+										>
+									</li>
+								</ul>
+							</li>
+
+							<li class="nav__item nav__item--has-mega">
+								<a href="#" class="nav__link nav__link--desktop">
+									Раскрытие информации
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
+									/>
+								</a>
+								<input type="checkbox" id="nav__showMegaInfo" />
+								<label
+									for="nav__showMegaInfo"
+									class="nav__link nav__link--mobile"
+								>
+									Раскрытие информации
+								</label>
+								<div class="nav__mega-menu">
+									<div class="nav__mega-content">
+										<!-- <div class="nav__mega-row">
+              <img
+                src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg"
+                alt=""
+              />
+            </div> -->
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/disclosure"
+														>Раскрытие информации</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/messages_and_notifications"
+														>Сообщения и уведомления</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/investors"
+														>Квалифицированным инвесторам</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/regulations_and_provisions"
+														>Регламенты и положения</a
+													>
+												</li>
+											</ul>
+										</div>
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/data_protection"
+														>Защита информации</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/conflict_of_interest"
+														>Информация о конфликте интересов</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a class="nav__mega-link" href="/src/information/cpo"
+														>Участие в СРО</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/licenses_and_certificates"
+														>Лицензии и свидетельства</a
+													>
+												</li>
+											</ul>
+										</div>
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/calculation_of_funds"
+														>Расчет размера собственных средств</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/financial_statements"
+														>Бухгалтерская отчетность</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/assessment_of_working_conditions"
+														>Специальная оценка труда</a
+													>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									Фонды
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
+									/>
+								</a>
+								<input type="checkbox" id="nav__showDropFunds" />
+								<label
+									for="nav__showDropFunds"
+									class="nav__link nav__link--mobile"
+								>
+									Фонды
+								</label>
+								<ul
+									class="nav__sub-list nav__sub-list--dropdown nav__sub-list--dropdown-long"
+								>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=1"
+										>
+											ЗПИФ комбинированный «Проектный бизнес»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=2"
+										>
+											ЗПИФ комбинированный «Структурные финансы»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=3"
+										>
+											ЗПИФ комбинированный «ЛэндПро»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=5"
+										>
+											ЗПИФ комбинированный «ФК ПаРус»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=6"
+										>
+											ЗПИФ комбинированный «Аксиома финансов»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=7"
+										>
+											ЗПИФ комбинированный «Финансовый центр»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=8"
+										>
+											ЗПИФ комбинированный «Проектные вложения»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=9"
+										>
+											ЗПИФ комбинированный «Финансовый бизнес»
+										</a>
+									</li>
+								</ul>
+							</li>
+
+							<!-- <li class="nav__item">
+                <a class="nav__link" href="/src/contacts/contacts.html">Контакты</a>
+              </li> -->
+						</ul>
+
+						<label for="nav__menu-btn" class="nav__btn nav__btn--menu">
+							<img
+								height="20"
+								width="20"
+								src="/assets/img/icons/open-burger-menu.svg"
+								alt="open-burger-menu"
+							/>
+						</label>
+					</div>
+				</nav>
+			</header>
+
+			<section class="mission mission--dark">
+				<div class="mission__content">
+					<p class="mission__statement">
+						Закрытые паевые инвестиционные фонды в управлении УК «Аксиома
+						Капитал»
+					</p>
+					<p class="mission__description">
+						Управляем индивидуальными закрытыми паевыми инвестиционными фондами
+						для защиты интересов, развития бизнеса и гарантий безопасности
+						активов наших клиентов
+					</p>
+				</div>
+			</section>
+
+			<!-- <section class="slider" id="funds-slider">
+        <div class="slider__flex">
+          <div class="slider__col">
+            <div class="slider__prev" aria-label="Предыдущий слайд">
+              <img src="/assets/img/icons/up-arrow.svg" alt="Prev" />
+            </div>
+
+            <div class="slider__thumbs">
+              <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="slider__image">
+                      <img
+                        src="/assets/img/photos/funds/fund-4.jpg"
+                        alt="Закрытый комбинированный паевый инвестиционный фонд «Проектный бизнес»"
+                      />
+                      <h4>
+                        Закрытый комбинированный паевый инвестиционный фонд «Проектный бизнес»
+                      </h4>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="slider__image">
+                      <img
+                        src="/assets/img/photos/funds/fund-2.jpg"
+                        alt="Закрытый комбинированный паевый инвестиционный фонд «Структурные финансы»"
+                      />
+                      <h4>
+                        Закрытый комбинированный паевый инвестиционный фонд «Структурные финансы»
+                      </h4>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="slider__image">
+                      <img
+                        src="/assets/img/photos/funds/fund-3.jpg"
+                        alt="Закрытый комбинированный паевый инвестиционный фонд «Аксиома
+                        бизнеса»
+                      "
+                      />
+                      <h4>Закрытый комбинированный паевый инвестиционный фонд «ЛэндПро»</h4>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="slider__image">
+                      <img
+                        src="/assets/img/photos/funds/fund-2.jpg"
+                        alt="Закрытый комбинированный паевый инвестиционный фонд «ФК ПаРус»
+                      "
+                      />
+                      <h4>Закрытый комбинированный паевый инвестиционный фонд «ФК ПаРус»</h4>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="slider__image">
+                      <img
+                        src="/assets/img/photos/funds/fund-3.jpg"
+                        alt="Закрытый комбинированный паевый инвестиционный фонд «Аксиома
+                      финансов»
+                    "
+                      />
+                      <h4>
+                        Закрытый комбинированный паевый инвестиционный фонд «Аксиома финансов»
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="slider__image">
+                      <img
+                        src="/assets/img/photos/funds/fund-2.jpg"
+                        alt="Закрытый комбинированный паевый инвестиционный фонд «Финансовый центр»
+                    "
+                      />
+                      <h4>
+                        Закрытый комбинированный паевый инвестиционный фонд «Финансовый центр»
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slider__next" aria-label="Следующий слайд">
+              <img src="/assets/img/icons/down-arrow.svg" alt="Next" />
+            </div>
+          </div>
+
+          <div class="slider__content">
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="slider__text">
+                    <p>
+                      Правила доверительного управления ЗПИФ комбинированный «Проектный бизнес»
+                      согласованы и представлены АО «Специализированный депозитарий «ИНФИНИТУМ» в
+                      Банк России 13.12.2024 (номер правил доверительного управления фондом
+                      6777-СД).
+                      <br />
+                      Инвестиционные паи ЗПИФ комбинированный «Проектный бизнес» предназначены
+                      <a href="/src/information/investors" class="link"
+                        >для квалифицированных инвесторов</a
+                      >. Не допускается распространение информации о паевом инвестиционном фонде,
+                      инвестиционные паи которого ограничены в обороте, за исключением случаев ее
+                      раскрытия в соответствии с Федеральным законом «Об инвестиционных фондах» и
+                      иными федеральными законами.
+                      <br />
+                      Информация о паевом инвестиционном фонде, инвестиционные паи которых
+                      ограничены в обороте, может предоставляться лицам, которым в соответствии с
+                      Федеральным законом «О рынке ценных бумаг» может предоставляться информация о
+                      ценных бумагах, предназначенных для квалифицированных инвесторов, по адресу
+                      ООО УК «Аксиома Капитал»: 143084, Московская область, г.о. Одинцовский, с.
+                      Усово, стр. 100, часть помещ. 10.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <div class="slider__text">
+                    <p>
+                      Правила доверительного управления ЗПИФ комбинированный «Структурные финансы»
+                      согласованы и представлены АО «Специализированный депозитарий «ИНФИНИТУМ» в
+                      Банк России 13.12.2024 (номер правил доверительного управления фондом
+                      6775-СД).
+                      <br />
+                      Инвестиционные паи ЗПИФ комбинированный «Структурные финансы» предназначены
+                      <a href="/src/information/investors" class="link"
+                        >для квалифицированных инвесторов</a
+                      >. Не допускается распространение информации о паевом инвестиционном фонде,
+                      инвестиционные паи которого ограничены в обороте, за исключением случаев ее
+                      раскрытия в соответствии с Федеральным законом «Об инвестиционных фондах» и
+                      иными федеральными законами. <br />
+                      Информация о паевом инвестиционном фонде, инвестиционные паи которых
+                      ограничены в обороте, может предоставляться лицам, которым в соответствии с
+                      Федеральным законом «О рынке ценных бумаг» может предоставляться информация о
+                      ценных бумагах, предназначенных для квалифицированных инвесторов, по адресу
+                      ООО УК «Аксиома Капитал»: 143084, Московская область, г.о. Одинцовский, с.
+                      Усово, стр. 100, часть помещ. 10.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <div class="slider__text">
+                    <p>
+                      Правила доверительного управления ЗПИФ комбинированный «ЛэндПро» согласованы и
+                      представлены АО «Специализированный депозитарий «ИНФИНИТУМ» в Банк России
+                      13.12.2024 (номер правил доверительного управления фондом 6776-СД).
+                      <br />
+                      Инвестиционные паи ЗПИФ комбинированный «ЛэндПро» предназначены
+                      <a href="/src/information/investors" class="link"
+                        >для квалифицированных инвесторов</a
+                      >. Не допускается распространение информации о паевом инвестиционном фонде,
+                      инвестиционные паи которого ограничены в обороте, за исключением случаев ее
+                      раскрытия в соответствии с Федеральным законом «Об инвестиционных фондах» и
+                      иными федеральными законами. <br />
+                      Информация о паевом инвестиционном фонде, инвестиционные паи которых
+                      ограничены в обороте, может предоставляться лицам, которым в соответствии с
+                      Федеральным законом «О рынке ценных бумаг» может предоставляться информация о
+                      ценных бумагах, предназначенных для квалифицированных инвесторов, по адресу
+                      ООО УК «Аксиома Капитал»: 143084, Московская область, г.о. Одинцовский, с.
+                      Усово, стр. 100, часть помещ. 10.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <div class="slider__text">
+                    <p>
+                      Правила доверительного управления ЗПИФ комбинированный «Инвестиционный центр»
+                      согласованы и представлены в Банк России 06.09.2024 АО «Специализированный
+                      депозитарий «ИНФИНИТУМ» (номер правил доверительного управления фондом
+                      6465-СД).
+                      <br />
+                      Инвестиционные паи ЗПИФ комбинированный «Инвестиционный центр» предназначены
+                      <a href="/src/information/investors" class="link"
+                        >для квалифицированных инвесторов</a
+                      >. Не допускается распространение информации о паевом инвестиционном фонде,
+                      инвестиционные паи которого ограничены в обороте, за исключением случаев ее
+                      раскрытия в соответствии с Федеральным законом «Об инвестиционных фондах» и
+                      иными федеральными законами. <br />
+                      Информация о паевом инвестиционном фонде, инвестиционные паи которых
+                      ограничены в обороте, может предоставляться лицам, которым в соответствии с
+                      Федеральным законом «О рынке ценных бумаг» может предоставляться информация о
+                      ценных бумагах, предназначенных для квалифицированных инвесторов, по адресу
+                      ООО УК «Аксиома Капитал»: 143084, Московская область, г.о. Одинцовский, с.
+                      Усово, стр. 100, часть помещ. 10.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <div class="slider__text">
+                    <p>
+                      Правила доверительного управления ЗПИФ комбинированный «ФК ПаРус» согласованы
+                      и представлены АО «Специализированный депозитарий «ИНФИНИТУМ» в Банк России
+                      15.11.2024 (номер правил доверительного управления фондом 6674-СД).
+                      <br />
+                      Инвестиционные паи ЗПИФ комбинированный «ФК ПаРус» предназначены
+                      <a href="/src/information/investors" class="link"
+                        >для квалифицированных инвесторов</a
+                      >. Не допускается распространение информации о паевом инвестиционном фонде,
+                      инвестиционные паи которого ограничены в обороте, за исключением случаев ее
+                      раскрытия в соответствии с Федеральным законом «Об инвестиционных фондах» и
+                      иными федеральными законами. <br />
+                      Информация о паевом инвестиционном фонде, инвестиционные паи которых
+                      ограничены в обороте, может предоставляться лицам, которым в соответствии с
+                      Федеральным законом «О рынке ценных бумаг» может предоставляться информация о
+                      ценных бумагах, предназначенных для квалифицированных инвесторов, по адресу
+                      ООО УК «Аксиома Капитал»: 143084, Московская область, г.о. Одинцовский, с.
+                      Усово, стр. 100, часть помещ. 10.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <div class="slider__text">
+                    <p>
+                      Правила доверительного управления ЗПИФ комбинированный «Аксиома финансов»
+                      согласованы и представлены АО «Специализированный депозитарий «ИНФИНИТУМ» в
+                      Банк России 25.11.2024 (номер правил доверительного управления фондом
+                      6691-СД).
+                      <br />
+                      Инвестиционные паи ЗПИФ комбинированный «Аксиома финансов» предназначены
+                      <a href="/src/information/investors" class="link"
+                        >для квалифицированных инвесторов</a
+                      >. Не допускается распространение информации о паевом инвестиционном фонде,
+                      инвестиционные паи которого ограничены в обороте, за исключением случаев ее
+                      раскрытия в соответствии с Федеральным законом «Об инвестиционных фондах» и
+                      иными федеральными законами. <br />
+                      Информация о паевом инвестиционном фонде, инвестиционные паи которых
+                      ограничены в обороте, может предоставляться лицам, которым в соответствии с
+                      Федеральным законом «О рынке ценных бумаг» может предоставляться информация о
+                      ценных бумагах, предназначенных для квалифицированных инвесторов, по адресу
+                      ООО УК «Аксиома Капитал»: 143084, Московская область, г.о. Одинцовский, с.
+                      Усово, стр. 100, часть помещ. 10.
+                    </p>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="slider__text">
+                    <p>
+                      Правила доверительного управления ЗПИФ комбинированный «Финансовый центр»
+                      согласованы ипредставлены АО «Специализированный депозитарий «ИНФИНИТУМ» в
+                      Банк России 26.06.2025 (номер правил доверительного управления фондом
+                      7142-СД).
+                      <br />
+                      Инвестиционные паи ЗПИФ комбинированный «Финансовый центр» предназначены
+                      <a href="/src/information/investors" class="link"
+                        >для квалифицированных инвесторов</a
+                      >. Не допускается распространение информации о паевом инвестиционномфонде,
+                      инвестиционные паи которого ограничены в обороте, за исключением случаев ее
+                      раскрытия в соответствии с Федеральным законом «Об инвестиционных фондах»
+                      ииными федеральными законами. <br />
+                      Информация о паевом инвестиционном фонде, инвестиционные паи которых
+                      ограничены в обороте, может предоставляться лицам,которым в соответствии с
+                      Федеральным законом «О рынке ценных бумаг» может предоставляться информация о
+                      ценных бумагах, предназначенных дляквалифицированных инвесторов, по адресу ООО
+                      УК «Аксиома Капитал»: 143084, Московская область, г.о. Одинцовский, с. Усово,
+                      стр. 100, часть помещ. 10.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+
+			<section class="slider" id="funds-slider">
+				<div class="slider__flex">
+					<div class="slider__col">
+						<div class="slider__prev" aria-label="Предыдущий слайд">
+							<img src="/assets/img/icons/up-arrow.svg" alt="Prev" />
+						</div>
+
+						<div class="slider__thumbs">
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<!-- Слайд 1 - Проектный бизнес -->
+									<div class="swiper-slide" data-fund-id="project-business">
+										<div class="slider__image">
+											<img
+												src="/assets/img/photos/funds/fund-4.jpg"
+												alt="Закрытый комбинированный паевый инвестиционный фонд «Проектный бизнес»"
+											/>
+											<h4>
+												Закрытый комбинированный паевый инвестиционный фонд
+												«Проектный бизнес»
+											</h4>
+										</div>
+									</div>
+
+									<!-- Слайд 2 - Структурные финансы -->
+									<div class="swiper-slide" data-fund-id="structural-finance">
+										<div class="slider__image">
+											<img
+												src="/assets/img/photos/funds/fund-2.jpg"
+												alt="Закрытый комбинированный паевый инвестиционный фонд «Структурные финансы»"
+											/>
+											<h4>
+												Закрытый комбинированный паевый инвестиционный фонд
+												«Структурные финансы»
+											</h4>
+										</div>
+									</div>
+
+									<!-- Слайд 3 - ЛэндПро -->
+									<div class="swiper-slide" data-fund-id="landpro">
+										<div class="slider__image">
+											<img
+												src="/assets/img/photos/funds/fund-3.jpg"
+												alt="Закрытый комбинированный паевый инвестиционный фонд «ЛэндПро»"
+											/>
+											<h4>
+												Закрытый комбинированный паевый инвестиционный фонд
+												«ЛэндПро»
+											</h4>
+										</div>
+									</div>
+
+									<!-- Слайд 4 - ФК ПаРус -->
+									<div class="swiper-slide" data-fund-id="fk-parus">
+										<div class="slider__image">
+											<img
+												src="/assets/img/photos/funds/fund-2.jpg"
+												alt="Закрытый комбинированный паевый инвестиционный фонд «ФК ПаРус»"
+											/>
+											<h4>
+												Закрытый комбинированный паевый инвестиционный фонд «ФК
+												ПаРус»
+											</h4>
+										</div>
+									</div>
+
+									<!-- Слайд 5 - Аксиома финансов -->
+									<div class="swiper-slide" data-fund-id="axioma-finance">
+										<div class="slider__image">
+											<img
+												src="/assets/img/photos/funds/fund-3.jpg"
+												alt="Закрытый комбинированный паевый инвестиционный фонд «Аксиома финансов»"
+											/>
+											<h4>
+												Закрытый комбинированный паевый инвестиционный фонд
+												«Аксиома финансов»
+											</h4>
+										</div>
+									</div>
+
+									<!-- Слайд 6 - Финансовый центр -->
+									<div class="swiper-slide" data-fund-id="financial-center">
+										<div class="slider__image">
+											<img
+												src="/assets/img/photos/funds/fund-2.jpg"
+												alt="Закрытый комбинированный паевый инвестиционный фонд «Финансовый центр»"
+											/>
+											<h4>
+												Закрытый комбинированный паевый инвестиционный фонд
+												«Финансовый центр»
+											</h4>
+										</div>
+									</div>
+
+									<!-- Слайд 7 - Проектные вложения (НОВЫЙ) -->
+									<div class="swiper-slide" data-fund-id="proektnye-vlozheniya">
+										<div class="slider__image">
+											<img
+												src="/assets/img/photos/funds/fund-4.jpg"
+												alt="Закрытый комбинированный паевый инвестиционный фонд «Проектные вложения»"
+											/>
+											<h4>
+												Закрытый комбинированный паевый инвестиционный фонд
+												«Проектные вложения»
+											</h4>
+										</div>
+									</div>
+
+									<!-- Слайд 8 - Финансовый бизнес (НОВЫЙ) -->
+									<div class="swiper-slide" data-fund-id="financial-business">
+										<div class="slider__image">
+											<img
+												src="/assets/img/photos/funds/fund-2.jpg"
+												alt="Закрытый комбинированный паевый инвестиционный фонд «Финансовый бизнес»"
+											/>
+											<h4>
+												Закрытый комбинированный паевый инвестиционный фонд
+												«Финансовый бизнес»
+											</h4>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="slider__next" aria-label="Следующий слайд">
+							<img src="/assets/img/icons/down-arrow.svg" alt="Next" />
+						</div>
+					</div>
+
+					<div class="slider__content">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<!-- Слайд 1 - Проектный бизнес -->
+								<div class="swiper-slide" data-fund-id="project-business">
+									<div class="slider__text">
+										<p>
+											Правила доверительного управления ЗПИФ комбинированный
+											«Проектный бизнес» согласованы и представлены АО
+											«Специализированный депозитарий «ИНФИНИТУМ» в Банк России
+											13.12.2024 (номер правил доверительного управления фондом
+											6777-СД).
+											<br />
+											Инвестиционные паи ЗПИФ комбинированный «Проектный бизнес»
+											предназначены
+											<a href="/src/information/investors" class="link"
+												>для квалифицированных инвесторов</a
+											>. Не допускается распространение информации о паевом
+											инвестиционном фонде, инвестиционные паи которого
+											ограничены в обороте, за исключением случаев ее раскрытия
+											в соответствии с Федеральным законом «Об инвестиционных
+											фондах» и иными федеральными законами.
+											<br />
+											Информация о паевом инвестиционном фонде, инвестиционные
+											паи которых ограничены в обороте, может предоставляться
+											лицам, которым в соответствии с Федеральным законом «О
+											рынке ценных бумаг» может предоставляться информация о
+											ценных бумагах, предназначенных для квалифицированных
+											инвесторов, по адресу ООО УК «Аксиома Капитал»: 143084,
+											Московская область, г.о. Одинцовский, с. Усово, стр. 100,
+											часть помещ. 10.
+										</p>
+									</div>
+								</div>
+
+								<!-- Слайд 2 - Структурные финансы -->
+								<div class="swiper-slide" data-fund-id="structural-finance">
+									<div class="slider__text">
+										<p>
+											Правила доверительного управления ЗПИФ комбинированный
+											«Структурные финансы» согласованы и представлены АО
+											«Специализированный депозитарий «ИНФИНИТУМ» в Банк России
+											13.12.2024 (номер правил доверительного управления фондом
+											6775-СД).
+											<br />
+											Инвестиционные паи ЗПИФ комбинированный «Структурные
+											финансы» предназначены
+											<a href="/src/information/investors" class="link"
+												>для квалифицированных инвесторов</a
+											>. Не допускается распространение информации о паевом
+											инвестиционном фонде, инвестиционные паи которого
+											ограничены в обороте, за исключением случаев ее раскрытия
+											в соответствии с Федеральным законом «Об инвестиционных
+											фондах» и иными федеральными законами.
+											<br />
+											Информация о паевом инвестиционном фонде, инвестиционные
+											паи которых ограничены в обороте, может предоставляться
+											лицам, которым в соответствии с Федеральным законом «О
+											рынке ценных бумаг» может предоставляться информация о
+											ценных бумагах, предназначенных для квалифицированных
+											инвесторов, по адресу ООО УК «Аксиома Капитал»: 143084,
+											Московская область, г.о. Одинцовский, с. Усово, стр. 100,
+											часть помещ. 10.
+										</p>
+									</div>
+								</div>
+
+								<!-- Слайд 3 - ЛэндПро -->
+								<div class="swiper-slide" data-fund-id="landpro">
+									<div class="slider__text">
+										<p>
+											Правила доверительного управления ЗПИФ комбинированный
+											«ЛэндПро» согласованы и представлены АО
+											«Специализированный депозитарий «ИНФИНИТУМ» в Банк России
+											13.12.2024 (номер правил доверительного управления фондом
+											6776-СД).
+											<br />
+											Инвестиционные паи ЗПИФ комбинированный «ЛэндПро»
+											предназначены
+											<a href="/src/information/investors" class="link"
+												>для квалифицированных инвесторов</a
+											>. Не допускается распространение информации о паевом
+											инвестиционном фонде, инвестиционные паи которого
+											ограничены в обороте, за исключением случаев ее раскрытия
+											в соответствии с Федеральным законом «Об инвестиционных
+											фондах» и иными федеральными законами.
+											<br />
+											Информация о паевом инвестиционном фонде, инвестиционные
+											паи которых ограничены в обороте, может предоставляться
+											лицам, которым в соответствии с Федеральным законом «О
+											рынке ценных бумаг» может предоставляться информация о
+											ценных бумагах, предназначенных для квалифицированных
+											инвесторов, по адресу ООО УК «Аксиома Капитал»: 143084,
+											Московская область, г.о. Одинцовский, с. Усово, стр. 100,
+											часть помещ. 10.
+										</p>
+									</div>
+								</div>
+
+								<!-- Слайд 4 - ФК ПаРус -->
+								<div class="swiper-slide" data-fund-id="fk-parus">
+									<div class="slider__text">
+										<p>
+											Правила доверительного управления ЗПИФ комбинированный «ФК
+											ПаРус» согласованы и представлены АО «Специализированный
+											депозитарий «ИНФИНИТУМ» в Банк России 15.11.2024 (номер
+											правил доверительного управления фондом 6674-СД).
+											<br />
+											Инвестиционные паи ЗПИФ комбинированный «ФК ПаРус»
+											предназначены
+											<a href="/src/information/investors" class="link"
+												>для квалифицированных инвесторов</a
+											>. Не допускается распространение информации о паевом
+											инвестиционном фонде, инвестиционные паи которого
+											ограничены в обороте, за исключением случаев ее раскрытия
+											в соответствии с Федеральным законом «Об инвестиционных
+											фондах» и иными федеральными законами.
+											<br />
+											Информация о паевом инвестиционном фонде, инвестиционные
+											паи которых ограничены в обороте, может предоставляться
+											лицам, которым в соответствии с Федеральным законом «О
+											рынке ценных бумаг» может предоставляться информация о
+											ценных бумагах, предназначенных для квалифицированных
+											инвесторов, по адресу ООО УК «Аксиома Капитал»: 143084,
+											Московская область, г.о. Одинцовский, с. Усово, стр. 100,
+											часть помещ. 10.
+										</p>
+									</div>
+								</div>
+
+								<!-- Слайд 5 - Аксиома финансов -->
+								<div class="swiper-slide" data-fund-id="axioma-finance">
+									<div class="slider__text">
+										<p>
+											Правила доверительного управления ЗПИФ комбинированный
+											«Аксиома финансов» согласованы и представлены АО
+											«Специализированный депозитарий «ИНФИНИТУМ» в Банк России
+											25.11.2024 (номер правил доверительного управления фондом
+											6691-СД).
+											<br />
+											Инвестиционные паи ЗПИФ комбинированный «Аксиома финансов»
+											предназначены
+											<a href="/src/information/investors" class="link"
+												>для квалифицированных инвесторов</a
+											>. Не допускается распространение информации о паевом
+											инвестиционном фонде, инвестиционные паи которого
+											ограничены в обороте, за исключением случаев ее раскрытия
+											в соответствии с Федеральным законом «Об инвестиционных
+											фондах» и иными федеральными законами.
+											<br />
+											Информация о паевом инвестиционном фонде, инвестиционные
+											паи которых ограничены в обороте, может предоставляться
+											лицам, которым в соответствии с Федеральным законом «О
+											рынке ценных бумаг» может предоставляться информация о
+											ценных бумагах, предназначенных для квалифицированных
+											инвесторов, по адресу ООО УК «Аксиома Капитал»: 143084,
+											Московская область, г.о. Одинцовский, с. Усово, стр. 100,
+											часть помещ. 10.
+										</p>
+									</div>
+								</div>
+
+								<!-- Слайд 6 - Финансовый центр -->
+								<div class="swiper-slide" data-fund-id="financial-center">
+									<div class="slider__text">
+										<p>
+											Правила доверительного управления ЗПИФ комбинированный
+											«Финансовый центр» согласованы и представлены АО
+											«Специализированный депозитарий «ИНФИНИТУМ» в Банк России
+											26.06.2025 (номер правил доверительного управления фондом
+											7142-СД).
+											<br />
+											Инвестиционные паи ЗПИФ комбинированный «Финансовый центр»
+											предназначены
+											<a href="/src/information/investors" class="link"
+												>для квалифицированных инвесторов</a
+											>. Не допускается распространение информации о паевом
+											инвестиционном фонде, инвестиционные паи которого
+											ограничены в обороте, за исключением случаев ее раскрытия
+											в соответствии с Федеральным законом «Об инвестиционных
+											фондах» ииными федеральными законами.
+											<br />
+											Информация о паевом инвестиционном фонде, инвестиционные
+											паи которых ограничены в обороте, может предоставляться
+											лицам,которым в соответствии с Федеральным законом «О
+											рынке ценных бумаг» может предоставляться информация о
+											ценных бумагах, предназначенных для квалифицированных
+											инвесторов, по адресу ООО УК «Аксиома Капитал»: 143084,
+											Московская область, г.о. Одинцовский, с. Усово, стр. 100,
+											часть помещ. 10.
+										</p>
+									</div>
+								</div>
+
+								<!-- Слайд 7 - Проектные вложения -->
+								<div class="swiper-slide" data-fund-id="proektnye-vlozheniya">
+									<div class="slider__text">
+										<p>
+											Правила доверительного управления ЗПИФ комбинированный
+											«Проектные вложения» согласованы и представлены АО
+											«Специализированный депозитарий «ИНФИНИТУМ» в Банк России
+											30.06.2025 (номер правил доверительного управления фондом
+											7149-СД).
+											<br />
+											Инвестиционные паи ЗПИФ комбинированный «Проектные
+											вложения» предназначены
+											<a href="/src/information/investors" class="link"
+												>для квалифицированных инвесторов</a
+											>. Не допускается распространение информации о паевом
+											инвестиционномфонде, инвестиционные паи которого
+											ограничены в обороте, за исключением случаев ее раскрытия
+											в соответствии с Федеральным законом «Об инвестиционных
+											фондах» ииными федеральными законами. Информация о паевом
+											инвестиционном фонде, инвестиционные паи которых
+											ограничены в обороте, может предоставляться лицам,которым
+											в соответствии с Федеральным законом «О рынке ценных
+											бумаг» может предоставляться информация о ценных бумагах,
+											предназначенных дляквалифицированных инвесторов, по адресу
+											ООО УК «Аксиома Капитал»: 143084, Московская область, г.о.
+											Одинцовский, с. Усово, стр. 100, часть помещ. 10.
+										</p>
+									</div>
+								</div>
+
+								<!-- Слайд 8 - Финансовый бизнес -->
+								<div class="swiper-slide" data-fund-id="financial-business">
+									<div class="slider__text">
+										<p>
+											Правила доверительного управления ЗПИФ комбинированный
+											«Финансовый бизнес» согласованы и представлены АО
+											«Специализированный депозитарий «ИНФИНИТУМ» в Банк России
+											30.06.2025 (номер правил доверительного управления фондом
+											7150-СД).
+											<br />
+											Инвестиционные паи ЗПИФ комбинированный «Финансовый
+											бизнес» предназначены
+											<a href="/src/information/investors" class="link"
+												>для квалифицированных инвесторов</a
+											>. Не допускается распространение информации о паевом
+											инвестиционномфонде, инвестиционные паи которого
+											ограничены в обороте, за исключением случаев ее раскрытия
+											в соответствии с Федеральным законом «Об инвестиционных
+											фондах» ииными федеральными законами. Информация о паевом
+											инвестиционном фонде, инвестиционные паи которых
+											ограничены в обороте, может предоставляться лицам,которым
+											в соответствии с Федеральным законом «О рынке ценных
+											бумаг» может предоставляться информация о ценных бумагах,
+											предназначенных дляквалифицированных инвесторов, по адресу
+											ООО УК «Аксиома Капитал»: 143084, Московская область, г.о.
+											Одинцовский, с. Усово, стр. 100, часть помещ. 10.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer class="footer">
+				<div class="footer__content">
+					<a href="#" class="footer__logo">
+						<img
+							class="footer__logo-image"
+							src="/assets/logo-black.svg"
+							alt="Footer Logo"
+						/>
+					</a>
+				</div>
+				<p class="footer__description-long">
+					Общество с ограниченной ответственностью Управляющая компания «Аксиома
+					Капитал» действует на основании лицензии, выданной Банком России
+					23.05.2024 г. № 21-000-1-01104, на осуществление деятельности по
+					управлению инвестиционными фондами, паевыми инвестиционными фондами и
+					негосударственными пенсионными фондами, без ограничения срока действия
+					(Решение Банка России от 23.05.2024 № РБ-14/682). Деятельность ООО УК
+					«Аксиома Капитал» по управлению инвестиционными фондами, паевыми
+					инвестиционными фондами и негосударственными пенсионными фондами не
+					совмещается с профессиональной деятельностью по доверительному
+					управлению ценными бумагами. В связи с этим отсутствует риск
+					возникновения конфликта интересов при совмещении указанных видов
+					деятельности. ООО УК «Аксиома Капитал» не осуществляет деятельность по
+					инвестиционному консультированию, не является инвестиционным
+					советником и не предоставляет индивидуальных инвестиционных
+					рекомендаций. Получить информацию об управляющей компании, находящихся
+					в ее управлении паевых инвестиционных фондах, ознакомиться с Правилами
+					доверительного управления паевыми инвестиционными фондами, а также
+					сведениями о местах приема заявок на приобретение, погашение
+					инвестиционных паев и иными документами, предусмотренными Федеральным
+					законом от 29.11.2001 № 156-ФЗ «Об инвестиционных фондах» и
+					нормативными актами Банка России, можно по адресу ООО УК «Аксиома
+					Капитал»: 143084, Московская область, г.о. Одинцовский, с. Усово, стр.
+					100, часть помещ. 10, по телефону +7 (495) 970-37-57, а также по
+					адресу страницы в сети Интернет:
+					<a class="link" href="https://axiomacapital.ru/"
+						>https://axiomacapital.ru/</a
+					>.
+					<br />
+					ООО УК «Аксиома Капитал» уведомляет, что стоимость инвестиционных паев
+					может увеличиваться и уменьшаться, результаты инвестирования в прошлом
+					не определяют доходы в будущем, государство не гарантирует доходность
+					инвестиций в паевые инвестиционные фонды. Прежде чем приобрести
+					инвестиционный пай, следует внимательно ознакомиться с правилами
+					доверительного управления паевым инвестиционным фондом.
+				</p>
+			</footer>
+		</div>
+		<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+		<script src="/assets/js/funds-slider.js"></script>
+	</body>
+</html>

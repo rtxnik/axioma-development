@@ -1,0 +1,26 @@
+// base/_reset.scss
+
+ul {
+	list-style: none;
+	// Color highlighting when pressed on mobile devices
+	// -webkit-tap-highlight-color: transparent;
+}
+
+a {
+	text-decoration: none;
+	color: #111827;
+}
+
+header {
+	width: 100%;
+}
+
+.reset-button {
+	all: unset;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.reset-input {
+	outline: none;
+}

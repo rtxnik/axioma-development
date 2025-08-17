@@ -1,0 +1,534 @@
+// pages/_zpif.scss
+
+.benefits-page {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 120px;
+  gap: 100px;
+  box-sizing: border-box;
+  font-family: var(--font-family-regular);
+  color: var(--color-white);
+  width: 100%;
+
+  &__advantages {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+    .advantages__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      .advantages__title {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+        max-width: 100%;
+
+        @media (max-width: 576px) {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .advantages__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+
+      .advantages__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        flex: 1 1 calc(50% - 40px);
+        box-sizing: border-box;
+
+        .advantages__icon {
+          width: 60px;
+          height: 60px;
+          flex-shrink: 0;
+
+          @media (max-width: 576px) {
+            width: 35px;
+            height: 35px;
+          }
+        }
+
+        .advantages__content {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .advantages__subtitle {
+            font-size: 20px;
+            font-weight: bold;
+
+            @media (max-width: 576px) {
+              font-size: 18px;
+            }
+          }
+
+          .advantages__features {
+            list-style: disc;
+            padding-left: 27px;
+            margin: 0;
+            font-size: 20px;
+            font-family: var(--font-family-regular);
+
+            .advantages__feature {
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__popularity {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .popularity__description {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .popularity__title {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+
+        @media (max-width: 576px) {
+          font-size: 20px;
+        }
+      }
+
+      .popularity__text {
+        font-size: 20px;
+
+        @media (max-width: 576px) {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .popularity__subtitle {
+      font-size: 26px;
+
+      @media (max-width: 576px) {
+        font-size: 18px;
+      }
+    }
+
+    .popularity__checklist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+
+      .checklist__group {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex: 1 1 calc(50% - 40px);
+        min-width: 0;
+
+        .checklist__item {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+
+          .checklist__icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+          }
+
+          .checklist__text {
+            font-size: 20px;
+            font-family: var(--font-family-regular);
+            overflow-wrap: break-word;
+            word-break: break-word;
+            min-width: 0;
+
+            @media (max-width: 576px) {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+
+    .popularity__conclusion {
+      font-size: 20px;
+      font-weight: bold;
+
+      @media (max-width: 576px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__general-info {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    max-width: 100%;
+
+    .general-info__content {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      max-width: 100%;
+
+      .general-info__description {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .general-info__title {
+          font-size: 32px;
+          font-weight: 700;
+          margin: 0;
+
+          @media (max-width: 576px) {
+            font-size: 20px;
+          }
+        }
+
+        .general-info__text {
+          font-size: 20px;
+
+          @media (max-width: 576px) {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .general-info__legal-basis {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+
+        .legal-basis__item {
+          display: flex;
+          align-items: flex-start;
+          gap: 20px;
+          flex: 1 1 100%;
+
+          .legal-basis__icon {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+
+            @media (max-width: 576px) {
+              width: 35px;
+              height: 35px;
+            }
+          }
+
+          .legal-basis__text {
+            font-size: 20px;
+
+            @media (max-width: 576px) {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+
+    .general-info__additional {
+      font-size: 20px;
+      line-height: 1.2;
+      font-family: var(--font-family-regular);
+
+      @media (max-width: 576px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__investor-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+    text-align: left;
+    font-size: 36px;
+    font-family: sans-serif;
+
+    .investor-info__description {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .investor-info__title {
+        font-family: var(--font-family-regular);
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+
+        @media (max-width: 576px) {
+          font-size: 20px;
+        }
+      }
+
+      .investor-info__subtitle {
+        font-family: var(--font-family-regular);
+        font-size: 26px;
+        font-weight: 700;
+        margin: 0;
+
+        @media (max-width: 576px) {
+          font-size: 18px;
+        }
+      }
+
+      .investor-info__list {
+        list-style: disc;
+        padding-left: 27px;
+        margin: 0;
+        font-size: 20px;
+        font-family: sans-serif;
+
+        .investor-info__item {
+          font-family: var(--font-family-regular);
+          margin-bottom: 10px;
+
+          @media (max-width: 576px) {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .investor-info__logo {
+      width: 198px;
+      height: 99px;
+      object-fit: contain;
+
+      @media (max-width: 576px) {
+        width: 108px;
+        height: 50px;
+      }
+    }
+  }
+
+  &__application-area {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+    .application-area__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+
+      .application-area__title {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+        max-width: 100%;
+
+        @media (max-width: 576px) {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .application-area__use-cases {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+
+      .use-cases__item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 1 1 calc(50% - 40px);
+        box-sizing: border-box;
+
+        .use-cases__icon {
+          width: 32px;
+          height: 32px;
+          flex-shrink: 0;
+        }
+
+        .use-cases__text {
+          font-size: 20px;
+          font-family: var(--font-family-regular);
+          overflow-wrap: break-word;
+          word-break: break-word;
+          min-width: 0;
+
+          @media (max-width: 576px) {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1325px) {
+    &__advantages {
+      .advantages__header {
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1125px) {
+    padding: 100px 60px;
+    gap: 50px;
+
+    &__advantages {
+      .advantages__list {
+        flex-direction: column;
+      }
+    }
+
+    &__popularity {
+      .popularity__checklist {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    &__application-area {
+      .application-area__use-cases {
+        flex-direction: column;
+      }
+    }
+
+    &__general-info {
+      .general-info__legal-basis {
+        .legal-basis__item {
+          flex: 1 1 100%;
+        }
+      }
+    }
+
+    .checklist__group {
+      gap: 10px;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    padding: 100px 60px;
+    gap: 50px;
+
+    &__advantages {
+      .advantages__title,
+      .popularity__title,
+      .application-area__title,
+      .investor-info__title,
+      .investor-info__subtitle {
+        font-size: 26px;
+      }
+
+      .advantages__subtitle,
+      .popularity__subtitle,
+      .checklist__text,
+      .advantages__feature,
+      .legal-basis__text,
+      .investor-info__text,
+      .use-cases__text {
+        font-size: 16px;
+      }
+
+      .advantages__icon,
+      .checklist__icon,
+      .use-cases__icon {
+        width: 32px;
+        height: 32px;
+      }
+
+      .advantages__list,
+      .application-area__use-cases {
+        gap: 40px;
+      }
+    }
+
+    &__investor-info {
+      font-size: 29px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    padding: 100px 30px;
+    gap: 25px;
+
+    &__advantages {
+      .advantages__title,
+      .popularity__title,
+      .application-area__title,
+      .investor-info__title,
+      .investor-info__subtitle {
+        font-size: 19px;
+      }
+
+      .advantages__subtitle,
+      .popularity__subtitle,
+      .checklist__text,
+      .advantages__feature,
+      .legal-basis__text,
+      .investor-info__text,
+      .use-cases__text {
+        font-size: 16px;
+      }
+
+      .advantages__icon,
+      .checklist__icon,
+      .use-cases__icon {
+        width: 32px;
+        height: 32px;
+      }
+
+      .advantages__list,
+      .popularity__checklist,
+      .application-area__use-cases {
+        gap: 20px;
+      }
+
+      .checklist__group,
+      .use-cases__group {
+        gap: 20px;
+      }
+    }
+  }
+}
+
+// .button {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   padding: 10px 19px;
+//   border: none;
+//   border-radius: 20px;
+//   cursor: pointer;
+//   background-color: #b4ab9d;
+//   width: 271px;
+//   transition: background-color 0.3s ease;
+
+//   &:hover {
+//     background-color: #d1c0a8;
+//   }
+
+//   &__text {
+//     font-size: 16px;
+//     font-family: var(--font-family-regular);
+//     text-align: center;
+
+//     @media (max-width: 576px) {
+//       font-size: 12px;
+//     }
+//   }
+
+//   // &--consultation {
+//   // }
+// }

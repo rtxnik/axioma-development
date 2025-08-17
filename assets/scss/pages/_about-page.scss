@@ -1,0 +1,253 @@
+// pages/_about-page.scss
+
+.company-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 100px 0;
+	background-color: var(--color-white);
+
+	&__title {
+		font-family: var(--font-family-bold);
+		font-weight: 700;
+		color: #111827;
+		font-size: 38px;
+		text-align: center;
+		margin: 60px 0px;
+
+		@media (max-width: 576px) {
+			font-size: 24px;
+		}
+	}
+
+	&__content {
+		display: flex;
+		align-items: flex-start;
+		gap: 80px;
+		width: 100%;
+		padding: 0 120px;
+
+		@media (max-width: 992px) {
+			padding: 0 60px;
+			gap: 40px;
+		}
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			padding: 0 20px;
+			gap: 20px;
+		}
+
+		@media (max-width: 576px) {
+			padding: 0 20px;
+			gap: 10px;
+		}
+	}
+
+	&__details {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		width: 100%;
+	}
+}
+
+.vacancies {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 20px;
+	position: relative;
+	flex: 1;
+	width: 100%;
+
+	@media (max-width: 1024px) {
+		margin-bottom: 60px;
+	}
+
+	@media (max-width: 576px) {
+		padding: 0 20px;
+	}
+
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		width: 100%;
+	}
+
+	&__item {
+		padding-bottom: 10px;
+		border-bottom: 1px solid var(--color-white);
+		cursor: pointer;
+		color: var(--color-white);
+
+		&--active {
+			.vacancies__details {
+				max-height: 10000px;
+				animation: fadeIn 1.5s ease-in-out;
+				overflow-y: auto;
+			}
+
+			.vacancies__icon {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	&__question {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__title {
+		flex-basis: 95%;
+		font-family: var(--font-family-bold);
+		font-weight: 700;
+		font-size: 24px;
+		color: var(--color-primary);
+		flex-grow: 1;
+
+		@media (max-width: 576px) {
+			font-size: 20px;
+		}
+	}
+
+	&__icon {
+		flex-basis: 2%;
+		width: 50px;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		transition: transform 0.5s ease-in-out;
+
+		&::before {
+			content: "";
+			position: absolute;
+			width: 12px;
+			height: 12px;
+			border-right: 2px solid white;
+			border-bottom: 2px solid white;
+			transform: rotate(45deg);
+		}
+	}
+
+	&__details {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 1.5s ease, padding 1.5s ease;
+		padding-right: 20px;
+	}
+
+	&__answer {
+		font-family: var(--font-family-regular);
+		font-weight: 400;
+		color: var(--main-4);
+		font-size: 20px;
+		padding-top: 10px;
+
+		@media (max-width: 576px) {
+			font-size: 14px;
+		}
+	}
+
+	&__button {
+		align-self: flex-end;
+		margin: 20px 0;
+		z-index: 1;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			max-height: 0;
+		}
+		to {
+			opacity: 1;
+			max-height: 10000px;
+		}
+	}
+}
+
+.regulations {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-bottom: 30px;
+
+	&__wrapper {
+		width: 100%;
+	}
+
+	&__element {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		width: 100%;
+		padding: 10px 0;
+		border-bottom: 1px solid var(--color-white);
+
+		@media (max-width: 1024px) {
+			justify-content: end;
+		}
+
+		@media (max-width: 576px) {
+			flex-direction: row;
+			justify-content: end;
+			margin-bottom: 5px;
+		}
+	}
+
+	&__title {
+		color: var(--color-white);
+		font-size: 18px;
+		font-weight: 600;
+		padding-right: 20px;
+	}
+
+	&__download {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 5px;
+		border-radius: 5px;
+		border: 1px solid var(--color-white);
+		background-color: transparent;
+		color: var(--color-white);
+		transition: background-color 0.3s ease;
+
+		&:hover {
+			background-color: var(--color-secondary);
+			color: var(--color-accent);
+		}
+
+		img {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	&__text-wrapper {
+		padding: 0 80px;
+		width: 100%;
+		text-align: left;
+
+		@media (max-width: 576px) {
+			padding: 0;
+		}
+	}
+
+	&__description {
+		color: var(--color-white);
+		font-size: 16px;
+		line-height: 1.5;
+	}
+}

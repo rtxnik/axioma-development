@@ -1,0 +1,49 @@
+/* ================================
+   Стилизация Кнопок (.button)
+=============================== */
+
+.button {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 19px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #b4ab9d;
+  width: fit-content;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background-color: #d1c0a8;
+  }
+
+  &__text {
+    font-size: 16px;
+    font-family: var(--font-family-regular);
+    text-align: center;
+    color: var(--color-white); /* Базовый цвет текста */
+
+    @media (max-width: 576px) {
+      font-size: 12px;
+    }
+  }
+
+  &--consultation {
+    // Дополнительные стили
+  }
+
+  /* Модификатор для тёмной вариации */
+  &--dark {
+    background-color: var(--color-primary); /* Чёрный фон */
+    max-width: 200px; /* Сохраняем ограничение ширины */
+
+    &:hover {
+      background-color: #333; /* Более светлый чёрный при наведении */
+    }
+
+    &__text {
+      color: #fff; /* Белый цвет текста для контраста */
+    }
+  }
+}

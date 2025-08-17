@@ -1,0 +1,57 @@
+// components/_leadership.scss
+
+/* Секция на всю ширину контейнера */
+.leadership {
+  width: 100%;
+}
+
+.leadership__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* По умолчанию – 3 элемента в ряд */
+.leadership__item {
+  flex: 0 0 calc(33.33% - 13.33px); /* вычитаем часть зазора */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* При ширине экрана меньше ~992px – 2 элемента в ряд */
+@media (max-width: 991.98px) {
+  .leadership__item {
+    flex: 0 0 calc(50% - 10px);
+  }
+}
+
+/* При ширине экрана меньше ~576px – 1 элемент в ряд */
+@media (max-width: 575.98px) {
+  .leadership__item {
+    flex: 0 0 100%;
+  }
+}
+
+/* Остальные стили остаются без изменений */
+.leadership__photo {
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.leadership__description {
+  margin: 25px 0 15px 0;
+}
+
+.leadership__name {
+  color: white;
+  font-size: 1.1em;
+  margin: 25px 0 0;
+}
+
+.leadership__position {
+  font-size: 0.9em;
+  color: white;
+  margin-top: 10px;
+}

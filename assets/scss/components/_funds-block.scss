@@ -1,0 +1,92 @@
+// components/_funds-block.scss
+
+.funds-block {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 120px;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 576px) {
+    padding: 0;
+  }
+
+  &__header {
+    text-align: center;
+    font-family: var(--font-family-regular);
+    color: var(--color-white);
+    margin-bottom: 60px;
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 700;
+
+    @media (max-width: 576px) {
+      font-size: 20px;
+      padding: 0 60px;
+    }
+  }
+
+  &__details {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 0 80px;
+    font-family: var(--font-family-regular);
+    font-size: 20px;
+    color: var(--color-white);
+
+    @media screen and (max-width: 1450px) {
+      padding: 0 40px;
+      gap: 30px;
+    }
+
+    @media screen and (max-width: 1200px) {
+      flex-direction: column;
+      align-items: center;
+      padding: 0 20px;
+      gap: 20px;
+    }
+  }
+
+  &__card {
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &__image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    &__info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  &__fund-title {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &__description {
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: var(--font-family-regular);
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

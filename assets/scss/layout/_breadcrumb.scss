@@ -1,0 +1,79 @@
+// layout/_breadcrumb.scss
+
+.breadcrumb {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0;
+	background-color: var(--color-white);
+	padding: 8px 16px;
+	border-radius: 8px;
+	overflow-x: auto; // Добавляем горизонтальную прокрутку при необходимости
+	-webkit-overflow-scrolling: touch; // Плавная прокрутка на iOS
+
+	&__list {
+		display: flex;
+		align-items: center;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		flex-wrap: nowrap; // Предотвращаем перенос элементов на новую строку
+
+		@media (max-width: 600px) {
+			flex-direction: row; // Сохраняем горизонтальное расположение
+			overflow-x: auto; // Разрешаем прокрутку
+			-webkit-overflow-scrolling: touch; // Плавная прокрутка на iOS
+		}
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		font-size: clamp(14px, 2vw, 16px);
+
+		&--separator {
+			margin: 0 8px;
+			color: #111827;
+			font-weight: bold;
+		}
+
+		&--current {
+			font-weight: bold;
+			color: #111827;
+		}
+
+		& + & {
+			margin-left: 8px;
+
+			@media (max-width: 600px) {
+				margin-left: 4px; // Сокращаем отступ для малых экранов
+			}
+		}
+	}
+
+	&__link {
+		/* Предполагается, что класс .link определен где-то еще */
+		font-size: clamp(14px, 2vw, 16px);
+		white-space: nowrap; // Предотвращаем перенос текста
+
+		@media (max-width: 576px) {
+			font-size: 12px;
+		}
+
+		&:hover {
+			text-decoration: underline; // Улучшение UX при наведении
+		}
+	}
+
+	&__current {
+		font-family: var(--font-family-bold);
+		font-size: clamp(14px, 2vw, 16px);
+	}
+}
+
+.breadcrumb-start {
+	display: flex;
+	justify-content: flex-start;
+	margin: 0 0 20px 0;
+	padding: 0;
+}

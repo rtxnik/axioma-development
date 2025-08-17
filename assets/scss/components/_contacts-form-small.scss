@@ -1,0 +1,247 @@
+/**********************************
+ *  МОДАЛЬНОЕ ОКНО .contact-modal
+ **********************************/
+.contact-modal {
+	display: none; /* Скрыто по умолчанию */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	overflow: auto; /* Для прокрутки содержимого при необходимости */
+
+	&__overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	&__content {
+		position: relative;
+		width: 90%;
+		max-width: 1000px;
+		margin: 50px auto;
+		padding: 55px;
+		background-color: var(--color-primary);
+		border-radius: 20px;
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+		box-sizing: border-box;
+		animation: fadeIn 0.3s ease-in-out;
+
+		@media (max-width: 1200px) {
+			padding: 50px;
+		}
+
+		@media (max-width: 768px) {
+			width: 95%;
+			padding: 30px;
+			margin: 20px auto;
+		}
+	}
+
+	&__close {
+		position: absolute;
+		top: 20px;
+		right: 25px;
+		background: none;
+		border: none;
+		font-size: 35px;
+		color: #111827;
+		cursor: pointer;
+		transition: color 0.3s ease;
+		z-index: 1002;
+
+		&:hover {
+			color: #d1c0a8;
+		}
+
+		@media (max-width: 768px) {
+			top: 10px;
+			right: 15px;
+			font-size: 28px;
+		}
+	}
+}
+
+/* Анимация появления контента при открытии модалки */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/********************************************
+ * ФОРМА .contact-form-big--modal внутри модалки
+ ********************************************/
+.contact-form-big--modal {
+	box-sizing: border-box;
+
+	&__fields {
+		display: flex;
+		flex-direction: column;
+		gap: 25px;
+	}
+
+	&__row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+
+	&__field {
+		padding: 15px 25px;
+		background-color: var(--color-secondary);
+		border-radius: 20px;
+		transition: all 0.3s ease;
+		/* Убрали hover-эффект, чтобы не мешать клику на кнопку закрытия */
+	}
+
+	&__label {
+		width: 180px;
+		font-family: var(--font-family-bold);
+		font-weight: 700;
+		font-size: 16px;
+		color: #111827;
+
+		@media (max-width: 600px) {
+			width: 100%;
+			margin-bottom: 5px;
+		}
+	}
+
+	&__input,
+	&__textarea {
+		font-family: var(--font-family-regular);
+		font-size: 16px;
+		border: 1px solid var(--border-color);
+		border-radius: 5px;
+		width: 100%;
+		background-color: transparent;
+		color: #111827;
+		padding: 10px 15px;
+	}
+
+	&__textarea {
+		resize: vertical;
+		min-height: 200px;
+	}
+
+	&__checkbox {
+		margin-right: 10px;
+	}
+
+	&__label--checkbox {
+		font-family: var(--font-family-regular);
+		font-weight: 400;
+		font-size: 14px;
+		color: #111827;
+	}
+
+	&__submit {
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		width: 100%;
+		padding: 12px 20px;
+		background-color: var(--button-bg);
+		transition: background-color 0.3s ease;
+		font-family: var(--font-family-bold);
+		font-size: 16px;
+		color: #ffffff;
+
+		&:hover {
+			background-color: #d1c0a8;
+		}
+	}
+
+	&__submit-text {
+		font-family: var(--font-family-bold);
+		font-weight: 700;
+		font-size: 16px;
+		color: #ffffff;
+		text-align: center;
+	}
+
+	&__file-upload {
+		display: flex;
+		align-items: center;
+		margin-top: 10px;
+	}
+
+	&__file-label {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		color: #111827;
+	}
+
+	&__file-input {
+		display: none;
+	}
+
+	&__file-icon {
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		background-image: url("/assets/img/icons/attachment.svg");
+		background-size: contain;
+		background-repeat: no-repeat;
+		margin-right: 10px;
+	}
+
+	&__file-text {
+		font-size: 14px;
+	}
+
+	&__file-remove {
+		background: none;
+		border: none;
+		cursor: pointer;
+		margin-left: 10px;
+		padding: 0;
+	}
+
+	&__remove-icon {
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		background-image: url("/assets/img/icons/close-attachment.svg");
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
+
+	@media (max-width: 768px) {
+		&__label {
+			width: 100%;
+		}
+
+		&__row {
+			flex-direction: column;
+		}
+
+		&__field {
+			flex: 1 1 100%;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.contact-modal__content {
+		padding: 30px;
+		margin: 20px auto;
+	}
+	.contact-modal__close {
+		top: 10px;
+		right: 15px;
+		font-size: 28px;
+	}
+}

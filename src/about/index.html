@@ -23,498 +23,366 @@
 		<meta name="author" content="" />
 		<link rel="stylesheet" href="/assets/css/normalize.css" />
 		<link rel="stylesheet" href="/assets/css/style.min.css" />
-		<link rel="stylesheet" href="/css/main.css" />
 	</head>
 	<body>
 		<div class="container">
-			<header class="header page__header" role="banner">
-				<div class="container">
-					<nav
-						class="nav header__nav"
-						role="navigation"
-						aria-label="Основная навигация"
-					>
-						<div class="nav__wrapper">
-							<!-- Logo -->
-							<div class="nav__logo">
-								<a
-									href="/"
-									class="logo nav__logo-link"
-									aria-label="Аксиома Капитал - главная страница"
-								>
-									<img
-										class="logo__image"
-										src="https://static.tildacdn.com/tild6337-3833-4836-a436-656266346565/____compressed_2_8.png"
-										alt="Аксиома Капитал"
-										width="240"
-										height="40"
-										loading="eager"
-									/>
-								</a>
-							</div>
+			<header class="header">
+				<nav class="nav">
+					<div class="nav__wrapper">
+						<div class="nav__logo">
+							<a href="/">
+								<img
+									class="logo"
+									src="/assets/img/icons/axioma_logo.svg"
+									alt="Logo"
+								/>
+							</a>
+						</div>
 
-							<!-- Mobile Menu Toggle -->
-							<input
-								type="checkbox"
-								id="menuToggle"
-								class="nav__toggle-input"
-							/>
-							<label
-								for="menuToggle"
-								class="nav__toggle"
-								aria-label="Меню"
-								role="button"
-								aria-expanded="false"
-							>
-								<span class="nav__toggle-icon">
-									<span class="nav__toggle-line"></span>
-									<span class="nav__toggle-line"></span>
-									<span class="nav__toggle-line"></span>
-								</span>
+						<input type="radio" name="slider" id="nav__menu-btn" />
+						<input type="radio" name="slider" id="nav__close-btn" />
+
+						<ul class="nav__list">
+							<label for="nav__close-btn" class="nav__btn nav__btn--close">
+								<img
+									height="20"
+									width="20"
+									src="/assets/img/icons/close-attachment.svg"
+									alt="close-attachment"
+								/>
 							</label>
 
-							<!-- Navigation Menu -->
-							<ul class="nav__list" role="menubar">
-								<!-- About Company -->
-								<li class="nav__item nav__item--has-dropdown" role="none">
-									<a
-										href="#"
-										class="nav__link nav__link--desktop"
-										role="menuitem"
-										aria-haspopup="true"
-										aria-expanded="false"
-									>
-										<span class="nav__link-text">О компании</span>
-										<svg
-											class="nav__link-arrow"
-											width="12"
-											height="12"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2"
-											aria-hidden="true"
-										>
-											<polyline points="6,9 12,15 18,9"></polyline>
-										</svg>
-									</a>
-
-									<input
-										type="checkbox"
-										id="aboutDropdown"
-										class="nav__dropdown-toggle"
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									О компании
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
 									/>
-									<label for="aboutDropdown" class="nav__link nav__link--mobile"
-										>О компании</label
-									>
-
-									<ul class="nav__dropdown" role="menu">
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/about"
-												role="menuitem"
-											>
-												<span>Информация об организации</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/req/"
-												role="menuitem"
-											>
-												<span>Реквизиты организации</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/team/"
-												role="menuitem"
-											>
-												<span>Команда</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/contacts/"
-												role="menuitem"
-											>
-												<span>Контакты</span>
-											</a>
-										</li>
-									</ul>
-								</li>
-
-								<!-- News -->
-								<li class="nav__item" role="none">
-									<a class="nav__link" href="/src/news/" role="menuitem">
-										<span class="nav__link-text">Новости</span>
-									</a>
-								</li>
-
-								<!-- Investment Library -->
-								<li class="nav__item nav__item--has-dropdown" role="none">
-									<a
-										href="#"
-										class="nav__link nav__link--desktop"
-										role="menuitem"
-										aria-haspopup="true"
-										aria-expanded="false"
-									>
-										<span class="nav__link-text"
-											>Инвестиционная библиотека</span
+								</a>
+								<input type="checkbox" id="nav__showDropInfo" />
+								<label
+									for="nav__showDropInfo"
+									class="nav__link nav__link--mobile"
+								>
+									О компании
+								</label>
+								<ul class="nav__sub-list nav__sub-list--dropdown">
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/about"
+											>Информация об организации</a
 										>
-										<svg
-											class="nav__link-arrow"
-											width="12"
-											height="12"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2"
-											aria-hidden="true"
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/req/"
+											>Реквизиты организации</a
 										>
-											<polyline points="6,9 12,15 18,9"></polyline>
-										</svg>
-									</a>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/team/">Команда</a>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/contacts/">Контакты</a>
+									</li>
+								</ul>
+							</li>
 
-									<input
-										type="checkbox"
-										id="libraryDropdown"
-										class="nav__dropdown-toggle"
+							<li class="nav__item">
+								<a class="nav__link" href="/src/news/">Новости</a>
+							</li>
+
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									Инвестиционная библиотека
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
 									/>
-									<label
-										for="libraryDropdown"
-										class="nav__link nav__link--mobile"
-										>Инвестиционная библиотека</label
-									>
-
-									<ul class="nav__dropdown" role="menu">
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/investment_library/what_is_zpif"
-												role="menuitem"
-											>
-												<span>Что такое ЗПИФ</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/investment_library/how_does_zpif_work"
-												role="menuitem"
-											>
-												<span>Как работает ЗПИФ</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/investment_library/business_solutions"
-												role="menuitem"
-											>
-												<span>Решения для бизнеса</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/investment_library/stages_of_creating_zpif"
-												role="menuitem"
-											>
-												<span>Этапы создания ЗПИФ</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/investment_library/composition_of_the_assets_zpif"
-												role="menuitem"
-											>
-												<span>Состав имущества ЗПИФ</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/investment_library/faq"
-												role="menuitem"
-											>
-												<span>Вопросы и ответы</span>
-											</a>
-										</li>
-									</ul>
-								</li>
-
-								<!-- Information Disclosure -->
-								<li class="nav__item nav__item--has-mega" role="none">
-									<a
-										href="#"
-										class="nav__link nav__link--desktop"
-										role="menuitem"
-										aria-haspopup="true"
-										aria-expanded="false"
-									>
-										<span class="nav__link-text">Раскрытие информации</span>
-										<svg
-											class="nav__link-arrow"
-											width="12"
-											height="12"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2"
-											aria-hidden="true"
+								</a>
+								<input type="checkbox" id="nav__showDropLibrary" />
+								<label
+									for="nav__showDropLibrary"
+									class="nav__link nav__link--mobile"
+								>
+									Инвестиционная библиотека
+								</label>
+								<ul class="nav__sub-list nav__sub-list--dropdown">
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/what_is_zpif"
+											>Что такое ЗПИФ</a
 										>
-											<polyline points="6,9 12,15 18,9"></polyline>
-										</svg>
-									</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/how_does_zpif_work"
+											>Как работает ЗПИФ</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/business_solutions"
+											>Решения для бизнеса</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/stages_of_creating_zpif"
+											>Этапы создания ЗПИФ</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/composition_of_the_assets_zpif"
+											>Состав имущества ЗПИФ</a
+										>
+									</li>
+									<!-- <li class="nav__sub-item">
+                    <a
+                      class="nav__sub-link"
+                      href="/src/investment_library/regulatory_documents"
+                      >Нормативные документы</a
+                    >
+                  </li> -->
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/investment_library/faq"
+											>Вопросы и ответы</a
+										>
+									</li>
+								</ul>
+							</li>
 
-									<input
-										type="checkbox"
-										id="megaDropdown"
-										class="nav__dropdown-toggle"
+							<li class="nav__item nav__item--has-mega">
+								<a href="#" class="nav__link nav__link--desktop">
+									Раскрытие информации
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
 									/>
-									<label for="megaDropdown" class="nav__link nav__link--mobile"
-										>Раскрытие информации</label
-									>
-
-									<div class="nav__mega-menu" role="menu">
-										<div class="nav__mega-content">
-											<div class="nav__mega-column">
-												<ul class="nav__mega-list" role="none">
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/disclosure"
-															role="menuitem"
-														>
-															<span>Раскрытие информации</span>
-														</a>
-													</li>
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/messages_and_notifications"
-															role="menuitem"
-														>
-															<span>Сообщения и уведомления</span>
-														</a>
-													</li>
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/investors"
-															role="menuitem"
-														>
-															<span>Квалифицированным инвесторам</span>
-														</a>
-													</li>
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/regulations_and_provisions"
-															role="menuitem"
-														>
-															<span>Регламенты и положения</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-											<div class="nav__mega-column">
-												<ul class="nav__mega-list" role="none">
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/data_protection"
-															role="menuitem"
-														>
-															<span>Защита информации</span>
-														</a>
-													</li>
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/conflict_of_interest"
-															role="menuitem"
-														>
-															<span>Информация о конфликте интересов</span>
-														</a>
-													</li>
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/cpo"
-															role="menuitem"
-														>
-															<span>Участие в СРО</span>
-														</a>
-													</li>
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/licenses_and_certificates"
-															role="menuitem"
-														>
-															<span>Лицензии и свидетельства</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-											<div class="nav__mega-column">
-												<ul class="nav__mega-list" role="none">
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/calculation_of_funds"
-															role="menuitem"
-														>
-															<span>Расчет размера собственных средств</span>
-														</a>
-													</li>
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/financial_statements"
-															role="menuitem"
-														>
-															<span>Бухгалтерская отчетность</span>
-														</a>
-													</li>
-													<li class="nav__mega-item" role="none">
-														<a
-															class="nav__mega-link"
-															href="/src/information/assessment_of_working_conditions"
-															role="menuitem"
-														>
-															<span>Специальная оценка труда</span>
-														</a>
-													</li>
-												</ul>
-											</div>
+								</a>
+								<input type="checkbox" id="nav__showMegaInfo" />
+								<label
+									for="nav__showMegaInfo"
+									class="nav__link nav__link--mobile"
+								>
+									Раскрытие информации
+								</label>
+								<div class="nav__mega-menu">
+									<div class="nav__mega-content">
+										<!-- <div class="nav__mega-row">
+              <img
+                src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg"
+                alt=""
+              />
+            </div> -->
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/disclosure"
+														>Раскрытие информации</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/messages_and_notifications"
+														>Сообщения и уведомления</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/investors"
+														>Квалифицированным инвесторам</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/regulations_and_provisions"
+														>Регламенты и положения</a
+													>
+												</li>
+											</ul>
+										</div>
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/data_protection"
+														>Защита информации</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/conflict_of_interest"
+														>Информация о конфликте интересов</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a class="nav__mega-link" href="/src/information/cpo"
+														>Участие в СРО</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/licenses_and_certificates"
+														>Лицензии и свидетельства</a
+													>
+												</li>
+											</ul>
+										</div>
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/calculation_of_funds"
+														>Расчет размера собственных средств</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/financial_statements"
+														>Бухгалтерская отчетность</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/assessment_of_working_conditions"
+														>Специальная оценка труда</a
+													>
+												</li>
+											</ul>
 										</div>
 									</div>
-								</li>
+								</div>
+							</li>
 
-								<!-- Funds -->
-								<li class="nav__item nav__item--has-dropdown" role="none">
-									<a
-										href="#"
-										class="nav__link nav__link--desktop"
-										role="menuitem"
-										aria-haspopup="true"
-										aria-expanded="false"
-									>
-										<span class="nav__link-text">Фонды</span>
-										<svg
-											class="nav__link-arrow"
-											width="12"
-											height="12"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2"
-											aria-hidden="true"
-										>
-											<polyline points="6,9 12,15 18,9"></polyline>
-										</svg>
-									</a>
-
-									<input
-										type="checkbox"
-										id="fundsDropdown"
-										class="nav__dropdown-toggle"
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									Фонды
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
 									/>
-									<label for="fundsDropdown" class="nav__link nav__link--mobile"
-										>Фонды</label
-									>
+								</a>
+								<input type="checkbox" id="nav__showDropFunds" />
+								<label
+									for="nav__showDropFunds"
+									class="nav__link nav__link--mobile"
+								>
+									Фонды
+								</label>
+								<ul
+									class="nav__sub-list nav__sub-list--dropdown nav__sub-list--dropdown-long"
+								>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=1"
+										>
+											ЗПИФ комбинированный «Проектный бизнес»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=2"
+										>
+											ЗПИФ комбинированный «Структурные финансы»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=3"
+										>
+											ЗПИФ комбинированный «ЛэндПро»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=5"
+										>
+											ЗПИФ комбинированный «ФК ПаРус»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=6"
+										>
+											ЗПИФ комбинированный «Аксиома финансов»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=7"
+										>
+											ЗПИФ комбинированный «Финансовый центр»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=8"
+										>
+											ЗПИФ комбинированный «Проектные вложения»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=9"
+										>
+											ЗПИФ комбинированный «Финансовый бизнес»
+										</a>
+									</li>
+								</ul>
+							</li>
 
-									<ul
-										class="nav__dropdown nav__dropdown--scrollable"
-										role="menu"
-									>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/funds/#funds-slider?slide=1"
-												role="menuitem"
-											>
-												<span>ЗПИФ комбинированный «Проектный бизнес»</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/funds/#funds-slider?slide=2"
-												role="menuitem"
-											>
-												<span>ЗПИФ комбинированный «Структурные финансы»</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/funds/#funds-slider?slide=3"
-												role="menuitem"
-											>
-												<span>ЗПИФ комбинированный «ЛэндПро»</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/funds/#funds-slider?slide=5"
-												role="menuitem"
-											>
-												<span>ЗПИФ комбинированный «ФК ПаРус»</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/funds/#funds-slider?slide=6"
-												role="menuitem"
-											>
-												<span>ЗПИФ комбинированный «Аксиома финансов»</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/funds/#funds-slider?slide=7"
-												role="menuitem"
-											>
-												<span>ЗПИФ комбинированный «Финансовый центр»</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/funds/#funds-slider?slide=8"
-												role="menuitem"
-											>
-												<span>ЗПИФ комбинированный «Проектные вложения»</span>
-											</a>
-										</li>
-										<li class="nav__dropdown-item" role="none">
-											<a
-												class="nav__dropdown-link"
-												href="/src/funds/#funds-slider?slide=9"
-												role="menuitem"
-											>
-												<span>ЗПИФ комбинированный «Финансовый бизнес»</span>
-											</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
+							<!-- <li class="nav__item">
+                <a class="nav__link" href="/src/contacts/contacts.html">Контакты</a>
+              </li> -->
+						</ul>
+
+						<label for="nav__menu-btn" class="nav__btn nav__btn--menu">
+							<img
+								height="20"
+								width="20"
+								src="/assets/img/icons/open-burger-menu.svg"
+								alt="open-burger-menu"
+							/>
+						</label>
+					</div>
+				</nav>
 			</header>
 
 			<div class="reports-container">
@@ -1040,7 +908,7 @@
 					<a href="#" class="footer__logo">
 						<img
 							class="footer__logo-image"
-							src="https://c.animaapp.com/gi2F843b/img/logo-1.svg"
+							src="/assets/logo-black.svg"
 							alt="Footer Logo"
 						/>
 					</a>
@@ -1083,6 +951,7 @@
 				</p>
 			</footer>
 		</div>
-		<script type="module" src="/js/main.js"></script>
+		<script src="/assets/js/form.js"></script>
+		<script src="/assets/js/hero.js"></script>
 	</body>
 </html>

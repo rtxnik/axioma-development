@@ -127,7 +127,7 @@ export class LicenseModal {
 					</div>
 				</div>
 				<div class="license-modal__download">
-					<a href="/documents/license-21-000-1-01104.pdf" 
+					<a href="/assets/docs/information/licenses_and_certificates/lic.pdf" 
 					   class="license-modal__download-btn" 
 					   download="Лицензия_Аксиома_Капитал_21-000-1-01104.pdf"
 					   target="_blank"

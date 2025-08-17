@@ -1,5 +1,5 @@
 /**
- * Модуль управления формами (обновленная версия с чекбоксом)
+ * Модуль управления формами с серверной интеграцией
  */
 import { CONFIG } from "../config/config.js"
 import { Utils } from "../utils/utils.js"
@@ -9,6 +9,13 @@ export class FormManager {
 		this.form = document.getElementById("contactForm")
 		this.toastContainer = document.getElementById("toastContainer")
 		this.activeToasts = []
+
+		// URL серверного обработчика
+		this.apiEndpoint = "/api/contact.php" // Путь к PHP обработчику
+
+		// Защита от спама
+		this.lastSubmitTime = 0
+		this.submitCooldown = 5000 // 5 секунд между отправками
 
 		if (this.form) {
 			this.init()
@@ -21,11 +28,29 @@ export class FormManager {
 		this.setupFormEffects()
 		this.setupRealTimeValidation()
 		this.setupCheckbox()
-		this.setupPhoneFieldFocus() // НОВЫЙ МЕТОД
+		this.setupPhoneFieldFocus()
+		this.setupHoneypot() // Добавляем honeypot защиту
 	}
 
 	/**
-	 * НОВЫЙ МЕТОД: Настройка фокуса для поля телефона
+	 * Настройка honeypot поля для защиты от ботов
+	 */
+	setupHoneypot() {
+		// Создаем скрытое поле
+		const honeypot = document.createElement("input")
+		honeypot.type = "text"
+		honeypot.name = "website"
+		honeypot.id = "website"
+		honeypot.style.display = "none"
+		honeypot.tabIndex = -1
+		honeypot.autocomplete = "off"
+
+		// Добавляем поле в форму
+		this.form.appendChild(honeypot)
+	}
+
+	/**
+	 * Настройка фокуса для поля телефона
 	 */
 	setupPhoneFieldFocus() {
 		const phoneInput = this.form.querySelector(".form__input--phone")
@@ -33,14 +58,11 @@ export class FormManager {
 		const countryButton = this.form.querySelector(".country-selector__button")
 
 		if (phoneInput && phoneGroup) {
-			// При фокусе на поле телефона
 			phoneInput.addEventListener("focus", () => {
 				phoneGroup.classList.add("form__group--phone-focused")
 			})
 
-			// При потере фокуса
 			phoneInput.addEventListener("blur", () => {
-				// Небольшая задержка, чтобы проверить, не перешел ли фокус на кнопку страны
 				setTimeout(() => {
 					if (!phoneGroup.contains(document.activeElement)) {
 						phoneGroup.classList.remove("form__group--phone-focused")
@@ -48,7 +70,6 @@ export class FormManager {
 				}, 100)
 			})
 
-			// При клике на селектор страны также показываем фокус
 			if (countryButton) {
 				countryButton.addEventListener("focus", () => {
 					phoneGroup.classList.add("form__group--phone-focused")
@@ -63,12 +84,9 @@ export class FormManager {
 				})
 			}
 
-			// При открытии dropdown оставляем фокус
 			const dropdown = this.form.querySelector(".country-selector__dropdown")
 			if (dropdown) {
-				// Обработка кликов внутри dropdown
 				dropdown.addEventListener("mousedown", e => {
-					// Предотвращаем потерю фокуса при клике внутри dropdown
 					e.preventDefault()
 				})
 			}
@@ -84,7 +102,6 @@ export class FormManager {
 		const checkboxBox = this.form.querySelector(".form__checkbox-box")
 
 		if (checkbox && checkboxWrapper) {
-			// Обработка клика по кастомному чекбоксу (квадратику)
 			if (checkboxBox) {
 				checkboxBox.addEventListener("click", e => {
 					e.preventDefault()
@@ -93,13 +110,10 @@ export class FormManager {
 				})
 			}
 
-			// Обработка клика по тексту лейбла
 			checkboxWrapper.addEventListener("click", e => {
-				// Если клик по ссылке - не переключаем чекбокс
 				if (e.target.tagName === "A" || e.target.closest(".form__link")) {
 					return
 				}
-				// Если клик не по самому чекбоксу и не по box
 				if (e.target !== checkbox && !e.target.closest(".form__checkbox-box")) {
 					e.preventDefault()
 					checkbox.checked = !checkbox.checked
@@ -107,7 +121,6 @@ export class FormManager {
 				}
 			})
 
-			// Валидация при изменении
 			checkbox.addEventListener("change", () => {
 				this.validateCheckbox(checkbox)
 			})
@@ -139,10 +152,8 @@ export class FormManager {
 	setupFormValidation() {
 		const inputs = this.form.querySelectorAll(".form__input")
 
-		// Обработка отправки формы
 		this.form.addEventListener("submit", e => this.handleSubmit(e))
 
-		// Валидация при потере фокуса
 		inputs.forEach(input => {
 			input.addEventListener("blur", () => {
 				if (input.value) {
@@ -159,7 +170,6 @@ export class FormManager {
 		const inputs = this.form.querySelectorAll(".form__input")
 
 		inputs.forEach(input => {
-			// Валидация в реальном времени с debounce
 			input.addEventListener(
 				"input",
 				Utils.debounce(() => {
@@ -182,7 +192,6 @@ export class FormManager {
 		let isValid = true
 		let errorMessage = ""
 
-		// Удаляем пробелы
 		const value = input.value.trim()
 
 		// Проверка обязательности
@@ -214,7 +223,7 @@ export class FormManager {
 			if (value.length < 2) {
 				isValid = false
 				errorMessage = "Имя должно содержать минимум 2 символа"
-			} else if (!/^[а-яА-ЯёЁa-zA-Z\s-]+$/.test(value)) {
+			} else if (!/^[а-яА-ЯёЁa-zA-Z\s\-']+$/u.test(value)) {
 				isValid = false
 				errorMessage = "Имя может содержать только буквы"
 			}
@@ -256,9 +265,8 @@ export class FormManager {
 			".country-selector__search-input"
 		)
 		const phoneInput = this.form.querySelector(".form__input--phone")
-		const phoneGroup = this.form.querySelector(".form__group--phone") // НОВОЕ
+		const phoneGroup = this.form.querySelector(".form__group--phone")
 
-		// Открытие/закрытие dropdown
 		button.addEventListener("click", e => {
 			e.preventDefault()
 			const isOpen = dropdown.classList.contains(
@@ -269,37 +277,31 @@ export class FormManager {
 				this.closeCountryDropdown(button, dropdown)
 			} else {
 				this.openCountryDropdown(button, dropdown)
-				// НОВОЕ: Сохраняем фокус на группе при открытии dropdown
 				phoneGroup.classList.add("form__group--phone-focused")
 				if (searchInput) searchInput.focus()
 			}
 		})
 
-		// Выбор страны
 		dropdown.addEventListener("click", e => {
 			const item = e.target.closest(".country-selector__item")
 			if (item) {
 				this.selectCountry(item, button, dropdown, phoneInput)
-				// НОВОЕ: Возвращаем фокус на поле телефона после выбора
 				phoneInput.focus()
 			}
 		})
 
-		// Поиск стран
 		if (searchInput) {
 			searchInput.addEventListener("input", e => {
 				this.searchCountries(e.target.value, dropdown)
 			})
 		}
 
-		// Закрытие при клике вне
 		document.addEventListener("click", e => {
 			if (!selector.contains(e.target)) {
 				this.closeCountryDropdown(button, dropdown)
 			}
 		})
 
-		// Закрытие по Escape
 		document.addEventListener("keydown", e => {
 			if (
 				e.key === "Escape" &&
@@ -314,27 +316,23 @@ export class FormManager {
 	openCountryDropdown(button, dropdown) {
 		dropdown.classList.add("country-selector__dropdown--open")
 		button.setAttribute("aria-expanded", "true")
-		// Добавляем класс для оверлея
 		button.closest(".country-selector").classList.add("country-selector--open")
 	}
 
 	closeCountryDropdown(button, dropdown) {
 		dropdown.classList.remove("country-selector__dropdown--open")
 		button.setAttribute("aria-expanded", "false")
-		// Убираем класс оверлея
 		button
 			.closest(".country-selector")
 			.classList.remove("country-selector--open")
 	}
 
 	selectCountry(item, button, dropdown, phoneInput) {
-		// Обновление выбранной страны
 		const flag = item.dataset.flag
 		const code = item.dataset.code
 
 		button.querySelector(".country-selector__flag").textContent = flag
 
-		// Обновление активного элемента
 		dropdown.querySelectorAll(".country-selector__item").forEach(el => {
 			el.classList.remove("country-selector__item--selected")
 			el.setAttribute("aria-selected", "false")
@@ -343,12 +341,10 @@ export class FormManager {
 		item.classList.add("country-selector__item--selected")
 		item.setAttribute("aria-selected", "true")
 
-		// Обновление поля телефона
 		const currentValue = phoneInput.value.replace(/^\+\d+\s*/, "")
 		phoneInput.value = code + " " + currentValue
 		phoneInput.focus()
 
-		// Закрытие dropdown
 		this.closeCountryDropdown(button, dropdown)
 	}
 
@@ -379,7 +375,6 @@ export class FormManager {
 		const inputs = this.form.querySelectorAll(".form__input")
 
 		inputs.forEach(input => {
-			// Эффект фокуса
 			input.addEventListener("focus", () => {
 				input.closest(".form__group").classList.add("form__group--focused")
 			})
@@ -395,6 +390,17 @@ export class FormManager {
 	 */
 	async handleSubmit(e) {
 		e.preventDefault()
+
+		// Проверка cooldown
+		const currentTime = Date.now()
+		if (currentTime - this.lastSubmitTime < this.submitCooldown) {
+			this.showToast(
+				"warning",
+				"Подождите",
+				"Слишком частая отправка. Попробуйте через несколько секунд."
+			)
+			return
+		}
 
 		// Валидация всех полей
 		const inputs = this.form.querySelectorAll(".form__input")
@@ -421,9 +427,14 @@ export class FormManager {
 			return
 		}
 
-		// Получение данных формы
-		const formData = new FormData(this.form)
-		const data = Object.fromEntries(formData)
+		// Подготовка данных
+		const formData = {
+			email: this.form.email.value.trim(),
+			phone: this.form.phone.value.trim(),
+			name: this.form.name.value.trim(),
+			privacy: checkbox.checked ? "on" : "off",
+			website: this.form.website ? this.form.website.value : "", // honeypot
+		}
 
 		// Анимация кнопки
 		const submitButton = this.form.querySelector(".button--submit")
@@ -434,34 +445,109 @@ export class FormManager {
 		submitButton.disabled = true
 
 		try {
-			// Имитация отправки (замените на реальный API вызов)
-			await new Promise(resolve => setTimeout(resolve, CONFIG.form.submitDelay))
+			// Отправка данных на сервер
+			const response = await fetch(this.apiEndpoint, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				body: JSON.stringify(formData),
+			})
 
-			// Успех
-			submitButton.classList.remove("button--loading")
-			submitButton.classList.add("button--success")
-			buttonText.textContent = "Отправлено!"
+			const result = await response.json()
 
-			// Показываем уведомление об успехе
-			this.showToast(
-				"success",
-				"Заявка отправлена!",
-				"Мы свяжемся с вами в ближайшее время"
-			)
+			if (response.ok && result.success) {
+				// Успех
+				this.lastSubmitTime = currentTime
 
-			// Сброс формы
-			setTimeout(() => {
-				this.form.reset()
-				this.form.querySelectorAll(".form__group").forEach(group => {
-					group.classList.remove("form__group--error")
-					group.classList.remove("form__group--phone-focused") // НОВОЕ
+				submitButton.classList.remove("button--loading")
+				submitButton.classList.add("button--success")
+				buttonText.textContent = "Отправлено!"
+
+				this.showToast(
+					"success",
+					"Заявка отправлена!",
+					result.message || "Мы свяжемся с вами в ближайшее время"
+				)
+
+				// Отправка события в Google Analytics
+				if (typeof gtag !== "undefined") {
+					gtag("event", "form_submit", {
+						event_category: "Contact",
+						event_label: "Contact Form",
+					})
+				}
+
+				// Отправка события в Яндекс.Метрику
+				if (typeof ym !== "undefined") {
+					ym(window.yaCounterId, "reachGoal", "FORM_SUBMIT")
+				}
+
+				// Сброс формы
+				setTimeout(() => {
+					this.form.reset()
+					this.form.querySelectorAll(".form__group").forEach(group => {
+						group.classList.remove("form__group--error")
+						group.classList.remove("form__group--phone-focused")
+					})
+
+					submitButton.classList.remove("button--success")
+					buttonText.textContent = originalText
+					submitButton.disabled = false
+				}, 2000)
+			} else if (response.status === 422 && result.errors) {
+				// Ошибки валидации от сервера
+				submitButton.classList.remove("button--loading")
+				submitButton.classList.add("button--error")
+
+				// Показываем ошибки для каждого поля
+				Object.keys(result.errors).forEach(fieldName => {
+					const input = this.form[fieldName]
+					if (input) {
+						const group = input.closest(".form__group")
+						const error = group.querySelector(".form__error")
+						if (group && error) {
+							group.classList.add("form__group--error")
+							error.textContent = result.errors[fieldName]
+						}
+					}
 				})
 
-				submitButton.classList.remove("button--success")
-				buttonText.textContent = originalText
-				submitButton.disabled = false
-			}, 2000)
+				this.showToast(
+					"error",
+					"Ошибка валидации",
+					"Проверьте правильность заполнения полей"
+				)
+
+				setTimeout(() => {
+					submitButton.classList.remove("button--error")
+					buttonText.textContent = originalText
+					submitButton.disabled = false
+				}, 2000)
+			} else if (response.status === 429) {
+				// Rate limiting
+				submitButton.classList.remove("button--loading")
+				submitButton.classList.add("button--error")
+
+				this.showToast(
+					"error",
+					"Превышен лимит",
+					result.message || "Слишком много попыток. Попробуйте позже."
+				)
+
+				setTimeout(() => {
+					submitButton.classList.remove("button--error")
+					buttonText.textContent = originalText
+					submitButton.disabled = false
+				}, 5000)
+			} else {
+				// Другая ошибка
+				throw new Error(result.message || "Ошибка отправки")
+			}
 		} catch (error) {
+			console.error("Form submission error:", error)
+
 			// Ошибка
 			submitButton.classList.remove("button--loading")
 			submitButton.classList.add("button--error")
@@ -470,7 +556,7 @@ export class FormManager {
 			this.showToast(
 				"error",
 				"Ошибка отправки",
-				"Произошла ошибка. Попробуйте позже"
+				"Произошла ошибка. Попробуйте позже или свяжитесь с нами по телефону."
 			)
 
 			setTimeout(() => {
@@ -485,7 +571,6 @@ export class FormManager {
 	 * Показ toast уведомления
 	 */
 	showToast(type, title, message, duration = 4000) {
-		// Создаем контейнер если его нет
 		if (!this.toastContainer) {
 			this.toastContainer = document.getElementById("toastContainer")
 			if (!this.toastContainer) {
@@ -507,6 +592,11 @@ export class FormManager {
 				<circle cx="12" cy="12" r="10"></circle>
 				<line x1="15" y1="9" x2="9" y2="15"></line>
 				<line x1="9" y1="9" x2="15" y2="15"></line>
+			</svg>`,
+			warning: `<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+				<line x1="12" y1="9" x2="12" y2="13"></line>
+				<line x1="12" y1="17" x2="12.01" y2="17"></line>
 			</svg>`,
 		}
 

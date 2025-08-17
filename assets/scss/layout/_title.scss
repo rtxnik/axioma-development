@@ -1,0 +1,10 @@
+// layout/_title.scss
+
+.title {
+	font-size: 16px;
+	color: #111827;
+
+	@media (max-width: 576px) {
+		font-size: 16px;
+	}
+}

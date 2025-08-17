@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/* Модальное окно */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: var(--main-1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  display: block;
+  opacity: 1;
+}
+
+.modal.hide {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal__content {
+  background-color: var(--main-1);
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  position: relative;
+  transform: translateY(-50px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.modal.show .modal__content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal__close {
+  color: var(--main-6);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.modal__close:hover,
+.modal__close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+#modal-message {
+  margin-top: 30px;
+  font-size: 18px;
+  text-align: center;
+}/*# sourceMappingURL=modal.css.map */

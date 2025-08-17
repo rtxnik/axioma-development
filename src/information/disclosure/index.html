@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<title>Аксиома Капитал - Список и схема взаимосвязей</title>
+		<link rel="icon" href="assets/img/fav/favicon.ico" type="image/x-icon" />
+		<link
+			rel="icon"
+			sizes="32x32"
+			href="/assets/img/fav/favicon-32x32.png"
+			type="image/png"
+		/>
+		<link
+			rel="icon"
+			sizes="16x16"
+			href="/assets/img/fav/favicon-16x16.png"
+			type="image/png"
+		/>
+		<link rel="apple-touch-icon" href="/assets/img/fav/apple-touch-icon.png" />
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Управляющая компания Аксиома Капитал" />
+		<meta name="author" content="" />
+		<link rel="stylesheet" href="/assets/css/normalize.css" />
+		<link rel="stylesheet" href="/assets/css/style.min.css" />
+	</head>
+	<body>
+		<div class="container">
+			<header class="header">
+				<nav class="nav">
+					<div class="nav__wrapper">
+						<div class="nav__logo">
+							<a href="/">
+								<img
+									class="logo"
+									src="/assets/img/icons/axioma_logo.svg"
+									alt="Logo"
+								/>
+							</a>
+						</div>
+
+						<input type="radio" name="slider" id="nav__menu-btn" />
+						<input type="radio" name="slider" id="nav__close-btn" />
+
+						<ul class="nav__list">
+							<label for="nav__close-btn" class="nav__btn nav__btn--close">
+								<img
+									height="20"
+									width="20"
+									src="/assets/img/icons/close-attachment.svg"
+									alt="close-attachment"
+								/>
+							</label>
+
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									О компании
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
+									/>
+								</a>
+								<input type="checkbox" id="nav__showDropInfo" />
+								<label
+									for="nav__showDropInfo"
+									class="nav__link nav__link--mobile"
+								>
+									О компании
+								</label>
+								<ul class="nav__sub-list nav__sub-list--dropdown">
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/about"
+											>Информация об организации</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/req/"
+											>Реквизиты организации</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/team/">Команда</a>
+									</li>
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/contacts/">Контакты</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="nav__item">
+								<a class="nav__link" href="/src/news/">Новости</a>
+							</li>
+
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									Инвестиционная библиотека
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
+									/>
+								</a>
+								<input type="checkbox" id="nav__showDropLibrary" />
+								<label
+									for="nav__showDropLibrary"
+									class="nav__link nav__link--mobile"
+								>
+									Инвестиционная библиотека
+								</label>
+								<ul class="nav__sub-list nav__sub-list--dropdown">
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/what_is_zpif"
+											>Что такое ЗПИФ</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/how_does_zpif_work"
+											>Как работает ЗПИФ</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/business_solutions"
+											>Решения для бизнеса</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/stages_of_creating_zpif"
+											>Этапы создания ЗПИФ</a
+										>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/investment_library/composition_of_the_assets_zpif"
+											>Состав имущества ЗПИФ</a
+										>
+									</li>
+									<!-- <li class="nav__sub-item">
+                    <a
+                      class="nav__sub-link"
+                      href="/src/investment_library/regulatory_documents"
+                      >Нормативные документы</a
+                    >
+                  </li> -->
+									<li class="nav__sub-item">
+										<a class="nav__sub-link" href="/src/investment_library/faq"
+											>Вопросы и ответы</a
+										>
+									</li>
+								</ul>
+							</li>
+
+							<li class="nav__item nav__item--has-mega">
+								<a href="#" class="nav__link nav__link--desktop">
+									Раскрытие информации
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
+									/>
+								</a>
+								<input type="checkbox" id="nav__showMegaInfo" />
+								<label
+									for="nav__showMegaInfo"
+									class="nav__link nav__link--mobile"
+								>
+									Раскрытие информации
+								</label>
+								<div class="nav__mega-menu">
+									<div class="nav__mega-content">
+										<!-- <div class="nav__mega-row">
+              <img
+                src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg"
+                alt=""
+              />
+            </div> -->
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/disclosure"
+														>Раскрытие информации</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/messages_and_notifications"
+														>Сообщения и уведомления</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/investors"
+														>Квалифицированным инвесторам</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/regulations_and_provisions"
+														>Регламенты и положения</a
+													>
+												</li>
+											</ul>
+										</div>
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/data_protection"
+														>Защита информации</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/conflict_of_interest"
+														>Информация о конфликте интересов</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a class="nav__mega-link" href="/src/information/cpo"
+														>Участие в СРО</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/licenses_and_certificates"
+														>Лицензии и свидетельства</a
+													>
+												</li>
+											</ul>
+										</div>
+										<div class="nav__mega-row">
+											<ul class="nav__mega-list">
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/calculation_of_funds"
+														>Расчет размера собственных средств</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/financial_statements"
+														>Бухгалтерская отчетность</a
+													>
+												</li>
+												<li class="nav__mega-item">
+													<a
+														class="nav__mega-link"
+														href="/src/information/assessment_of_working_conditions"
+														>Специальная оценка труда</a
+													>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li class="nav__item nav__item--has-dropdown">
+								<a href="#" class="nav__link nav__link--desktop">
+									Фонды
+									<img
+										height="10"
+										width="10"
+										class="dropdown__arrow"
+										src="/assets/img/icons/down-arrow.svg"
+										alt="down-arrow-icon"
+									/>
+								</a>
+								<input type="checkbox" id="nav__showDropFunds" />
+								<label
+									for="nav__showDropFunds"
+									class="nav__link nav__link--mobile"
+								>
+									Фонды
+								</label>
+								<ul
+									class="nav__sub-list nav__sub-list--dropdown nav__sub-list--dropdown-long"
+								>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=1"
+										>
+											ЗПИФ комбинированный «Проектный бизнес»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=2"
+										>
+											ЗПИФ комбинированный «Структурные финансы»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=3"
+										>
+											ЗПИФ комбинированный «ЛэндПро»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=5"
+										>
+											ЗПИФ комбинированный «ФК ПаРус»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=6"
+										>
+											ЗПИФ комбинированный «Аксиома финансов»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=7"
+										>
+											ЗПИФ комбинированный «Финансовый центр»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=8"
+										>
+											ЗПИФ комбинированный «Проектные вложения»
+										</a>
+									</li>
+									<li class="nav__sub-item">
+										<a
+											class="nav__sub-link"
+											href="/src/funds/#funds-slider?slide=9"
+										>
+											ЗПИФ комбинированный «Финансовый бизнес»
+										</a>
+									</li>
+								</ul>
+							</li>
+
+							<!-- <li class="nav__item">
+                <a class="nav__link" href="/src/contacts/contacts.html">Контакты</a>
+              </li> -->
+						</ul>
+
+						<label for="nav__menu-btn" class="nav__btn nav__btn--menu">
+							<img
+								height="20"
+								width="20"
+								src="/assets/img/icons/open-burger-menu.svg"
+								alt="open-burger-menu"
+							/>
+						</label>
+					</div>
+				</nav>
+			</header>
+
+			<div class="reports-container">
+				<nav class="sidebar-menu">
+					<ul class="sidebar-menu__list">
+						<li class="sidebar-menu__item">
+							<a href="/src/information/disclosure" class="sidebar-menu__link">
+								<span class="sidebar-menu__text">
+									Список и схема взаимосвязей участников и лиц, под контролем
+									либо значительным влиянием которых находится Управляющая
+									компания
+								</span>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a
+								href="/src/information/messages_and_notifications"
+								class="sidebar-menu__link"
+							>
+								<span class="sidebar-menu__text"
+									>Сообщения, уведомления и иная информация</span
+								>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a href="/src/information/investors" class="sidebar-menu__link">
+								<span class="sidebar-menu__text"
+									>Признание лиц квалифицированными инвесторами</span
+								>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a
+								href="/src/information/regulations_and_provisions"
+								class="sidebar-menu__link"
+							>
+								<span class="sidebar-menu__text">Регламенты и положения</span>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a
+								href="/src/information/data_protection"
+								class="sidebar-menu__link"
+							>
+								<span class="sidebar-menu__text"
+									>Защита инсайдерской информации</span
+								>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a
+								href="/src/information/conflict_of_interest"
+								class="sidebar-menu__link"
+							>
+								<span class="sidebar-menu__text"
+									>Информация о конфликте интересов</span
+								>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a href="/src/information/cpo" class="sidebar-menu__link">
+								<span class="sidebar-menu__text">Участие в СРО</span>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a
+								href="/src/information/licenses_and_certificates"
+								class="sidebar-menu__link"
+							>
+								<span class="sidebar-menu__text">Лицензии и свидетельства</span>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a
+								href="/src/information/calculation_of_funds"
+								class="sidebar-menu__link"
+							>
+								<span class="sidebar-menu__text"
+									>Расчет размера собственных средств</span
+								>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a
+								href="/src/information/financial_statements"
+								class="sidebar-menu__link"
+							>
+								<span class="sidebar-menu__text">Бухгалтерская отчетность</span>
+							</a>
+						</li>
+						<li class="sidebar-menu__item">
+							<a
+								href="/src/information/assessment_of_working_conditions"
+								class="sidebar-menu__link"
+							>
+								<span class="sidebar-menu__text"
+									>Результаты проведения специальной оценки труда</span
+								>
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<main class="information">
+					<nav class="breadcrumb breadcrumb-start">
+						<ul class="breadcrumb__list">
+							<li class="breadcrumb__item">
+								<a href="/" class="breadcrumb__link">Главная</a>
+							</li>
+							<li class="breadcrumb__item breadcrumb__item--separator">/</li>
+							<li class="breadcrumb__item">
+								<a href="/src/information/disclosure/" class="breadcrumb__link"
+									>Список и схема взаимосвязей</a
+								>
+							</li>
+						</ul>
+					</nav>
+
+					<article class="information__selected-item">
+						<h1 class="title">
+							Список и схема взаимосвязей участников и лиц, под контролем либо
+							значительным влиянием которых находится Управляющая компания
+						</h1>
+					</article>
+
+					<section class="documents">
+						<article
+							class="document-card"
+							data-year="2024"
+							data-download-url="/assets/docs/information/disclosure/RI.pdf"
+							data-download-name="RI21-000-1-01104_20240619_сайт.pdf"
+						>
+							<header class="document-card__header">
+								<p class="document-card__description">
+									Список и Схема взаимосвязи участников управляющей компании
+								</p>
+							</header>
+
+							<section class="document-card__details">
+								<div class="document-card__detail">
+									<img
+										class="document-card__icon"
+										src="/assets/img/icons/calendar_icon.png"
+										alt="Опубликовано"
+									/>
+									<div class="document-card__info">
+										<span class="document-card__label">Опубликовано:</span>
+										<span class="document-card__value">19.06.2024 10:40</span>
+									</div>
+								</div>
+
+								<!-- <div class="document-card__detail">
+                <img
+                  class="document-card__icon"
+                  src="/assets/img/icons/twocirclingarrows.png"
+                  alt="Изменено"
+                />
+                <div class="document-card__info">
+                  <span class="document-card__label">Изменено:</span>
+                  <span class="document-card__value">19.06.2024 12:40</span>
+                </div>
+              </div> -->
+
+								<div class="document-card__detail">
+									<img
+										class="document-card__icon"
+										src="/assets/img/icons/deadline.png"
+										alt="Срок доступа"
+									/>
+									<div class="document-card__info">
+										<span class="document-card__label">Срок доступа:</span>
+										<span class="document-card__value">бессрочно</span>
+									</div>
+								</div>
+							</section>
+
+							<div class="document-card__footer">
+								<div class="license__download">
+									<img
+										class="license__download-icon"
+										src="/assets/img/icons/download-icon.svg"
+										alt="Download"
+									/>
+								</div>
+							</div>
+						</article>
+					</section>
+				</main>
+			</div>
+
+			<section class="information__hero"></section>
+
+			<footer class="footer">
+				<div class="footer__content">
+					<a href="#" class="footer__logo">
+						<img
+							class="footer__logo-image"
+							src="/assets/logo-black.svg"
+							alt="Footer Logo"
+						/>
+					</a>
+				</div>
+				<p class="footer__description-long">
+					Общество с ограниченной ответственностью Управляющая компания «Аксиома
+					Капитал» действует на основании лицензии, выданной Банком России
+					23.05.2024 г. № 21-000-1-01104, на осуществление деятельности по
+					управлению инвестиционными фондами, паевыми инвестиционными фондами и
+					негосударственными пенсионными фондами, без ограничения срока действия
+					(Решение Банка России от 23.05.2024 № РБ-14/682). Деятельность ООО УК
+					«Аксиома Капитал» по управлению инвестиционными фондами, паевыми
+					инвестиционными фондами и негосударственными пенсионными фондами не
+					совмещается с профессиональной деятельностью по доверительному
+					управлению ценными бумагами. В связи с этим отсутствует риск
+					возникновения конфликта интересов при совмещении указанных видов
+					деятельности. ООО УК «Аксиома Капитал» не осуществляет деятельность по
+					инвестиционному консультированию, не является инвестиционным
+					советником и не предоставляет индивидуальных инвестиционных
+					рекомендаций. Получить информацию об управляющей компании, находящихся
+					в ее управлении паевых инвестиционных фондах, ознакомиться с Правилами
+					доверительного управления паевыми инвестиционными фондами, а также
+					сведениями о местах приема заявок на приобретение, погашение
+					инвестиционных паев и иными документами, предусмотренными Федеральным
+					законом от 29.11.2001 № 156-ФЗ «Об инвестиционных фондах» и
+					нормативными актами Банка России, можно по адресу ООО УК «Аксиома
+					Капитал»: 143084, Московская область, г.о. Одинцовский, с. Усово, стр.
+					100, часть помещ. 10, по телефону +7 (495) 970-37-57, а также по
+					адресу страницы в сети Интернет:
+					<a class="link" href="https://axiomacapital.ru/"
+						>https://axiomacapital.ru/</a
+					>.
+					<br />
+					ООО УК «Аксиома Капитал» уведомляет, что стоимость инвестиционных паев
+					может увеличиваться и уменьшаться, результаты инвестирования в прошлом
+					не определяют доходы в будущем, государство не гарантирует доходность
+					инвестиций в паевые инвестиционные фонды. Прежде чем приобрести
+					инвестиционный пай, следует внимательно ознакомиться с правилами
+					доверительного управления паевым инвестиционным фондом.
+				</p>
+			</footer>
+		</div>
+		<script src="/assets/js/document-card.js"></script>
+		<script src="/assets/js/form.js"></script>
+		<script src="/assets/js/year-selection.js"></script>
+	</body>
+</html>
