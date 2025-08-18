@@ -1,29 +1,26 @@
 /**
- * Модуль управления модальными окнами услуг - Исправленная версия
+ * Модуль управления модальными окнами услуг - Оптимизированная версия
  */
 export class ServiceModalManager {
 	constructor() {
 		this.modal = null
 		this.isAnimating = false
+		this.scrollPosition = 0
 		this.servicesData = this.getServicesData()
+		this.focusedElementBeforeModal = null
 		this.init()
 	}
 
 	init() {
-		// Находим все кнопки-триггеры
-		const triggers = document.querySelectorAll("[data-service-trigger]")
-
-		triggers.forEach(trigger => {
-			trigger.addEventListener("click", e => {
+		// Делегирование событий для лучшей производительности
+		document.addEventListener("click", e => {
+			const trigger = e.target.closest("[data-service-trigger]")
+			if (trigger && !this.isAnimating) {
 				e.preventDefault()
 				e.stopPropagation()
-
-				// ИСПРАВЛЕНО: Предотвращаем открытие во время анимации
-				if (this.isAnimating) return
-
 				const serviceId = trigger.dataset.serviceTrigger
 				this.show(serviceId)
-			})
+			}
 		})
 	}
 
@@ -173,25 +170,39 @@ export class ServiceModalManager {
 
 	show(serviceId) {
 		const serviceData = this.servicesData[serviceId]
-		if (!serviceData) {
-			console.error(`Service data not found for: ${serviceId}`)
-			return
-		}
-
-		// ИСПРАВЛЕНО: Предотвращаем повторное открытие
-		if (this.modal || this.isAnimating) return
+		if (!serviceData || this.modal || this.isAnimating) return
 
 		this.isAnimating = true
+		this.focusedElementBeforeModal = document.activeElement
 
 		// Создаем модальное окно
-		this.modal = document.createElement("div")
-		this.modal.className = "service-modal"
-		this.modal.setAttribute("role", "dialog")
-		this.modal.setAttribute("aria-modal", "true")
-		this.modal.setAttribute("aria-labelledby", "modal-title")
+		this.modal = this.createModal(serviceData)
+		document.body.appendChild(this.modal)
 
-		// Генерируем HTML контент
-		this.modal.innerHTML = `
+		// ИСПРАВЛЕНО: Улучшенная блокировка скролла
+		this.lockScroll()
+
+		// Анимация появления
+		requestAnimationFrame(() => {
+			this.modal.classList.add("service-modal--visible")
+			this.isAnimating = false
+
+			// Фокус на кнопку закрытия
+			const closeBtn = this.modal.querySelector(".service-modal__close")
+			if (closeBtn) closeBtn.focus()
+		})
+
+		this.setupEventHandlers()
+	}
+
+	createModal(serviceData) {
+		const modal = document.createElement("div")
+		modal.className = "service-modal"
+		modal.setAttribute("role", "dialog")
+		modal.setAttribute("aria-modal", "true")
+		modal.setAttribute("aria-labelledby", "modal-title")
+
+		modal.innerHTML = `
 			<div class="service-modal__backdrop" aria-hidden="true"></div>
 			<div class="service-modal__container">
 				<div class="service-modal__content">
@@ -244,62 +255,31 @@ export class ServiceModalManager {
 			</div>
 		`
 
-		// Добавляем в DOM
-		document.body.appendChild(this.modal)
-
-		// ИСПРАВЛЕНО: Блокируем скролл с сохранением позиции
-		this.lockScroll()
-
-		// ИСПРАВЛЕНО: Используем requestAnimationFrame для плавной анимации
-		requestAnimationFrame(() => {
-			requestAnimationFrame(() => {
-				this.modal.classList.add("service-modal--visible")
-				this.isAnimating = false
-			})
-		})
-
-		// Настраиваем обработчики
-		this.setupEventHandlers()
-
-		// Фокус на модальное окно для доступности
-		setTimeout(() => {
-			const closeBtn = this.modal.querySelector(".service-modal__close")
-			if (closeBtn) closeBtn.focus()
-		}, 300)
+		return modal
 	}
 
 	setupEventHandlers() {
-		const closeBtn = this.modal.querySelector(".service-modal__close")
-		const backdrop = this.modal.querySelector(".service-modal__backdrop")
-		const ctaButton = this.modal.querySelector(".service-modal__cta-button")
-
-		// Закрытие по кнопке
-		closeBtn.addEventListener("click", () => this.close())
-
-		// Закрытие по клику на фон
-		backdrop.addEventListener("click", () => this.close())
-
-		// Закрытие по Escape
-		this.handleEscape = e => {
-			if (e.key === "Escape") {
+		// Используем один обработчик для всего модального окна
+		this.modalClickHandler = e => {
+			if (
+				e.target.closest(".service-modal__close") ||
+				e.target.classList.contains("service-modal__backdrop")
+			) {
 				this.close()
+			} else if (e.target.closest(".service-modal__cta-button")) {
+				this.handleCTAClick()
 			}
 		}
-		document.addEventListener("keydown", this.handleEscape)
 
-		// Обработка CTA кнопки
-		ctaButton.addEventListener("click", () => {
-			this.close()
-			// Прокручиваем к форме контактов
-			setTimeout(() => {
-				const contactSection = document.getElementById("contact")
-				if (contactSection) {
-					contactSection.scrollIntoView({ behavior: "smooth" })
-				}
-			}, 350)
-		})
+		this.modal.addEventListener("click", this.modalClickHandler)
 
-		// Ловушка фокуса для доступности
+		// Escape handler
+		this.escapeHandler = e => {
+			if (e.key === "Escape") this.close()
+		}
+		document.addEventListener("keydown", this.escapeHandler)
+
+		// Focus trap
 		this.setupFocusTrap()
 	}
 
@@ -307,54 +287,91 @@ export class ServiceModalManager {
 		const focusableElements = this.modal.querySelectorAll(
 			'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
 		)
+
+		if (focusableElements.length === 0) return
+
 		const firstFocusable = focusableElements[0]
 		const lastFocusable = focusableElements[focusableElements.length - 1]
 
-		this.handleTab = e => {
-			if (e.key === "Tab") {
-				if (e.shiftKey) {
-					if (document.activeElement === firstFocusable) {
-						e.preventDefault()
-						lastFocusable.focus()
-					}
-				} else {
-					if (document.activeElement === lastFocusable) {
-						e.preventDefault()
-						firstFocusable.focus()
-					}
+		this.tabHandler = e => {
+			if (e.key !== "Tab") return
+
+			if (e.shiftKey) {
+				if (document.activeElement === firstFocusable) {
+					e.preventDefault()
+					lastFocusable.focus()
+				}
+			} else {
+				if (document.activeElement === lastFocusable) {
+					e.preventDefault()
+					firstFocusable.focus()
 				}
 			}
 		}
 
-		this.modal.addEventListener("keydown", this.handleTab)
+		this.modal.addEventListener("keydown", this.tabHandler)
 	}
 
-	// ИСПРАВЛЕНО: Блокировка скролла без прыжков
+	handleCTAClick() {
+		this.close()
+		// Прокрутка к форме после закрытия
+		setTimeout(() => {
+			const contactSection = document.getElementById("contact")
+			if (contactSection) {
+				contactSection.scrollIntoView({ behavior: "smooth", block: "start" })
+			}
+		}, 300)
+	}
+
+	// ИСПРАВЛЕНО: Улучшенная блокировка скролла без прыжков
 	lockScroll() {
+		// Сохраняем текущую позицию скролла
+		this.scrollPosition =
+			window.pageYOffset || document.documentElement.scrollTop
+
+		// Добавляем padding для компенсации скроллбара
 		const scrollbarWidth =
 			window.innerWidth - document.documentElement.clientWidth
-		this.scrollPosition = window.pageYOffset
 
-		document.body.style.overflow = "hidden"
-		document.body.style.position = "fixed"
-		document.body.style.top = `-${this.scrollPosition}px`
-		document.body.style.width = "100%"
+		// Применяем стили к body
+		document.body.style.cssText = `
+			overflow: hidden;
+			padding-right: ${scrollbarWidth}px;
+			position: relative;
+		`
 
-		// Компенсируем ширину скроллбара
-		if (scrollbarWidth > 0) {
-			document.body.style.paddingRight = `${scrollbarWidth}px`
-		}
+		// Создаем временный элемент для сохранения позиции скролла
+		const scrollAnchor = document.createElement("div")
+		scrollAnchor.id = "scroll-anchor"
+		scrollAnchor.style.cssText = `
+			position: absolute;
+			top: ${this.scrollPosition}px;
+			left: 0;
+			width: 1px;
+			height: 1px;
+			opacity: 0;
+			pointer-events: none;
+		`
+		document.body.appendChild(scrollAnchor)
 	}
 
-	// ИСПРАВЛЕНО: Разблокировка скролла с восстановлением позиции
+	// ИСПРАВЛЕНО: Улучшенная разблокировка скролла
 	unlockScroll() {
-		document.body.style.overflow = ""
-		document.body.style.position = ""
-		document.body.style.top = ""
-		document.body.style.width = ""
-		document.body.style.paddingRight = ""
+		// Удаляем временный элемент
+		const scrollAnchor = document.getElementById("scroll-anchor")
+		if (scrollAnchor) {
+			scrollAnchor.remove()
+		}
 
-		window.scrollTo(0, this.scrollPosition)
+		// Восстанавливаем стили body
+		document.body.style.cssText = ""
+
+		// Восстанавливаем позицию скролла плавно
+		window.scrollTo({
+			top: this.scrollPosition,
+			left: 0,
+			behavior: "instant", // Используем instant для мгновенного восстановления
+		})
 	}
 
 	close() {
@@ -362,29 +379,45 @@ export class ServiceModalManager {
 
 		this.isAnimating = true
 
-		// Запускаем анимацию закрытия
+		// Анимация закрытия
 		this.modal.classList.remove("service-modal--visible")
 
-		// ИСПРАВЛЕНО: Разблокируем скролл
-		this.unlockScroll()
+		// Очистка обработчиков
+		if (this.modalClickHandler) {
+			this.modal.removeEventListener("click", this.modalClickHandler)
+		}
+		if (this.escapeHandler) {
+			document.removeEventListener("keydown", this.escapeHandler)
+		}
+		if (this.tabHandler) {
+			this.modal.removeEventListener("keydown", this.tabHandler)
+		}
 
-		// Удаляем обработчики
-		document.removeEventListener("keydown", this.handleEscape)
-		this.modal.removeEventListener("keydown", this.handleTab)
-
-		// Удаляем из DOM после анимации
+		// Удаление модального окна и восстановление скролла
 		setTimeout(() => {
+			this.unlockScroll()
+
 			if (this.modal) {
 				this.modal.remove()
 				this.modal = null
 			}
+
+			// Возвращаем фокус
+			if (
+				this.focusedElementBeforeModal &&
+				this.focusedElementBeforeModal.focus
+			) {
+				this.focusedElementBeforeModal.focus()
+			}
+
 			this.isAnimating = false
 		}, 300)
+	}
 
-		// Возвращаем фокус на кнопку, которая открыла модальное окно
-		const activeButton = document.querySelector("[data-service-trigger]:focus")
-		if (activeButton) {
-			activeButton.focus()
+	// Метод для очистки при уничтожении
+	destroy() {
+		if (this.modal) {
+			this.close()
 		}
 	}
 }

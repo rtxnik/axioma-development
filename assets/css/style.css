@@ -3018,7 +3018,7 @@ header {
   text-decoration: underline;
 }
 .contact-section-big__description a:hover {
-  color: var(--color-secondary);
+  color: #3b82f6;
 }
 @media (max-width: 768px) {
   .contact-section-big__description {
@@ -3547,7 +3547,7 @@ header {
   margin: 0 0.25rem;
 }
 .pdf-viewer-arrow-btn:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: #3b82f6;
 }
 .pdf-viewer-arrow-btn:disabled {
   color: rgba(255, 255, 255, 0.3);

@@ -460,3 +460,52 @@
 	-webkit-overflow-scrolling: touch;
 	overflow-scrolling: touch;
 }
+
+/* ===============================================
+   ИСПРАВЛЕНИЯ ДЛЯ ПРЕДОТВРАЩЕНИЯ ПРЫЖКОВ СКРОЛЛА
+   =============================================== */
+
+/* Предотвращение прыжков при блокировке скролла */
+body.modal-open {
+	overflow: hidden;
+	position: relative;
+}
+
+/* Якорь для сохранения позиции */
+#scroll-anchor {
+	visibility: hidden;
+	pointer-events: none;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+/* Оптимизация анимаций для мобильных */
+@media (max-width: 768px) {
+	.service-modal__content {
+		transition: opacity 0.2s ease, transform 0.2s ease;
+	}
+
+	/* Упрощенная анимация на мобильных */
+	.service-modal--visible .service-modal__content {
+		animation: none;
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* Отключение will-change для предотвращения мерцания */
+.service-modal,
+.service-modal__backdrop,
+.service-modal__content {
+	will-change: auto;
+	-webkit-backface-visibility: visible;
+	backface-visibility: visible;
+}
+
+/* Улучшенная производительность скролла внутри модального окна */
+.service-modal__content {
+	-webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+}
